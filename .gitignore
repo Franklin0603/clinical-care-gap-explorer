@@ -1,0 +1,22 @@
+# data — regenerable, large, and never belongs in git
+data/raw/
+data/warehouse/
+*.duckdb
+*.duckdb.wal
+synthea/
+*.jar
+
+# python
+.venv/
+__pycache__/
+*.pyc
+
+# node
+node_modules/
+.next/
+.vercel/
+
+# os / editor
+.DS_Store
+.idea/
+.vscode/
