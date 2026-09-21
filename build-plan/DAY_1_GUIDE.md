@@ -323,6 +323,9 @@ defend.
 
 ## 1.12 — Load Bronze  · WORK THIS OUT (worked example, then extend)
 
+> Extended version, including the decisions to make before you type and the
+> traps specific to this dataset: `LOAD_BRONZE_GUIDE.md`.
+
 One table, fully worked:
 
 ```python
