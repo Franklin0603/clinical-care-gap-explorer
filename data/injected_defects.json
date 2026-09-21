@@ -1,0 +1,2844 @@
+{
+ "seed": 20260823,
+ "volume": {
+  "D1": 40,
+  "D2": 150,
+  "D3": 20,
+  "D4": 8,
+  "D5": 25,
+  "D6": 6
+ },
+ "total": 249,
+ "entries": [
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "01e52f9d-3872-9a59-6705-4e8c0d68fd50"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "09527386-1d9c-f6a2-b4a0-352926e9e802"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "12c65474-ae7c-3a2e-ca5f-35f798c00024"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "18f1d934-bd81-79d0-7375-fed0e70fcc11"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "1c0fa1bd-7f20-9e70-8739-99837007656c"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "1e528593-92f0-e5b7-5e36-f121f384e855"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "1f15f811-0033-bdc1-9d3c-4b2573bbf43b"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "2a418d80-75d4-cb3a-55c5-58d8660b75d5"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "330e68f1-aa53-9dbe-fa15-1254f83351b6"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "3b15ee15-0f2a-91d2-be24-0a3c029ebf02"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "4528f806-07dd-7a52-f233-46c01e971a38"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "4941744a-e120-ed39-6041-c546c17ccf17"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "4dd9594e-3d10-6ffe-1ee7-274e21ec929b"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "53b237aa-9ddf-403f-e74b-9e7a9c616a1c"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "546eccd8-ce77-14a9-188f-12be47c6532a"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "54c5483c-d937-54d5-51fe-6f2e76010fea"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "565b8265-cb17-8e83-7333-34f12cfae5d0"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "6d907ed2-a003-7509-22d5-2c2e2679b277"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "6fff5870-20ac-1a1d-e543-8f78bc2f7c53"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "7abbf272-d271-8717-b88e-12e07f5affe8"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "7ae7d70d-3b9f-e4e1-a95f-55d2501c88a1"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "820e0df0-ad4f-5e89-94a5-618dc7651f7f"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "827c52b6-f098-9e53-f44a-43d893492ed5"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "93b255f5-cd2a-2a1b-a0c7-4993dc3901f1"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "9df3fbab-efbf-b706-1099-6830c35d19a8"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "9df3fbab-efbf-b706-5420-f81360298695"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "a9c083e3-a34a-dcb7-eb27-bfe0906360bf"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "af64b0bf-aad5-9272-929b-10773e4c9dc4"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "b7bcd51e-35c0-f0b5-d9cb-406f79b083fc"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "b9388167-86b5-a149-e3a6-075378910469"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "bb527977-aea0-113f-540b-93fcbd09ad01"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "c29af4b6-f98b-20c6-967b-c9163cb87ff5"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "c417f41b-9c8d-a2e2-f5df-608e0ea0b562"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "c4302baa-e55e-d7e2-f999-e00c9dcf2b08"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "ce166926-4e33-02a4-b3d5-260ba39c978b"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "dac144e3-7ed4-7ce5-1605-7518d68030ff"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "dbebde9a-26cc-95c4-5efb-75bdfd53b355"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "ebb66476-4b46-e281-69b1-47ed4af186fb"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "f1957939-e2e6-3691-1dd8-58276b9951be"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D1",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "f52c7b09-9aa3-c2b6-b67b-02e6e3719048"
+   },
+   "field": null,
+   "original": null,
+   "injected": "row inserted a second time, unchanged"
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "01e52f9d-3872-9a59-0281-d3fa1412b8fa",
+    "CODE": "8867-4",
+    "DATE": "2002-11-30T08:06:20Z"
+   },
+   "field": "PATIENT",
+   "original": "01e52f9d-3872-9a59-2200-ed010dfafe82",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "04cfdd75-b077-79b5-0cff-13bca77cb7f4",
+    "CODE": "93028-9",
+    "DATE": "2021-03-12T14:17:52Z"
+   },
+   "field": "PATIENT",
+   "original": "04cfdd75-b077-79b5-0f49-777f4dd55ecb",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "056c4f0f-c630-6fd3-e611-35c99209e1d0",
+    "CODE": "2028-9",
+    "DATE": "2023-03-21T05:59:17Z"
+   },
+   "field": "PATIENT",
+   "original": "056c4f0f-c630-6fd3-e99b-db4456192d93",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "0b016a3f-40f6-7d2d-86aa-bc8651c3bd13",
+    "CODE": "8867-4",
+    "DATE": "2019-06-16T06:54:50Z"
+   },
+   "field": "PATIENT",
+   "original": "0b016a3f-40f6-7d2d-3fa6-fddb0d45611e",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "15e18436-9fbf-fb4a-f07e-d977449f2c8a",
+    "CODE": "93038-8",
+    "DATE": "2021-03-12T01:26:04Z"
+   },
+   "field": "PATIENT",
+   "original": "15e18436-9fbf-fb4a-c5eb-b31ed3057b03",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "197901fd-7999-d6dc-77c2-5fe61ac28b67",
+    "CODE": "2069-3",
+    "DATE": "2023-04-03T14:21:24Z"
+   },
+   "field": "PATIENT",
+   "original": "197901fd-7999-d6dc-74ec-88bc769c2d98",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "1a7e4e2d-de36-8754-d389-8bff2e347064",
+    "CODE": "93026-3",
+    "DATE": "2006-06-02T12:52:50Z"
+   },
+   "field": "PATIENT",
+   "original": "1a7e4e2d-de36-8754-ab2f-149e0feedf25",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "1b6c48b7-9e76-e7a1-0d02-a979e1db2dd8",
+    "CODE": "2708-6",
+    "DATE": "2022-05-28T22:53:02Z"
+   },
+   "field": "PATIENT",
+   "original": "1b6c48b7-9e76-e7a1-18f8-841869d00d72",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "1e528593-92f0-e5b7-5fb7-4fbb4f288dd0",
+    "CODE": "10834-0",
+    "DATE": "2023-08-29T02:12:08Z"
+   },
+   "field": "PATIENT",
+   "original": "1e528593-92f0-e5b7-532a-ffe9ee3b6610",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "1e528593-92f0-e5b7-8177-d5e61cd6c4ff",
+    "CODE": "8867-4",
+    "DATE": "2019-10-30T13:17:08Z"
+   },
+   "field": "PATIENT",
+   "original": "1e528593-92f0-e5b7-532a-ffe9ee3b6610",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "202ae60e-df4c-9c07-9984-e1f01e1924bb",
+    "CODE": "2885-2",
+    "DATE": "1995-12-14T15:14:46Z"
+   },
+   "field": "PATIENT",
+   "original": "202ae60e-df4c-9c07-5e40-e01836b73440",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "224990fa-ca3b-2bdf-2866-2618a2e5582c",
+    "CODE": "55758-7",
+    "DATE": "2020-01-01T12:07:03Z"
+   },
+   "field": "PATIENT",
+   "original": "224990fa-ca3b-2bdf-24f1-dfa1553dcd41",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "22523ad1-c4b9-7e03-1ae6-e056146cbb5d",
+    "CODE": "32623-1",
+    "DATE": "2025-07-21T21:44:23Z"
+   },
+   "field": "PATIENT",
+   "original": "22523ad1-c4b9-7e03-9555-585189e7882e",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "2619e386-a99f-34be-0a68-64b4370d261b",
+    "CODE": "718-7",
+    "DATE": "2024-01-18T08:45:25Z"
+   },
+   "field": "PATIENT",
+   "original": "2619e386-a99f-34be-0f2b-c01dbd0fc881",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "276b1d34-fb0e-d74b-ed9b-1bb89546bbf1",
+    "CODE": "8302-2",
+    "DATE": "2020-02-18T13:50:13Z"
+   },
+   "field": "PATIENT",
+   "original": "276b1d34-fb0e-d74b-af24-b85ec762a26d",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "28bc89bb-9a8a-9bc9-76c9-209507c3fdd2",
+    "CODE": "70274-6",
+    "DATE": "2016-11-25T19:16:32Z"
+   },
+   "field": "PATIENT",
+   "original": "28bc89bb-9a8a-9bc9-363e-da05bfa54376",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "29c31d6f-6bcc-89da-4760-0b1d62b77fbd",
+    "CODE": "93026-3",
+    "DATE": "2018-12-02T23:54:47Z"
+   },
+   "field": "PATIENT",
+   "original": "29c31d6f-6bcc-89da-5bb9-3ba5d37307e4",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "29c6b03c-63e8-a403-a1ec-0ab66236f829",
+    "CODE": "20454-5",
+    "DATE": "1990-12-29T03:17:46Z"
+   },
+   "field": "PATIENT",
+   "original": "29c6b03c-63e8-a403-8cd7-a3ccf9eec5bc",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "29c6b03c-63e8-a403-c671-dedb06f30265",
+    "CODE": "20565-8",
+    "DATE": "1991-10-27T21:40:46Z"
+   },
+   "field": "PATIENT",
+   "original": "29c6b03c-63e8-a403-8cd7-a3ccf9eec5bc",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "30b10111-0ea6-821d-e36e-9ef06b6934bc",
+    "CODE": "32207-3",
+    "DATE": "2024-08-04T08:12:19Z"
+   },
+   "field": "PATIENT",
+   "original": "30b10111-0ea6-821d-990d-87d3ed86523b",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "30ec0e64-ddbf-f291-7635-6ff67308d191",
+    "CODE": "18262-6",
+    "DATE": "2024-02-15T05:54:02Z"
+   },
+   "field": "PATIENT",
+   "original": "30ec0e64-ddbf-f291-8330-6ae2b46864f6",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "3484b4e2-3407-60d7-a633-ebd301b14cad",
+    "CODE": "2339-0",
+    "DATE": "2021-01-04T07:36:17Z"
+   },
+   "field": "PATIENT",
+   "original": "3484b4e2-3407-60d7-4ad7-6b091069071e",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "36c9879a-06f4-d01b-7447-053b88fe311b",
+    "CODE": "8462-4",
+    "DATE": "2018-11-19T23:42:11Z"
+   },
+   "field": "PATIENT",
+   "original": "36c9879a-06f4-d01b-501a-adeaf1194c95",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "36cff286-4aeb-7ea5-4285-00f9988baacd",
+    "CODE": "93031-3",
+    "DATE": "2020-05-30T21:12:16Z"
+   },
+   "field": "PATIENT",
+   "original": "36cff286-4aeb-7ea5-d111-e361d53a3739",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "3839e566-b84d-7bdd-1c4a-f23bc390021f",
+    "CODE": "8302-2",
+    "DATE": "2026-08-20T16:23:48Z"
+   },
+   "field": "PATIENT",
+   "original": "3839e566-b84d-7bdd-bdc6-cf1095527d70",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "3b1005cc-f3b2-9a20-a7f0-7c4673ca3c37",
+    "CODE": "32623-1",
+    "DATE": "2024-08-05T10:25:40Z"
+   },
+   "field": "PATIENT",
+   "original": "3b1005cc-f3b2-9a20-de33-8bcd40f606cf",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "3b15ee15-0f2a-91d2-616a-f182573262a9",
+    "CODE": "1920-8",
+    "DATE": "2020-01-10T08:19:05Z"
+   },
+   "field": "PATIENT",
+   "original": "3b15ee15-0f2a-91d2-037e-26bcfd78ebf2",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "401cd1e2-16e9-43c8-d513-852df4a3d813",
+    "CODE": "74006-8",
+    "DATE": "2018-01-19T05:14:13Z"
+   },
+   "field": "PATIENT",
+   "original": "401cd1e2-16e9-43c8-330e-4e875fb5bda5",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "403fad10-ac3d-dbd1-34a1-0561f193bc01",
+    "CODE": "3094-0",
+    "DATE": "2021-10-08T08:24:05Z"
+   },
+   "field": "PATIENT",
+   "original": "403fad10-ac3d-dbd1-e9c7-8d4b410b2738",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "4152efd9-17ea-6dcf-0dcf-b0adf4c59c98",
+    "CODE": "6768-6",
+    "DATE": "2020-12-27T22:36:27Z"
+   },
+   "field": "PATIENT",
+   "original": "4152efd9-17ea-6dcf-1926-ee8d72195107",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "4152efd9-17ea-6dcf-2111-92e187eed26b",
+    "CODE": "8310-5",
+    "DATE": "2020-12-18T20:33:47Z"
+   },
+   "field": "PATIENT",
+   "original": "4152efd9-17ea-6dcf-1926-ee8d72195107",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "42126ec0-9a32-26f0-a3bd-2fa5cb801b2e",
+    "CODE": "1960-4",
+    "DATE": "2018-04-07T21:05:14Z"
+   },
+   "field": "PATIENT",
+   "original": "42126ec0-9a32-26f0-70a9-d7b8d00f2f5d",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "434df6c0-81ec-ad9c-6795-fe63a42f7b46",
+    "CODE": "56799-0",
+    "DATE": "2022-02-21T05:42:39Z"
+   },
+   "field": "PATIENT",
+   "original": "434df6c0-81ec-ad9c-476d-66ff16504b5d",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "44e74303-5865-f254-4d71-6280b16ae770",
+    "CODE": "8462-4",
+    "DATE": "2022-05-23T10:05:11Z"
+   },
+   "field": "PATIENT",
+   "original": "44e74303-5865-f254-418c-3e1244838f05",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "46cc21e6-fd01-3b0a-f07a-fcedd491365e",
+    "CODE": "93033-9",
+    "DATE": "2022-01-26T12:39:21Z"
+   },
+   "field": "PATIENT",
+   "original": "46cc21e6-fd01-3b0a-9c49-8f31bcb5a4d5",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "485af41c-3b3d-fb44-2023-500ae16ff391",
+    "CODE": "2069-3",
+    "DATE": "1986-02-02T05:48:17Z"
+   },
+   "field": "PATIENT",
+   "original": "485af41c-3b3d-fb44-e4c3-94666299c792",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "485af41c-3b3d-fb44-f1d2-2ce962f2caba",
+    "CODE": "93026-3",
+    "DATE": "1982-10-01T06:00:38Z"
+   },
+   "field": "PATIENT",
+   "original": "485af41c-3b3d-fb44-e4c3-94666299c792",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "4941744a-e120-ed39-70c2-344810470155",
+    "CODE": "34533-0",
+    "DATE": "2025-08-08T06:23:05Z"
+   },
+   "field": "PATIENT",
+   "original": "4941744a-e120-ed39-abea-84d52e1d6385",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "522feb3c-210d-2e0a-7617-964490affcb5",
+    "CODE": "1975-2",
+    "DATE": "2022-04-02T10:49:26Z"
+   },
+   "field": "PATIENT",
+   "original": "522feb3c-210d-2e0a-689d-26f085cf5575",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "546eccd8-ce77-14a9-0430-233f2456deed",
+    "CODE": "2093-3",
+    "DATE": "2021-07-17T02:14:15Z"
+   },
+   "field": "PATIENT",
+   "original": "546eccd8-ce77-14a9-b806-0f5d7b4667db",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "5599ae5e-abfd-73d6-15ec-da2050e4469f",
+    "CODE": "6690-2",
+    "DATE": "2024-08-23T16:24:20Z"
+   },
+   "field": "PATIENT",
+   "original": "5599ae5e-abfd-73d6-75ae-68ff78fce4d0",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "5599ae5e-abfd-73d6-864b-8b444c32e9dd",
+    "CODE": "93031-3",
+    "DATE": "2022-03-31T22:57:39Z"
+   },
+   "field": "PATIENT",
+   "original": "5599ae5e-abfd-73d6-75ae-68ff78fce4d0",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "565b8265-cb17-8e83-5755-04767d7a4008",
+    "CODE": "2085-9",
+    "DATE": "1998-09-21T07:31:14Z"
+   },
+   "field": "PATIENT",
+   "original": "565b8265-cb17-8e83-b7c3-81a3d80b0853",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "598d2868-1b7f-543a-476f-257f279dfd40",
+    "CODE": "5803-2",
+    "DATE": "2025-09-02T16:14:47Z"
+   },
+   "field": "PATIENT",
+   "original": "598d2868-1b7f-543a-03ed-1a7375b06716",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "598d2868-1b7f-543a-8a4d-e5eb42d261bc",
+    "CODE": "72514-3",
+    "DATE": "2019-02-12T16:14:47Z"
+   },
+   "field": "PATIENT",
+   "original": "598d2868-1b7f-543a-03ed-1a7375b06716",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "59a63d88-ae0e-11bc-eac3-c5b8b7da5389",
+    "CODE": "93028-9",
+    "DATE": "2025-04-01T08:45:50Z"
+   },
+   "field": "PATIENT",
+   "original": "59a63d88-ae0e-11bc-c233-51324cd27c66",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "5ab7dcef-2db6-acec-9232-e3b418a8f77c",
+    "CODE": "6768-6",
+    "DATE": "2022-05-14T04:59:14Z"
+   },
+   "field": "PATIENT",
+   "original": "5ab7dcef-2db6-acec-39c8-2b43ff29feeb",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "5ab7dcef-2db6-acec-b415-b0f19c705895",
+    "CODE": "72514-3",
+    "DATE": "2022-08-10T19:18:14Z"
+   },
+   "field": "PATIENT",
+   "original": "5ab7dcef-2db6-acec-39c8-2b43ff29feeb",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "5d6fefb4-c601-c8a1-6728-57082d3df072",
+    "CODE": "8480-6",
+    "DATE": "2012-11-01T07:04:00Z"
+   },
+   "field": "PATIENT",
+   "original": "5d6fefb4-c601-c8a1-3c4a-04846064e1ee",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "5d6fefb4-c601-c8a1-eb38-b5f4939f97a6",
+    "CODE": "25428-4",
+    "DATE": "2006-04-20T07:04:00Z"
+   },
+   "field": "PATIENT",
+   "original": "5d6fefb4-c601-c8a1-3c4a-04846064e1ee",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "5f9e194f-0147-7e03-62f1-1f49f5512037",
+    "CODE": "14959-1",
+    "DATE": "2024-07-29T03:11:15Z"
+   },
+   "field": "PATIENT",
+   "original": "5f9e194f-0147-7e03-bf35-61df99c92da4",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "6233cecb-bb5a-6d62-2706-04941e7801cf",
+    "CODE": "82667-7",
+    "DATE": "2024-10-02T23:03:09Z"
+   },
+   "field": "PATIENT",
+   "original": "6233cecb-bb5a-6d62-5797-05e47f730617",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "64b7b8b0-3b23-c963-1711-690d3bb482bc",
+    "CODE": "76437-3",
+    "DATE": "2020-07-22T11:05:10Z"
+   },
+   "field": "PATIENT",
+   "original": "64b7b8b0-3b23-c963-787c-95309c7e37d6",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "64b7b8b0-3b23-c963-a3ab-9c8c9f283290",
+    "CODE": "20454-5",
+    "DATE": "2022-04-06T10:18:59Z"
+   },
+   "field": "PATIENT",
+   "original": "64b7b8b0-3b23-c963-787c-95309c7e37d6",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "64b7b8b0-3b23-c963-e640-8c2d7d2f2242",
+    "CODE": "5770-3",
+    "DATE": "2025-08-27T10:18:59Z"
+   },
+   "field": "PATIENT",
+   "original": "64b7b8b0-3b23-c963-787c-95309c7e37d6",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "659c109a-d48b-7269-f7ba-0f8024e244f7",
+    "CODE": "38483-4",
+    "DATE": "2025-03-20T14:49:54Z"
+   },
+   "field": "PATIENT",
+   "original": "659c109a-d48b-7269-b27e-24b0c12df0d9",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "66b32c98-0fca-4144-3fa3-007d3f672a15",
+    "CODE": "9279-1",
+    "DATE": "2021-06-25T16:45:23Z"
+   },
+   "field": "PATIENT",
+   "original": "66b32c98-0fca-4144-5d96-1088abf58312",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "66b32c98-0fca-4144-f993-0d5ed6417705",
+    "CODE": "93031-3",
+    "DATE": "2026-06-26T17:26:53Z"
+   },
+   "field": "PATIENT",
+   "original": "66b32c98-0fca-4144-5d96-1088abf58312",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "67cde956-a869-5e04-136d-ed9abe553aa8",
+    "CODE": "29463-7",
+    "DATE": "2024-12-16T20:05:20Z"
+   },
+   "field": "PATIENT",
+   "original": "67cde956-a869-5e04-93b2-a6711ca92e48",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "67cde956-a869-5e04-35e7-a24feeafb9c4",
+    "CODE": "2160-0",
+    "DATE": "2020-08-31T20:05:20Z"
+   },
+   "field": "PATIENT",
+   "original": "67cde956-a869-5e04-93b2-a6711ca92e48",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "67cde956-a869-5e04-6640-d50f3db90636",
+    "CODE": "2028-9",
+    "DATE": "2025-05-19T20:05:20Z"
+   },
+   "field": "PATIENT",
+   "original": "67cde956-a869-5e04-93b2-a6711ca92e48",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "689b8201-5022-1f9e-55cd-fdc1ad3fb1e4",
+    "CODE": "82589-3",
+    "DATE": "2016-10-20T01:45:01Z"
+   },
+   "field": "PATIENT",
+   "original": "689b8201-5022-1f9e-ad6b-00a4fabedfbe",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "696a8f84-af45-5baa-90f2-f19785205a37",
+    "CODE": "9279-1",
+    "DATE": "2020-08-19T09:54:02Z"
+   },
+   "field": "PATIENT",
+   "original": "696a8f84-af45-5baa-bef8-931d8bd94119",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "6bc745d5-c2b3-6935-f49c-cbafb5b6acb4",
+    "CODE": "39156-5",
+    "DATE": "2025-04-20T00:34:32Z"
+   },
+   "field": "PATIENT",
+   "original": "6bc745d5-c2b3-6935-cb64-58ca569537e4",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "6f4e8838-d34a-f747-1716-a80d247e2435",
+    "CODE": "1742-6",
+    "DATE": "2017-03-02T19:58:46Z"
+   },
+   "field": "PATIENT",
+   "original": "6f4e8838-d34a-f747-9236-ca8c634305ce",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "712d670d-24ce-1f59-9215-c8da4deb8510",
+    "CODE": "8480-6",
+    "DATE": "1985-01-03T00:49:00Z"
+   },
+   "field": "PATIENT",
+   "original": "712d670d-24ce-1f59-9954-b8ad269db86e",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "72573d64-d485-5f2d-c79e-e1dd09397a7f",
+    "CODE": "70274-6",
+    "DATE": "2021-10-10T22:53:24Z"
+   },
+   "field": "PATIENT",
+   "original": "72573d64-d485-5f2d-581d-b553f77ef4a3",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "7641b1f3-3699-9ab3-74f9-720504344fac",
+    "CODE": "49765-1",
+    "DATE": "2023-09-28T20:47:18Z"
+   },
+   "field": "PATIENT",
+   "original": "7641b1f3-3699-9ab3-0f9d-b417d43d5e64",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "7983d89a-8cb9-6f64-fcf7-78b8f6008f98",
+    "CODE": "72166-2",
+    "DATE": "2024-01-21T00:38:36Z"
+   },
+   "field": "PATIENT",
+   "original": "7983d89a-8cb9-6f64-4c03-b0ccd95fbd91",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "7eb06879-1cc6-4d96-0b0d-ad6244d6bc5a",
+    "CODE": "20565-8",
+    "DATE": "2017-06-08T20:44:27Z"
+   },
+   "field": "PATIENT",
+   "original": "7eb06879-1cc6-4d96-287a-2789515be6b1",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "820e0df0-ad4f-5e89-0bfe-3c4f30df776e",
+    "CODE": "93026-3",
+    "DATE": "2022-03-20T23:10:55Z"
+   },
+   "field": "PATIENT",
+   "original": "820e0df0-ad4f-5e89-4294-3b2ef9f20452",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "82ba6a2c-834a-f8dd-1955-9f1974d93024",
+    "CODE": "76501-6",
+    "DATE": "2019-05-27T06:52:20Z"
+   },
+   "field": "PATIENT",
+   "original": "82ba6a2c-834a-f8dd-4833-0756791ea61d",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "83e45d7b-7988-9845-5117-cf7876a43bc0",
+    "CODE": "9279-1",
+    "DATE": "2023-10-31T20:29:11Z"
+   },
+   "field": "PATIENT",
+   "original": "83e45d7b-7988-9845-d7a7-a7a30403935f",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "8495bcba-7343-1b9c-6d1a-a2f85587b254",
+    "CODE": "5799-2",
+    "DATE": "1997-04-18T05:15:58Z"
+   },
+   "field": "PATIENT",
+   "original": "8495bcba-7343-1b9c-6c4b-5b0278870b9e",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "8495bcba-7343-1b9c-d692-c89adace2e52",
+    "CODE": "54899-0",
+    "DATE": "1992-10-30T05:49:07Z"
+   },
+   "field": "PATIENT",
+   "original": "8495bcba-7343-1b9c-6c4b-5b0278870b9e",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "8db0444a-867c-f10b-9f74-70bdc028dd3e",
+    "CODE": "5794-3",
+    "DATE": "2024-08-28T19:24:08Z"
+   },
+   "field": "PATIENT",
+   "original": "8db0444a-867c-f10b-361f-4a327cbffeca",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "8db0444a-867c-f10b-b18d-3cf592e984b7",
+    "CODE": "38483-4",
+    "DATE": "2020-02-26T19:24:08Z"
+   },
+   "field": "PATIENT",
+   "original": "8db0444a-867c-f10b-361f-4a327cbffeca",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "947e5fa7-9c03-f094-8822-c3b16f9e594f",
+    "CODE": "93035-4",
+    "DATE": "2025-02-19T14:12:33Z"
+   },
+   "field": "PATIENT",
+   "original": "947e5fa7-9c03-f094-efc5-ec113b501ac8",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "95feb885-62f0-2deb-e61b-2ca2db6dae80",
+    "CODE": "5797-6",
+    "DATE": "2022-07-31T16:58:43Z"
+   },
+   "field": "PATIENT",
+   "original": "95feb885-62f0-2deb-28ae-823b4cc4c612",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "9753ef4c-1a84-74e7-9bf7-35fde620e956",
+    "CODE": "79818-1",
+    "DATE": "2014-10-07T15:53:34Z"
+   },
+   "field": "PATIENT",
+   "original": "9753ef4c-1a84-74e7-9fd4-86312e895726",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "9803ebcd-45d8-daf2-029b-493981657f8f",
+    "CODE": "718-7",
+    "DATE": "2019-01-14T12:44:38Z"
+   },
+   "field": "PATIENT",
+   "original": "9803ebcd-45d8-daf2-6f5a-8f74cce3baeb",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "9e0c2c58-bf74-3ad0-7998-aeb6b6f13b18",
+    "CODE": "39156-5",
+    "DATE": "2017-02-07T23:46:06Z"
+   },
+   "field": "PATIENT",
+   "original": "9e0c2c58-bf74-3ad0-a708-6a44f3e10cd6",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "9e7914e8-d519-7208-5e99-05e8b9e3cfac",
+    "CODE": "55758-7",
+    "DATE": "2019-01-09T07:14:16Z"
+   },
+   "field": "PATIENT",
+   "original": "9e7914e8-d519-7208-703c-49da10a0ea8e",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "a677755c-46ef-ae71-fd9b-8d509bd67b12",
+    "CODE": "8480-6",
+    "DATE": "2019-05-24T04:42:46Z"
+   },
+   "field": "PATIENT",
+   "original": "a677755c-46ef-ae71-bf00-afedbc06333a",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "aa4ba5f3-70ee-1c26-a40a-fabdb350a5cc",
+    "CODE": "34533-0",
+    "DATE": "2022-07-30T14:42:06Z"
+   },
+   "field": "PATIENT",
+   "original": "aa4ba5f3-70ee-1c26-0341-3c6c96846c39",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "adf69155-879b-6230-09b7-ef0949339669",
+    "CODE": "33914-3",
+    "DATE": "2025-01-10T00:56:44Z"
+   },
+   "field": "PATIENT",
+   "original": "adf69155-879b-6230-2234-c7d962a711a6",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "af39a148-8c46-1f54-436c-5d995a8969cd",
+    "CODE": "93038-8",
+    "DATE": "2024-02-19T03:00:31Z"
+   },
+   "field": "PATIENT",
+   "original": "af39a148-8c46-1f54-caef-d471736e4392",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "af654f20-6af6-1078-e6b5-77f1e62efc72",
+    "CODE": "8480-6",
+    "DATE": "2023-02-05T01:01:09Z"
+   },
+   "field": "PATIENT",
+   "original": "af654f20-6af6-1078-fa5d-0e51eae35794",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "b1527484-9124-138d-440d-7cf8c9338783",
+    "CODE": "5902-2",
+    "DATE": "2020-11-08T20:48:15Z"
+   },
+   "field": "PATIENT",
+   "original": "b1527484-9124-138d-cd24-59d750a1e01f",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "b1527484-9124-138d-71fb-54d86259bc73",
+    "CODE": "93030-5",
+    "DATE": "2025-09-20T19:35:29Z"
+   },
+   "field": "PATIENT",
+   "original": "b1527484-9124-138d-cd24-59d750a1e01f",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "b1527484-9124-138d-dc1d-8467eb2e1c44",
+    "CODE": "56051-6",
+    "DATE": "2022-09-03T19:59:26Z"
+   },
+   "field": "PATIENT",
+   "original": "b1527484-9124-138d-cd24-59d750a1e01f",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "b521dea0-035f-c0c9-33bb-dcff3d296597",
+    "CODE": "67875-5",
+    "DATE": "2016-10-29T12:30:18Z"
+   },
+   "field": "PATIENT",
+   "original": "b521dea0-035f-c0c9-ff4e-83307644dc72",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "b7955789-f809-9513-98b8-88f584b989bd",
+    "CODE": "76501-6",
+    "DATE": "2017-05-06T03:46:41Z"
+   },
+   "field": "PATIENT",
+   "original": "b7955789-f809-9513-5df9-ab04d87a3d34",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "bb527977-aea0-113f-3573-a190b799f7b4",
+    "CODE": "32167-9",
+    "DATE": "2002-03-22T05:15:58Z"
+   },
+   "field": "PATIENT",
+   "original": "bb527977-aea0-113f-7241-26b92ddd9b80",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "bb527977-aea0-113f-496c-64440ae2a9de",
+    "CODE": "5792-7",
+    "DATE": "1998-04-17T05:15:58Z"
+   },
+   "field": "PATIENT",
+   "original": "bb527977-aea0-113f-7241-26b92ddd9b80",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "bb527977-aea0-113f-aba1-795dc35747d5",
+    "CODE": "39156-5",
+    "DATE": "1998-02-06T05:15:58Z"
+   },
+   "field": "PATIENT",
+   "original": "bb527977-aea0-113f-7241-26b92ddd9b80",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "bbbac86f-460b-fd43-81ae-bb412ac3e70a",
+    "CODE": "93038-8",
+    "DATE": "2002-08-11T14:51:01Z"
+   },
+   "field": "PATIENT",
+   "original": "bbbac86f-460b-fd43-88c3-23c2dbfa9644",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "bc501e5b-fcda-52ea-c605-7513ca268f26",
+    "CODE": "72514-3",
+    "DATE": "2017-02-23T19:56:02Z"
+   },
+   "field": "PATIENT",
+   "original": "bc501e5b-fcda-52ea-6bc4-d2c3c5598e91",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "bf11c599-51b6-0b29-8092-417b84806c48",
+    "CODE": "93033-9",
+    "DATE": "2020-05-19T18:20:46Z"
+   },
+   "field": "PATIENT",
+   "original": "bf11c599-51b6-0b29-4ef0-6685557ba1f1",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "bfe8c5d0-f43c-317c-4056-0de2723d3345",
+    "CODE": "63512-8",
+    "DATE": "2017-09-25T19:10:42Z"
+   },
+   "field": "PATIENT",
+   "original": "bfe8c5d0-f43c-317c-763d-3dd7a97d2e51",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "c0019d47-e91e-147c-4109-4918eaa8454a",
+    "CODE": "56799-0",
+    "DATE": "2019-10-08T02:59:27Z"
+   },
+   "field": "PATIENT",
+   "original": "c0019d47-e91e-147c-607b-630d49664fc8",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "c1cffe2a-a986-8818-f0dc-5b5ddbf34b4c",
+    "CODE": "59576-9",
+    "DATE": "2020-11-12T22:04:01Z"
+   },
+   "field": "PATIENT",
+   "original": "c1cffe2a-a986-8818-42e7-83cf30a9a099",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "c24941da-8187-d66c-a243-832c49a0f24d",
+    "CODE": "2703-7",
+    "DATE": "2024-09-29T16:58:51Z"
+   },
+   "field": "PATIENT",
+   "original": "c24941da-8187-d66c-bfc0-926199a69c9f",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "c29af4b6-f98b-20c6-e08d-59f97fbf1e93",
+    "CODE": "2345-7",
+    "DATE": "2009-07-17T05:15:58Z"
+   },
+   "field": "PATIENT",
+   "original": "c29af4b6-f98b-20c6-5917-05f7507b4392",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "c3116624-718f-e9e7-c0c5-cd2d96fa7188",
+    "CODE": "72514-3",
+    "DATE": "1995-05-28T01:18:46Z"
+   },
+   "field": "PATIENT",
+   "original": "c3116624-718f-e9e7-cc18-200abaec2ea8",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "c3fe0124-8ecd-a40f-1a31-4f9443174496",
+    "CODE": "93030-5",
+    "DATE": "2019-05-01T07:33:53Z"
+   },
+   "field": "PATIENT",
+   "original": "c3fe0124-8ecd-a40f-8081-0dc4f0cedba0",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "c67a65cb-60d4-fea7-0d8d-c42088c49eb1",
+    "CODE": "76501-6",
+    "DATE": "1968-09-14T11:05:25Z"
+   },
+   "field": "PATIENT",
+   "original": "c67a65cb-60d4-fea7-f97e-37ee02b922f3",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "cc6af46b-6aed-cfa7-80a3-0ebea1a71278",
+    "CODE": "8480-6",
+    "DATE": "2024-11-21T08:30:40Z"
+   },
+   "field": "PATIENT",
+   "original": "cc6af46b-6aed-cfa7-9f8f-8ed762be443f",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "cd7300b5-1e19-c2a6-de11-1ecbf26f22b2",
+    "CODE": "49765-1",
+    "DATE": "2019-02-16T06:01:39Z"
+   },
+   "field": "PATIENT",
+   "original": "cd7300b5-1e19-c2a6-e618-dfb3a7cc1b1b",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "ce166926-4e33-02a4-17c1-8ebe3ac80bf2",
+    "CODE": "2885-2",
+    "DATE": "2025-10-09T00:10:57Z"
+   },
+   "field": "PATIENT",
+   "original": "ce166926-4e33-02a4-fd87-a9b390d63298",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "ce166926-4e33-02a4-ba0b-f9b17c37b114",
+    "CODE": "20565-8",
+    "DATE": "2022-11-13T14:17:57Z"
+   },
+   "field": "PATIENT",
+   "original": "ce166926-4e33-02a4-fd87-a9b390d63298",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "ce166926-4e33-02a4-db10-8633bb66cd37",
+    "CODE": "72514-3",
+    "DATE": "2024-06-21T09:50:57Z"
+   },
+   "field": "PATIENT",
+   "original": "ce166926-4e33-02a4-fd87-a9b390d63298",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "ceb23b46-d128-d7a4-36e7-90e895ff58d5",
+    "CODE": "8480-6",
+    "DATE": "2021-01-31T06:15:44Z"
+   },
+   "field": "PATIENT",
+   "original": "ceb23b46-d128-d7a4-dfb3-b70ffebfd2db",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "cf9f648b-3742-5105-e7b9-33bb5c5926b8",
+    "CODE": "63512-8",
+    "DATE": "2020-06-18T14:27:20Z"
+   },
+   "field": "PATIENT",
+   "original": "cf9f648b-3742-5105-2d54-f88f73bf1818",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "d2a10596-7dee-7ce4-e028-c80cdfcd593f",
+    "CODE": "8480-6",
+    "DATE": "2023-02-28T00:29:26Z"
+   },
+   "field": "PATIENT",
+   "original": "d2a10596-7dee-7ce4-b0b7-69cca15fa0e9",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "d30a6bb2-9609-a36f-3a4f-0f58e2ce98f2",
+    "CODE": "5802-4",
+    "DATE": "2012-02-11T16:51:19Z"
+   },
+   "field": "PATIENT",
+   "original": "d30a6bb2-9609-a36f-5b74-83e0b6964e46",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "d37ab0bd-be2d-726d-5891-b15a50319628",
+    "CODE": "8480-6",
+    "DATE": "2025-07-09T12:44:03Z"
+   },
+   "field": "PATIENT",
+   "original": "d37ab0bd-be2d-726d-6b6d-cdb0296fb730",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "d41749a3-6e5b-0ec9-938b-acc361845bc1",
+    "CODE": "20565-8",
+    "DATE": "2017-07-30T14:25:00Z"
+   },
+   "field": "PATIENT",
+   "original": "d41749a3-6e5b-0ec9-9843-b1d1085b8dfb",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "d46629ff-2b06-c5b4-0b30-0638af05b0d9",
+    "CODE": "79819-9",
+    "DATE": "2020-03-29T05:15:07Z"
+   },
+   "field": "PATIENT",
+   "original": "d46629ff-2b06-c5b4-fb36-e661d1f2284b",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "d87cfb28-aaa3-73da-3b60-cadf43362b5a",
+    "CODE": "8302-2",
+    "DATE": "2025-04-17T22:01:59Z"
+   },
+   "field": "PATIENT",
+   "original": "d87cfb28-aaa3-73da-7a6e-7db1cbb03ecb",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "da97171d-a52d-9662-aeeb-75cc5a23aa74",
+    "CODE": "93033-9",
+    "DATE": "2019-04-12T15:57:01Z"
+   },
+   "field": "PATIENT",
+   "original": "da97171d-a52d-9662-7db4-5ca04804303d",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "dd61a6d9-8d7a-f0a1-5ae9-6889ad0c5244",
+    "CODE": "8302-2",
+    "DATE": "1953-08-31T23:52:33Z"
+   },
+   "field": "PATIENT",
+   "original": "dd61a6d9-8d7a-f0a1-6fc1-e208b70718c2",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "dd758db2-03ba-cb29-70e3-7ab24c350dc4",
+    "CODE": "93035-4",
+    "DATE": "2020-11-15T01:23:58Z"
+   },
+   "field": "PATIENT",
+   "original": "dd758db2-03ba-cb29-a1a7-9e70d707b308",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "df02c43f-cb47-ef47-0555-5920e8356e61",
+    "CODE": "71802-3",
+    "DATE": "1995-09-04T11:25:09Z"
+   },
+   "field": "PATIENT",
+   "original": "df02c43f-cb47-ef47-90c8-8c026c8bd841",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "e29600a7-7eec-1b43-2402-7a85102c88b7",
+    "CODE": "72166-2",
+    "DATE": "1980-03-04T14:40:22Z"
+   },
+   "field": "PATIENT",
+   "original": "e29600a7-7eec-1b43-f663-f427139269d8",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "e35b5259-ac59-12dc-33a3-f64bc2bc91b9",
+    "CODE": "2951-2",
+    "DATE": "2026-01-11T00:45:30Z"
+   },
+   "field": "PATIENT",
+   "original": "e35b5259-ac59-12dc-ccab-fcd4ffe5943e",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "e35b5259-ac59-12dc-798e-7b9e5ec0dfac",
+    "CODE": "34533-0",
+    "DATE": "2026-08-09T00:45:30Z"
+   },
+   "field": "PATIENT",
+   "original": "e35b5259-ac59-12dc-ccab-fcd4ffe5943e",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "e6090a29-8560-a921-8102-e4d4a587c41b",
+    "CODE": "72514-3",
+    "DATE": "2008-05-24T16:46:34Z"
+   },
+   "field": "PATIENT",
+   "original": "e6090a29-8560-a921-3371-127d480908cb",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "e6090a29-8560-a921-b3b6-daacfb8e9302",
+    "CODE": "5803-2",
+    "DATE": "2006-07-29T16:46:34Z"
+   },
+   "field": "PATIENT",
+   "original": "e6090a29-8560-a921-3371-127d480908cb",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "e971d2e8-9653-e7f3-330b-761e68300354",
+    "CODE": "39156-5",
+    "DATE": "2017-05-03T23:23:59Z"
+   },
+   "field": "PATIENT",
+   "original": "e971d2e8-9653-e7f3-d885-332e1bc09252",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "ed088210-dd92-9914-904a-f9c2c00cefcd",
+    "CODE": "93034-7",
+    "DATE": "2023-09-09T08:55:34Z"
+   },
+   "field": "PATIENT",
+   "original": "ed088210-dd92-9914-2d2d-6281bbf65723",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "ee2c6d62-cc80-8756-2367-6cc6b3a33d4a",
+    "CODE": "49765-1",
+    "DATE": "1996-09-18T11:32:42Z"
+   },
+   "field": "PATIENT",
+   "original": "ee2c6d62-cc80-8756-d920-a58a44704c89",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "ee381c2c-46e1-cb55-8196-de5d19dade5f",
+    "CODE": "5794-3",
+    "DATE": "1983-12-04T02:04:08Z"
+   },
+   "field": "PATIENT",
+   "original": "ee381c2c-46e1-cb55-4b81-4a8b2f367d65",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f07d90c9-b212-5011-0bdf-61359730068f",
+    "CODE": "3094-0",
+    "DATE": "2015-03-27T04:42:46Z"
+   },
+   "field": "PATIENT",
+   "original": "f07d90c9-b212-5011-d0ab-d3c783b26608",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f07d90c9-b212-5011-16b6-4e50e04d706f",
+    "CODE": "2075-0",
+    "DATE": "2014-08-29T04:42:46Z"
+   },
+   "field": "PATIENT",
+   "original": "f07d90c9-b212-5011-d0ab-d3c783b26608",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f07d90c9-b212-5011-29af-477076601633",
+    "CODE": "8302-2",
+    "DATE": "2013-04-26T04:42:46Z"
+   },
+   "field": "PATIENT",
+   "original": "f07d90c9-b212-5011-d0ab-d3c783b26608",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f07d90c9-b212-5011-dca3-4e4545720a89",
+    "CODE": "76504-0",
+    "DATE": "2015-09-11T06:20:38Z"
+   },
+   "field": "PATIENT",
+   "original": "f07d90c9-b212-5011-d0ab-d3c783b26608",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f25542df-449d-a8f9-3a30-562ac773443b",
+    "CODE": "10834-0",
+    "DATE": "2025-09-01T12:07:59Z"
+   },
+   "field": "PATIENT",
+   "original": "f25542df-449d-a8f9-71c2-85b7264cb9cb",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f267f864-81e3-4f8e-2ce4-6fc493d40a9a",
+    "CODE": "70274-6",
+    "DATE": "2011-06-27T08:41:51Z"
+   },
+   "field": "PATIENT",
+   "original": "f267f864-81e3-4f8e-d4ce-32b3669a4792",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f267f864-81e3-4f8e-45a0-57e7ee2aac31",
+    "CODE": "93038-8",
+    "DATE": "2020-06-08T08:20:00Z"
+   },
+   "field": "PATIENT",
+   "original": "f267f864-81e3-4f8e-d4ce-32b3669a4792",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f267f864-81e3-4f8e-8178-5b2e17307bdc",
+    "CODE": "76501-6",
+    "DATE": "2016-04-18T08:23:35Z"
+   },
+   "field": "PATIENT",
+   "original": "f267f864-81e3-4f8e-d4ce-32b3669a4792",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f267f864-81e3-4f8e-9b67-352c2d63d6d2",
+    "CODE": "6298-4",
+    "DATE": "2016-10-03T07:36:17Z"
+   },
+   "field": "PATIENT",
+   "original": "f267f864-81e3-4f8e-d4ce-32b3669a4792",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f267f864-81e3-4f8e-f2ca-1e3384e1a89a",
+    "CODE": "93028-9",
+    "DATE": "2016-07-25T08:23:17Z"
+   },
+   "field": "PATIENT",
+   "original": "f267f864-81e3-4f8e-d4ce-32b3669a4792",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f27bda00-1e1b-69cf-5c6d-d9fe99caebe7",
+    "CODE": "33914-3",
+    "DATE": "2021-03-10T15:33:06Z"
+   },
+   "field": "PATIENT",
+   "original": "f27bda00-1e1b-69cf-285c-8aabf2fd7968",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f30a657f-2ae5-684a-8448-cd88b41f2abe",
+    "CODE": "2069-3",
+    "DATE": "2014-07-05T17:06:50Z"
+   },
+   "field": "PATIENT",
+   "original": "f30a657f-2ae5-684a-160b-5d180f93a3be",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f30a657f-2ae5-684a-85b4-5e37f7ec07c0",
+    "CODE": "5797-6",
+    "DATE": "2008-09-27T15:01:50Z"
+   },
+   "field": "PATIENT",
+   "original": "f30a657f-2ae5-684a-160b-5d180f93a3be",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f30a657f-2ae5-684a-c399-2240eae5c3db",
+    "CODE": "6298-4",
+    "DATE": "2016-07-23T15:01:50Z"
+   },
+   "field": "PATIENT",
+   "original": "f30a657f-2ae5-684a-160b-5d180f93a3be",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f52c7b09-9aa3-c2b6-da9c-1457c4ce0f99",
+    "CODE": "5778-6",
+    "DATE": "2024-11-21T01:09:32Z"
+   },
+   "field": "PATIENT",
+   "original": "f52c7b09-9aa3-c2b6-2891-9422737ce2e2",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f870f04f-d88f-1675-47de-7053650a854d",
+    "CODE": "67875-5",
+    "DATE": "2020-07-09T01:41:13Z"
+   },
+   "field": "PATIENT",
+   "original": "f870f04f-d88f-1675-2451-3912e12dbb57",
+   "injected": null
+  },
+  {
+   "defect": "D2",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "fd3658f2-1061-158a-5596-41adba11b709",
+    "CODE": "63586-2",
+    "DATE": "2018-12-18T12:03:58Z"
+   },
+   "field": "PATIENT",
+   "original": "fd3658f2-1061-158a-ff7b-b3bfa03d4bc2",
+   "injected": null
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "1c0fa1bd-7f20-9e70-db35-c2ebab35f37a",
+    "CODE": "4548-4",
+    "DATE": "2019-11-07T09:58:17Z"
+   },
+   "field": "VALUE",
+   "original": "3.0",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "403fad10-ac3d-dbd1-cbd3-754f73257af8",
+    "CODE": "4548-4",
+    "DATE": "2023-09-01T08:24:05Z"
+   },
+   "field": "VALUE",
+   "original": "5.5",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "53d76024-8fbc-2f6f-8d66-5b828e724b17",
+    "CODE": "4548-4",
+    "DATE": "2020-06-16T05:31:50Z"
+   },
+   "field": "VALUE",
+   "original": "3.9",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "64b7b8b0-3b23-c963-a807-41274603d708",
+    "CODE": "4548-4",
+    "DATE": "2019-08-14T10:18:59Z"
+   },
+   "field": "VALUE",
+   "original": "3.9",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "689b8201-5022-1f9e-b22e-3a55efbdee51",
+    "CODE": "4548-4",
+    "DATE": "2017-10-26T00:49:00Z"
+   },
+   "field": "VALUE",
+   "original": "5.8",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "94397896-83cf-8014-d293-36ef8f8ca9c6",
+    "CODE": "4548-4",
+    "DATE": "2026-03-22T23:49:15Z"
+   },
+   "field": "VALUE",
+   "original": "3.9",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "95feb885-62f0-2deb-2452-e500473d99a4",
+    "CODE": "4548-4",
+    "DATE": "2021-09-26T16:58:43Z"
+   },
+   "field": "VALUE",
+   "original": "3.4",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "9701efff-2009-742f-5c8c-7baf5d2e597a",
+    "CODE": "4548-4",
+    "DATE": "1989-09-03T00:45:30Z"
+   },
+   "field": "VALUE",
+   "original": "5.6",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "a445c3e2-715e-e5f2-ecaf-8e80c8f533da",
+    "CODE": "4548-4",
+    "DATE": "2023-06-12T05:05:30Z"
+   },
+   "field": "VALUE",
+   "original": "3.1",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "b18cdce2-6dbe-c7a5-116f-f54f7b8a5d1f",
+    "CODE": "4548-4",
+    "DATE": "2021-04-19T04:00:51Z"
+   },
+   "field": "VALUE",
+   "original": "2.6",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "b828e7bc-9a2f-929b-44fa-9f2e547db746",
+    "CODE": "4548-4",
+    "DATE": "2009-08-19T19:24:08Z"
+   },
+   "field": "VALUE",
+   "original": "3.2",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "c29af4b6-f98b-20c6-3687-e96b2c7adc18",
+    "CODE": "4548-4",
+    "DATE": "2008-08-22T05:15:58Z"
+   },
+   "field": "VALUE",
+   "original": "3.3",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "dd758db2-03ba-cb29-141a-78c4483e50e0",
+    "CODE": "4548-4",
+    "DATE": "2017-08-06T00:34:32Z"
+   },
+   "field": "VALUE",
+   "original": "3.3",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "df02c43f-cb47-ef47-fc05-6abb282f0410",
+    "CODE": "4548-4",
+    "DATE": "1991-12-09T10:25:40Z"
+   },
+   "field": "VALUE",
+   "original": "3.0",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f07d90c9-b212-5011-ba21-ef7eb4707527",
+    "CODE": "4548-4",
+    "DATE": "2011-02-25T04:42:46Z"
+   },
+   "field": "VALUE",
+   "original": "2.7",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f07d90c9-b212-5011-f0b0-803ca187b119",
+    "CODE": "4548-4",
+    "DATE": "2013-02-22T04:42:46Z"
+   },
+   "field": "VALUE",
+   "original": "3.1",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f267f864-81e3-4f8e-192b-dc55c3ef82e5",
+    "CODE": "4548-4",
+    "DATE": "2011-01-24T07:36:17Z"
+   },
+   "field": "VALUE",
+   "original": "2.8",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f267f864-81e3-4f8e-e266-32d8bda9b9e7",
+    "CODE": "4548-4",
+    "DATE": "2013-08-05T07:36:17Z"
+   },
+   "field": "VALUE",
+   "original": "2.7",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f30a657f-2ae5-684a-3932-f85e07be1669",
+    "CODE": "4548-4",
+    "DATE": "2010-07-17T15:01:50Z"
+   },
+   "field": "VALUE",
+   "original": "4.1",
+   "injected": "250"
+  },
+  {
+   "defect": "D3",
+   "table": "bronze_observations",
+   "key": {
+    "ENCOUNTER": "f870f04f-d88f-1675-6e57-e51ff4f603b0",
+    "CODE": "4548-4",
+    "DATE": "2023-07-27T01:00:24Z"
+   },
+   "field": "VALUE",
+   "original": "6.2",
+   "injected": "250"
+  },
+  {
+   "defect": "D4",
+   "table": "bronze_patients",
+   "key": {
+    "Id": "3c72e166-bb7a-9132-32e5-3582e34b2174"
+   },
+   "field": "BIRTHDATE",
+   "original": "2012-08-31",
+   "injected": "2112-08-31"
+  },
+  {
+   "defect": "D4",
+   "table": "bronze_patients",
+   "key": {
+    "Id": "425a2728-cebb-9101-7b3b-f1f9f8c87b48"
+   },
+   "field": "BIRTHDATE",
+   "original": "1993-05-06",
+   "injected": "2093-05-06"
+  },
+  {
+   "defect": "D4",
+   "table": "bronze_patients",
+   "key": {
+    "Id": "662496ff-c3fd-e92b-01ab-91bc2e079ddf"
+   },
+   "field": "BIRTHDATE",
+   "original": "1984-05-12",
+   "injected": "2084-05-12"
+  },
+  {
+   "defect": "D4",
+   "table": "bronze_patients",
+   "key": {
+    "Id": "81bb2cc1-8556-ccad-8738-00d187ffb540"
+   },
+   "field": "BIRTHDATE",
+   "original": "1993-01-26",
+   "injected": "2093-01-26"
+  },
+  {
+   "defect": "D4",
+   "table": "bronze_patients",
+   "key": {
+    "Id": "ba9056d8-c2d7-6f8f-a320-09cb66f9eabf"
+   },
+   "field": "BIRTHDATE",
+   "original": "1964-06-28",
+   "injected": "2064-06-28"
+  },
+  {
+   "defect": "D4",
+   "table": "bronze_patients",
+   "key": {
+    "Id": "cf5ac1b8-e980-f0de-fb02-6b0bbbbf172c"
+   },
+   "field": "BIRTHDATE",
+   "original": "1957-06-25",
+   "injected": "2057-06-25"
+  },
+  {
+   "defect": "D4",
+   "table": "bronze_patients",
+   "key": {
+    "Id": "d11d8161-498d-63f9-e17d-d403a0cd5875"
+   },
+   "field": "BIRTHDATE",
+   "original": "2025-07-06",
+   "injected": "2125-07-06"
+  },
+  {
+   "defect": "D4",
+   "table": "bronze_patients",
+   "key": {
+    "Id": "dae1f111-05b1-8d1d-969f-f48ec0396e8f"
+   },
+   "field": "BIRTHDATE",
+   "original": "2007-02-04",
+   "injected": "2107-02-04"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "082ad3e9-b3d8-bf20-c635-5a6e8c21946a"
+   },
+   "field": "START,STOP",
+   "original": "2019-12-08T06:41:39Z,2019-12-08T09:49:36Z",
+   "injected": "2019-12-08T09:49:36Z,2019-12-08T06:41:39Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "17087210-7ca7-e030-f9d3-38e8e5089dfe"
+   },
+   "field": "START,STOP",
+   "original": "2019-08-24T07:32:03Z,2019-08-24T07:47:03Z",
+   "injected": "2019-08-24T07:47:03Z,2019-08-24T07:32:03Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "1965304d-d16e-e0d2-6d00-67ad83bb3fde"
+   },
+   "field": "START,STOP",
+   "original": "2008-02-16T16:34:36Z,2008-02-16T20:26:36Z",
+   "injected": "2008-02-16T20:26:36Z,2008-02-16T16:34:36Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "1e528593-92f0-e5b7-e1fc-58e42cdf8e20"
+   },
+   "field": "START,STOP",
+   "original": "2023-04-10T08:38:08Z,2023-04-10T11:16:08Z",
+   "injected": "2023-04-10T11:16:08Z,2023-04-10T08:38:08Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "30cf7d32-948e-0651-d845-b85af9ede341"
+   },
+   "field": "START,STOP",
+   "original": "2020-08-01T11:55:45Z,2020-08-01T12:52:29Z",
+   "injected": "2020-08-01T12:52:29Z,2020-08-01T11:55:45Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "329051eb-a199-868d-f939-5d6b5396837f"
+   },
+   "field": "START,STOP",
+   "original": "2023-10-03T07:56:00Z,2023-10-03T08:56:00Z",
+   "injected": "2023-10-03T08:56:00Z,2023-10-03T07:56:00Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "3947bb31-2bd8-0d95-1258-9cb36f9ed62e"
+   },
+   "field": "START,STOP",
+   "original": "2012-08-14T13:42:30Z,2012-08-14T13:57:30Z",
+   "injected": "2012-08-14T13:57:30Z,2012-08-14T13:42:30Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "5a33f0af-5c31-aa55-aa16-f10f26d6e417"
+   },
+   "field": "START,STOP",
+   "original": "2025-06-21T17:48:12Z,2025-06-21T18:03:12Z",
+   "injected": "2025-06-21T18:03:12Z,2025-06-21T17:48:12Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "646ab468-fd5a-57fb-0f08-c31ebfa2a271"
+   },
+   "field": "START,STOP",
+   "original": "2025-09-30T15:00:11Z,2025-09-30T15:32:33Z",
+   "injected": "2025-09-30T15:32:33Z,2025-09-30T15:00:11Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "6d907ed2-a003-7509-d65c-1888079f862e"
+   },
+   "field": "START,STOP",
+   "original": "2022-12-04T12:35:59Z,2022-12-04T15:39:59Z",
+   "injected": "2022-12-04T15:39:59Z,2022-12-04T12:35:59Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "6ddd6321-ea39-250d-2593-d285bdb86514"
+   },
+   "field": "START,STOP",
+   "original": "2006-07-18T04:16:51Z,2006-07-18T05:05:30Z",
+   "injected": "2006-07-18T05:05:30Z,2006-07-18T04:16:51Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "8495bcba-7343-1b9c-957a-ab2d3f992d87"
+   },
+   "field": "START,STOP",
+   "original": "1991-08-16T05:15:58Z,1991-08-16T05:54:19Z",
+   "injected": "1991-08-16T05:54:19Z,1991-08-16T05:15:58Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "89f8ab28-e0ca-7c4d-bf44-9b440cb486d5"
+   },
+   "field": "START,STOP",
+   "original": "2015-07-24T10:32:49Z,2015-07-24T10:47:49Z",
+   "injected": "2015-07-24T10:47:49Z,2015-07-24T10:32:49Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "8d52feb9-a40f-4207-4a7e-4f3966f8cf45"
+   },
+   "field": "START,STOP",
+   "original": "2019-11-12T11:43:33Z,2019-11-12T12:35:12Z",
+   "injected": "2019-11-12T12:35:12Z,2019-11-12T11:43:33Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "a65b5e11-170e-ac7e-88a3-a9144cb43733"
+   },
+   "field": "START,STOP",
+   "original": "2015-05-11T21:35:28Z,2015-05-11T22:22:26Z",
+   "injected": "2015-05-11T22:22:26Z,2015-05-11T21:35:28Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "a9073be5-847e-a007-5c41-232873d8aedf"
+   },
+   "field": "START,STOP",
+   "original": "2026-02-25T01:17:19Z,2026-02-25T01:32:19Z",
+   "injected": "2026-02-25T01:32:19Z,2026-02-25T01:17:19Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "adf69155-879b-6230-8c63-87b1aefc3fcf"
+   },
+   "field": "START,STOP",
+   "original": "2024-10-17T00:29:44Z,2024-10-17T03:09:44Z",
+   "injected": "2024-10-17T03:09:44Z,2024-10-17T00:29:44Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "adf69155-879b-6230-f930-b42e276042ee"
+   },
+   "field": "START,STOP",
+   "original": "2025-12-27T08:11:44Z,2025-12-27T12:10:44Z",
+   "injected": "2025-12-27T12:10:44Z,2025-12-27T08:11:44Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "b557310a-6831-b979-449c-febe3ae58731"
+   },
+   "field": "START,STOP",
+   "original": "2016-02-15T13:53:40Z,2016-02-15T14:08:40Z",
+   "injected": "2016-02-15T14:08:40Z,2016-02-15T13:53:40Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "c7b16bd1-5fe2-d67d-1f56-f4920b22cbb8"
+   },
+   "field": "START,STOP",
+   "original": "2012-08-31T05:15:58Z,2012-08-31T06:08:48Z",
+   "injected": "2012-08-31T06:08:48Z,2012-08-31T05:15:58Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "c7b16bd1-5fe2-d67d-3cc2-e493746ec63d"
+   },
+   "field": "START,STOP",
+   "original": "2018-04-22T05:15:58Z,2018-04-22T05:30:58Z",
+   "injected": "2018-04-22T05:30:58Z,2018-04-22T05:15:58Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "d41749a3-6e5b-0ec9-6c56-273ccc23c18a"
+   },
+   "field": "START,STOP",
+   "original": "2018-08-15T05:47:00Z,2018-08-15T07:58:00Z",
+   "injected": "2018-08-15T07:58:00Z,2018-08-15T05:47:00Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "e0f4878d-c900-1259-fdeb-43097228006d"
+   },
+   "field": "START,STOP",
+   "original": "2020-01-12T11:46:12Z,2020-01-12T12:01:12Z",
+   "injected": "2020-01-12T12:01:12Z,2020-01-12T11:46:12Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "e356c995-85ec-c24f-83ad-360346f3a3c9"
+   },
+   "field": "START,STOP",
+   "original": "2021-06-14T19:06:45Z,2021-06-14T19:21:45Z",
+   "injected": "2021-06-14T19:21:45Z,2021-06-14T19:06:45Z"
+  },
+  {
+   "defect": "D5",
+   "table": "bronze_encounters",
+   "key": {
+    "Id": "fe062fd2-0854-e183-bef7-73edde21431e"
+   },
+   "field": "START,STOP",
+   "original": "2021-11-12T06:40:46Z,2021-11-12T07:41:20Z",
+   "injected": "2021-11-12T07:41:20Z,2021-11-12T06:40:46Z"
+  },
+  {
+   "defect": "D6",
+   "table": "bronze_patients",
+   "key": {
+    "Id": "ee2fdada-7c82-fd97-085b-64494338ec4f"
+   },
+   "field": "Id",
+   "original": "1782a49d-23a9-f6b1-47cb-ba0ae8bbf1ed",
+   "injected": "ee2fdada-7c82-fd97-085b-64494338ec4f"
+  },
+  {
+   "defect": "D6",
+   "table": "bronze_patients",
+   "key": {
+    "Id": "b5c36d2a-4758-c275-d092-b0fd2bd3d5a2"
+   },
+   "field": "Id",
+   "original": "4917c584-f3bb-ebd1-e6ad-7a9947fc13d5",
+   "injected": "b5c36d2a-4758-c275-d092-b0fd2bd3d5a2"
+  },
+  {
+   "defect": "D6",
+   "table": "bronze_patients",
+   "key": {
+    "Id": "3c9cff8e-889a-545b-f781-9e5687da6e99"
+   },
+   "field": "Id",
+   "original": "5c92cf2b-01b7-8cc3-0fc2-21df6d9ff71f",
+   "injected": "3c9cff8e-889a-545b-f781-9e5687da6e99"
+  },
+  {
+   "defect": "D6",
+   "table": "bronze_patients",
+   "key": {
+    "Id": "ab5a9b62-5c60-35c1-3a35-4527ed3c3576"
+   },
+   "field": "Id",
+   "original": "93a5bbce-4021-1dd6-93a7-4b70ace444bf",
+   "injected": "ab5a9b62-5c60-35c1-3a35-4527ed3c3576"
+  },
+  {
+   "defect": "D6",
+   "table": "bronze_patients",
+   "key": {
+    "Id": "aa081e8d-e726-0459-f291-e2b76dca7fc8"
+   },
+   "field": "Id",
+   "original": "9c5895b3-4818-3b2d-d8b6-dd5e805fc885",
+   "injected": "aa081e8d-e726-0459-f291-e2b76dca7fc8"
+  },
+  {
+   "defect": "D6",
+   "table": "bronze_patients",
+   "key": {
+    "Id": "d119c336-873e-24ca-04a1-47117bd5277b"
+   },
+   "field": "Id",
+   "original": "bb610fec-3d0b-c2f9-a372-dd5b12805739",
+   "injected": "d119c336-873e-24ca-04a1-47117bd5277b"
+  }
+ ]
+}
