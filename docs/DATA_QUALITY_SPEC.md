@@ -33,7 +33,7 @@ is measurable.
 |----|-------|------|-------------------|
 | DQ1 | Encounter uniqueness | one row per (patient_id, encounter_id) | Quarantine dupes, keep earliest |
 | DQ2 | Referential integrity | observations.patient_id exists in patients | Quarantine |
-| DQ3 | A1c plausibility | 3.0 ≤ value ≤ 20.0 (%) | Remediate if divisible pattern suggests unit error, else quarantine |
+| DQ3 | A1c plausibility | **2.0** ≤ value ≤ 20.0 (%) — floor revised Day 1: 951 clean values sit below 3.0 | Value > 20 and 40–600 → treated as mg/dL glucose in a % field, converted A1c = (v + 46.7) / 28.7 (rule `A1C_MGDL_TO_PCT_EAG`), original kept; anything else out of range → quarantine (Decision D4) |
 | DQ4 | Birth date sanity | birth_date < today AND age ≤ 120 | Quarantine |
 | DQ5 | Encounter chronology | discharge ≥ admission | Quarantine |
 | DQ6 | Patient identity | no two patients share name + birth date | Route to `identity_review` |
@@ -56,7 +56,10 @@ Status starts as `pending`. Nothing downstream merges these.
 and in the README. If it is below 100%, say which defect got through and
 why — a known, explained gap reads better than a claimed perfect score.
 
-Result: ___ of 6 defect types detected (___%).
+Result: **6 of 6** defect types detected (100%); 249 of 249 injected rows, each by the
+check meant to catch it. Measured by `validate.py` against `injected_defects.json`
+and written to `data/dq_report.json`. Reconciliation `bronze = silver + quarantine`
+balances on all five tables.
 
 ## What I'd do differently at scale
 
