@@ -17,7 +17,7 @@ RAW = "data/raw/csv"
 # SNOMED CT. Confirmed present in this Synthea extract - see profile.py 1.9.
 #
 # A patient qualifies on ANY of these. Anchoring on 44054006 alone is wrong:
-# in this extract 72 of the 128 patients carrying a diabetic complication have
+# in this extract 73 of the 128 patients carrying a diabetic complication have
 # no type-2 diagnosis code on file, and they are the sickest of the cohort.
 # Real claims data behaves the same way, which is why HEDIS value sets are
 # lists rather than single codes.
@@ -36,7 +36,7 @@ DIABETES_CODES = {
 # with a reason attached, not an oversight:
 #
 #   714628002  Prediabetes - not diabetes. Does not qualify for the HbA1c
-#              control measure. 430 patients in this extract, so including it
+#              control measure. 439 patients in this extract, so including it
 #              would roughly triple the denominator.
 #   80394007   Hyperglycemia - a finding, not a diagnosis. Can occur without
 #              diabetes (stress, steroids, acute illness).

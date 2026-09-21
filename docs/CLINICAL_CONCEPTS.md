@@ -146,7 +146,7 @@ decision.
 
 ### Prediabetes is not diabetes
 
-Searching condition descriptions for the text `diabet` matches **430 patients
+Searching condition descriptions for the text `diabet` matches **439 patients
 with prediabetes** — more than any real diabetes code. Prediabetes means elevated
 blood sugar that has not crossed the diagnostic threshold. Those patients do not
 qualify for the A1c measure.
@@ -158,9 +158,9 @@ text search.
 ### One diabetes code is not enough
 
 The obvious approach is to take the type 2 code, `44054006`, and call it the
-cohort. That gives 89 patients.
+cohort. That gives 88 patients.
 
-But **72 more patients carry a diabetic complication** — diabetic kidney disease,
+But **73 more patients carry a diabetic complication** — diabetic kidney disease,
 diabetic retinopathy, diabetic neuropathy — **with no type 2 diagnosis code on
 file at all.** Their record says, in effect, "complication of a disease we never
 wrote down."
@@ -170,14 +170,14 @@ specifically the sickest half — the ones who most need the follow-up. This isn
 a quirk of synthetic data; it is why professional value sets are lists of dozens
 of codes rather than one. Our cohort is the union of all 8.
 
-Final cohort: **161 patients** out of 1,142.
+Final cohort: **161 patients** out of 1,153.
 
 ### The A1c range in our own spec was wrong
 
 `DATA_QUALITY_SPEC.md` proposed flagging any A1c outside 3.0–20.0 percent.
 
 The units checked out — Synthea reports `4548-4` in percent, so the order of
-magnitude was right. But **993 of 8,749 A1c values sit below 3.0**. That is 11%
+magnitude was right. But **951 of 8,941 A1c values sit below 3.0**. That is 11%
 of completely clean data that the check would have flagged as broken, before a
 single defect was injected.
 
@@ -187,7 +187,7 @@ reason task 1.10 exists.
 
 ### Diabetes is never resolved
 
-Of **819** diabetes condition rows, **zero** have an end date. In this dataset a
+Of **835** diabetes condition rows, **zero** have an end date. In this dataset a
 diabetes diagnosis, once recorded, is permanent.
 
 Clinically that is roughly right — type 2 diabetes is managed, not cured. It also

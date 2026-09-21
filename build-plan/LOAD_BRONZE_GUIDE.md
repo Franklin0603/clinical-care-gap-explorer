@@ -33,7 +33,7 @@ Bronze quietly cleans itself on load, that catch rate measures nothing.
 Five, not eighteen. `patients`, `encounters`, `conditions`, `observations`,
 `medications`. That's Decision **D15** in the workbook — the other thirteen are
 billing ledgers or clinical data with no bearing on an A1c gap, and
-`claims_transactions.csv` alone is 1,031,224 rows.
+`claims_transactions.csv` alone is 1,094,500 rows.
 
 Write the list out explicitly. A `glob` over `data/raw/csv/*.csv` is fewer
 keystrokes and silently loads 40% more data than you decided to.
@@ -143,11 +143,11 @@ the header. I checked all five against `wc -l`; they match exactly today, so any
 mismatch you see is a bug you introduced:
 
 ```
-patients        1,142
-encounters     65,350
-conditions     40,105
-observations  836,111
-medications    56,228
+patients        1,153
+encounters     67,755
+conditions     40,811
+observations  870,510
+medications    59,273
 ```
 
 **V1.6 — Lineage is populated.** `SELECT _source_file, count(*) FROM
