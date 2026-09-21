@@ -240,7 +240,7 @@ def verify(con, entries):
     header("V2.7  Cohort survived")
     cohort = con.sql(f"SELECT count(DISTINCT PATIENT) FROM bronze_conditions WHERE CODE IN ({DX_CODES})").fetchone()[0]
     a1c_ok = con.sql(f"SELECT count(*) FROM bronze_observations WHERE CODE='{A1C}' AND TRY_CAST(VALUE AS DOUBLE) <= 20").fetchone()[0]
-    print(f"  diabetic patients {cohort}   valid A1c rows {a1c_ok:,}   (Day 1: 161 / 8,941)")
+    print(f"  diabetic patients {cohort}   valid A1c rows {a1c_ok:,}   (Day 1: 161 code-carriers / 8,941)")
 
     header("V2.8  Row counts vs clean Bronze")
     for name, delta in [("patients", VOLUME["D6"]), ("encounters", VOLUME["D1"]),

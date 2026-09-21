@@ -170,7 +170,8 @@ specifically the sickest half — the ones who most need the follow-up. This isn
 a quirk of synthetic data; it is why professional value sets are lists of dozens
 of codes rather than one. Our cohort is the union of all 8.
 
-Final cohort: **161 patients** out of 1,153.
+Final cohort: **161 patients** out of 1,153 carry a code; **116** are alive on the as-of
+date and form the denominator the care-gap report is built on.
 
 ### The A1c range in our own spec was wrong
 

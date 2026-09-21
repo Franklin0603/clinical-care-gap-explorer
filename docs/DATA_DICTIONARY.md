@@ -30,7 +30,7 @@ Confirmed present in this extract (`pipeline/profile.py`). A patient qualifies o
 | `97331000119101` | Macular edema and retinopathy due to type 2 diabetes mellitus | 3 |
 | `1501000119109` | Proliferative diabetic retinopathy due to type II DM | 1 |
 
-**Cohort: 161 distinct patients.**
+**161 distinct patients carry at least one; 116 of them are alive on the as-of date (the Gold denominator, D5).**
 
 Excluded on purpose:
 
@@ -184,34 +184,44 @@ One row per diabetic patient. The product of the whole pipeline.
 | Column | Type | Notes |
 |--------|------|-------|
 | patient_id | string | |
-| age | int | Derived at run time |
+| age | int | On the as-of date, not the wall clock |
 | last_a1c_date | date | Null = never tested |
 | last_a1c_value | double | |
 | days_since_a1c | int | Null-safe |
 | gap_flag | boolean | True if > 365 days or never |
-| active_med_count | int | |
+| active_med_count | int | Medications active on the as-of date |
+| asof_date | date | Decision D7; every row carries the date it was computed for |
 
 ## Cohort definition
 
 **Diabetic patient** — *decided, D5:* any of the 8 SNOMED codes above, ever
-recorded, with no active-as-of filter. Justified because 0 of 835 diabetes
-condition rows carry a `STOP` date, so a diagnosis is permanent in this dataset;
-and clinically, type 2 diabetes is managed rather than cured. Anchoring on
-`44054006` alone would drop 73 patients (45% of the cohort) who carry a
-complication with no underlying diagnosis code.
+recorded, on a patient **alive on the as-of date**. Justified because 0 of 835
+diabetes condition rows carry a `STOP` date, so a diagnosis is permanent in this
+dataset (and clinically, type 2 diabetes is managed rather than cured); and
+because a care-gap list is a call list — 45 of the 161 people carrying a diabetes
+code died before 2026-08-23, and HEDIS excludes deceased members from the
+denominator. Anchoring on `44054006` alone would drop 73 patients (45%) who
+carry a complication with no underlying diagnosis code.
 
-**Cohort: 161 patients.**
+**Denominator: 116 patients.**
 
-**Open A1c gap** — *open, D6, decide Day 4:* no `4548-4` result in 365 days.
-Two questions still unanswered:
+**Open A1c gap** — *decided, D6:* no A1c result (LOINC `4548-4`, numeric value,
+observed on or before the as-of date) in the 365 days before the as-of date. A
+patient who has never been tested is a gap. Exactly 365 days is not a gap; 366
+is. Remediated values (Decision D4) count as results.
 
-- Does an ordered-but-no-result count as a gap? (Clinically yes — the patient
-  still has no number. Operationally it is a different work queue.)
-- What is "today"? A run-time date makes README numbers drift daily. Recommend
-  freezing at `2026-08-23` (D7).
+Two things the number cannot see, stated rather than hidden:
 
-For reference, at 365 days as of 2026-08-23: **69 of 161 (43%)** have an open
-gap, and **28 have never had an A1c at all**.
+- *Ordered but not resulted.* Synthea has no orders table and no procedure row
+  mentions A1c, so "we ordered it and the patient never went" and "we never
+  ordered it" are indistinguishable here. On real data they are different
+  problems with different fixes; v1 counts them the same.
+- *Results in another lab system.* Invisible. The measure is "no result we can
+  see", which is what every care-gap report actually measures.
+
+**Result as of 2026-08-23: 25 of 116 (21.6%) have an open gap; 21 of those 25
+have never had an A1c at all.** On the full 161 including the deceased the count
+is 69 — which is why the deceased are excluded.
 
 Your answers to these two are the most interview-relevant lines in the whole
 repo. Defend them in the README.

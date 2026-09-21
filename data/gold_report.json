@@ -1,0 +1,52 @@
+{
+ "asof": "2026-08-23",
+ "gap_days": 365,
+ "cohort": 116,
+ "open_gaps": 25,
+ "gap_rate_pct": 21.6,
+ "never_tested": 21,
+ "age_min": 36,
+ "age_max": 103,
+ "gaps_by_decade": [
+  {
+   "decade": 30,
+   "patients": 2,
+   "gaps": 1
+  },
+  {
+   "decade": 40,
+   "patients": 10,
+   "gaps": 2
+  },
+  {
+   "decade": 50,
+   "patients": 26,
+   "gaps": 6
+  },
+  {
+   "decade": 60,
+   "patients": 43,
+   "gaps": 10
+  },
+  {
+   "decade": 70,
+   "patients": 22,
+   "gaps": 5
+  },
+  {
+   "decade": 80,
+   "patients": 5,
+   "gaps": 1
+  },
+  {
+   "decade": 90,
+   "patients": 6,
+   "gaps": 0
+  },
+  {
+   "decade": 100,
+   "patients": 2,
+   "gaps": 0
+  }
+ ]
+}

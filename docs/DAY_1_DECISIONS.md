@@ -59,6 +59,9 @@ Applied as an actual 365-day gap as of 2026-08-23:
 | No A1c in 12 months | **69 of 161 (43%)** |
 | No glucose in 12 months | 49 of 161 (30%) |
 
+(Day 1 profiling figures on all 161 code-carriers. Gold excludes the 45 who died
+before the as-of date — Decision D5 — and reports **25 of 116 (21.6%)**.)
+
 ### 3. A1c is the measure that actually exists
 
 HEDIS diabetes care is specified on HbA1c. There is no quality measure, anywhere,
@@ -198,7 +201,7 @@ code list live in `pipeline/cohort.py`.
   rows carry a stop date, so a diagnosis is permanent in this dataset. Clinically
   correct too: type 2 diabetes is managed, not cured.
 
-**Cohort: 161 patients.**
+**Cohort: 161 patients carry a code; 116 are alive on the as-of date and form the Gold denominator (Day 4).**
 
 ---
 
@@ -227,4 +230,4 @@ argument for **D7** being a fixed as-of date rather than `current_date` — a
 run-time date means the gap count in the README changes every day it is read.
 
 **Open — decide on Day 4:** D7 (as-of date). Recommended: freeze at
-`2026-08-23`, the simulation end date, so 69 stays 69.
+`2026-08-23`, the simulation end date, so the gap count stays put. *(Decided Day 3.)*
