@@ -29,9 +29,9 @@ The one LEFT JOIN in build() is the whole of task 4.3. An inner join from
 cohort to observations deletes every never-tested patient - 21 of the 25 open
 gaps here - and nothing errors.
 
-Run order: load_bronze.py -> corrupt.py -> validate.py -> build_gold.py
+Run order: load_bronze.py -> corrupt.py -> validate.py -> gold.py
 
-    python pipeline/build_gold.py
+    python pipeline/gold.py
 """
 
 import json
