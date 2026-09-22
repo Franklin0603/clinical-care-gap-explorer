@@ -5,6 +5,11 @@
  "open_gaps": 25,
  "gap_rate_pct": 21.6,
  "never_tested": 21,
+ "never_tested_complication_only": 21,
+ "uncontrolled_last_a1c": 19,
+ "on_insulin": 45,
+ "identity_review_pending": 0,
+ "due_within_90_days": 12,
  "age_min": 36,
  "age_max": 103,
  "gaps_by_decade": [

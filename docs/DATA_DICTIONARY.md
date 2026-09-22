@@ -191,6 +191,24 @@ One row per diabetic patient. The product of the whole pipeline.
 | gap_flag | boolean | True if > 365 days or never |
 | active_med_count | int | Medications active on the as-of date |
 | asof_date | date | Decision D7; every row carries the date it was computed for |
+| next_due_date | date | `last_a1c_date + 365`. Null when never tested: due now |
+| days_overdue | int | Days past `next_due_date`; null unless overdue |
+| a1c_count_2y | int | Results in the 730 days before as-of. 0 = nobody is managing this |
+| first_dx_date | date | Earliest onset of any cohort code |
+| last_a1c_controlled | boolean | `last_a1c_value < 7.0` (ADA target). Null when never tested |
+| last_encounter_date | date | Most recent admission on or before as-of. "When did we last see them" |
+| identity_review_pending | boolean | Patient is a candidate in a pending `identity_review` row. Guard before any outreach |
+| on_insulin | boolean | Active RxNorm `106892` or `311034` on the as-of date |
+| priority | int | Worklist rank over open gaps only, null otherwise: never-tested, then most overdue, then highest last value, then insulin, then oldest |
+
+Two columns were considered and dropped because the data cannot support them
+honestly: `lost_to_followup` (0 of 116 — Synthea patients never disappear) and
+any contact channel (Synthea has address, city and ZIP; no phone, no email).
+
+**Finding:** all 21 never-tested patients are complication-only — none carries
+`44054006`, every one carries diabetic kidney disease, none is on insulin. The
+patients a single-code cohort misses, an inner join deletes, and nobody treats are
+the same 21 people.
 
 ## Cohort definition
 
