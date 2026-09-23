@@ -7,3 +7,6 @@ six==1.17.0
 # notebook-first prototyping (pipeline/index.ipynb)
 ipykernel
 nbclient
+
+# charts (notebook prototyping; see docs/VISUALS.md)
+matplotlib
