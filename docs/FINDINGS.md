@@ -28,6 +28,8 @@ building, and nobody has ordered the one test that says how bad it is.
 
 ---
 
+![Cohort funnel: 161 patients carry a diabetes code, 116 alive on the as-of date, 25 open gaps, 21 never tested](img/01_cohort_funnel.png)
+
 ## Finding 1 — One diagnosis code misses 45% of the cohort
 
 The obvious cohort definition is "patients with the type 2 diabetes code,
@@ -47,6 +49,8 @@ eight codes, written out with reasons in `pipeline/cohort.py`.
 Gold is built by joining the cohort to each patient's most recent A1c. Written
 with an inner join, the table has 95 rows and zero never-tested patients. Written
 with a left join, it has 116 rows and 21.
+
+![Left join keeps 116 patients; inner join keeps 95 and silently deletes 21](img/02_inner_join.png)
 
 Nothing errors either way. The inner-join version looks complete and plausible.
 The 21 patients it drops are 84% of the open gaps — the ones who most need a
@@ -82,9 +86,17 @@ before the as-of date, and the dead carry most of the stale A1cs. Excluding them
 
 `DATA_QUALITY_SPEC.md` proposed rejecting any A1c outside 3.0–20.0 %. The units
 were right. The floor was not: **951 of 8,941 clean values sit below 3.0** — an 11%
-false-positive rate before a single defect had been injected. A check that fires
+false-positive rate before a single defect had been injected.
+
+![A1c distribution with 951 clean results below the proposed 3.0 floor](img/04_a1c_floor.png)
+
+A check that fires
 on clean input makes catch rate meaningless, and catch rate is the number the
 project exists to report. Floor revised to 2.0.
+
+![Open gaps climb from 25 to 116 as the assumed date moves forward](img/06_asof_drift.png)
+
+*Why the as-of date is fixed (Decision D7): the data stops, the calendar does not.*
 
 ## Finding 6 — "Same seed" did not mean same data
 
