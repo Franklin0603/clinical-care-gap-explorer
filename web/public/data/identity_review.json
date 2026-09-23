@@ -1,0 +1,56 @@
+[
+ {
+  "candidate_a_mrn": "93a5bbce-4021-1dd6-93a7-4b70ace444bf",
+  "candidate_b_mrn": "ab5a9b62-5c60-35c1-3a35-4527ed3c3576",
+  "match_fields": "first_name,last_name,birth_date,ssn,address",
+  "confidence": 1.0,
+  "status": "pending",
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "candidate_a_mrn": "9c5895b3-4818-3b2d-d8b6-dd5e805fc885",
+  "candidate_b_mrn": "aa081e8d-e726-0459-f291-e2b76dca7fc8",
+  "match_fields": "first_name,last_name,birth_date,ssn,address",
+  "confidence": 1.0,
+  "status": "pending",
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "candidate_a_mrn": "4917c584-f3bb-ebd1-e6ad-7a9947fc13d5",
+  "candidate_b_mrn": "b5c36d2a-4758-c275-d092-b0fd2bd3d5a2",
+  "match_fields": "first_name,last_name,birth_date,ssn,address",
+  "confidence": 1.0,
+  "status": "pending",
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "candidate_a_mrn": "bb610fec-3d0b-c2f9-a372-dd5b12805739",
+  "candidate_b_mrn": "d119c336-873e-24ca-04a1-47117bd5277b",
+  "match_fields": "first_name,last_name,birth_date,ssn,address",
+  "confidence": 1.0,
+  "status": "pending",
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "candidate_a_mrn": "1782a49d-23a9-f6b1-47cb-ba0ae8bbf1ed",
+  "candidate_b_mrn": "ee2fdada-7c82-fd97-085b-64494338ec4f",
+  "match_fields": "first_name,last_name,birth_date,ssn,address",
+  "confidence": 1.0,
+  "status": "pending",
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "candidate_a_mrn": "3c9cff8e-889a-545b-f781-9e5687da6e99",
+  "candidate_b_mrn": "5c92cf2b-01b7-8cc3-0fc2-21df6d9ff71f",
+  "match_fields": "first_name,last_name,birth_date,ssn,address",
+  "confidence": 1.0,
+  "status": "pending",
+  "reviewed_by": null,
+  "reviewed_at": null
+ }
+]

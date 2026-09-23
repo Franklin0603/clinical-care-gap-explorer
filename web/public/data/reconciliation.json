@@ -1,0 +1,37 @@
+[
+ {
+  "name": "patients",
+  "bronze": 1159,
+  "silver": 1151,
+  "quarantined": 8,
+  "balances": true
+ },
+ {
+  "name": "encounters",
+  "bronze": 67795,
+  "silver": 67730,
+  "quarantined": 65,
+  "balances": true
+ },
+ {
+  "name": "conditions",
+  "bronze": 40811,
+  "silver": 40811,
+  "quarantined": 0,
+  "balances": true
+ },
+ {
+  "name": "observations",
+  "bronze": 870510,
+  "silver": 870360,
+  "quarantined": 150,
+  "balances": true
+ },
+ {
+  "name": "medications",
+  "bronze": 59273,
+  "silver": 59273,
+  "quarantined": 0,
+  "balances": true
+ }
+]

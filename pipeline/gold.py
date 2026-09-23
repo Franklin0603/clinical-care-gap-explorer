@@ -173,6 +173,20 @@ def summary(con):
                count(*) FILTER (WHERE last_a1c_date IS NULL AND patient_id NOT IN
                                 (SELECT patient_id FROM silver_conditions WHERE snomed_code = '44054006'))
         FROM care_gap_a1c""").fetchone()
+    # Figures the site states in prose. They would go stale silently if a
+    # different seed were used, so they ship with the report rather than the copy.
+    complication_only, inner_join_keeps, a1c_below_floor = con.sql(f"""
+        SELECT (SELECT count(DISTINCT patient_id) FROM silver_conditions
+                WHERE snomed_code IN ({DX_CODES}) AND snomed_code <> '44054006'
+                  AND patient_id NOT IN (SELECT patient_id FROM silver_conditions WHERE snomed_code = '44054006')),
+               (SELECT count(*) FROM care_gap_a1c g
+                WHERE EXISTS (SELECT 1 FROM silver_observations o
+                              WHERE o.patient_id = g.patient_id AND o.loinc_code = '{A1C}'
+                                AND o.value IS NOT NULL AND o.observed_at <= TIMESTAMP '{ASOF}')),
+               (SELECT count(*) FROM read_csv_auto('data/raw/csv/observations.csv', all_varchar=true)
+                WHERE CODE = '{A1C}' AND TRY_CAST(VALUE AS DOUBLE) < 3.0)
+    """).fetchone()
+
     by_decade = con.sql("""
         SELECT (age // 10) * 10 AS decade, count(*) AS patients, count(*) FILTER (WHERE gap_flag) AS gaps
         FROM care_gap_a1c GROUP BY 1 ORDER BY 1""").fetchall()
@@ -183,6 +197,10 @@ def summary(con):
         "uncontrolled_last_a1c": uncontrolled, "on_insulin": insulin,
         "identity_review_pending": review, "due_within_90_days": due90,
         "age_min": min_age, "age_max": max_age,
+        "complication_only": complication_only,          # carry a complication, no type 2 code
+        "complication_only_pct": round(100 * complication_only / 161),
+        "inner_join_would_keep": inner_join_keeps,       # what the bug would report
+        "a1c_clean_below_3": a1c_below_floor,            # clean values the old DQ3 floor rejected
         "gaps_by_decade": [{"decade": d, "patients": p, "gaps": g} for d, p, g in by_decade],
     }
 

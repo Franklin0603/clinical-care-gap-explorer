@@ -1,0 +1,99 @@
+{
+ "asof": "2026-08-23",
+ "a1c_range": [
+  2.0,
+  20.0
+ ],
+ "remediation_rule": "A1C_MGDL_TO_PCT_EAG",
+ "reconciliation": [
+  {
+   "table": "patients",
+   "bronze": 1159,
+   "silver": 1151,
+   "quarantined": 8,
+   "balances": true
+  },
+  {
+   "table": "encounters",
+   "bronze": 67795,
+   "silver": 67730,
+   "quarantined": 65,
+   "balances": true
+  },
+  {
+   "table": "conditions",
+   "bronze": 40811,
+   "silver": 40811,
+   "quarantined": 0,
+   "balances": true
+  },
+  {
+   "table": "observations",
+   "bronze": 870510,
+   "silver": 870360,
+   "quarantined": 150,
+   "balances": true
+  },
+  {
+   "table": "medications",
+   "bronze": 59273,
+   "silver": 59273,
+   "quarantined": 0,
+   "balances": true
+  }
+ ],
+ "quarantine_by_check": {
+  "DQ1": 40,
+  "DQ2": 150,
+  "DQ4": 8,
+  "DQ5": 25
+ },
+ "identity_review_pending": 6,
+ "remediated": 20,
+ "catch": [
+  {
+   "defect": "D1",
+   "check": "DQ1",
+   "injected": 40,
+   "caught": 40,
+   "caught_by_other": 0
+  },
+  {
+   "defect": "D2",
+   "check": "DQ2",
+   "injected": 150,
+   "caught": 150,
+   "caught_by_other": 0
+  },
+  {
+   "defect": "D3",
+   "check": "DQ3",
+   "injected": 20,
+   "caught": 20,
+   "caught_by_other": 0
+  },
+  {
+   "defect": "D4",
+   "check": "DQ4",
+   "injected": 8,
+   "caught": 8,
+   "caught_by_other": 0
+  },
+  {
+   "defect": "D5",
+   "check": "DQ5",
+   "injected": 25,
+   "caught": 25,
+   "caught_by_other": 0
+  },
+  {
+   "defect": "D6",
+   "check": "DQ6",
+   "injected": 6,
+   "caught": 6,
+   "caught_by_other": 0
+  }
+ ],
+ "catch_rate_types": "6 of 6",
+ "catch_rate_rows": "249 of 249"
+}

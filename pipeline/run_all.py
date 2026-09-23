@@ -5,7 +5,7 @@
     python pipeline/run_all.py --fresh      # delete the warehouse file first (V4.10: from nothing)
 
 Stages, in order and each re-runnable:
-    load_bronze  -> corrupt -> validate -> gold
+    load_bronze  -> corrupt -> validate -> gold -> export_web
 Any stage that fails its own checks raises SystemExit and stops the run.
 """
 
@@ -15,8 +15,9 @@ import subprocess
 import sys
 import time
 
-import gold
 import corrupt
+import export_web
+import gold
 import load_bronze
 import validate
 
@@ -60,6 +61,7 @@ def main():
     stage("corrupt", corrupt.main)
     stage("validate", validate.main)
     stage("gold", gold.main)
+    stage("export_web", export_web.main)   # the site reads a build-time snapshot (D9)
     print(f"\nSynthea-to-Gold complete in {time.time() - t0:.1f}s")
 
 

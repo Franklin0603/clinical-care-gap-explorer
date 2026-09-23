@@ -1,0 +1,29 @@
+{
+ "tables": {
+  "care_gap_a1c": {
+   "rows": 116,
+   "parquet": "care_gap_a1c.parquet",
+   "json": "care_gap_a1c.json"
+  },
+  "quarantine": {
+   "rows": 223,
+   "parquet": "quarantine.parquet",
+   "json": "quarantine.json"
+  },
+  "identity_review": {
+   "rows": 6,
+   "parquet": "identity_review.parquet",
+   "json": "identity_review.json"
+  },
+  "remediation_log": {
+   "rows": 20,
+   "parquet": "remediation_log.parquet",
+   "json": "remediation_log.json"
+  }
+ },
+ "reports": [
+  "dq_report.json",
+  "gold_report.json",
+  "reconciliation.json"
+ ]
+}

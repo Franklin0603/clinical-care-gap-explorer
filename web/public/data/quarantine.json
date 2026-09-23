@@ -1,0 +1,1786 @@
+[
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "820e0df0-ad4f-5e89-94a5-618dc7651f7f",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"820e0df0-ad4f-5e89-94a5-618dc7651f7f\",\"START\":\"2015-03-22T22:24:40Z\",\"STOP\":\"2015-03-22T23:23:58Z\",\"PATIENT\":\"820e0df0-ad4f-5e89-4294-3b2ef9f20452\",\"ORGANIZATION\":\"3f12ebb4-e03c-3453-88d2-4fc9682383df\",\"PROVIDER\":\"b52bc816-83b9-3872-b1b5-7df6f453c421\",\"PAYER\":\"0133f751-9229-3cfd-815f-b6d4979bdd6a\",\"ENCOUNTERCLASS\":\"wellness\",\"CODE\":\"162673000\",\"DESCRIPTION\":\"General examination of patient (procedure)\",\"BASE_ENCOUNTER_COST\":\"136.80\",\"TOTAL_CLAIM_COST\":\"941.54\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "b9388167-86b5-a149-e3a6-075378910469",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"b9388167-86b5-a149-e3a6-075378910469\",\"START\":\"2003-01-25T23:08:32Z\",\"STOP\":\"2003-01-25T23:42:57Z\",\"PATIENT\":\"b9388167-86b5-a149-3b7a-957c39726ca6\",\"ORGANIZATION\":\"d1d4d104-68cb-356b-9086-888de7d2826f\",\"PROVIDER\":\"73b92552-3206-343a-9d4c-c3c4d88b04bf\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"wellness\",\"CODE\":\"162673000\",\"DESCRIPTION\":\"General examination of patient (procedure)\",\"BASE_ENCOUNTER_COST\":\"136.80\",\"TOTAL_CLAIM_COST\":\"5426.35\",\"PAYER_COVERAGE\":\"4341.07\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "6d907ed2-a003-7509-22d5-2c2e2679b277",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"6d907ed2-a003-7509-22d5-2c2e2679b277\",\"START\":\"2020-12-27T21:02:59Z\",\"STOP\":\"2020-12-28T00:19:59Z\",\"PATIENT\":\"6d907ed2-a003-7509-190d-325cf4c79b5f\",\"ORGANIZATION\":\"05fcf001-ab24-3d7d-85f7-f64942d82738\",\"PROVIDER\":\"3bb79b69-b91c-3c21-b451-5c7903fe1b0c\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185347001\",\"DESCRIPTION\":\"Encounter for problem (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"535.87\",\"PAYER_COVERAGE\":\"428.70\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "dbebde9a-26cc-95c4-5efb-75bdfd53b355",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"dbebde9a-26cc-95c4-5efb-75bdfd53b355\",\"START\":\"2007-04-06T17:58:54Z\",\"STOP\":\"2007-04-06T18:53:17Z\",\"PATIENT\":\"dbebde9a-26cc-95c4-3b84-b1a4c76aab0a\",\"ORGANIZATION\":\"c5403c4f-14d5-3171-9227-a9b8327f3149\",\"PROVIDER\":\"ac141702-11c7-302e-a690-d83715d7af22\",\"PAYER\":\"26aab0cd-6aba-3e1b-ac5b-05c8867e762c\",\"ENCOUNTERCLASS\":\"wellness\",\"CODE\":\"162673000\",\"DESCRIPTION\":\"General examination of patient (procedure)\",\"BASE_ENCOUNTER_COST\":\"136.80\",\"TOTAL_CLAIM_COST\":\"919.90\",\"PAYER_COVERAGE\":\"919.90\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "7ae7d70d-3b9f-e4e1-a95f-55d2501c88a1",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"7ae7d70d-3b9f-e4e1-a95f-55d2501c88a1\",\"START\":\"2025-02-25T23:43:40Z\",\"STOP\":\"2025-02-25T23:58:40Z\",\"PATIENT\":\"7ae7d70d-3b9f-e4e1-77e2-e0b9caf81598\",\"ORGANIZATION\":\"4bc0cc09-77e5-37f5-844d-64a6637cae54\",\"PROVIDER\":\"ecc61889-8e91-3d7f-a07f-624ad07a004c\",\"PAYER\":\"df166300-5a78-3502-a46a-832842197811\",\"ENCOUNTERCLASS\":\"outpatient\",\"CODE\":\"698314001\",\"DESCRIPTION\":\"Consultation for treatment (procedure)\",\"BASE_ENCOUNTER_COST\":\"142.58\",\"TOTAL_CLAIM_COST\":\"142.58\",\"PAYER_COVERAGE\":\"92.58\",\"REASONCODE\":\"389095005\",\"REASONDESCRIPTION\":\"Contraception care (regime/therapy)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "9df3fbab-efbf-b706-5420-f81360298695",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"9df3fbab-efbf-b706-5420-f81360298695\",\"START\":\"1996-07-10T20:06:58Z\",\"STOP\":\"1996-07-10T22:34:58Z\",\"PATIENT\":\"9df3fbab-efbf-b706-a49c-787c9d77e464\",\"ORGANIZATION\":\"d1d4d104-68cb-356b-9086-888de7d2826f\",\"PROVIDER\":\"73b92552-3206-343a-9d4c-c3c4d88b04bf\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185347001\",\"DESCRIPTION\":\"Encounter for problem (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"729.04\",\"PAYER_COVERAGE\":\"583.23\",\"REASONCODE\":\"431857002\",\"REASONDESCRIPTION\":\"Chronic kidney disease stage 4 (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "b7bcd51e-35c0-f0b5-d9cb-406f79b083fc",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"b7bcd51e-35c0-f0b5-d9cb-406f79b083fc\",\"START\":\"2000-10-11T19:24:08Z\",\"STOP\":\"2000-10-12T02:59:53Z\",\"PATIENT\":\"b7bcd51e-35c0-f0b5-34c8-1780687f9f22\",\"ORGANIZATION\":\"497f39dd-280e-3d58-af5b-c5e3a3a09b10\",\"PROVIDER\":\"e77aceee-289b-3afa-9260-22fc91f7c53a\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185349003\",\"DESCRIPTION\":\"Encounter for check up (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"4830.95\",\"PAYER_COVERAGE\":\"4830.95\",\"REASONCODE\":\"66383009\",\"REASONDESCRIPTION\":\"Gingivitis (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "1c0fa1bd-7f20-9e70-8739-99837007656c",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"1c0fa1bd-7f20-9e70-8739-99837007656c\",\"START\":\"2022-06-13T23:06:17Z\",\"STOP\":\"2022-06-14T01:49:17Z\",\"PATIENT\":\"1c0fa1bd-7f20-9e70-22c7-f293f24941f5\",\"ORGANIZATION\":\"4f5e8f16-a31b-3071-8556-d7188ede313d\",\"PROVIDER\":\"47f6caf9-76ea-3dd4-b62d-fbc2ddcf044d\",\"PAYER\":\"df166300-5a78-3502-a46a-832842197811\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185347001\",\"DESCRIPTION\":\"Encounter for problem (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"535.87\",\"PAYER_COVERAGE\":\"485.87\",\"REASONCODE\":\"431857002\",\"REASONDESCRIPTION\":\"Chronic kidney disease stage 4 (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "4dd9594e-3d10-6ffe-1ee7-274e21ec929b",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"4dd9594e-3d10-6ffe-1ee7-274e21ec929b\",\"START\":\"2009-11-17T13:40:08Z\",\"STOP\":\"2009-11-17T14:26:17Z\",\"PATIENT\":\"4dd9594e-3d10-6ffe-02d4-20dae37d9d28\",\"ORGANIZATION\":\"dd9914b0-9491-3330-a890-d34e95e497ea\",\"PROVIDER\":\"45079f95-8152-30c6-a327-6aac5e2a26ea\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"wellness\",\"CODE\":\"162673000\",\"DESCRIPTION\":\"General examination of patient (procedure)\",\"BASE_ENCOUNTER_COST\":\"136.80\",\"TOTAL_CLAIM_COST\":\"1720.18\",\"PAYER_COVERAGE\":\"1376.14\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "1f15f811-0033-bdc1-9d3c-4b2573bbf43b",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"1f15f811-0033-bdc1-9d3c-4b2573bbf43b\",\"START\":\"2025-07-19T21:11:15Z\",\"STOP\":\"2025-07-19T21:26:15Z\",\"PATIENT\":\"1f15f811-0033-bdc1-9192-6da18b9d5abf\",\"ORGANIZATION\":\"b7866c75-5e56-36b0-b9c5-c63051677b69\",\"PROVIDER\":\"48f8e5f5-3d07-3335-ac88-2d141e895606\",\"PAYER\":\"df166300-5a78-3502-a46a-832842197811\",\"ENCOUNTERCLASS\":\"wellness\",\"CODE\":\"410620009\",\"DESCRIPTION\":\"Well child visit (procedure)\",\"BASE_ENCOUNTER_COST\":\"136.80\",\"TOTAL_CLAIM_COST\":\"704.20\",\"PAYER_COVERAGE\":\"704.20\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "546eccd8-ce77-14a9-188f-12be47c6532a",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"546eccd8-ce77-14a9-188f-12be47c6532a\",\"START\":\"2016-06-18T02:14:15Z\",\"STOP\":\"2016-06-18T02:54:41Z\",\"PATIENT\":\"546eccd8-ce77-14a9-b806-0f5d7b4667db\",\"ORGANIZATION\":\"c4e5b33c-17b8-3f51-a8ba-a327d54e642a\",\"PROVIDER\":\"24bb7fa0-afb3-3f9f-96a9-c04777878479\",\"PAYER\":\"26aab0cd-6aba-3e1b-ac5b-05c8867e762c\",\"ENCOUNTERCLASS\":\"wellness\",\"CODE\":\"162673000\",\"DESCRIPTION\":\"General examination of patient (procedure)\",\"BASE_ENCOUNTER_COST\":\"136.80\",\"TOTAL_CLAIM_COST\":\"778.78\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "93b255f5-cd2a-2a1b-a0c7-4993dc3901f1",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"93b255f5-cd2a-2a1b-a0c7-4993dc3901f1\",\"START\":\"2022-08-22T08:51:08Z\",\"STOP\":\"2022-08-22T09:06:08Z\",\"PATIENT\":\"93b255f5-cd2a-2a1b-75bd-56e745f362df\",\"ORGANIZATION\":\"125eccb3-d003-34ea-9bd8-360dff059782\",\"PROVIDER\":\"c828fb7e-ed31-3516-837c-3fa1bd5b31b4\",\"PAYER\":\"26aab0cd-6aba-3e1b-ac5b-05c8867e762c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"424619006\",\"DESCRIPTION\":\"Prenatal visit (regime/therapy)\",\"BASE_ENCOUNTER_COST\":\"142.58\",\"TOTAL_CLAIM_COST\":\"18236.08\",\"PAYER_COVERAGE\":\"18236.08\",\"REASONCODE\":\"72892002\",\"REASONDESCRIPTION\":\"Normal pregnancy (finding)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "12c65474-ae7c-3a2e-ca5f-35f798c00024",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"12c65474-ae7c-3a2e-ca5f-35f798c00024\",\"START\":\"2024-02-08T21:08:34Z\",\"STOP\":\"2024-02-08T22:48:33Z\",\"PATIENT\":\"12c65474-ae7c-3a2e-1b7e-c48f3dae9f3b\",\"ORGANIZATION\":\"e09d4c49-c2ef-3b0f-9a46-3719d9219306\",\"PROVIDER\":\"49690467-26c4-3c09-b594-7047f5bce6e6\",\"PAYER\":\"734afbd6-4794-363b-9bc0-6a3981533ed5\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185347001\",\"DESCRIPTION\":\"Encounter for problem (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"948.35\",\"PAYER_COVERAGE\":\"758.68\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "9df3fbab-efbf-b706-1099-6830c35d19a8",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"9df3fbab-efbf-b706-1099-6830c35d19a8\",\"START\":\"1994-06-24T12:15:58Z\",\"STOP\":\"1994-06-24T16:07:58Z\",\"PATIENT\":\"9df3fbab-efbf-b706-a49c-787c9d77e464\",\"ORGANIZATION\":\"d1d4d104-68cb-356b-9086-888de7d2826f\",\"PROVIDER\":\"73b92552-3206-343a-9d4c-c3c4d88b04bf\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185347001\",\"DESCRIPTION\":\"Encounter for problem (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"667.97\",\"PAYER_COVERAGE\":\"667.97\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "a9c083e3-a34a-dcb7-eb27-bfe0906360bf",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"a9c083e3-a34a-dcb7-eb27-bfe0906360bf\",\"START\":\"2021-09-01T00:15:16Z\",\"STOP\":\"2021-09-01T05:54:50Z\",\"PATIENT\":\"a9c083e3-a34a-dcb7-8114-e1585a193635\",\"ORGANIZATION\":\"217cb6f6-e822-3831-9d9d-ffa104971042\",\"PROVIDER\":\"9bffd0aa-5a62-3096-b46c-7b42d2e7b74b\",\"PAYER\":\"26aab0cd-6aba-3e1b-ac5b-05c8867e762c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185349003\",\"DESCRIPTION\":\"Encounter for check up (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"4399.55\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":\"103697008\",\"REASONDESCRIPTION\":\"Patient referral for dental care (procedure)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "f1957939-e2e6-3691-1dd8-58276b9951be",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"f1957939-e2e6-3691-1dd8-58276b9951be\",\"START\":\"2014-02-24T18:25:46Z\",\"STOP\":\"2014-02-24T19:16:16Z\",\"PATIENT\":\"f1957939-e2e6-3691-2a8b-7b4c6fc4a8e1\",\"ORGANIZATION\":\"e2eab39c-5195-34aa-b35f-e89e37cfed01\",\"PROVIDER\":\"74c5a48b-fd72-3588-92ea-4e8fb381c9f2\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"308335008\",\"DESCRIPTION\":\"Patient encounter procedure (procedure)\",\"BASE_ENCOUNTER_COST\":\"142.58\",\"TOTAL_CLAIM_COST\":\"573.98\",\"PAYER_COVERAGE\":\"459.18\",\"REASONCODE\":\"82423001\",\"REASONDESCRIPTION\":\"Chronic pain (finding)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "1e528593-92f0-e5b7-5e36-f121f384e855",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"1e528593-92f0-e5b7-5e36-f121f384e855\",\"START\":\"2026-01-24T07:25:08Z\",\"STOP\":\"2026-01-24T07:40:08Z\",\"PATIENT\":\"1e528593-92f0-e5b7-532a-ffe9ee3b6610\",\"ORGANIZATION\":\"b9a91cbd-3263-31d9-9cff-55873cf8b2e2\",\"PROVIDER\":\"8e41c02c-c246-34bf-81d9-93d076117417\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185347001\",\"DESCRIPTION\":\"Encounter for problem (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"234.71\",\"PAYER_COVERAGE\":\"187.76\",\"REASONCODE\":\"431857002\",\"REASONDESCRIPTION\":\"Chronic kidney disease stage 4 (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "2a418d80-75d4-cb3a-55c5-58d8660b75d5",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"2a418d80-75d4-cb3a-55c5-58d8660b75d5\",\"START\":\"2018-05-13T06:50:00Z\",\"STOP\":\"2018-05-13T07:27:56Z\",\"PATIENT\":\"2a418d80-75d4-cb3a-ddae-f93264bbe782\",\"ORGANIZATION\":\"82c72223-f521-3a34-9b9b-4ff366365399\",\"PROVIDER\":\"ef3c22e4-d7e1-37a5-b0c1-bc063205d3e5\",\"PAYER\":\"d31fccc3-1767-390d-966a-22a5156f4219\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"390906007\",\"DESCRIPTION\":\"Follow-up encounter (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"516.95\",\"PAYER_COVERAGE\":\"413.56\",\"REASONCODE\":\"37320007\",\"REASONDESCRIPTION\":\"Loss of teeth (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "4528f806-07dd-7a52-f233-46c01e971a38",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"4528f806-07dd-7a52-f233-46c01e971a38\",\"START\":\"2017-09-19T16:31:50Z\",\"STOP\":\"2017-09-19T17:21:50Z\",\"PATIENT\":\"4528f806-07dd-7a52-99de-378b2870611c\",\"ORGANIZATION\":\"2f735290-1603-31b5-b561-7c8e0d413170\",\"PROVIDER\":\"2db91a80-0b12-34c6-8adf-0abcf4382dc9\",\"PAYER\":\"b046940f-1664-3047-bca7-dfa76be352a4\",\"ENCOUNTERCLASS\":\"wellness\",\"CODE\":\"162673000\",\"DESCRIPTION\":\"General examination of patient (procedure)\",\"BASE_ENCOUNTER_COST\":\"136.80\",\"TOTAL_CLAIM_COST\":\"927.94\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "4941744a-e120-ed39-6041-c546c17ccf17",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"4941744a-e120-ed39-6041-c546c17ccf17\",\"START\":\"2023-08-25T06:23:05Z\",\"STOP\":\"2023-08-25T07:12:04Z\",\"PATIENT\":\"4941744a-e120-ed39-abea-84d52e1d6385\",\"ORGANIZATION\":\"53f086de-2fc7-3d35-92c2-aca4ed944e7f\",\"PROVIDER\":\"dac86177-2397-3ce7-988e-e006c4fb7cbf\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"outpatient\",\"CODE\":\"185349003\",\"DESCRIPTION\":\"Encounter for check up (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"1378.71\",\"PAYER_COVERAGE\":\"1102.95\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "565b8265-cb17-8e83-7333-34f12cfae5d0",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"565b8265-cb17-8e83-7333-34f12cfae5d0\",\"START\":\"1991-07-31T19:24:08Z\",\"STOP\":\"1991-07-31T20:01:01Z\",\"PATIENT\":\"565b8265-cb17-8e83-b7c3-81a3d80b0853\",\"ORGANIZATION\":\"390a2aa4-70b4-3a64-a12f-9bd777834c8d\",\"PROVIDER\":\"9a468b37-4733-359b-b558-58dc8ed991e0\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"wellness\",\"CODE\":\"162673000\",\"DESCRIPTION\":\"General examination of patient (procedure)\",\"BASE_ENCOUNTER_COST\":\"136.80\",\"TOTAL_CLAIM_COST\":\"951.80\",\"PAYER_COVERAGE\":\"643.47\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "6fff5870-20ac-1a1d-e543-8f78bc2f7c53",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"6fff5870-20ac-1a1d-e543-8f78bc2f7c53\",\"START\":\"2016-05-21T17:04:49Z\",\"STOP\":\"2016-05-21T17:55:49Z\",\"PATIENT\":\"6fff5870-20ac-1a1d-f243-c4443ba9b9ee\",\"ORGANIZATION\":\"411f14a5-de79-3e08-81d6-301270cc2275\",\"PROVIDER\":\"8553a52e-3a03-358d-ae72-f8562c1c0181\",\"PAYER\":\"df166300-5a78-3502-a46a-832842197811\",\"ENCOUNTERCLASS\":\"wellness\",\"CODE\":\"162673000\",\"DESCRIPTION\":\"General examination of patient (procedure)\",\"BASE_ENCOUNTER_COST\":\"136.80\",\"TOTAL_CLAIM_COST\":\"785.58\",\"PAYER_COVERAGE\":\"685.58\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "7abbf272-d271-8717-b88e-12e07f5affe8",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"7abbf272-d271-8717-b88e-12e07f5affe8\",\"START\":\"2025-03-22T17:20:18Z\",\"STOP\":\"2025-03-22T17:35:18Z\",\"PATIENT\":\"7abbf272-d271-8717-08a5-a44877f0d5e5\",\"ORGANIZATION\":\"2836d9ac-c6a6-39d1-8f13-fdf0fc8928f4\",\"PROVIDER\":\"f13ba666-4a9d-3ead-bc36-b43755b010f4\",\"PAYER\":\"b046940f-1664-3047-bca7-dfa76be352a4\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"169762003\",\"DESCRIPTION\":\"Postnatal visit (regime/therapy)\",\"BASE_ENCOUNTER_COST\":\"142.58\",\"TOTAL_CLAIM_COST\":\"1005.38\",\"PAYER_COVERAGE\":\"1005.38\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "c29af4b6-f98b-20c6-967b-c9163cb87ff5",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"c29af4b6-f98b-20c6-967b-c9163cb87ff5\",\"START\":\"1985-01-20T21:01:50Z\",\"STOP\":\"1985-01-21T01:48:45Z\",\"PATIENT\":\"c29af4b6-f98b-20c6-5917-05f7507b4392\",\"ORGANIZATION\":\"74ab949d-17ac-3309-83a0-13b4405c66aa\",\"PROVIDER\":\"bf8beba4-39bd-3347-9692-46521ffdae6d\",\"PAYER\":\"26aab0cd-6aba-3e1b-ac5b-05c8867e762c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185347001\",\"DESCRIPTION\":\"Encounter for problem (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"1444.46\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":\"414545008\",\"REASONDESCRIPTION\":\"Ischemic heart disease (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "c417f41b-9c8d-a2e2-f5df-608e0ea0b562",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"c417f41b-9c8d-a2e2-f5df-608e0ea0b562\",\"START\":\"2021-07-04T05:12:17Z\",\"STOP\":\"2021-07-04T05:27:17Z\",\"PATIENT\":\"c417f41b-9c8d-a2e2-e1df-2a0baef38d7d\",\"ORGANIZATION\":\"497f39dd-280e-3d58-af5b-c5e3a3a09b10\",\"PROVIDER\":\"e77aceee-289b-3afa-9260-22fc91f7c53a\",\"PAYER\":\"e03e23c9-4df1-3eb6-a62d-f70f02301496\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185345009\",\"DESCRIPTION\":\"Encounter for symptom (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"85.55\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":\"195662009\",\"REASONDESCRIPTION\":\"Acute viral pharyngitis (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "ce166926-4e33-02a4-b3d5-260ba39c978b",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"ce166926-4e33-02a4-b3d5-260ba39c978b\",\"START\":\"2023-08-26T22:09:57Z\",\"STOP\":\"2023-08-26T22:24:57Z\",\"PATIENT\":\"ce166926-4e33-02a4-fd87-a9b390d63298\",\"ORGANIZATION\":\"497f39dd-280e-3d58-af5b-c5e3a3a09b10\",\"PROVIDER\":\"e77aceee-289b-3afa-9260-22fc91f7c53a\",\"PAYER\":\"8fa6c185-e44e-3e34-8bd8-39be8694f4ce\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185347001\",\"DESCRIPTION\":\"Encounter for problem (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"234.71\",\"PAYER_COVERAGE\":\"164.30\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "3b15ee15-0f2a-91d2-be24-0a3c029ebf02",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"3b15ee15-0f2a-91d2-be24-0a3c029ebf02\",\"START\":\"2015-12-18T08:19:05Z\",\"STOP\":\"2015-12-18T08:34:05Z\",\"PATIENT\":\"3b15ee15-0f2a-91d2-037e-26bcfd78ebf2\",\"ORGANIZATION\":\"4ffa4412-1493-3beb-b8f0-6614dde953a4\",\"PROVIDER\":\"35c055c0-f114-349c-85a8-6fa56a50e2ba\",\"PAYER\":\"e03e23c9-4df1-3eb6-a62d-f70f02301496\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"390906007\",\"DESCRIPTION\":\"Follow-up encounter (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"234.71\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":\"55822004\",\"REASONDESCRIPTION\":\"Hyperlipidemia (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "53b237aa-9ddf-403f-e74b-9e7a9c616a1c",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"53b237aa-9ddf-403f-e74b-9e7a9c616a1c\",\"START\":\"2016-11-19T03:50:36Z\",\"STOP\":\"2016-11-19T04:05:36Z\",\"PATIENT\":\"53b237aa-9ddf-403f-e948-60ab3f9bafd8\",\"ORGANIZATION\":\"1f9d5a6b-d2ea-3000-bb9d-b22c00ffbbb2\",\"PROVIDER\":\"f074e185-0c24-3f5a-a6b6-8389e036b367\",\"PAYER\":\"df166300-5a78-3502-a46a-832842197811\",\"ENCOUNTERCLASS\":\"wellness\",\"CODE\":\"410620009\",\"DESCRIPTION\":\"Well child visit (procedure)\",\"BASE_ENCOUNTER_COST\":\"136.80\",\"TOTAL_CLAIM_COST\":\"1186.78\",\"PAYER_COVERAGE\":\"1086.78\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "18f1d934-bd81-79d0-7375-fed0e70fcc11",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"18f1d934-bd81-79d0-7375-fed0e70fcc11\",\"START\":\"2021-05-29T09:41:56Z\",\"STOP\":\"2021-05-29T10:41:56Z\",\"PATIENT\":\"18f1d934-bd81-79d0-83b8-bcbc0f24ecff\",\"ORGANIZATION\":\"fbd4ccdf-2fdb-3652-9bbe-1ccff886bd34\",\"PROVIDER\":\"53fc819e-a758-3674-8340-98ad1bb2dba0\",\"PAYER\":\"df166300-5a78-3502-a46a-832842197811\",\"ENCOUNTERCLASS\":\"emergency\",\"CODE\":\"183460006\",\"DESCRIPTION\":\"Obstetric emergency hospital admission (procedure)\",\"BASE_ENCOUNTER_COST\":\"146.18\",\"TOTAL_CLAIM_COST\":\"1440.38\",\"PAYER_COVERAGE\":\"1390.38\",\"REASONCODE\":\"72892002\",\"REASONDESCRIPTION\":\"Normal pregnancy (finding)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "dac144e3-7ed4-7ce5-1605-7518d68030ff",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"dac144e3-7ed4-7ce5-1605-7518d68030ff\",\"START\":\"1990-03-30T12:18:46Z\",\"STOP\":\"1990-03-30T14:51:15Z\",\"PATIENT\":\"dac144e3-7ed4-7ce5-4c30-59024831c006\",\"ORGANIZATION\":\"6df069d9-5273-32df-bee8-b6a5a20c2ece\",\"PROVIDER\":\"8fa26a5d-a717-394a-9b5a-9d6e362b5c1e\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185349003\",\"DESCRIPTION\":\"Encounter for check up (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"2673.95\",\"PAYER_COVERAGE\":\"2139.16\",\"REASONCODE\":\"103697008\",\"REASONDESCRIPTION\":\"Patient referral for dental care (procedure)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "c4302baa-e55e-d7e2-f999-e00c9dcf2b08",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"c4302baa-e55e-d7e2-f999-e00c9dcf2b08\",\"START\":\"2025-03-31T11:04:29Z\",\"STOP\":\"2025-03-31T11:27:11Z\",\"PATIENT\":\"c4302baa-e55e-d7e2-b9db-e138c5d0de8a\",\"ORGANIZATION\":\"e09d4c49-c2ef-3b0f-9a46-3719d9219306\",\"PROVIDER\":\"49690467-26c4-3c09-b594-7047f5bce6e6\",\"PAYER\":\"26aab0cd-6aba-3e1b-ac5b-05c8867e762c\",\"ENCOUNTERCLASS\":\"outpatient\",\"CODE\":\"308335008\",\"DESCRIPTION\":\"Patient encounter procedure (procedure)\",\"BASE_ENCOUNTER_COST\":\"142.58\",\"TOTAL_CLAIM_COST\":\"7161.17\",\"PAYER_COVERAGE\":\"640.30\",\"REASONCODE\":\"389095005\",\"REASONDESCRIPTION\":\"Contraception care (regime/therapy)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "09527386-1d9c-f6a2-b4a0-352926e9e802",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"09527386-1d9c-f6a2-b4a0-352926e9e802\",\"START\":\"1993-01-11T17:18:06Z\",\"STOP\":\"1993-01-11T18:18:06Z\",\"PATIENT\":\"09527386-1d9c-f6a2-8c55-03eeb927f546\",\"ORGANIZATION\":\"485ae27b-c5ba-3fd0-9a16-c9eea20be185\",\"PROVIDER\":\"9c01f98a-8cb7-389c-9d62-72346b28b21c\",\"PAYER\":\"8fa6c185-e44e-3e34-8bd8-39be8694f4ce\",\"ENCOUNTERCLASS\":\"emergency\",\"CODE\":\"50849002\",\"DESCRIPTION\":\"Emergency room admission (procedure)\",\"BASE_ENCOUNTER_COST\":\"146.18\",\"TOTAL_CLAIM_COST\":\"8731.14\",\"PAYER_COVERAGE\":\"6111.80\",\"REASONCODE\":\"196416002\",\"REASONDESCRIPTION\":\"Impacted molars (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "54c5483c-d937-54d5-51fe-6f2e76010fea",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"54c5483c-d937-54d5-51fe-6f2e76010fea\",\"START\":\"2020-04-15T09:21:11Z\",\"STOP\":\"2020-04-15T09:36:11Z\",\"PATIENT\":\"54c5483c-d937-54d5-1e01-995da563e465\",\"ORGANIZATION\":\"b9e35b8a-9831-32d8-a6dc-d7a546c126b0\",\"PROVIDER\":\"c8188d57-01d7-38ed-98f9-a0f85d6f8e43\",\"PAYER\":\"df166300-5a78-3502-a46a-832842197811\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"394701000\",\"DESCRIPTION\":\"Asthma follow-up (regime/therapy)\",\"BASE_ENCOUNTER_COST\":\"142.58\",\"TOTAL_CLAIM_COST\":\"142.58\",\"PAYER_COVERAGE\":\"92.58\",\"REASONCODE\":\"195967001\",\"REASONDESCRIPTION\":\"Asthma (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "bb527977-aea0-113f-540b-93fcbd09ad01",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"bb527977-aea0-113f-540b-93fcbd09ad01\",\"START\":\"2000-08-25T05:15:58Z\",\"STOP\":\"2000-08-25T05:49:19Z\",\"PATIENT\":\"bb527977-aea0-113f-7241-26b92ddd9b80\",\"ORGANIZATION\":\"d1d4d104-68cb-356b-9086-888de7d2826f\",\"PROVIDER\":\"73b92552-3206-343a-9d4c-c3c4d88b04bf\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"outpatient\",\"CODE\":\"185349003\",\"DESCRIPTION\":\"Encounter for check up (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"740.69\",\"PAYER_COVERAGE\":\"592.54\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "af64b0bf-aad5-9272-929b-10773e4c9dc4",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"af64b0bf-aad5-9272-929b-10773e4c9dc4\",\"START\":\"2024-03-23T11:00:58Z\",\"STOP\":\"2024-03-23T11:54:44Z\",\"PATIENT\":\"af64b0bf-aad5-9272-d456-0b1ceecaa603\",\"ORGANIZATION\":\"9203d0d2-ca7d-3421-9361-974402ffb561\",\"PROVIDER\":\"01c19ab0-9680-322d-af81-67b22469de86\",\"PAYER\":\"b046940f-1664-3047-bca7-dfa76be352a4\",\"ENCOUNTERCLASS\":\"wellness\",\"CODE\":\"162673000\",\"DESCRIPTION\":\"General examination of patient (procedure)\",\"BASE_ENCOUNTER_COST\":\"136.80\",\"TOTAL_CLAIM_COST\":\"1586.70\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "ebb66476-4b46-e281-69b1-47ed4af186fb",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"ebb66476-4b46-e281-69b1-47ed4af186fb\",\"START\":\"1990-02-05T06:53:07Z\",\"STOP\":\"1990-02-05T07:53:07Z\",\"PATIENT\":\"ebb66476-4b46-e281-19c8-43d3f29e070d\",\"ORGANIZATION\":\"4ffc4e4b-9d8d-3c30-ad84-fc9a7209da94\",\"PROVIDER\":\"e1de552e-d732-3868-aa5a-a9679bdabb85\",\"PAYER\":\"d18ef2e6-ef40-324c-be54-34a5ee865625\",\"ENCOUNTERCLASS\":\"emergency\",\"CODE\":\"183452005\",\"DESCRIPTION\":\"Emergency hospital admission (procedure)\",\"BASE_ENCOUNTER_COST\":\"87.71\",\"TOTAL_CLAIM_COST\":\"87.71\",\"PAYER_COVERAGE\":\"52.71\",\"REASONCODE\":\"82423001\",\"REASONDESCRIPTION\":\"Chronic pain (finding)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "f52c7b09-9aa3-c2b6-b67b-02e6e3719048",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"f52c7b09-9aa3-c2b6-b67b-02e6e3719048\",\"START\":\"2011-12-29T01:09:32Z\",\"STOP\":\"2011-12-29T01:40:23Z\",\"PATIENT\":\"f52c7b09-9aa3-c2b6-2891-9422737ce2e2\",\"ORGANIZATION\":\"9adfae03-673d-365d-9052-f705098fa3e4\",\"PROVIDER\":\"6fb56da8-f615-3b2c-8121-2cab08c86c5a\",\"PAYER\":\"26aab0cd-6aba-3e1b-ac5b-05c8867e762c\",\"ENCOUNTERCLASS\":\"outpatient\",\"CODE\":\"185349003\",\"DESCRIPTION\":\"Encounter for check up (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"666.11\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "330e68f1-aa53-9dbe-fa15-1254f83351b6",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"330e68f1-aa53-9dbe-fa15-1254f83351b6\",\"START\":\"2018-12-26T00:44:16Z\",\"STOP\":\"2018-12-26T02:49:00Z\",\"PATIENT\":\"330e68f1-aa53-9dbe-3178-d6f30702b54c\",\"ORGANIZATION\":\"901c2d40-1ca3-3879-9a20-c663b8adc0a9\",\"PROVIDER\":\"83028496-3510-3a72-82de-12ebcff45cab\",\"PAYER\":\"0133f751-9229-3cfd-815f-b6d4979bdd6a\",\"ENCOUNTERCLASS\":\"emergency\",\"CODE\":\"185345009\",\"DESCRIPTION\":\"Encounter for symptom (procedure)\",\"BASE_ENCOUNTER_COST\":\"87.71\",\"TOTAL_CLAIM_COST\":\"4476.29\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":\"307426000\",\"REASONDESCRIPTION\":\"Acute infective cystitis (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "01e52f9d-3872-9a59-6705-4e8c0d68fd50",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"01e52f9d-3872-9a59-6705-4e8c0d68fd50\",\"START\":\"2007-12-12T10:09:27Z\",\"STOP\":\"2007-12-12T10:24:27Z\",\"PATIENT\":\"01e52f9d-3872-9a59-2200-ed010dfafe82\",\"ORGANIZATION\":\"74ab949d-17ac-3309-83a0-13b4405c66aa\",\"PROVIDER\":\"bf8beba4-39bd-3347-9692-46521ffdae6d\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"448337001\",\"DESCRIPTION\":\"Telemedicine consultation with patient (procedure)\",\"BASE_ENCOUNTER_COST\":\"142.58\",\"TOTAL_CLAIM_COST\":\"142.58\",\"PAYER_COVERAGE\":\"114.06\",\"REASONCODE\":\"88805009\",\"REASONDESCRIPTION\":\"Chronic congestive heart failure (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "827c52b6-f098-9e53-f44a-43d893492ed5",
+  "failure_reason": "Duplicate encounter row for the same patient and encounter id; earliest copy kept",
+  "check_id": "DQ1",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"827c52b6-f098-9e53-f44a-43d893492ed5\",\"START\":\"2021-10-31T12:08:28Z\",\"STOP\":\"2021-10-31T12:23:28Z\",\"PATIENT\":\"827c52b6-f098-9e53-2adc-752e3669ed70\",\"ORGANIZATION\":\"d3085315-9893-34c7-8889-3a31dc17c2b0\",\"PROVIDER\":\"2feb2317-27d9-3044-b317-f1dcf4917216\",\"PAYER\":\"e03e23c9-4df1-3eb6-a62d-f70f02301496\",\"ENCOUNTERCLASS\":\"wellness\",\"CODE\":\"410620009\",\"DESCRIPTION\":\"Well child visit (procedure)\",\"BASE_ENCOUNTER_COST\":\"136.80\",\"TOTAL_CLAIM_COST\":\"347.38\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "f07d90c9-b212-5011-0bdf-61359730068f|3094-0|2015-03-27T04:42:46Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2015-03-27T04:42:46Z\",\"PATIENT\":null,\"ENCOUNTER\":\"f07d90c9-b212-5011-0bdf-61359730068f\",\"CATEGORY\":\"laboratory\",\"CODE\":\"3094-0\",\"DESCRIPTION\":\"Urea nitrogen [Mass/volume] in Serum or Plasma\",\"VALUE\":\"7.9\",\"UNITS\":\"mg/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "f07d90c9-b212-5011-dca3-4e4545720a89|76504-0|2015-09-11T06:20:38Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2015-09-11T06:20:38Z\",\"PATIENT\":null,\"ENCOUNTER\":\"f07d90c9-b212-5011-dca3-4e4545720a89\",\"CATEGORY\":\"survey\",\"CODE\":\"76504-0\",\"DESCRIPTION\":\"Total score [HARK]\",\"VALUE\":\"0.0\",\"UNITS\":\"{score}\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "202ae60e-df4c-9c07-9984-e1f01e1924bb|2885-2|1995-12-14T15:14:46Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"1995-12-14T15:14:46Z\",\"PATIENT\":null,\"ENCOUNTER\":\"202ae60e-df4c-9c07-9984-e1f01e1924bb\",\"CATEGORY\":\"laboratory\",\"CODE\":\"2885-2\",\"DESCRIPTION\":\"Protein [Mass/volume] in Serum or Plasma\",\"VALUE\":\"7.2\",\"UNITS\":\"g/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "a677755c-46ef-ae71-fd9b-8d509bd67b12|8480-6|2019-05-24T04:42:46Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2019-05-24T04:42:46Z\",\"PATIENT\":null,\"ENCOUNTER\":\"a677755c-46ef-ae71-fd9b-8d509bd67b12\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8480-6\",\"DESCRIPTION\":\"Systolic Blood Pressure\",\"VALUE\":\"107.0\",\"UNITS\":\"mm[Hg]\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "1e528593-92f0-e5b7-8177-d5e61cd6c4ff|8867-4|2019-10-30T13:17:08Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2019-10-30T13:17:08Z\",\"PATIENT\":null,\"ENCOUNTER\":\"1e528593-92f0-e5b7-8177-d5e61cd6c4ff\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8867-4\",\"DESCRIPTION\":\"Heart rate\",\"VALUE\":\"61.0\",\"UNITS\":\"/min\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "1e528593-92f0-e5b7-5fb7-4fbb4f288dd0|10834-0|2023-08-29T02:12:08Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2023-08-29T02:12:08Z\",\"PATIENT\":null,\"ENCOUNTER\":\"1e528593-92f0-e5b7-5fb7-4fbb4f288dd0\",\"CATEGORY\":\"laboratory\",\"CODE\":\"10834-0\",\"DESCRIPTION\":\"Globulin [Mass/volume] in Serum by calculation\",\"VALUE\":\"2.6\",\"UNITS\":\"g/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "29c6b03c-63e8-a403-a1ec-0ab66236f829|20454-5|1990-12-29T03:17:46Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"1990-12-29T03:17:46Z\",\"PATIENT\":null,\"ENCOUNTER\":\"29c6b03c-63e8-a403-a1ec-0ab66236f829\",\"CATEGORY\":\"laboratory\",\"CODE\":\"20454-5\",\"DESCRIPTION\":\"Protein [Presence] in Urine by Test strip\",\"VALUE\":\"Urine protein test = +++ (finding)\",\"UNITS\":\"{nominal}\",\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "29c6b03c-63e8-a403-c671-dedb06f30265|20565-8|1991-10-27T21:40:46Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"1991-10-27T21:40:46Z\",\"PATIENT\":null,\"ENCOUNTER\":\"29c6b03c-63e8-a403-c671-dedb06f30265\",\"CATEGORY\":\"laboratory\",\"CODE\":\"20565-8\",\"DESCRIPTION\":\"Carbon dioxide  total [Moles/volume] in Blood\",\"VALUE\":\"20.3\",\"UNITS\":\"mmol/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "6f4e8838-d34a-f747-1716-a80d247e2435|1742-6|2017-03-02T19:58:46Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2017-03-02T19:58:46Z\",\"PATIENT\":null,\"ENCOUNTER\":\"6f4e8838-d34a-f747-1716-a80d247e2435\",\"CATEGORY\":\"laboratory\",\"CODE\":\"1742-6\",\"DESCRIPTION\":\"Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma\",\"VALUE\":\"48.4\",\"UNITS\":\"U/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "df02c43f-cb47-ef47-0555-5920e8356e61|71802-3|1995-09-04T11:25:09Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"1995-09-04T11:25:09Z\",\"PATIENT\":null,\"ENCOUNTER\":\"df02c43f-cb47-ef47-0555-5920e8356e61\",\"CATEGORY\":\"survey\",\"CODE\":\"71802-3\",\"DESCRIPTION\":\"Housing status\",\"VALUE\":\"I have housing\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "82ba6a2c-834a-f8dd-1955-9f1974d93024|76501-6|2019-05-27T06:52:20Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2019-05-27T06:52:20Z\",\"PATIENT\":null,\"ENCOUNTER\":\"82ba6a2c-834a-f8dd-1955-9f1974d93024\",\"CATEGORY\":\"survey\",\"CODE\":\"76501-6\",\"DESCRIPTION\":\"Within the last year  have you been afraid of your partner or ex-partner\",\"VALUE\":\"No\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "b1527484-9124-138d-440d-7cf8c9338783|5902-2|2020-11-08T20:48:15Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2020-11-08T20:48:15Z\",\"PATIENT\":null,\"ENCOUNTER\":\"b1527484-9124-138d-440d-7cf8c9338783\",\"CATEGORY\":\"laboratory\",\"CODE\":\"5902-2\",\"DESCRIPTION\":\"Prothrombin time (PT)\",\"VALUE\":\"11.5\",\"UNITS\":\"s\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "b1527484-9124-138d-dc1d-8467eb2e1c44|56051-6|2022-09-03T19:59:26Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2022-09-03T19:59:26Z\",\"PATIENT\":null,\"ENCOUNTER\":\"b1527484-9124-138d-dc1d-8467eb2e1c44\",\"CATEGORY\":\"survey\",\"CODE\":\"56051-6\",\"DESCRIPTION\":\"Hispanic or Latino\",\"VALUE\":\"No\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "b1527484-9124-138d-71fb-54d86259bc73|93030-5|2025-09-20T19:35:29Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2025-09-20T19:35:29Z\",\"PATIENT\":null,\"ENCOUNTER\":\"b1527484-9124-138d-71fb-54d86259bc73\",\"CATEGORY\":\"survey\",\"CODE\":\"93030-5\",\"DESCRIPTION\":\"Has lack of transportation kept you from medical appointments  meetings  work  or from getting things needed for daily living\",\"VALUE\":\"No\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "f52c7b09-9aa3-c2b6-da9c-1457c4ce0f99|5778-6|2024-11-21T01:09:32Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2024-11-21T01:09:32Z\",\"PATIENT\":null,\"ENCOUNTER\":\"f52c7b09-9aa3-c2b6-da9c-1457c4ce0f99\",\"CATEGORY\":\"laboratory\",\"CODE\":\"5778-6\",\"DESCRIPTION\":\"Color of Urine\",\"VALUE\":\"Brown color (qualifier value)\",\"UNITS\":\"{nominal}\",\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "9753ef4c-1a84-74e7-9bf7-35fde620e956|79818-1|2014-10-07T15:53:34Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2014-10-07T15:53:34Z\",\"PATIENT\":null,\"ENCOUNTER\":\"9753ef4c-1a84-74e7-9bf7-35fde620e956\",\"CATEGORY\":\"imaging\",\"CODE\":\"79818-1\",\"DESCRIPTION\":\"Study observation Right retina by OCT\",\"VALUE\":\"No abnormal findings\",\"UNITS\":\"{nominal}\",\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "1a7e4e2d-de36-8754-d389-8bff2e347064|93026-3|2006-06-02T12:52:50Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2006-06-02T12:52:50Z\",\"PATIENT\":null,\"ENCOUNTER\":\"1a7e4e2d-de36-8754-d389-8bff2e347064\",\"CATEGORY\":\"survey\",\"CODE\":\"93026-3\",\"DESCRIPTION\":\"Do you feel physically and emotionally safe where you currently live [PRAPARE]\",\"VALUE\":\"No\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "565b8265-cb17-8e83-5755-04767d7a4008|2085-9|1998-09-21T07:31:14Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"1998-09-21T07:31:14Z\",\"PATIENT\":null,\"ENCOUNTER\":\"565b8265-cb17-8e83-5755-04767d7a4008\",\"CATEGORY\":\"laboratory\",\"CODE\":\"2085-9\",\"DESCRIPTION\":\"Cholesterol in HDL [Mass/volume] in Serum or Plasma\",\"VALUE\":\"55.7\",\"UNITS\":\"mg/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "42126ec0-9a32-26f0-a3bd-2fa5cb801b2e|1960-4|2018-04-07T21:05:14Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2018-04-07T21:05:14Z\",\"PATIENT\":null,\"ENCOUNTER\":\"42126ec0-9a32-26f0-a3bd-2fa5cb801b2e\",\"CATEGORY\":\"laboratory\",\"CODE\":\"1960-4\",\"DESCRIPTION\":\"Bicarbonate [Moles/volume] in Arterial blood\",\"VALUE\":\"23.7\",\"UNITS\":\"mmol/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "f25542df-449d-a8f9-3a30-562ac773443b|10834-0|2025-09-01T12:07:59Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2025-09-01T12:07:59Z\",\"PATIENT\":null,\"ENCOUNTER\":\"f25542df-449d-a8f9-3a30-562ac773443b\",\"CATEGORY\":\"laboratory\",\"CODE\":\"10834-0\",\"DESCRIPTION\":\"Globulin [Mass/volume] in Serum by calculation\",\"VALUE\":\"3.2\",\"UNITS\":\"g/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "8495bcba-7343-1b9c-d692-c89adace2e52|54899-0|1992-10-30T05:49:07Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"1992-10-30T05:49:07Z\",\"PATIENT\":null,\"ENCOUNTER\":\"8495bcba-7343-1b9c-d692-c89adace2e52\",\"CATEGORY\":\"survey\",\"CODE\":\"54899-0\",\"DESCRIPTION\":\"Preferred language\",\"VALUE\":\"English\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "3b1005cc-f3b2-9a20-a7f0-7c4673ca3c37|32623-1|2024-08-05T10:25:40Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2024-08-05T10:25:40Z\",\"PATIENT\":null,\"ENCOUNTER\":\"3b1005cc-f3b2-9a20-a7f0-7c4673ca3c37\",\"CATEGORY\":\"laboratory\",\"CODE\":\"32623-1\",\"DESCRIPTION\":\"Platelet [Entitic mean volume] in Blood by Automated count\",\"VALUE\":\"10.4\",\"UNITS\":\"fL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "8495bcba-7343-1b9c-6d1a-a2f85587b254|5799-2|1997-04-18T05:15:58Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"1997-04-18T05:15:58Z\",\"PATIENT\":null,\"ENCOUNTER\":\"8495bcba-7343-1b9c-6d1a-a2f85587b254\",\"CATEGORY\":\"laboratory\",\"CODE\":\"5799-2\",\"DESCRIPTION\":\"Leukocyte esterase [Presence] in Urine by Test strip\",\"VALUE\":\"Urine leukocytes not detected (finding)\",\"UNITS\":\"{nominal}\",\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "712d670d-24ce-1f59-9215-c8da4deb8510|8480-6|1985-01-03T00:49:00Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"1985-01-03T00:49:00Z\",\"PATIENT\":null,\"ENCOUNTER\":\"712d670d-24ce-1f59-9215-c8da4deb8510\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8480-6\",\"DESCRIPTION\":\"Systolic Blood Pressure\",\"VALUE\":\"110.0\",\"UNITS\":\"mm[Hg]\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "2619e386-a99f-34be-0a68-64b4370d261b|718-7|2024-01-18T08:45:25Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2024-01-18T08:45:25Z\",\"PATIENT\":null,\"ENCOUNTER\":\"2619e386-a99f-34be-0a68-64b4370d261b\",\"CATEGORY\":\"laboratory\",\"CODE\":\"718-7\",\"DESCRIPTION\":\"Hemoglobin [Mass/volume] in Blood\",\"VALUE\":\"11.6\",\"UNITS\":\"g/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "e35b5259-ac59-12dc-33a3-f64bc2bc91b9|2951-2|2026-01-11T00:45:30Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2026-01-11T00:45:30Z\",\"PATIENT\":null,\"ENCOUNTER\":\"e35b5259-ac59-12dc-33a3-f64bc2bc91b9\",\"CATEGORY\":\"laboratory\",\"CODE\":\"2951-2\",\"DESCRIPTION\":\"Sodium [Moles/volume] in Serum or Plasma\",\"VALUE\":\"140.6\",\"UNITS\":\"mmol/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "e35b5259-ac59-12dc-798e-7b9e5ec0dfac|34533-0|2026-08-09T00:45:30Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2026-08-09T00:45:30Z\",\"PATIENT\":null,\"ENCOUNTER\":\"e35b5259-ac59-12dc-798e-7b9e5ec0dfac\",\"CATEGORY\":\"laboratory\",\"CODE\":\"34533-0\",\"DESCRIPTION\":\"Odor of Urine\",\"VALUE\":\"Urine smell ammoniacal (finding)\",\"UNITS\":\"{nominal}\",\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "7eb06879-1cc6-4d96-0b0d-ad6244d6bc5a|20565-8|2017-06-08T20:44:27Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2017-06-08T20:44:27Z\",\"PATIENT\":null,\"ENCOUNTER\":\"7eb06879-1cc6-4d96-0b0d-ad6244d6bc5a\",\"CATEGORY\":\"laboratory\",\"CODE\":\"20565-8\",\"DESCRIPTION\":\"Carbon dioxide  total [Moles/volume] in Blood\",\"VALUE\":\"21.8\",\"UNITS\":\"mmol/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "546eccd8-ce77-14a9-0430-233f2456deed|2093-3|2021-07-17T02:14:15Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2021-07-17T02:14:15Z\",\"PATIENT\":null,\"ENCOUNTER\":\"546eccd8-ce77-14a9-0430-233f2456deed\",\"CATEGORY\":\"laboratory\",\"CODE\":\"2093-3\",\"DESCRIPTION\":\"Cholesterol [Mass/volume] in Serum or Plasma\",\"VALUE\":\"152.7\",\"UNITS\":\"mg/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "434df6c0-81ec-ad9c-6795-fe63a42f7b46|56799-0|2022-02-21T05:42:39Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2022-02-21T05:42:39Z\",\"PATIENT\":null,\"ENCOUNTER\":\"434df6c0-81ec-ad9c-6795-fe63a42f7b46\",\"CATEGORY\":\"survey\",\"CODE\":\"56799-0\",\"DESCRIPTION\":\"Address\",\"VALUE\":\"254 Dibbert Harbor\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "947e5fa7-9c03-f094-8822-c3b16f9e594f|93035-4|2025-02-19T14:12:33Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2025-02-19T14:12:33Z\",\"PATIENT\":null,\"ENCOUNTER\":\"947e5fa7-9c03-f094-8822-c3b16f9e594f\",\"CATEGORY\":\"survey\",\"CODE\":\"93035-4\",\"DESCRIPTION\":\"Has season or migrant farm work been your or your family's main source of income at any point in past 2 years [PRAPARE]\",\"VALUE\":\"I choose not to answer this question\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "bf11c599-51b6-0b29-8092-417b84806c48|93033-9|2020-05-19T18:20:46Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2020-05-19T18:20:46Z\",\"PATIENT\":null,\"ENCOUNTER\":\"bf11c599-51b6-0b29-8092-417b84806c48\",\"CATEGORY\":\"survey\",\"CODE\":\"93033-9\",\"DESCRIPTION\":\"Are you worried about losing your housing [PRAPARE]\",\"VALUE\":\"No\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "5ab7dcef-2db6-acec-9232-e3b418a8f77c|6768-6|2022-05-14T04:59:14Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2022-05-14T04:59:14Z\",\"PATIENT\":null,\"ENCOUNTER\":\"5ab7dcef-2db6-acec-9232-e3b418a8f77c\",\"CATEGORY\":\"laboratory\",\"CODE\":\"6768-6\",\"DESCRIPTION\":\"Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma\",\"VALUE\":\"102.5\",\"UNITS\":\"U/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "5ab7dcef-2db6-acec-b415-b0f19c705895|72514-3|2022-08-10T19:18:14Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2022-08-10T19:18:14Z\",\"PATIENT\":null,\"ENCOUNTER\":\"5ab7dcef-2db6-acec-b415-b0f19c705895\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"72514-3\",\"DESCRIPTION\":\"Pain severity - 0-10 verbal numeric rating [Score] - Reported\",\"VALUE\":\"6.0\",\"UNITS\":\"{score}\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "d2a10596-7dee-7ce4-e028-c80cdfcd593f|8480-6|2023-02-28T00:29:26Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2023-02-28T00:29:26Z\",\"PATIENT\":null,\"ENCOUNTER\":\"d2a10596-7dee-7ce4-e028-c80cdfcd593f\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8480-6\",\"DESCRIPTION\":\"Systolic Blood Pressure\",\"VALUE\":\"96.0\",\"UNITS\":\"mm[Hg]\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "83e45d7b-7988-9845-5117-cf7876a43bc0|9279-1|2023-10-31T20:29:11Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2023-10-31T20:29:11Z\",\"PATIENT\":null,\"ENCOUNTER\":\"83e45d7b-7988-9845-5117-cf7876a43bc0\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"9279-1\",\"DESCRIPTION\":\"Respiratory rate\",\"VALUE\":\"15.0\",\"UNITS\":\"/min\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "aa4ba5f3-70ee-1c26-a40a-fabdb350a5cc|34533-0|2022-07-30T14:42:06Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2022-07-30T14:42:06Z\",\"PATIENT\":null,\"ENCOUNTER\":\"aa4ba5f3-70ee-1c26-a40a-fabdb350a5cc\",\"CATEGORY\":\"laboratory\",\"CODE\":\"34533-0\",\"DESCRIPTION\":\"Odor of Urine\",\"VALUE\":\"Urine smell ammoniacal (finding)\",\"UNITS\":\"{nominal}\",\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "c3fe0124-8ecd-a40f-1a31-4f9443174496|93030-5|2019-05-01T07:33:53Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2019-05-01T07:33:53Z\",\"PATIENT\":null,\"ENCOUNTER\":\"c3fe0124-8ecd-a40f-1a31-4f9443174496\",\"CATEGORY\":\"survey\",\"CODE\":\"93030-5\",\"DESCRIPTION\":\"Has lack of transportation kept you from medical appointments  meetings  work  or from getting things needed for daily living\",\"VALUE\":\"No\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "5599ae5e-abfd-73d6-864b-8b444c32e9dd|93031-3|2022-03-31T22:57:39Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2022-03-31T22:57:39Z\",\"PATIENT\":null,\"ENCOUNTER\":\"5599ae5e-abfd-73d6-864b-8b444c32e9dd\",\"CATEGORY\":\"survey\",\"CODE\":\"93031-3\",\"DESCRIPTION\":\"Have you or any family members you live with been unable to get any of the following when it was really needed in past 1 year [PRAPARE]\",\"VALUE\":\"I choose not to answer this question\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "5d6fefb4-c601-c8a1-eb38-b5f4939f97a6|25428-4|2006-04-20T07:04:00Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2006-04-20T07:04:00Z\",\"PATIENT\":null,\"ENCOUNTER\":\"5d6fefb4-c601-c8a1-eb38-b5f4939f97a6\",\"CATEGORY\":\"laboratory\",\"CODE\":\"25428-4\",\"DESCRIPTION\":\"Glucose [Presence] in Urine by Test strip\",\"VALUE\":\"Urine glucose test = ++ (finding)\",\"UNITS\":\"{nominal}\",\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "5599ae5e-abfd-73d6-15ec-da2050e4469f|6690-2|2024-08-23T16:24:20Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2024-08-23T16:24:20Z\",\"PATIENT\":null,\"ENCOUNTER\":\"5599ae5e-abfd-73d6-15ec-da2050e4469f\",\"CATEGORY\":\"laboratory\",\"CODE\":\"6690-2\",\"DESCRIPTION\":\"Leukocytes [#/volume] in Blood by Automated count\",\"VALUE\":\"6.4\",\"UNITS\":\"10*3/uL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "9e0c2c58-bf74-3ad0-7998-aeb6b6f13b18|39156-5|2017-02-07T23:46:06Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2017-02-07T23:46:06Z\",\"PATIENT\":null,\"ENCOUNTER\":\"9e0c2c58-bf74-3ad0-7998-aeb6b6f13b18\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"39156-5\",\"DESCRIPTION\":\"Body mass index (BMI) [Ratio]\",\"VALUE\":\"27.4\",\"UNITS\":\"kg/m2\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "5d6fefb4-c601-c8a1-6728-57082d3df072|8480-6|2012-11-01T07:04:00Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2012-11-01T07:04:00Z\",\"PATIENT\":null,\"ENCOUNTER\":\"5d6fefb4-c601-c8a1-6728-57082d3df072\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8480-6\",\"DESCRIPTION\":\"Systolic Blood Pressure\",\"VALUE\":\"130.0\",\"UNITS\":\"mm[Hg]\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "f267f864-81e3-4f8e-2ce4-6fc493d40a9a|70274-6|2011-06-27T08:41:51Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2011-06-27T08:41:51Z\",\"PATIENT\":null,\"ENCOUNTER\":\"f267f864-81e3-4f8e-2ce4-6fc493d40a9a\",\"CATEGORY\":\"survey\",\"CODE\":\"70274-6\",\"DESCRIPTION\":\"Generalized anxiety disorder 7 item (GAD-7) total score [Reported.PHQ]\",\"VALUE\":\"4.0\",\"UNITS\":\"{score}\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "1b6c48b7-9e76-e7a1-0d02-a979e1db2dd8|2708-6|2022-05-28T22:53:02Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2022-05-28T22:53:02Z\",\"PATIENT\":null,\"ENCOUNTER\":\"1b6c48b7-9e76-e7a1-0d02-a979e1db2dd8\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"2708-6\",\"DESCRIPTION\":\"Oxygen saturation in Arterial blood\",\"VALUE\":\"93.0\",\"UNITS\":\"%\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "f267f864-81e3-4f8e-8178-5b2e17307bdc|76501-6|2016-04-18T08:23:35Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2016-04-18T08:23:35Z\",\"PATIENT\":null,\"ENCOUNTER\":\"f267f864-81e3-4f8e-8178-5b2e17307bdc\",\"CATEGORY\":\"survey\",\"CODE\":\"76501-6\",\"DESCRIPTION\":\"Within the last year  have you been afraid of your partner or ex-partner\",\"VALUE\":\"No\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "f267f864-81e3-4f8e-f2ca-1e3384e1a89a|93028-9|2016-07-25T08:23:17Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2016-07-25T08:23:17Z\",\"PATIENT\":null,\"ENCOUNTER\":\"f267f864-81e3-4f8e-f2ca-1e3384e1a89a\",\"CATEGORY\":\"survey\",\"CODE\":\"93028-9\",\"DESCRIPTION\":\"Have you spent more than 2 nights in a row in a jail  prison  detention center  or juvenile correctional facility in past 1 year [PRAPARE]\",\"VALUE\":\"Yes\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "f267f864-81e3-4f8e-9b67-352c2d63d6d2|6298-4|2016-10-03T07:36:17Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2016-10-03T07:36:17Z\",\"PATIENT\":null,\"ENCOUNTER\":\"f267f864-81e3-4f8e-9b67-352c2d63d6d2\",\"CATEGORY\":\"laboratory\",\"CODE\":\"6298-4\",\"DESCRIPTION\":\"Potassium [Moles/volume] in Blood\",\"VALUE\":\"4.9\",\"UNITS\":\"mmol/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "f267f864-81e3-4f8e-45a0-57e7ee2aac31|93038-8|2020-06-08T08:20:00Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2020-06-08T08:20:00Z\",\"PATIENT\":null,\"ENCOUNTER\":\"f267f864-81e3-4f8e-45a0-57e7ee2aac31\",\"CATEGORY\":\"survey\",\"CODE\":\"93038-8\",\"DESCRIPTION\":\"Stress level\",\"VALUE\":\"A little bit\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "fd3658f2-1061-158a-5596-41adba11b709|63586-2|2018-12-18T12:03:58Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2018-12-18T12:03:58Z\",\"PATIENT\":null,\"ENCOUNTER\":\"fd3658f2-1061-158a-5596-41adba11b709\",\"CATEGORY\":\"survey\",\"CODE\":\"63586-2\",\"DESCRIPTION\":\"What was your best estimate of the total income of all family members from all sources  before taxes  in last year [PhenX]\",\"VALUE\":\"9194\",\"UNITS\":\"/a\",\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "485af41c-3b3d-fb44-f1d2-2ce962f2caba|93026-3|1982-10-01T06:00:38Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"1982-10-01T06:00:38Z\",\"PATIENT\":null,\"ENCOUNTER\":\"485af41c-3b3d-fb44-f1d2-2ce962f2caba\",\"CATEGORY\":\"survey\",\"CODE\":\"93026-3\",\"DESCRIPTION\":\"Do you feel physically and emotionally safe where you currently live [PRAPARE]\",\"VALUE\":\"Yes\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "485af41c-3b3d-fb44-2023-500ae16ff391|2069-3|1986-02-02T05:48:17Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"1986-02-02T05:48:17Z\",\"PATIENT\":null,\"ENCOUNTER\":\"485af41c-3b3d-fb44-2023-500ae16ff391\",\"CATEGORY\":\"laboratory\",\"CODE\":\"2069-3\",\"DESCRIPTION\":\"Chloride [Moles/volume] in Blood\",\"VALUE\":\"106.6\",\"UNITS\":\"mmol/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "30ec0e64-ddbf-f291-7635-6ff67308d191|18262-6|2024-02-15T05:54:02Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2024-02-15T05:54:02Z\",\"PATIENT\":null,\"ENCOUNTER\":\"30ec0e64-ddbf-f291-7635-6ff67308d191\",\"CATEGORY\":\"laboratory\",\"CODE\":\"18262-6\",\"DESCRIPTION\":\"Cholesterol in LDL [Mass/volume] in Serum or Plasma by Direct assay\",\"VALUE\":\"78.4\",\"UNITS\":\"mg/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "689b8201-5022-1f9e-55cd-fdc1ad3fb1e4|82589-3|2016-10-20T01:45:01Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2016-10-20T01:45:01Z\",\"PATIENT\":null,\"ENCOUNTER\":\"689b8201-5022-1f9e-55cd-fdc1ad3fb1e4\",\"CATEGORY\":\"survey\",\"CODE\":\"82589-3\",\"DESCRIPTION\":\"Highest level of education\",\"VALUE\":\"Less than high school degree\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "c3116624-718f-e9e7-c0c5-cd2d96fa7188|72514-3|1995-05-28T01:18:46Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"1995-05-28T01:18:46Z\",\"PATIENT\":null,\"ENCOUNTER\":\"c3116624-718f-e9e7-c0c5-cd2d96fa7188\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"72514-3\",\"DESCRIPTION\":\"Pain severity - 0-10 verbal numeric rating [Score] - Reported\",\"VALUE\":\"3.0\",\"UNITS\":\"{score}\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "04cfdd75-b077-79b5-0cff-13bca77cb7f4|93028-9|2021-03-12T14:17:52Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2021-03-12T14:17:52Z\",\"PATIENT\":null,\"ENCOUNTER\":\"04cfdd75-b077-79b5-0cff-13bca77cb7f4\",\"CATEGORY\":\"survey\",\"CODE\":\"93028-9\",\"DESCRIPTION\":\"Have you spent more than 2 nights in a row in a jail  prison  detention center  or juvenile correctional facility in past 1 year [PRAPARE]\",\"VALUE\":\"No\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "cf9f648b-3742-5105-e7b9-33bb5c5926b8|63512-8|2020-06-18T14:27:20Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2020-06-18T14:27:20Z\",\"PATIENT\":null,\"ENCOUNTER\":\"cf9f648b-3742-5105-e7b9-33bb5c5926b8\",\"CATEGORY\":\"survey\",\"CODE\":\"63512-8\",\"DESCRIPTION\":\"How many people are living or staying at this address [#]\",\"VALUE\":\"6.0\",\"UNITS\":\"{#}\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "bb527977-aea0-113f-aba1-795dc35747d5|39156-5|1998-02-06T05:15:58Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"1998-02-06T05:15:58Z\",\"PATIENT\":null,\"ENCOUNTER\":\"bb527977-aea0-113f-aba1-795dc35747d5\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"39156-5\",\"DESCRIPTION\":\"Body mass index (BMI) [Ratio]\",\"VALUE\":\"27.9\",\"UNITS\":\"kg/m2\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "bb527977-aea0-113f-496c-64440ae2a9de|5792-7|1998-04-17T05:15:58Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"1998-04-17T05:15:58Z\",\"PATIENT\":null,\"ENCOUNTER\":\"bb527977-aea0-113f-496c-64440ae2a9de\",\"CATEGORY\":\"laboratory\",\"CODE\":\"5792-7\",\"DESCRIPTION\":\"Glucose [Mass/volume] in Urine by Test strip\",\"VALUE\":\"1.8\",\"UNITS\":\"mg/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "dd61a6d9-8d7a-f0a1-5ae9-6889ad0c5244|8302-2|1953-08-31T23:52:33Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"1953-08-31T23:52:33Z\",\"PATIENT\":null,\"ENCOUNTER\":\"dd61a6d9-8d7a-f0a1-5ae9-6889ad0c5244\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8302-2\",\"DESCRIPTION\":\"Body Height\",\"VALUE\":\"92.4\",\"UNITS\":\"cm\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "7983d89a-8cb9-6f64-fcf7-78b8f6008f98|72166-2|2024-01-21T00:38:36Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2024-01-21T00:38:36Z\",\"PATIENT\":null,\"ENCOUNTER\":\"7983d89a-8cb9-6f64-fcf7-78b8f6008f98\",\"CATEGORY\":\"social-history\",\"CODE\":\"72166-2\",\"DESCRIPTION\":\"Tobacco smoking status\",\"VALUE\":\"Never smoked tobacco (finding)\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "bb527977-aea0-113f-3573-a190b799f7b4|32167-9|2002-03-22T05:15:58Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2002-03-22T05:15:58Z\",\"PATIENT\":null,\"ENCOUNTER\":\"bb527977-aea0-113f-3573-a190b799f7b4\",\"CATEGORY\":\"laboratory\",\"CODE\":\"32167-9\",\"DESCRIPTION\":\"Clarity of Urine\",\"VALUE\":\"Translucent (qualifier value)\",\"UNITS\":\"{nominal}\",\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "c0019d47-e91e-147c-4109-4918eaa8454a|56799-0|2019-10-08T02:59:27Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2019-10-08T02:59:27Z\",\"PATIENT\":null,\"ENCOUNTER\":\"c0019d47-e91e-147c-4109-4918eaa8454a\",\"CATEGORY\":\"survey\",\"CODE\":\"56799-0\",\"DESCRIPTION\":\"Address\",\"VALUE\":\"491 Reynolds Gardens\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "598d2868-1b7f-543a-8a4d-e5eb42d261bc|72514-3|2019-02-12T16:14:47Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2019-02-12T16:14:47Z\",\"PATIENT\":null,\"ENCOUNTER\":\"598d2868-1b7f-543a-8a4d-e5eb42d261bc\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"72514-3\",\"DESCRIPTION\":\"Pain severity - 0-10 verbal numeric rating [Score] - Reported\",\"VALUE\":\"2.0\",\"UNITS\":\"{score}\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "598d2868-1b7f-543a-476f-257f279dfd40|5803-2|2025-09-02T16:14:47Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2025-09-02T16:14:47Z\",\"PATIENT\":null,\"ENCOUNTER\":\"598d2868-1b7f-543a-476f-257f279dfd40\",\"CATEGORY\":\"laboratory\",\"CODE\":\"5803-2\",\"DESCRIPTION\":\"pH of Urine by Test strip\",\"VALUE\":\"5.4\",\"UNITS\":\"pH\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "c24941da-8187-d66c-a243-832c49a0f24d|2703-7|2024-09-29T16:58:51Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2024-09-29T16:58:51Z\",\"PATIENT\":null,\"ENCOUNTER\":\"c24941da-8187-d66c-a243-832c49a0f24d\",\"CATEGORY\":\"laboratory\",\"CODE\":\"2703-7\",\"DESCRIPTION\":\"Oxygen [Partial pressure] in Arterial blood\",\"VALUE\":\"86.7\",\"UNITS\":\"mm[Hg]\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "bc501e5b-fcda-52ea-c605-7513ca268f26|72514-3|2017-02-23T19:56:02Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2017-02-23T19:56:02Z\",\"PATIENT\":null,\"ENCOUNTER\":\"bc501e5b-fcda-52ea-c605-7513ca268f26\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"72514-3\",\"DESCRIPTION\":\"Pain severity - 0-10 verbal numeric rating [Score] - Reported\",\"VALUE\":\"5.0\",\"UNITS\":\"{score}\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "15e18436-9fbf-fb4a-f07e-d977449f2c8a|93038-8|2021-03-12T01:26:04Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2021-03-12T01:26:04Z\",\"PATIENT\":null,\"ENCOUNTER\":\"15e18436-9fbf-fb4a-f07e-d977449f2c8a\",\"CATEGORY\":\"survey\",\"CODE\":\"93038-8\",\"DESCRIPTION\":\"Stress level\",\"VALUE\":\"A little bit\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "8db0444a-867c-f10b-b18d-3cf592e984b7|38483-4|2020-02-26T19:24:08Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2020-02-26T19:24:08Z\",\"PATIENT\":null,\"ENCOUNTER\":\"8db0444a-867c-f10b-b18d-3cf592e984b7\",\"CATEGORY\":\"laboratory\",\"CODE\":\"38483-4\",\"DESCRIPTION\":\"Creatinine [Mass/volume] in Blood\",\"VALUE\":\"1.7\",\"UNITS\":\"mg/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "056c4f0f-c630-6fd3-e611-35c99209e1d0|2028-9|2023-03-21T05:59:17Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2023-03-21T05:59:17Z\",\"PATIENT\":null,\"ENCOUNTER\":\"056c4f0f-c630-6fd3-e611-35c99209e1d0\",\"CATEGORY\":\"laboratory\",\"CODE\":\"2028-9\",\"DESCRIPTION\":\"Carbon dioxide  total [Moles/volume] in Serum or Plasma\",\"VALUE\":\"27.3\",\"UNITS\":\"mmol/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "8db0444a-867c-f10b-9f74-70bdc028dd3e|5794-3|2024-08-28T19:24:08Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2024-08-28T19:24:08Z\",\"PATIENT\":null,\"ENCOUNTER\":\"8db0444a-867c-f10b-9f74-70bdc028dd3e\",\"CATEGORY\":\"laboratory\",\"CODE\":\"5794-3\",\"DESCRIPTION\":\"Hemoglobin [Presence] in Urine by Test strip\",\"VALUE\":\"Blood not detected in urine (finding)\",\"UNITS\":\"{nominal}\",\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "c29af4b6-f98b-20c6-e08d-59f97fbf1e93|2345-7|2009-07-17T05:15:58Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2009-07-17T05:15:58Z\",\"PATIENT\":null,\"ENCOUNTER\":\"c29af4b6-f98b-20c6-e08d-59f97fbf1e93\",\"CATEGORY\":\"laboratory\",\"CODE\":\"2345-7\",\"DESCRIPTION\":\"Glucose [Mass/volume] in Serum or Plasma\",\"VALUE\":\"73.0\",\"UNITS\":\"mg/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "67cde956-a869-5e04-35e7-a24feeafb9c4|2160-0|2020-08-31T20:05:20Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2020-08-31T20:05:20Z\",\"PATIENT\":null,\"ENCOUNTER\":\"67cde956-a869-5e04-35e7-a24feeafb9c4\",\"CATEGORY\":\"laboratory\",\"CODE\":\"2160-0\",\"DESCRIPTION\":\"Creatinine [Mass/volume] in Serum or Plasma\",\"VALUE\":\"1.9\",\"UNITS\":\"mg/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "e6090a29-8560-a921-b3b6-daacfb8e9302|5803-2|2006-07-29T16:46:34Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2006-07-29T16:46:34Z\",\"PATIENT\":null,\"ENCOUNTER\":\"e6090a29-8560-a921-b3b6-daacfb8e9302\",\"CATEGORY\":\"laboratory\",\"CODE\":\"5803-2\",\"DESCRIPTION\":\"pH of Urine by Test strip\",\"VALUE\":\"5.5\",\"UNITS\":\"pH\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "dd758db2-03ba-cb29-70e3-7ab24c350dc4|93035-4|2020-11-15T01:23:58Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2020-11-15T01:23:58Z\",\"PATIENT\":null,\"ENCOUNTER\":\"dd758db2-03ba-cb29-70e3-7ab24c350dc4\",\"CATEGORY\":\"survey\",\"CODE\":\"93035-4\",\"DESCRIPTION\":\"Has season or migrant farm work been your or your family's main source of income at any point in past 2 years [PRAPARE]\",\"VALUE\":\"No\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "ed088210-dd92-9914-904a-f9c2c00cefcd|93034-7|2023-09-09T08:55:34Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2023-09-09T08:55:34Z\",\"PATIENT\":null,\"ENCOUNTER\":\"ed088210-dd92-9914-904a-f9c2c00cefcd\",\"CATEGORY\":\"survey\",\"CODE\":\"93034-7\",\"DESCRIPTION\":\"Discharged from the U.S. Armed Forces\",\"VALUE\":\"No\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "e971d2e8-9653-e7f3-330b-761e68300354|39156-5|2017-05-03T23:23:59Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2017-05-03T23:23:59Z\",\"PATIENT\":null,\"ENCOUNTER\":\"e971d2e8-9653-e7f3-330b-761e68300354\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"39156-5\",\"DESCRIPTION\":\"Body mass index (BMI) [Ratio]\",\"VALUE\":\"30.5\",\"UNITS\":\"kg/m2\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "6bc745d5-c2b3-6935-f49c-cbafb5b6acb4|39156-5|2025-04-20T00:34:32Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2025-04-20T00:34:32Z\",\"PATIENT\":null,\"ENCOUNTER\":\"6bc745d5-c2b3-6935-f49c-cbafb5b6acb4\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"39156-5\",\"DESCRIPTION\":\"Body mass index (BMI) [Ratio]\",\"VALUE\":\"28.0\",\"UNITS\":\"kg/m2\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "bfe8c5d0-f43c-317c-4056-0de2723d3345|63512-8|2017-09-25T19:10:42Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2017-09-25T19:10:42Z\",\"PATIENT\":null,\"ENCOUNTER\":\"bfe8c5d0-f43c-317c-4056-0de2723d3345\",\"CATEGORY\":\"survey\",\"CODE\":\"63512-8\",\"DESCRIPTION\":\"How many people are living or staying at this address [#]\",\"VALUE\":\"3.0\",\"UNITS\":\"{#}\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "9803ebcd-45d8-daf2-029b-493981657f8f|718-7|2019-01-14T12:44:38Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2019-01-14T12:44:38Z\",\"PATIENT\":null,\"ENCOUNTER\":\"9803ebcd-45d8-daf2-029b-493981657f8f\",\"CATEGORY\":\"laboratory\",\"CODE\":\"718-7\",\"DESCRIPTION\":\"Hemoglobin [Mass/volume] in Blood\",\"VALUE\":\"12.3\",\"UNITS\":\"g/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "820e0df0-ad4f-5e89-0bfe-3c4f30df776e|93026-3|2022-03-20T23:10:55Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2022-03-20T23:10:55Z\",\"PATIENT\":null,\"ENCOUNTER\":\"820e0df0-ad4f-5e89-0bfe-3c4f30df776e\",\"CATEGORY\":\"survey\",\"CODE\":\"93026-3\",\"DESCRIPTION\":\"Do you feel physically and emotionally safe where you currently live [PRAPARE]\",\"VALUE\":\"Yes\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "9e7914e8-d519-7208-5e99-05e8b9e3cfac|55758-7|2019-01-09T07:14:16Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2019-01-09T07:14:16Z\",\"PATIENT\":null,\"ENCOUNTER\":\"9e7914e8-d519-7208-5e99-05e8b9e3cfac\",\"CATEGORY\":\"survey\",\"CODE\":\"55758-7\",\"DESCRIPTION\":\"Patient Health Questionnaire 2 item (PHQ-2) total score [Reported]\",\"VALUE\":\"0.0\",\"UNITS\":\"{score}\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "c1cffe2a-a986-8818-f0dc-5b5ddbf34b4c|59576-9|2020-11-12T22:04:01Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2020-11-12T22:04:01Z\",\"PATIENT\":null,\"ENCOUNTER\":\"c1cffe2a-a986-8818-f0dc-5b5ddbf34b4c\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"59576-9\",\"DESCRIPTION\":\"Body mass index (BMI) [Percentile] Per age and sex\",\"VALUE\":\"80.7\",\"UNITS\":\"%\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "d30a6bb2-9609-a36f-3a4f-0f58e2ce98f2|5802-4|2012-02-11T16:51:19Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2012-02-11T16:51:19Z\",\"PATIENT\":null,\"ENCOUNTER\":\"d30a6bb2-9609-a36f-3a4f-0f58e2ce98f2\",\"CATEGORY\":\"laboratory\",\"CODE\":\"5802-4\",\"DESCRIPTION\":\"Nitrite [Presence] in Urine by Test strip\",\"VALUE\":\"Nitrite not detected in urine (finding)\",\"UNITS\":\"{nominal}\",\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "da97171d-a52d-9662-aeeb-75cc5a23aa74|93033-9|2019-04-12T15:57:01Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2019-04-12T15:57:01Z\",\"PATIENT\":null,\"ENCOUNTER\":\"da97171d-a52d-9662-aeeb-75cc5a23aa74\",\"CATEGORY\":\"survey\",\"CODE\":\"93033-9\",\"DESCRIPTION\":\"Are you worried about losing your housing [PRAPARE]\",\"VALUE\":\"No\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "36cff286-4aeb-7ea5-4285-00f9988baacd|93031-3|2020-05-30T21:12:16Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2020-05-30T21:12:16Z\",\"PATIENT\":null,\"ENCOUNTER\":\"36cff286-4aeb-7ea5-4285-00f9988baacd\",\"CATEGORY\":\"survey\",\"CODE\":\"93031-3\",\"DESCRIPTION\":\"Have you or any family members you live with been unable to get any of the following when it was really needed in past 1 year [PRAPARE]\",\"VALUE\":\"I choose not to answer this question\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "e29600a7-7eec-1b43-2402-7a85102c88b7|72166-2|1980-03-04T14:40:22Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"1980-03-04T14:40:22Z\",\"PATIENT\":null,\"ENCOUNTER\":\"e29600a7-7eec-1b43-2402-7a85102c88b7\",\"CATEGORY\":\"social-history\",\"CODE\":\"72166-2\",\"DESCRIPTION\":\"Tobacco smoking status\",\"VALUE\":\"Never smoked tobacco (finding)\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "46cc21e6-fd01-3b0a-f07a-fcedd491365e|93033-9|2022-01-26T12:39:21Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2022-01-26T12:39:21Z\",\"PATIENT\":null,\"ENCOUNTER\":\"46cc21e6-fd01-3b0a-f07a-fcedd491365e\",\"CATEGORY\":\"survey\",\"CODE\":\"93033-9\",\"DESCRIPTION\":\"Are you worried about losing your housing [PRAPARE]\",\"VALUE\":\"No\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "f30a657f-2ae5-684a-85b4-5e37f7ec07c0|5797-6|2008-09-27T15:01:50Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2008-09-27T15:01:50Z\",\"PATIENT\":null,\"ENCOUNTER\":\"f30a657f-2ae5-684a-85b4-5e37f7ec07c0\",\"CATEGORY\":\"laboratory\",\"CODE\":\"5797-6\",\"DESCRIPTION\":\"Ketones [Mass/volume] in Urine by Test strip\",\"VALUE\":\"17.1\",\"UNITS\":\"mg/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "f30a657f-2ae5-684a-8448-cd88b41f2abe|2069-3|2014-07-05T17:06:50Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2014-07-05T17:06:50Z\",\"PATIENT\":null,\"ENCOUNTER\":\"f30a657f-2ae5-684a-8448-cd88b41f2abe\",\"CATEGORY\":\"laboratory\",\"CODE\":\"2069-3\",\"DESCRIPTION\":\"Chloride [Moles/volume] in Blood\",\"VALUE\":\"102.9\",\"UNITS\":\"mmol/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "f30a657f-2ae5-684a-c399-2240eae5c3db|6298-4|2016-07-23T15:01:50Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2016-07-23T15:01:50Z\",\"PATIENT\":null,\"ENCOUNTER\":\"f30a657f-2ae5-684a-c399-2240eae5c3db\",\"CATEGORY\":\"laboratory\",\"CODE\":\"6298-4\",\"DESCRIPTION\":\"Potassium [Moles/volume] in Blood\",\"VALUE\":\"4.6\",\"UNITS\":\"mmol/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "d41749a3-6e5b-0ec9-938b-acc361845bc1|20565-8|2017-07-30T14:25:00Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2017-07-30T14:25:00Z\",\"PATIENT\":null,\"ENCOUNTER\":\"d41749a3-6e5b-0ec9-938b-acc361845bc1\",\"CATEGORY\":\"laboratory\",\"CODE\":\"20565-8\",\"DESCRIPTION\":\"Carbon dioxide  total [Moles/volume] in Blood\",\"VALUE\":\"28.1\",\"UNITS\":\"mmol/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "d46629ff-2b06-c5b4-0b30-0638af05b0d9|79819-9|2020-03-29T05:15:07Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2020-03-29T05:15:07Z\",\"PATIENT\":null,\"ENCOUNTER\":\"d46629ff-2b06-c5b4-0b30-0638af05b0d9\",\"CATEGORY\":\"imaging\",\"CODE\":\"79819-9\",\"DESCRIPTION\":\"Study observation Left retina by OCT\",\"VALUE\":\"No abnormal findings\",\"UNITS\":\"{nominal}\",\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "ee2c6d62-cc80-8756-2367-6cc6b3a33d4a|49765-1|1996-09-18T11:32:42Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"1996-09-18T11:32:42Z\",\"PATIENT\":null,\"ENCOUNTER\":\"ee2c6d62-cc80-8756-2367-6cc6b3a33d4a\",\"CATEGORY\":\"laboratory\",\"CODE\":\"49765-1\",\"DESCRIPTION\":\"Calcium [Mass/volume] in Blood\",\"VALUE\":\"9.7\",\"UNITS\":\"mg/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "3839e566-b84d-7bdd-1c4a-f23bc390021f|8302-2|2026-08-20T16:23:48Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2026-08-20T16:23:48Z\",\"PATIENT\":null,\"ENCOUNTER\":\"3839e566-b84d-7bdd-1c4a-f23bc390021f\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8302-2\",\"DESCRIPTION\":\"Body Height\",\"VALUE\":\"76.6\",\"UNITS\":\"cm\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "3484b4e2-3407-60d7-a633-ebd301b14cad|2339-0|2021-01-04T07:36:17Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2021-01-04T07:36:17Z\",\"PATIENT\":null,\"ENCOUNTER\":\"3484b4e2-3407-60d7-a633-ebd301b14cad\",\"CATEGORY\":\"laboratory\",\"CODE\":\"2339-0\",\"DESCRIPTION\":\"Glucose [Mass/volume] in Blood\",\"VALUE\":\"74.3\",\"UNITS\":\"mg/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "36c9879a-06f4-d01b-7447-053b88fe311b|8462-4|2018-11-19T23:42:11Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2018-11-19T23:42:11Z\",\"PATIENT\":null,\"ENCOUNTER\":\"36c9879a-06f4-d01b-7447-053b88fe311b\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8462-4\",\"DESCRIPTION\":\"Diastolic Blood Pressure\",\"VALUE\":\"68.0\",\"UNITS\":\"mm[Hg]\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "4941744a-e120-ed39-70c2-344810470155|34533-0|2025-08-08T06:23:05Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2025-08-08T06:23:05Z\",\"PATIENT\":null,\"ENCOUNTER\":\"4941744a-e120-ed39-70c2-344810470155\",\"CATEGORY\":\"laboratory\",\"CODE\":\"34533-0\",\"DESCRIPTION\":\"Odor of Urine\",\"VALUE\":\"Urine smell ammoniacal (finding)\",\"UNITS\":\"{nominal}\",\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "01e52f9d-3872-9a59-0281-d3fa1412b8fa|8867-4|2002-11-30T08:06:20Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2002-11-30T08:06:20Z\",\"PATIENT\":null,\"ENCOUNTER\":\"01e52f9d-3872-9a59-0281-d3fa1412b8fa\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8867-4\",\"DESCRIPTION\":\"Heart rate\",\"VALUE\":\"62.0\",\"UNITS\":\"/min\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "30b10111-0ea6-821d-e36e-9ef06b6934bc|32207-3|2024-08-04T08:12:19Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2024-08-04T08:12:19Z\",\"PATIENT\":null,\"ENCOUNTER\":\"30b10111-0ea6-821d-e36e-9ef06b6934bc\",\"CATEGORY\":\"laboratory\",\"CODE\":\"32207-3\",\"DESCRIPTION\":\"Platelet distribution width [Entitic volume] in Blood by Automated count\",\"VALUE\":\"9.9\",\"UNITS\":\"fL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "29c31d6f-6bcc-89da-4760-0b1d62b77fbd|93026-3|2018-12-02T23:54:47Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2018-12-02T23:54:47Z\",\"PATIENT\":null,\"ENCOUNTER\":\"29c31d6f-6bcc-89da-4760-0b1d62b77fbd\",\"CATEGORY\":\"survey\",\"CODE\":\"93026-3\",\"DESCRIPTION\":\"Do you feel physically and emotionally safe where you currently live [PRAPARE]\",\"VALUE\":\"Yes\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "224990fa-ca3b-2bdf-2866-2618a2e5582c|55758-7|2020-01-01T12:07:03Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2020-01-01T12:07:03Z\",\"PATIENT\":null,\"ENCOUNTER\":\"224990fa-ca3b-2bdf-2866-2618a2e5582c\",\"CATEGORY\":\"survey\",\"CODE\":\"55758-7\",\"DESCRIPTION\":\"Patient Health Questionnaire 2 item (PHQ-2) total score [Reported]\",\"VALUE\":\"0.0\",\"UNITS\":\"{score}\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "659c109a-d48b-7269-f7ba-0f8024e244f7|38483-4|2025-03-20T14:49:54Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2025-03-20T14:49:54Z\",\"PATIENT\":null,\"ENCOUNTER\":\"659c109a-d48b-7269-f7ba-0f8024e244f7\",\"CATEGORY\":\"laboratory\",\"CODE\":\"38483-4\",\"DESCRIPTION\":\"Creatinine [Mass/volume] in Blood\",\"VALUE\":\"3.4\",\"UNITS\":\"mg/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "ee381c2c-46e1-cb55-8196-de5d19dade5f|5794-3|1983-12-04T02:04:08Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"1983-12-04T02:04:08Z\",\"PATIENT\":null,\"ENCOUNTER\":\"ee381c2c-46e1-cb55-8196-de5d19dade5f\",\"CATEGORY\":\"laboratory\",\"CODE\":\"5794-3\",\"DESCRIPTION\":\"Hemoglobin [Presence] in Urine by Test strip\",\"VALUE\":\"Blood not detected in urine (finding)\",\"UNITS\":\"{nominal}\",\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "44e74303-5865-f254-4d71-6280b16ae770|8462-4|2022-05-23T10:05:11Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2022-05-23T10:05:11Z\",\"PATIENT\":null,\"ENCOUNTER\":\"44e74303-5865-f254-4d71-6280b16ae770\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8462-4\",\"DESCRIPTION\":\"Diastolic Blood Pressure\",\"VALUE\":\"81.0\",\"UNITS\":\"mm[Hg]\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "0b016a3f-40f6-7d2d-86aa-bc8651c3bd13|8867-4|2019-06-16T06:54:50Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2019-06-16T06:54:50Z\",\"PATIENT\":null,\"ENCOUNTER\":\"0b016a3f-40f6-7d2d-86aa-bc8651c3bd13\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8867-4\",\"DESCRIPTION\":\"Heart rate\",\"VALUE\":\"66.0\",\"UNITS\":\"/min\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "adf69155-879b-6230-09b7-ef0949339669|33914-3|2025-01-10T00:56:44Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2025-01-10T00:56:44Z\",\"PATIENT\":null,\"ENCOUNTER\":\"adf69155-879b-6230-09b7-ef0949339669\",\"CATEGORY\":\"laboratory\",\"CODE\":\"33914-3\",\"DESCRIPTION\":\"Glomerular filtration rate [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)/1.73 sq M\",\"VALUE\":\"21.8\",\"UNITS\":\"mL/min\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "66b32c98-0fca-4144-3fa3-007d3f672a15|9279-1|2021-06-25T16:45:23Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2021-06-25T16:45:23Z\",\"PATIENT\":null,\"ENCOUNTER\":\"66b32c98-0fca-4144-3fa3-007d3f672a15\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"9279-1\",\"DESCRIPTION\":\"Respiratory rate\",\"VALUE\":\"14.0\",\"UNITS\":\"/min\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "66b32c98-0fca-4144-f993-0d5ed6417705|93031-3|2026-06-26T17:26:53Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2026-06-26T17:26:53Z\",\"PATIENT\":null,\"ENCOUNTER\":\"66b32c98-0fca-4144-f993-0d5ed6417705\",\"CATEGORY\":\"survey\",\"CODE\":\"93031-3\",\"DESCRIPTION\":\"Have you or any family members you live with been unable to get any of the following when it was really needed in past 1 year [PRAPARE]\",\"VALUE\":\"I choose not to answer this question\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "403fad10-ac3d-dbd1-34a1-0561f193bc01|3094-0|2021-10-08T08:24:05Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2021-10-08T08:24:05Z\",\"PATIENT\":null,\"ENCOUNTER\":\"403fad10-ac3d-dbd1-34a1-0561f193bc01\",\"CATEGORY\":\"laboratory\",\"CODE\":\"3094-0\",\"DESCRIPTION\":\"Urea nitrogen [Mass/volume] in Serum or Plasma\",\"VALUE\":\"13.0\",\"UNITS\":\"mg/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "f07d90c9-b212-5011-29af-477076601633|8302-2|2013-04-26T04:42:46Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2013-04-26T04:42:46Z\",\"PATIENT\":null,\"ENCOUNTER\":\"f07d90c9-b212-5011-29af-477076601633\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8302-2\",\"DESCRIPTION\":\"Body Height\",\"VALUE\":\"171.3\",\"UNITS\":\"cm\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "f07d90c9-b212-5011-16b6-4e50e04d706f|2075-0|2014-08-29T04:42:46Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2014-08-29T04:42:46Z\",\"PATIENT\":null,\"ENCOUNTER\":\"f07d90c9-b212-5011-16b6-4e50e04d706f\",\"CATEGORY\":\"laboratory\",\"CODE\":\"2075-0\",\"DESCRIPTION\":\"Chloride [Moles/volume] in Serum or Plasma\",\"VALUE\":\"107.4\",\"UNITS\":\"mmol/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "e6090a29-8560-a921-8102-e4d4a587c41b|72514-3|2008-05-24T16:46:34Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2008-05-24T16:46:34Z\",\"PATIENT\":null,\"ENCOUNTER\":\"e6090a29-8560-a921-8102-e4d4a587c41b\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"72514-3\",\"DESCRIPTION\":\"Pain severity - 0-10 verbal numeric rating [Score] - Reported\",\"VALUE\":\"2.0\",\"UNITS\":\"{score}\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "67cde956-a869-5e04-136d-ed9abe553aa8|29463-7|2024-12-16T20:05:20Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2024-12-16T20:05:20Z\",\"PATIENT\":null,\"ENCOUNTER\":\"67cde956-a869-5e04-136d-ed9abe553aa8\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"29463-7\",\"DESCRIPTION\":\"Body Weight\",\"VALUE\":\"65.9\",\"UNITS\":\"kg\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "67cde956-a869-5e04-6640-d50f3db90636|2028-9|2025-05-19T20:05:20Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2025-05-19T20:05:20Z\",\"PATIENT\":null,\"ENCOUNTER\":\"67cde956-a869-5e04-6640-d50f3db90636\",\"CATEGORY\":\"laboratory\",\"CODE\":\"2028-9\",\"DESCRIPTION\":\"Carbon dioxide  total [Moles/volume] in Serum or Plasma\",\"VALUE\":\"28.7\",\"UNITS\":\"mmol/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "3b15ee15-0f2a-91d2-616a-f182573262a9|1920-8|2020-01-10T08:19:05Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2020-01-10T08:19:05Z\",\"PATIENT\":null,\"ENCOUNTER\":\"3b15ee15-0f2a-91d2-616a-f182573262a9\",\"CATEGORY\":\"laboratory\",\"CODE\":\"1920-8\",\"DESCRIPTION\":\"Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma\",\"VALUE\":\"25.9\",\"UNITS\":\"U/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "b7955789-f809-9513-98b8-88f584b989bd|76501-6|2017-05-06T03:46:41Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2017-05-06T03:46:41Z\",\"PATIENT\":null,\"ENCOUNTER\":\"b7955789-f809-9513-98b8-88f584b989bd\",\"CATEGORY\":\"survey\",\"CODE\":\"76501-6\",\"DESCRIPTION\":\"Within the last year  have you been afraid of your partner or ex-partner\",\"VALUE\":\"No\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "28bc89bb-9a8a-9bc9-76c9-209507c3fdd2|70274-6|2016-11-25T19:16:32Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2016-11-25T19:16:32Z\",\"PATIENT\":null,\"ENCOUNTER\":\"28bc89bb-9a8a-9bc9-76c9-209507c3fdd2\",\"CATEGORY\":\"survey\",\"CODE\":\"70274-6\",\"DESCRIPTION\":\"Generalized anxiety disorder 7 item (GAD-7) total score [Reported.PHQ]\",\"VALUE\":\"2.0\",\"UNITS\":\"{score}\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "ceb23b46-d128-d7a4-36e7-90e895ff58d5|8480-6|2021-01-31T06:15:44Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2021-01-31T06:15:44Z\",\"PATIENT\":null,\"ENCOUNTER\":\"ceb23b46-d128-d7a4-36e7-90e895ff58d5\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8480-6\",\"DESCRIPTION\":\"Systolic Blood Pressure\",\"VALUE\":\"109.0\",\"UNITS\":\"mm[Hg]\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "22523ad1-c4b9-7e03-1ae6-e056146cbb5d|32623-1|2025-07-21T21:44:23Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2025-07-21T21:44:23Z\",\"PATIENT\":null,\"ENCOUNTER\":\"22523ad1-c4b9-7e03-1ae6-e056146cbb5d\",\"CATEGORY\":\"laboratory\",\"CODE\":\"32623-1\",\"DESCRIPTION\":\"Platelet [Entitic mean volume] in Blood by Automated count\",\"VALUE\":\"12.1\",\"UNITS\":\"fL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "c67a65cb-60d4-fea7-0d8d-c42088c49eb1|76501-6|1968-09-14T11:05:25Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"1968-09-14T11:05:25Z\",\"PATIENT\":null,\"ENCOUNTER\":\"c67a65cb-60d4-fea7-0d8d-c42088c49eb1\",\"CATEGORY\":\"survey\",\"CODE\":\"76501-6\",\"DESCRIPTION\":\"Within the last year  have you been afraid of your partner or ex-partner\",\"VALUE\":\"No\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "64b7b8b0-3b23-c963-1711-690d3bb482bc|76437-3|2020-07-22T11:05:10Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2020-07-22T11:05:10Z\",\"PATIENT\":null,\"ENCOUNTER\":\"64b7b8b0-3b23-c963-1711-690d3bb482bc\",\"CATEGORY\":\"survey\",\"CODE\":\"76437-3\",\"DESCRIPTION\":\"Primary insurance\",\"VALUE\":\"Medicare\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "64b7b8b0-3b23-c963-a3ab-9c8c9f283290|20454-5|2022-04-06T10:18:59Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2022-04-06T10:18:59Z\",\"PATIENT\":null,\"ENCOUNTER\":\"64b7b8b0-3b23-c963-a3ab-9c8c9f283290\",\"CATEGORY\":\"laboratory\",\"CODE\":\"20454-5\",\"DESCRIPTION\":\"Protein [Presence] in Urine by Test strip\",\"VALUE\":\"Urine protein test = +++ (finding)\",\"UNITS\":\"{nominal}\",\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "401cd1e2-16e9-43c8-d513-852df4a3d813|74006-8|2018-01-19T05:14:13Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2018-01-19T05:14:13Z\",\"PATIENT\":null,\"ENCOUNTER\":\"401cd1e2-16e9-43c8-d513-852df4a3d813\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"74006-8\",\"DESCRIPTION\":\"Weight difference [Mass difference] --pre dialysis - post dialysis\",\"VALUE\":\"1.3\",\"UNITS\":\"kg\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "64b7b8b0-3b23-c963-e640-8c2d7d2f2242|5770-3|2025-08-27T10:18:59Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2025-08-27T10:18:59Z\",\"PATIENT\":null,\"ENCOUNTER\":\"64b7b8b0-3b23-c963-e640-8c2d7d2f2242\",\"CATEGORY\":\"laboratory\",\"CODE\":\"5770-3\",\"DESCRIPTION\":\"Bilirubin.total [Presence] in Urine by Test strip\",\"VALUE\":\"Finding of bilirubin in urine (finding)\",\"UNITS\":\"{nominal}\",\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "6233cecb-bb5a-6d62-2706-04941e7801cf|82667-7|2024-10-02T23:03:09Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2024-10-02T23:03:09Z\",\"PATIENT\":null,\"ENCOUNTER\":\"6233cecb-bb5a-6d62-2706-04941e7801cf\",\"CATEGORY\":\"survey\",\"CODE\":\"82667-7\",\"DESCRIPTION\":\"Total score [DAST-10]\",\"VALUE\":\"1.0\",\"UNITS\":\"{score}\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "d37ab0bd-be2d-726d-5891-b15a50319628|8480-6|2025-07-09T12:44:03Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2025-07-09T12:44:03Z\",\"PATIENT\":null,\"ENCOUNTER\":\"d37ab0bd-be2d-726d-5891-b15a50319628\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8480-6\",\"DESCRIPTION\":\"Systolic Blood Pressure\",\"VALUE\":\"134.0\",\"UNITS\":\"mm[Hg]\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "59a63d88-ae0e-11bc-eac3-c5b8b7da5389|93028-9|2025-04-01T08:45:50Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2025-04-01T08:45:50Z\",\"PATIENT\":null,\"ENCOUNTER\":\"59a63d88-ae0e-11bc-eac3-c5b8b7da5389\",\"CATEGORY\":\"survey\",\"CODE\":\"93028-9\",\"DESCRIPTION\":\"Have you spent more than 2 nights in a row in a jail  prison  detention center  or juvenile correctional facility in past 1 year [PRAPARE]\",\"VALUE\":\"No\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "cc6af46b-6aed-cfa7-80a3-0ebea1a71278|8480-6|2024-11-21T08:30:40Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2024-11-21T08:30:40Z\",\"PATIENT\":null,\"ENCOUNTER\":\"cc6af46b-6aed-cfa7-80a3-0ebea1a71278\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8480-6\",\"DESCRIPTION\":\"Systolic Blood Pressure\",\"VALUE\":\"126.0\",\"UNITS\":\"mm[Hg]\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "cd7300b5-1e19-c2a6-de11-1ecbf26f22b2|49765-1|2019-02-16T06:01:39Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2019-02-16T06:01:39Z\",\"PATIENT\":null,\"ENCOUNTER\":\"cd7300b5-1e19-c2a6-de11-1ecbf26f22b2\",\"CATEGORY\":\"laboratory\",\"CODE\":\"49765-1\",\"DESCRIPTION\":\"Calcium [Mass/volume] in Blood\",\"VALUE\":\"8.7\",\"UNITS\":\"mg/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "f870f04f-d88f-1675-47de-7053650a854d|67875-5|2020-07-09T01:41:13Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2020-07-09T01:41:13Z\",\"PATIENT\":null,\"ENCOUNTER\":\"f870f04f-d88f-1675-47de-7053650a854d\",\"CATEGORY\":\"survey\",\"CODE\":\"67875-5\",\"DESCRIPTION\":\"Employment status - current\",\"VALUE\":\"Full-time work\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "d87cfb28-aaa3-73da-3b60-cadf43362b5a|8302-2|2025-04-17T22:01:59Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2025-04-17T22:01:59Z\",\"PATIENT\":null,\"ENCOUNTER\":\"d87cfb28-aaa3-73da-3b60-cadf43362b5a\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8302-2\",\"DESCRIPTION\":\"Body Height\",\"VALUE\":\"181.2\",\"UNITS\":\"cm\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "f27bda00-1e1b-69cf-5c6d-d9fe99caebe7|33914-3|2021-03-10T15:33:06Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2021-03-10T15:33:06Z\",\"PATIENT\":null,\"ENCOUNTER\":\"f27bda00-1e1b-69cf-5c6d-d9fe99caebe7\",\"CATEGORY\":\"laboratory\",\"CODE\":\"33914-3\",\"DESCRIPTION\":\"Glomerular filtration rate [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)/1.73 sq M\",\"VALUE\":\"13.9\",\"UNITS\":\"mL/min\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "5f9e194f-0147-7e03-62f1-1f49f5512037|14959-1|2024-07-29T03:11:15Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2024-07-29T03:11:15Z\",\"PATIENT\":null,\"ENCOUNTER\":\"5f9e194f-0147-7e03-62f1-1f49f5512037\",\"CATEGORY\":\"laboratory\",\"CODE\":\"14959-1\",\"DESCRIPTION\":\"Microalbumin/Creatinine [Mass Ratio] in Urine\",\"VALUE\":\"8.8\",\"UNITS\":\"mg/g\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "696a8f84-af45-5baa-90f2-f19785205a37|9279-1|2020-08-19T09:54:02Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2020-08-19T09:54:02Z\",\"PATIENT\":null,\"ENCOUNTER\":\"696a8f84-af45-5baa-90f2-f19785205a37\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"9279-1\",\"DESCRIPTION\":\"Respiratory rate\",\"VALUE\":\"15.0\",\"UNITS\":\"/min\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "bbbac86f-460b-fd43-81ae-bb412ac3e70a|93038-8|2002-08-11T14:51:01Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2002-08-11T14:51:01Z\",\"PATIENT\":null,\"ENCOUNTER\":\"bbbac86f-460b-fd43-81ae-bb412ac3e70a\",\"CATEGORY\":\"survey\",\"CODE\":\"93038-8\",\"DESCRIPTION\":\"Stress level\",\"VALUE\":\"Very much\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "522feb3c-210d-2e0a-7617-964490affcb5|1975-2|2022-04-02T10:49:26Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2022-04-02T10:49:26Z\",\"PATIENT\":null,\"ENCOUNTER\":\"522feb3c-210d-2e0a-7617-964490affcb5\",\"CATEGORY\":\"laboratory\",\"CODE\":\"1975-2\",\"DESCRIPTION\":\"Bilirubin.total [Mass/volume] in Serum or Plasma\",\"VALUE\":\"0.6\",\"UNITS\":\"mg/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "4152efd9-17ea-6dcf-2111-92e187eed26b|8310-5|2020-12-18T20:33:47Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2020-12-18T20:33:47Z\",\"PATIENT\":null,\"ENCOUNTER\":\"4152efd9-17ea-6dcf-2111-92e187eed26b\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8310-5\",\"DESCRIPTION\":\"Body temperature\",\"VALUE\":\"39.9\",\"UNITS\":\"Cel\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "4152efd9-17ea-6dcf-0dcf-b0adf4c59c98|6768-6|2020-12-27T22:36:27Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2020-12-27T22:36:27Z\",\"PATIENT\":null,\"ENCOUNTER\":\"4152efd9-17ea-6dcf-0dcf-b0adf4c59c98\",\"CATEGORY\":\"laboratory\",\"CODE\":\"6768-6\",\"DESCRIPTION\":\"Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma\",\"VALUE\":\"76.2\",\"UNITS\":\"U/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "ce166926-4e33-02a4-ba0b-f9b17c37b114|20565-8|2022-11-13T14:17:57Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2022-11-13T14:17:57Z\",\"PATIENT\":null,\"ENCOUNTER\":\"ce166926-4e33-02a4-ba0b-f9b17c37b114\",\"CATEGORY\":\"laboratory\",\"CODE\":\"20565-8\",\"DESCRIPTION\":\"Carbon dioxide  total [Moles/volume] in Blood\",\"VALUE\":\"28.2\",\"UNITS\":\"mmol/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "ce166926-4e33-02a4-db10-8633bb66cd37|72514-3|2024-06-21T09:50:57Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2024-06-21T09:50:57Z\",\"PATIENT\":null,\"ENCOUNTER\":\"ce166926-4e33-02a4-db10-8633bb66cd37\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"72514-3\",\"DESCRIPTION\":\"Pain severity - 0-10 verbal numeric rating [Score] - Reported\",\"VALUE\":\"2.0\",\"UNITS\":\"{score}\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "7641b1f3-3699-9ab3-74f9-720504344fac|49765-1|2023-09-28T20:47:18Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2023-09-28T20:47:18Z\",\"PATIENT\":null,\"ENCOUNTER\":\"7641b1f3-3699-9ab3-74f9-720504344fac\",\"CATEGORY\":\"laboratory\",\"CODE\":\"49765-1\",\"DESCRIPTION\":\"Calcium [Mass/volume] in Blood\",\"VALUE\":\"8.7\",\"UNITS\":\"mg/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "72573d64-d485-5f2d-c79e-e1dd09397a7f|70274-6|2021-10-10T22:53:24Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2021-10-10T22:53:24Z\",\"PATIENT\":null,\"ENCOUNTER\":\"72573d64-d485-5f2d-c79e-e1dd09397a7f\",\"CATEGORY\":\"survey\",\"CODE\":\"70274-6\",\"DESCRIPTION\":\"Generalized anxiety disorder 7 item (GAD-7) total score [Reported.PHQ]\",\"VALUE\":\"1.0\",\"UNITS\":\"{score}\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "ce166926-4e33-02a4-17c1-8ebe3ac80bf2|2885-2|2025-10-09T00:10:57Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2025-10-09T00:10:57Z\",\"PATIENT\":null,\"ENCOUNTER\":\"ce166926-4e33-02a4-17c1-8ebe3ac80bf2\",\"CATEGORY\":\"laboratory\",\"CODE\":\"2885-2\",\"DESCRIPTION\":\"Protein [Mass/volume] in Serum or Plasma\",\"VALUE\":\"7.0\",\"UNITS\":\"g/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "276b1d34-fb0e-d74b-ed9b-1bb89546bbf1|8302-2|2020-02-18T13:50:13Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2020-02-18T13:50:13Z\",\"PATIENT\":null,\"ENCOUNTER\":\"276b1d34-fb0e-d74b-ed9b-1bb89546bbf1\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8302-2\",\"DESCRIPTION\":\"Body Height\",\"VALUE\":\"176.5\",\"UNITS\":\"cm\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "af654f20-6af6-1078-e6b5-77f1e62efc72|8480-6|2023-02-05T01:01:09Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2023-02-05T01:01:09Z\",\"PATIENT\":null,\"ENCOUNTER\":\"af654f20-6af6-1078-e6b5-77f1e62efc72\",\"CATEGORY\":\"vital-signs\",\"CODE\":\"8480-6\",\"DESCRIPTION\":\"Systolic Blood Pressure\",\"VALUE\":\"97.0\",\"UNITS\":\"mm[Hg]\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "95feb885-62f0-2deb-e61b-2ca2db6dae80|5797-6|2022-07-31T16:58:43Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2022-07-31T16:58:43Z\",\"PATIENT\":null,\"ENCOUNTER\":\"95feb885-62f0-2deb-e61b-2ca2db6dae80\",\"CATEGORY\":\"laboratory\",\"CODE\":\"5797-6\",\"DESCRIPTION\":\"Ketones [Mass/volume] in Urine by Test strip\",\"VALUE\":\"10.2\",\"UNITS\":\"mg/dL\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "197901fd-7999-d6dc-77c2-5fe61ac28b67|2069-3|2023-04-03T14:21:24Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2023-04-03T14:21:24Z\",\"PATIENT\":null,\"ENCOUNTER\":\"197901fd-7999-d6dc-77c2-5fe61ac28b67\",\"CATEGORY\":\"laboratory\",\"CODE\":\"2069-3\",\"DESCRIPTION\":\"Chloride [Moles/volume] in Blood\",\"VALUE\":\"106.4\",\"UNITS\":\"mmol/L\",\"TYPE\":\"numeric\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "b521dea0-035f-c0c9-33bb-dcff3d296597|67875-5|2016-10-29T12:30:18Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2016-10-29T12:30:18Z\",\"PATIENT\":null,\"ENCOUNTER\":\"b521dea0-035f-c0c9-33bb-dcff3d296597\",\"CATEGORY\":\"survey\",\"CODE\":\"67875-5\",\"DESCRIPTION\":\"Employment status - current\",\"VALUE\":\"Part-time or temporary work\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_observations",
+  "source_row_id": "af39a148-8c46-1f54-436c-5d995a8969cd|93038-8|2024-02-19T03:00:31Z",
+  "failure_reason": "Observation has no patient identifier",
+  "check_id": "DQ2",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"DATE\":\"2024-02-19T03:00:31Z\",\"PATIENT\":null,\"ENCOUNTER\":\"af39a148-8c46-1f54-436c-5d995a8969cd\",\"CATEGORY\":\"survey\",\"CODE\":\"93038-8\",\"DESCRIPTION\":\"Stress level\",\"VALUE\":\"A little bit\",\"UNITS\":null,\"TYPE\":\"text\",\"_loaded_at\":\"2026-09-22 23:49:01.21455-04\",\"_source_file\":\"observations.csv\"}"
+ },
+ {
+  "source_table": "bronze_patients",
+  "source_row_id": "425a2728-cebb-9101-7b3b-f1f9f8c87b48",
+  "failure_reason": "Birth date is after the as-of date",
+  "check_id": "DQ4",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"425a2728-cebb-9101-7b3b-f1f9f8c87b48\",\"BIRTHDATE\":\"2093-05-06\",\"DEATHDATE\":null,\"SSN\":\"999-10-9231\",\"DRIVERS\":\"S99918448\",\"PASSPORT\":\"X69322076X\",\"PREFIX\":\"Mrs.\",\"FIRST\":\"Janie347\",\"MIDDLE\":null,\"LAST\":\"Lockman863\",\"SUFFIX\":null,\"MAIDEN\":\"Kihn564\",\"MARITAL\":\"M\",\"RACE\":\"white\",\"ETHNICITY\":\"nonhispanic\",\"GENDER\":\"F\",\"BIRTHPLACE\":\"Norfolk  Massachusetts  US\",\"ADDRESS\":\"637 Hamill Ferry\",\"CITY\":\"Stoughton\",\"STATE\":\"Massachusetts\",\"COUNTY\":\"Norfolk County\",\"FIPS\":null,\"ZIP\":\"00000\",\"LAT\":\"42.087916871560445\",\"LON\":\"-71.0659275206574\",\"HEALTHCARE_EXPENSES\":\"160676.40\",\"HEALTHCARE_COVERAGE\":\"226647.43\",\"INCOME\":\"198936\",\"_loaded_at\":\"2026-09-22 23:49:00.092944-04\",\"_source_file\":\"patients.csv\"}"
+ },
+ {
+  "source_table": "bronze_patients",
+  "source_row_id": "662496ff-c3fd-e92b-01ab-91bc2e079ddf",
+  "failure_reason": "Birth date is after the as-of date",
+  "check_id": "DQ4",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"662496ff-c3fd-e92b-01ab-91bc2e079ddf\",\"BIRTHDATE\":\"2084-05-12\",\"DEATHDATE\":null,\"SSN\":\"999-38-7888\",\"DRIVERS\":\"S99951990\",\"PASSPORT\":\"X96849946X\",\"PREFIX\":\"Mrs.\",\"FIRST\":\"Marjorie611\",\"MIDDLE\":null,\"LAST\":\"Paucek755\",\"SUFFIX\":null,\"MAIDEN\":\"Rohan584\",\"MARITAL\":\"M\",\"RACE\":\"white\",\"ETHNICITY\":\"nonhispanic\",\"GENDER\":\"F\",\"BIRTHPLACE\":\"Arlington  Massachusetts  US\",\"ADDRESS\":\"265 Moore Landing\",\"CITY\":\"Weymouth\",\"STATE\":\"Massachusetts\",\"COUNTY\":\"Norfolk County\",\"FIPS\":\"25021\",\"ZIP\":\"02189\",\"LAT\":\"42.11727740646257\",\"LON\":\"-70.97439874839982\",\"HEALTHCARE_EXPENSES\":\"215153.07\",\"HEALTHCARE_COVERAGE\":\"160753.29\",\"INCOME\":\"45070\",\"_loaded_at\":\"2026-09-22 23:49:00.092944-04\",\"_source_file\":\"patients.csv\"}"
+ },
+ {
+  "source_table": "bronze_patients",
+  "source_row_id": "3c72e166-bb7a-9132-32e5-3582e34b2174",
+  "failure_reason": "Birth date is after the as-of date",
+  "check_id": "DQ4",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"3c72e166-bb7a-9132-32e5-3582e34b2174\",\"BIRTHDATE\":\"2112-08-31\",\"DEATHDATE\":null,\"SSN\":\"999-65-3042\",\"DRIVERS\":null,\"PASSPORT\":null,\"PREFIX\":null,\"FIRST\":\"Margie619\",\"MIDDLE\":\"Letha284\",\"LAST\":\"O'Keefe54\",\"SUFFIX\":null,\"MAIDEN\":null,\"MARITAL\":null,\"RACE\":\"white\",\"ETHNICITY\":\"nonhispanic\",\"GENDER\":\"F\",\"BIRTHPLACE\":\"Gloucester  Massachusetts  US\",\"ADDRESS\":\"1003 Purdy Heights\",\"CITY\":\"Lawrence\",\"STATE\":\"Massachusetts\",\"COUNTY\":\"Essex County\",\"FIPS\":\"25009\",\"ZIP\":\"01843\",\"LAT\":\"42.6826411547726\",\"LON\":\"-71.12528945119949\",\"HEALTHCARE_EXPENSES\":\"29331.87\",\"HEALTHCARE_COVERAGE\":\"8681.40\",\"INCOME\":\"28600\",\"_loaded_at\":\"2026-09-22 23:49:00.092944-04\",\"_source_file\":\"patients.csv\"}"
+ },
+ {
+  "source_table": "bronze_patients",
+  "source_row_id": "dae1f111-05b1-8d1d-969f-f48ec0396e8f",
+  "failure_reason": "Birth date is after the as-of date",
+  "check_id": "DQ4",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"dae1f111-05b1-8d1d-969f-f48ec0396e8f\",\"BIRTHDATE\":\"2107-02-04\",\"DEATHDATE\":null,\"SSN\":\"999-33-9090\",\"DRIVERS\":\"S99964847\",\"PASSPORT\":null,\"PREFIX\":\"Ms.\",\"FIRST\":\"Gia583\",\"MIDDLE\":null,\"LAST\":\"Welch179\",\"SUFFIX\":null,\"MAIDEN\":null,\"MARITAL\":null,\"RACE\":\"white\",\"ETHNICITY\":\"nonhispanic\",\"GENDER\":\"F\",\"BIRTHPLACE\":\"Billerica  Massachusetts  US\",\"ADDRESS\":\"792 Abbott Course\",\"CITY\":\"Framingham\",\"STATE\":\"Massachusetts\",\"COUNTY\":\"Middlesex County\",\"FIPS\":\"25017\",\"ZIP\":\"01701\",\"LAT\":\"42.29287591488105\",\"LON\":\"-71.43626165171763\",\"HEALTHCARE_EXPENSES\":\"77330.72\",\"HEALTHCARE_COVERAGE\":\"172733.58\",\"INCOME\":\"177443\",\"_loaded_at\":\"2026-09-22 23:49:00.092944-04\",\"_source_file\":\"patients.csv\"}"
+ },
+ {
+  "source_table": "bronze_patients",
+  "source_row_id": "cf5ac1b8-e980-f0de-fb02-6b0bbbbf172c",
+  "failure_reason": "Birth date is after the as-of date",
+  "check_id": "DQ4",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"cf5ac1b8-e980-f0de-fb02-6b0bbbbf172c\",\"BIRTHDATE\":\"2057-06-25\",\"DEATHDATE\":null,\"SSN\":\"999-94-9630\",\"DRIVERS\":\"S99918653\",\"PASSPORT\":\"X56726607X\",\"PREFIX\":\"Mrs.\",\"FIRST\":\"Belkis212\",\"MIDDLE\":\"Natividad796\",\"LAST\":\"Williamson769\",\"SUFFIX\":null,\"MAIDEN\":\"Leuschke194\",\"MARITAL\":\"M\",\"RACE\":\"white\",\"ETHNICITY\":\"nonhispanic\",\"GENDER\":\"F\",\"BIRTHPLACE\":\"Amherst  Massachusetts  US\",\"ADDRESS\":\"1094 Wisoky Trail Suite 54\",\"CITY\":\"Fall River\",\"STATE\":\"Massachusetts\",\"COUNTY\":\"Bristol County\",\"FIPS\":\"25005\",\"ZIP\":\"02720\",\"LAT\":\"41.70743218025221\",\"LON\":\"-71.1802748650615\",\"HEALTHCARE_EXPENSES\":\"15811.06\",\"HEALTHCARE_COVERAGE\":\"511770.39\",\"INCOME\":\"18418\",\"_loaded_at\":\"2026-09-22 23:49:00.092944-04\",\"_source_file\":\"patients.csv\"}"
+ },
+ {
+  "source_table": "bronze_patients",
+  "source_row_id": "ba9056d8-c2d7-6f8f-a320-09cb66f9eabf",
+  "failure_reason": "Birth date is after the as-of date",
+  "check_id": "DQ4",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"ba9056d8-c2d7-6f8f-a320-09cb66f9eabf\",\"BIRTHDATE\":\"2064-06-28\",\"DEATHDATE\":null,\"SSN\":\"999-20-2119\",\"DRIVERS\":\"S99926824\",\"PASSPORT\":\"X97619090X\",\"PREFIX\":\"Mrs.\",\"FIRST\":\"Bryanna1\",\"MIDDLE\":\"Mozelle144\",\"LAST\":\"Schulist381\",\"SUFFIX\":null,\"MAIDEN\":\"Daugherty69\",\"MARITAL\":\"M\",\"RACE\":\"black\",\"ETHNICITY\":\"hispanic\",\"GENDER\":\"F\",\"BIRTHPLACE\":\"Amesbury  Massachusetts  US\",\"ADDRESS\":\"357 Parker Crossroad Apt 87\",\"CITY\":\"Boston\",\"STATE\":\"Massachusetts\",\"COUNTY\":\"Suffolk County\",\"FIPS\":\"25025\",\"ZIP\":\"02152\",\"LAT\":\"42.34803845260247\",\"LON\":\"-71.0987163257955\",\"HEALTHCARE_EXPENSES\":\"404463.29\",\"HEALTHCARE_COVERAGE\":\"751228.93\",\"INCOME\":\"27768\",\"_loaded_at\":\"2026-09-22 23:49:00.092944-04\",\"_source_file\":\"patients.csv\"}"
+ },
+ {
+  "source_table": "bronze_patients",
+  "source_row_id": "d11d8161-498d-63f9-e17d-d403a0cd5875",
+  "failure_reason": "Birth date is after the as-of date",
+  "check_id": "DQ4",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"d11d8161-498d-63f9-e17d-d403a0cd5875\",\"BIRTHDATE\":\"2125-07-06\",\"DEATHDATE\":null,\"SSN\":\"999-77-1995\",\"DRIVERS\":null,\"PASSPORT\":null,\"PREFIX\":null,\"FIRST\":\"Elmira442\",\"MIDDLE\":\"Katelynn452\",\"LAST\":\"Hartmann983\",\"SUFFIX\":null,\"MAIDEN\":null,\"MARITAL\":null,\"RACE\":\"white\",\"ETHNICITY\":\"nonhispanic\",\"GENDER\":\"F\",\"BIRTHPLACE\":\"Boston  Massachusetts  US\",\"ADDRESS\":\"776 Morar Rue\",\"CITY\":\"Oxford\",\"STATE\":\"Massachusetts\",\"COUNTY\":\"Worcester County\",\"FIPS\":\"25027\",\"ZIP\":\"01540\",\"LAT\":\"42.13215436399558\",\"LON\":\"-71.821068756104\",\"HEALTHCARE_EXPENSES\":\"5246.95\",\"HEALTHCARE_COVERAGE\":\"1742.91\",\"INCOME\":\"77034\",\"_loaded_at\":\"2026-09-22 23:49:00.092944-04\",\"_source_file\":\"patients.csv\"}"
+ },
+ {
+  "source_table": "bronze_patients",
+  "source_row_id": "81bb2cc1-8556-ccad-8738-00d187ffb540",
+  "failure_reason": "Birth date is after the as-of date",
+  "check_id": "DQ4",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"81bb2cc1-8556-ccad-8738-00d187ffb540\",\"BIRTHDATE\":\"2093-01-26\",\"DEATHDATE\":null,\"SSN\":\"999-33-5779\",\"DRIVERS\":\"S99995907\",\"PASSPORT\":\"X54724869X\",\"PREFIX\":\"Mrs.\",\"FIRST\":\"Tamica785\",\"MIDDLE\":\"Diane211\",\"LAST\":\"Kohler843\",\"SUFFIX\":null,\"MAIDEN\":\"Kulas532\",\"MARITAL\":\"M\",\"RACE\":\"white\",\"ETHNICITY\":\"nonhispanic\",\"GENDER\":\"F\",\"BIRTHPLACE\":\"Boston  Massachusetts  US\",\"ADDRESS\":\"673 Simonis Ville\",\"CITY\":\"Hudson\",\"STATE\":\"Massachusetts\",\"COUNTY\":\"Middlesex County\",\"FIPS\":\"25017\",\"ZIP\":\"01749\",\"LAT\":\"42.43646018416638\",\"LON\":\"-71.50909110991827\",\"HEALTHCARE_EXPENSES\":\"41193.78\",\"HEALTHCARE_COVERAGE\":\"446733.43\",\"INCOME\":\"101130\",\"_loaded_at\":\"2026-09-22 23:49:00.092944-04\",\"_source_file\":\"patients.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "6d907ed2-a003-7509-d65c-1888079f862e",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"6d907ed2-a003-7509-d65c-1888079f862e\",\"START\":\"2022-12-04T15:39:59Z\",\"STOP\":\"2022-12-04T12:35:59Z\",\"PATIENT\":\"6d907ed2-a003-7509-190d-325cf4c79b5f\",\"ORGANIZATION\":\"05fcf001-ab24-3d7d-85f7-f64942d82738\",\"PROVIDER\":\"3bb79b69-b91c-3c21-b451-5c7903fe1b0c\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185347001\",\"DESCRIPTION\":\"Encounter for problem (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"1745.73\",\"PAYER_COVERAGE\":\"1396.58\",\"REASONCODE\":\"431857002\",\"REASONDESCRIPTION\":\"Chronic kidney disease stage 4 (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "8495bcba-7343-1b9c-957a-ab2d3f992d87",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"8495bcba-7343-1b9c-957a-ab2d3f992d87\",\"START\":\"1991-08-16T05:54:19Z\",\"STOP\":\"1991-08-16T05:15:58Z\",\"PATIENT\":\"8495bcba-7343-1b9c-6c4b-5b0278870b9e\",\"ORGANIZATION\":\"7b7ce654-a413-37d1-9d34-97240c0ac580\",\"PROVIDER\":\"ae156012-3ee0-329b-bb8a-346b86072faa\",\"PAYER\":\"26aab0cd-6aba-3e1b-ac5b-05c8867e762c\",\"ENCOUNTERCLASS\":\"urgentcare\",\"CODE\":\"702927004\",\"DESCRIPTION\":\"Urgent care clinic (environment)\",\"BASE_ENCOUNTER_COST\":\"142.58\",\"TOTAL_CLAIM_COST\":\"1479.46\",\"PAYER_COVERAGE\":\"1479.46\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "e0f4878d-c900-1259-fdeb-43097228006d",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"e0f4878d-c900-1259-fdeb-43097228006d\",\"START\":\"2020-01-12T12:01:12Z\",\"STOP\":\"2020-01-12T11:46:12Z\",\"PATIENT\":\"e0f4878d-c900-1259-b33d-3cdf4e3d7007\",\"ORGANIZATION\":\"3ff0f58b-7a1f-3334-9449-ff15f68b7d86\",\"PROVIDER\":\"270e84cf-1d42-31c2-aeb2-ce5a7353a522\",\"PAYER\":\"0133f751-9229-3cfd-815f-b6d4979bdd6a\",\"ENCOUNTERCLASS\":\"outpatient\",\"CODE\":\"698314001\",\"DESCRIPTION\":\"Consultation for treatment (procedure)\",\"BASE_ENCOUNTER_COST\":\"142.58\",\"TOTAL_CLAIM_COST\":\"142.58\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":\"389095005\",\"REASONDESCRIPTION\":\"Contraception care (regime/therapy)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "6ddd6321-ea39-250d-2593-d285bdb86514",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"6ddd6321-ea39-250d-2593-d285bdb86514\",\"START\":\"2006-07-18T05:05:30Z\",\"STOP\":\"2006-07-18T04:16:51Z\",\"PATIENT\":\"6ddd6321-ea39-250d-9f04-8207f9ab128b\",\"ORGANIZATION\":\"936ceb96-2b12-371f-aa68-ee02a9c06f4c\",\"PROVIDER\":\"977037aa-7d3f-3e07-adea-3447e579421e\",\"PAYER\":\"d31fccc3-1767-390d-966a-22a5156f4219\",\"ENCOUNTERCLASS\":\"wellness\",\"CODE\":\"162673000\",\"DESCRIPTION\":\"General examination of patient (procedure)\",\"BASE_ENCOUNTER_COST\":\"136.80\",\"TOTAL_CLAIM_COST\":\"1432.41\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "c7b16bd1-5fe2-d67d-1f56-f4920b22cbb8",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"c7b16bd1-5fe2-d67d-1f56-f4920b22cbb8\",\"START\":\"2012-08-31T06:08:48Z\",\"STOP\":\"2012-08-31T05:15:58Z\",\"PATIENT\":\"c7b16bd1-5fe2-d67d-7062-635450b5c827\",\"ORGANIZATION\":\"d1d4d104-68cb-356b-9086-888de7d2826f\",\"PROVIDER\":\"73b92552-3206-343a-9d4c-c3c4d88b04bf\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"outpatient\",\"CODE\":\"185349003\",\"DESCRIPTION\":\"Encounter for check up (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"1040.45\",\"PAYER_COVERAGE\":\"754.24\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "c7b16bd1-5fe2-d67d-3cc2-e493746ec63d",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"c7b16bd1-5fe2-d67d-3cc2-e493746ec63d\",\"START\":\"2018-04-22T05:30:58Z\",\"STOP\":\"2018-04-22T05:15:58Z\",\"PATIENT\":\"c7b16bd1-5fe2-d67d-7062-635450b5c827\",\"ORGANIZATION\":\"d1d4d104-68cb-356b-9086-888de7d2826f\",\"PROVIDER\":\"73b92552-3206-343a-9d4c-c3c4d88b04bf\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"281036007\",\"DESCRIPTION\":\"Follow-up consultation (procedure)\",\"BASE_ENCOUNTER_COST\":\"142.58\",\"TOTAL_CLAIM_COST\":\"142.58\",\"PAYER_COVERAGE\":\"114.06\",\"REASONCODE\":\"26929004\",\"REASONDESCRIPTION\":\"Alzheimer's disease (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "30cf7d32-948e-0651-d845-b85af9ede341",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"30cf7d32-948e-0651-d845-b85af9ede341\",\"START\":\"2020-08-01T12:52:29Z\",\"STOP\":\"2020-08-01T11:55:45Z\",\"PATIENT\":\"30cf7d32-948e-0651-620d-105520134a20\",\"ORGANIZATION\":\"21989e2e-249c-3b79-acf0-240211e16b4b\",\"PROVIDER\":\"9e901d70-a940-3977-9ba1-fbdcde4d10a1\",\"PAYER\":\"734afbd6-4794-363b-9bc0-6a3981533ed5\",\"ENCOUNTERCLASS\":\"wellness\",\"CODE\":\"162673000\",\"DESCRIPTION\":\"General examination of patient (procedure)\",\"BASE_ENCOUNTER_COST\":\"136.80\",\"TOTAL_CLAIM_COST\":\"919.90\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "329051eb-a199-868d-f939-5d6b5396837f",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"329051eb-a199-868d-f939-5d6b5396837f\",\"START\":\"2023-10-03T08:56:00Z\",\"STOP\":\"2023-10-03T07:56:00Z\",\"PATIENT\":\"329051eb-a199-868d-31be-70d7c2637f10\",\"ORGANIZATION\":\"e7722de2-0e62-3dc9-a163-a7003956673b\",\"PROVIDER\":\"db24c859-4ad7-3e76-9087-1755ba8f21c6\",\"PAYER\":\"26aab0cd-6aba-3e1b-ac5b-05c8867e762c\",\"ENCOUNTERCLASS\":\"emergency\",\"CODE\":\"50849002\",\"DESCRIPTION\":\"Emergency room admission (procedure)\",\"BASE_ENCOUNTER_COST\":\"146.18\",\"TOTAL_CLAIM_COST\":\"146.18\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":\"384709000\",\"REASONDESCRIPTION\":\"Sprain (morphologic abnormality)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "3947bb31-2bd8-0d95-1258-9cb36f9ed62e",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"3947bb31-2bd8-0d95-1258-9cb36f9ed62e\",\"START\":\"2012-08-14T13:57:30Z\",\"STOP\":\"2012-08-14T13:42:30Z\",\"PATIENT\":\"3947bb31-2bd8-0d95-0b04-5045eb7f56fd\",\"ORGANIZATION\":\"15d4c950-4691-3996-b4c4-bf06bfb58ff7\",\"PROVIDER\":\"ae2d7e56-6024-3d82-9e07-147ec905b603\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185347001\",\"DESCRIPTION\":\"Encounter for problem (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"234.71\",\"PAYER_COVERAGE\":\"187.76\",\"REASONCODE\":\"431857002\",\"REASONDESCRIPTION\":\"Chronic kidney disease stage 4 (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "fe062fd2-0854-e183-bef7-73edde21431e",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"fe062fd2-0854-e183-bef7-73edde21431e\",\"START\":\"2021-11-12T07:41:20Z\",\"STOP\":\"2021-11-12T06:40:46Z\",\"PATIENT\":\"fe062fd2-0854-e183-6ea3-ab3ea89af59d\",\"ORGANIZATION\":\"0fedae9f-701f-3317-9b2f-69aea2202cdc\",\"PROVIDER\":\"9fa58f33-6937-357d-a6d2-30d69873b989\",\"PAYER\":\"0133f751-9229-3cfd-815f-b6d4979bdd6a\",\"ENCOUNTERCLASS\":\"outpatient\",\"CODE\":\"308335008\",\"DESCRIPTION\":\"Patient encounter procedure (procedure)\",\"BASE_ENCOUNTER_COST\":\"142.58\",\"TOTAL_CLAIM_COST\":\"4245.51\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":\"389095005\",\"REASONDESCRIPTION\":\"Contraception care (regime/therapy)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "8d52feb9-a40f-4207-4a7e-4f3966f8cf45",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"8d52feb9-a40f-4207-4a7e-4f3966f8cf45\",\"START\":\"2019-11-12T12:35:12Z\",\"STOP\":\"2019-11-12T11:43:33Z\",\"PATIENT\":\"8d52feb9-a40f-4207-7024-45e0f3172c3b\",\"ORGANIZATION\":\"f341c366-8313-3790-ab26-d8d27b116ff5\",\"PROVIDER\":\"2b68c93d-9705-3e87-945f-30144399a83e\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"wellness\",\"CODE\":\"162673000\",\"DESCRIPTION\":\"General examination of patient (procedure)\",\"BASE_ENCOUNTER_COST\":\"136.80\",\"TOTAL_CLAIM_COST\":\"2134.40\",\"PAYER_COVERAGE\":\"1707.52\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "a65b5e11-170e-ac7e-88a3-a9144cb43733",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"a65b5e11-170e-ac7e-88a3-a9144cb43733\",\"START\":\"2015-05-11T22:22:26Z\",\"STOP\":\"2015-05-11T21:35:28Z\",\"PATIENT\":\"a65b5e11-170e-ac7e-672e-0507631a668a\",\"ORGANIZATION\":\"9fdce5d5-d4d0-3156-a8d5-8757bfe4e9b3\",\"PROVIDER\":\"593a8760-b431-358c-84c7-52dd3bb29c01\",\"PAYER\":\"df166300-5a78-3502-a46a-832842197811\",\"ENCOUNTERCLASS\":\"wellness\",\"CODE\":\"162673000\",\"DESCRIPTION\":\"General examination of patient (procedure)\",\"BASE_ENCOUNTER_COST\":\"136.80\",\"TOTAL_CLAIM_COST\":\"1186.78\",\"PAYER_COVERAGE\":\"1186.78\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "e356c995-85ec-c24f-83ad-360346f3a3c9",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"e356c995-85ec-c24f-83ad-360346f3a3c9\",\"START\":\"2021-06-14T19:21:45Z\",\"STOP\":\"2021-06-14T19:06:45Z\",\"PATIENT\":\"e356c995-85ec-c24f-e6ae-8e5ffa0869b5\",\"ORGANIZATION\":\"0ddb0329-b59d-3187-874c-602c649249c8\",\"PROVIDER\":\"02f75c2a-042a-32f3-b956-c6838810e7a0\",\"PAYER\":\"b046940f-1664-3047-bca7-dfa76be352a4\",\"ENCOUNTERCLASS\":\"outpatient\",\"CODE\":\"185345009\",\"DESCRIPTION\":\"Encounter for symptom (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"85.55\",\"PAYER_COVERAGE\":\"59.88\",\"REASONCODE\":\"65363002\",\"REASONDESCRIPTION\":\"Otitis media (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "082ad3e9-b3d8-bf20-c635-5a6e8c21946a",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"082ad3e9-b3d8-bf20-c635-5a6e8c21946a\",\"START\":\"2019-12-08T09:49:36Z\",\"STOP\":\"2019-12-08T06:41:39Z\",\"PATIENT\":\"082ad3e9-b3d8-bf20-bb68-febcc4b35a4e\",\"ORGANIZATION\":\"2836d9ac-c6a6-39d1-8f13-fdf0fc8928f4\",\"PROVIDER\":\"f13ba666-4a9d-3ead-bc36-b43755b010f4\",\"PAYER\":\"8fa6c185-e44e-3e34-8bd8-39be8694f4ce\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185349003\",\"DESCRIPTION\":\"Encounter for check up (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"3105.35\",\"PAYER_COVERAGE\":\"2173.74\",\"REASONCODE\":\"66383009\",\"REASONDESCRIPTION\":\"Gingivitis (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "d41749a3-6e5b-0ec9-6c56-273ccc23c18a",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"d41749a3-6e5b-0ec9-6c56-273ccc23c18a\",\"START\":\"2018-08-15T07:58:00Z\",\"STOP\":\"2018-08-15T05:47:00Z\",\"PATIENT\":\"d41749a3-6e5b-0ec9-9843-b1d1085b8dfb\",\"ORGANIZATION\":\"0fab3c4e-a028-39a6-b15a-be5a88b6aa2a\",\"PROVIDER\":\"bacbea60-ef65-324c-9585-760c425ee047\",\"PAYER\":\"26aab0cd-6aba-3e1b-ac5b-05c8867e762c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185347001\",\"DESCRIPTION\":\"Encounter for problem (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"535.87\",\"PAYER_COVERAGE\":\"535.87\",\"REASONCODE\":\"431857002\",\"REASONDESCRIPTION\":\"Chronic kidney disease stage 4 (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "1965304d-d16e-e0d2-6d00-67ad83bb3fde",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"1965304d-d16e-e0d2-6d00-67ad83bb3fde\",\"START\":\"2008-02-16T20:26:36Z\",\"STOP\":\"2008-02-16T16:34:36Z\",\"PATIENT\":\"1965304d-d16e-e0d2-5a6c-7e9e38836909\",\"ORGANIZATION\":\"a537b406-fdfa-36b4-84da-12512e7e6c63\",\"PROVIDER\":\"2576d5a3-3b05-31ee-a76b-655506f1685a\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185347001\",\"DESCRIPTION\":\"Encounter for problem (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"646.72\",\"PAYER_COVERAGE\":\"517.38\",\"REASONCODE\":\"46177005\",\"REASONDESCRIPTION\":\"End-stage renal disease (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "b557310a-6831-b979-449c-febe3ae58731",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"b557310a-6831-b979-449c-febe3ae58731\",\"START\":\"2016-02-15T14:08:40Z\",\"STOP\":\"2016-02-15T13:53:40Z\",\"PATIENT\":\"b557310a-6831-b979-2bef-e65c4ece93e2\",\"ORGANIZATION\":\"b6eeaaf7-1683-3bcb-b6ee-81ce304636ef\",\"PROVIDER\":\"69e5664a-bc92-3af1-bd6d-7cb86047cfff\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185349003\",\"DESCRIPTION\":\"Encounter for check up (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"85.55\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":\"62106007\",\"REASONDESCRIPTION\":\"Concussion with no loss of consciousness (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "a9073be5-847e-a007-5c41-232873d8aedf",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"a9073be5-847e-a007-5c41-232873d8aedf\",\"START\":\"2026-02-25T01:32:19Z\",\"STOP\":\"2026-02-25T01:17:19Z\",\"PATIENT\":\"a9073be5-847e-a007-cdc1-0c28a6565048\",\"ORGANIZATION\":\"b6eeaaf7-1683-3bcb-b6ee-81ce304636ef\",\"PROVIDER\":\"69e5664a-bc92-3af1-bd6d-7cb86047cfff\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"outpatient\",\"CODE\":\"185349003\",\"DESCRIPTION\":\"Encounter for check up (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"450.41\",\"PAYER_COVERAGE\":\"360.32\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "89f8ab28-e0ca-7c4d-bf44-9b440cb486d5",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"89f8ab28-e0ca-7c4d-bf44-9b440cb486d5\",\"START\":\"2015-07-24T10:47:49Z\",\"STOP\":\"2015-07-24T10:32:49Z\",\"PATIENT\":\"89f8ab28-e0ca-7c4d-201a-b9f870a08380\",\"ORGANIZATION\":\"06cc2462-430f-3322-9c87-7e971125f510\",\"PROVIDER\":\"72b4e9dc-3e40-37dd-9eda-139804d5a313\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"390906007\",\"DESCRIPTION\":\"Follow-up encounter (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"234.71\",\"PAYER_COVERAGE\":\"187.76\",\"REASONCODE\":\"55822004\",\"REASONDESCRIPTION\":\"Hyperlipidemia (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "646ab468-fd5a-57fb-0f08-c31ebfa2a271",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"646ab468-fd5a-57fb-0f08-c31ebfa2a271\",\"START\":\"2025-09-30T15:32:33Z\",\"STOP\":\"2025-09-30T15:00:11Z\",\"PATIENT\":\"646ab468-fd5a-57fb-1f43-bbc4aeef78f4\",\"ORGANIZATION\":\"b014aec7-7bd8-351f-8808-3e280cbc5be6\",\"PROVIDER\":\"097e726e-981d-3693-9d50-af29c6a75fb3\",\"PAYER\":\"b046940f-1664-3047-bca7-dfa76be352a4\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"371883000\",\"DESCRIPTION\":\"Outpatient procedure (procedure)\",\"BASE_ENCOUNTER_COST\":\"142.58\",\"TOTAL_CLAIM_COST\":\"5263.67\",\"PAYER_COVERAGE\":\"5263.67\",\"REASONCODE\":\"609328004\",\"REASONDESCRIPTION\":\"Allergic disposition (finding)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "17087210-7ca7-e030-f9d3-38e8e5089dfe",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"17087210-7ca7-e030-f9d3-38e8e5089dfe\",\"START\":\"2019-08-24T07:47:03Z\",\"STOP\":\"2019-08-24T07:32:03Z\",\"PATIENT\":\"17087210-7ca7-e030-045c-fc9f1e4a4bc2\",\"ORGANIZATION\":\"dd9914b0-9491-3330-a890-d34e95e497ea\",\"PROVIDER\":\"45079f95-8152-30c6-a327-6aac5e2a26ea\",\"PAYER\":\"df166300-5a78-3502-a46a-832842197811\",\"ENCOUNTERCLASS\":\"wellness\",\"CODE\":\"410620009\",\"DESCRIPTION\":\"Well child visit (procedure)\",\"BASE_ENCOUNTER_COST\":\"136.80\",\"TOTAL_CLAIM_COST\":\"816.80\",\"PAYER_COVERAGE\":\"816.80\",\"REASONCODE\":null,\"REASONDESCRIPTION\":null,\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "adf69155-879b-6230-8c63-87b1aefc3fcf",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"adf69155-879b-6230-8c63-87b1aefc3fcf\",\"START\":\"2024-10-17T03:09:44Z\",\"STOP\":\"2024-10-17T00:29:44Z\",\"PATIENT\":\"adf69155-879b-6230-2234-c7d962a711a6\",\"ORGANIZATION\":\"a2cc09de-c1e2-3126-8c09-d49f95225281\",\"PROVIDER\":\"9dd3889c-cb8c-383c-96bc-a4ca0c2f61ce\",\"PAYER\":\"e03e23c9-4df1-3eb6-a62d-f70f02301496\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185347001\",\"DESCRIPTION\":\"Encounter for problem (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"535.87\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":\"431857002\",\"REASONDESCRIPTION\":\"Chronic kidney disease stage 4 (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "adf69155-879b-6230-f930-b42e276042ee",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"adf69155-879b-6230-f930-b42e276042ee\",\"START\":\"2025-12-27T12:10:44Z\",\"STOP\":\"2025-12-27T08:11:44Z\",\"PATIENT\":\"adf69155-879b-6230-2234-c7d962a711a6\",\"ORGANIZATION\":\"a2cc09de-c1e2-3126-8c09-d49f95225281\",\"PROVIDER\":\"9dd3889c-cb8c-383c-96bc-a4ca0c2f61ce\",\"PAYER\":\"d18ef2e6-ef40-324c-be54-34a5ee865625\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185347001\",\"DESCRIPTION\":\"Encounter for problem (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"957.30\",\"PAYER_COVERAGE\":\"922.30\",\"REASONCODE\":\"431857002\",\"REASONDESCRIPTION\":\"Chronic kidney disease stage 4 (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "5a33f0af-5c31-aa55-aa16-f10f26d6e417",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"5a33f0af-5c31-aa55-aa16-f10f26d6e417\",\"START\":\"2025-06-21T18:03:12Z\",\"STOP\":\"2025-06-21T17:48:12Z\",\"PATIENT\":\"5a33f0af-5c31-aa55-e57b-819f62fb506b\",\"ORGANIZATION\":\"b014aec7-7bd8-351f-8808-3e280cbc5be6\",\"PROVIDER\":\"097e726e-981d-3693-9d50-af29c6a75fb3\",\"PAYER\":\"26aab0cd-6aba-3e1b-ac5b-05c8867e762c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185347001\",\"DESCRIPTION\":\"Encounter for problem (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"234.71\",\"PAYER_COVERAGE\":\"0.00\",\"REASONCODE\":\"431857002\",\"REASONDESCRIPTION\":\"Chronic kidney disease stage 4 (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ },
+ {
+  "source_table": "bronze_encounters",
+  "source_row_id": "1e528593-92f0-e5b7-e1fc-58e42cdf8e20",
+  "failure_reason": "Discharge timestamp is before admission timestamp",
+  "check_id": "DQ5",
+  "quarantined_at": "2026-08-23",
+  "raw_payload": "{\"Id\":\"1e528593-92f0-e5b7-e1fc-58e42cdf8e20\",\"START\":\"2023-04-10T11:16:08Z\",\"STOP\":\"2023-04-10T08:38:08Z\",\"PATIENT\":\"1e528593-92f0-e5b7-532a-ffe9ee3b6610\",\"ORGANIZATION\":\"b9a91cbd-3263-31d9-9cff-55873cf8b2e2\",\"PROVIDER\":\"8e41c02c-c246-34bf-81d9-93d076117417\",\"PAYER\":\"a735bf55-83e9-331a-899d-a82a60b9f60c\",\"ENCOUNTERCLASS\":\"ambulatory\",\"CODE\":\"185347001\",\"DESCRIPTION\":\"Encounter for problem (procedure)\",\"BASE_ENCOUNTER_COST\":\"85.55\",\"TOTAL_CLAIM_COST\":\"535.87\",\"PAYER_COVERAGE\":\"428.70\",\"REASONCODE\":\"431857002\",\"REASONDESCRIPTION\":\"Chronic kidney disease stage 4 (disorder)\",\"_loaded_at\":\"2026-09-22 23:49:00.282951-04\",\"_source_file\":\"encounters.csv\"}"
+ }
+]
