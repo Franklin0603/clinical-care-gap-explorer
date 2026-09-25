@@ -3,7 +3,7 @@
 Finds diabetic patients overdue for an A1c test — and shows the data quality work
 required before that list can be trusted.
 
-**Live demo:** _(Day 5)_
+**Live demo:** https://franklin0603.github.io/clinical-care-gap-explorer/
 **Synthetic data only (Synthea). No PHI.**
 
 ---
@@ -73,21 +73,43 @@ Full reasoning: [DATA_DICTIONARY.md](docs/DATA_DICTIONARY.md).
 
 ## Pages
 
-1. **Overview** — what this is, headline number
+1. **Overview** — the headline number and how it was reached
 2. **Pipeline & Data Quality** — layer counts, six checks, quarantine, identity review queue
-3. **Patient Care** — the cohort, with role-based access (PCT / Nurse / Physician)
-4. **Ask the Data** — natural language → SQL, generated SQL always shown
+3. **Patient Care** — the cohort, scoped by clinical role (PCT / Nurse / Physician)
+4. **Ask the Data** — natural language → SQL, generated SQL always shown *(Day 7)*
 
 ## Access by role
 
 Access is scoped to the **minimum necessary** for each clinical role. This is not
-HIPAA compliance — it is a model of the access-scoping principle, filtered
-server-side. There is no authentication; the role selector is a demonstration
-control.
+HIPAA compliance — it is a model of the access-scoping principle. There is no
+authentication; the role selector is a demonstration control.
 
-The matrix is based on my own experience as a patient care technician: a PCT sees
-vitals and care tasks, a nurse adds labs and active medications, a physician sees
-full history.
+| Role | Patients | Columns | Scope |
+|------|---------:|--------:|-------|
+| Patient Care Technician | 70 | 7 | One assigned unit |
+| Nurse | 106 | 17 | Their service line |
+| Physician | 116 | 19 | Cross-unit, whole panel |
+
+**The filtering is in the query layer, not the component.** The site is a static
+export, so there is no request-time server; instead the pipeline writes one
+payload per role, each built by SQL that never selects the restricted columns and
+never returns out-of-unit rows. The PCT's file contains no A1c value anywhere —
+the fields are absent, not blanked, not hidden in CSS. Row counts change with
+role as well as columns.
+
+**Column filtering alone would still leak.** `next_due_date` is the last A1c date
+plus 365 days and `days_overdue` is the same date in different clothes, so
+withholding the value while keeping either one reconstructs the test date
+exactly. Derived columns are restricted alongside what they derive from — see
+[`pipeline/access.py`](pipeline/access.py).
+
+**What it does not do:** with no authentication, every role's file is reachable
+by anyone who guesses the URL. In a real system the same queries would sit behind
+a session and an authorization check. What is being demonstrated is where the
+restriction lives.
+
+The matrix draws on my time as a patient care technician: a PCT sees who needs a
+task done and when the patient was last in, not what the result was.
 
 ## Run it
 

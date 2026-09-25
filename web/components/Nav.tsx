@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 const PAGES = [
   { href: "/", label: "Overview" },
   { href: "/pipeline", label: "Pipeline & Data Quality" },
+  { href: "/patients", label: "Patient Care" },
 ];
 
 export default function Nav() {

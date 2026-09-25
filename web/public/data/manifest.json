@@ -25,5 +25,106 @@
   "dq_report.json",
   "gold_report.json",
   "reconciliation.json"
- ]
+ ],
+ "roles": {
+  "pct": {
+   "label": "Patient Care Technician",
+   "scope": "One assigned unit",
+   "rationale": "Sees who needs a lab draw and when they were last in, and nothing about the result. On the floor a PCT is told which patients need a task done, not what the number was.",
+   "units": [
+    "ambulatory"
+   ],
+   "columns": [
+    "patient_id",
+    "mrn",
+    "age",
+    "sex",
+    "unit",
+    "last_encounter_date",
+    "gap_flag"
+   ],
+   "restricted": [
+    "last_a1c_date",
+    "last_a1c_value",
+    "days_since_a1c",
+    "next_due_date",
+    "days_overdue",
+    "a1c_count_2y",
+    "last_a1c_controlled",
+    "priority",
+    "active_med_count",
+    "on_insulin",
+    "first_dx_date",
+    "identity_review_pending"
+   ],
+   "patients": 70,
+   "gaps": 12
+  },
+  "nurse": {
+   "label": "Nurse",
+   "scope": "Their service line",
+   "rationale": "Adds lab results and active medications, because a nurse acts on the value - an A1c of 9.5 fourteen months ago is a different call from a 5.8. Not full diagnosis history.",
+   "units": [
+    "ambulatory",
+    "wellness",
+    "outpatient"
+   ],
+   "columns": [
+    "patient_id",
+    "mrn",
+    "age",
+    "sex",
+    "unit",
+    "last_encounter_date",
+    "gap_flag",
+    "last_a1c_date",
+    "last_a1c_value",
+    "days_since_a1c",
+    "next_due_date",
+    "days_overdue",
+    "a1c_count_2y",
+    "last_a1c_controlled",
+    "priority",
+    "active_med_count",
+    "on_insulin"
+   ],
+   "restricted": [
+    "first_dx_date",
+    "identity_review_pending"
+   ],
+   "patients": 106,
+   "gaps": 22
+  },
+  "physician": {
+   "label": "Physician",
+   "scope": "Cross-unit, whole panel",
+   "rationale": "The fullest view: diagnosis history, every patient regardless of unit, and the identity-review flag, because deciding whether two records are one person is a clinical judgement.",
+   "units": null,
+   "columns": [
+    "patient_id",
+    "mrn",
+    "age",
+    "sex",
+    "unit",
+    "last_encounter_date",
+    "gap_flag",
+    "last_a1c_date",
+    "last_a1c_value",
+    "days_since_a1c",
+    "next_due_date",
+    "days_overdue",
+    "a1c_count_2y",
+    "last_a1c_controlled",
+    "priority",
+    "active_med_count",
+    "on_insulin",
+    "first_dx_date",
+    "identity_review_pending"
+   ],
+   "restricted": [],
+   "patients": 116,
+   "gaps": 25
+  }
+ },
+ "default_role": "pct"
 }

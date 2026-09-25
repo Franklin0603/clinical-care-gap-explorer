@@ -24,11 +24,79 @@ import shutil
 
 import duckdb
 
+from access import ROLES, DEFAULT_ROLE, restricted_for
 from load_bronze import DB
 
 OUT = "web/public/data"
 TABLES = ["care_gap_a1c", "quarantine", "identity_review", "remediation_log"]
 REPORTS = ["data/dq_report.json", "data/gold_report.json"]
+
+
+def export_by_role(con, manifest):
+    """One payload per role (Day 6).
+
+    The restricted columns are never SELECTed and the out-of-unit rows are never
+    returned, so the file a PCT's page loads has no A1c in it at all - absent,
+    not blank. With a static site there is no request-time server to filter, so
+    the filtering happens here, in the query layer, at build time.
+    """
+    con.sql("""
+        CREATE OR REPLACE TEMP VIEW patient_unit AS
+        SELECT g.patient_id,
+               arg_max(e.encounter_type, e.admission_ts) AS unit   -- care setting of the most recent encounter
+        FROM care_gap_a1c g
+        JOIN silver_encounters e USING (patient_id)
+        WHERE e.admission_ts <= g.asof_date
+        GROUP BY g.patient_id
+    """)
+    con.sql("""
+        CREATE OR REPLACE TEMP VIEW gold_scoped AS
+        SELECT g.*, p.mrn, p.sex, u.unit
+        FROM care_gap_a1c g
+        JOIN silver_patients p USING (patient_id)
+        JOIN patient_unit u USING (patient_id)
+    """)
+
+    manifest["roles"] = {}
+    for role, cfg in ROLES.items():
+        cols = ", ".join(f'"{c}"' for c in cfg["columns"])
+        where = ""
+        if cfg["units"]:
+            units = ", ".join(f"'{u}'" for u in cfg["units"])
+            where = f"WHERE unit IN ({units})"
+        df = con.sql(f"SELECT {cols} FROM gold_scoped {where} ORDER BY gap_flag DESC, age DESC").df()
+        df = df.astype(object).where(df.notna(), None)
+        rows = df.to_dict("records")
+        for r in rows:
+            for k, v in r.items():
+                if hasattr(v, "isoformat"):
+                    r[k] = v.isoformat()[:10]
+                elif v is not None and not isinstance(v, (str, int, float, bool)):
+                    r[k] = str(v)
+        with open(f"{OUT}/care_gap_{role}.json", "w") as fh:
+            json.dump(rows, fh, indent=1, default=str, allow_nan=False)
+        manifest["roles"][role] = {
+            "label": cfg["label"], "scope": cfg["scope"], "rationale": cfg["rationale"],
+            "units": cfg["units"], "columns": cfg["columns"],
+            "restricted": restricted_for(role),
+            "patients": len(rows),
+            "gaps": sum(1 for r in rows if r["gap_flag"]),
+        }
+        print(f"  care_gap_{role:10} {len(rows):>5} rows  {len(cfg['columns']):>2} cols"
+              f"  {len(restricted_for(role)):>2} restricted")
+    manifest["default_role"] = DEFAULT_ROLE
+
+    # Age bands - Decision D11. HEDIS diabetes measures apply to members 18-75 and
+    # stratify 18-64 / 65-75, so the boundaries are the measure's, not round numbers.
+    bands = con.sql("""
+        SELECT CASE WHEN age < 45 THEN '18-44' WHEN age < 65 THEN '45-64'
+                    WHEN age <= 75 THEN '65-75' ELSE '76+' END AS band,
+               count(*) AS patients, count(*) FILTER (WHERE gap_flag) AS gaps, min(age) AS lo
+        FROM care_gap_a1c GROUP BY 1 ORDER BY lo
+    """).df().drop(columns=["lo"]).to_dict("records")
+    with open(f"{OUT}/age_bands.json", "w") as fh:
+        json.dump(bands, fh, indent=1, default=str)
+    print(f"  {'age_bands.json':20} {len(bands):>5} bands")
 
 
 def export(con):
@@ -59,6 +127,8 @@ def export(con):
         shutil.copy(src, f"{OUT}/{os.path.basename(src)}")
         manifest["reports"].append(os.path.basename(src))
         print(f"  {os.path.basename(src):20}       copied")
+
+    export_by_role(con, manifest)
 
     # the reconciliation, as its own small artefact - P2 shows it as a table
     recon = con.sql("""

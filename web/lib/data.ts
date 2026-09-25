@@ -78,3 +78,71 @@ export const checks = [
 });
 
 export const fmt = (n: number) => n.toLocaleString("en-US");
+
+// ---------------------------------------------------------------- Day 6: roles
+import manifest from "@/public/data/manifest.json";
+import pctRows from "@/public/data/care_gap_pct.json";
+import nurseRows from "@/public/data/care_gap_nurse.json";
+import physicianRows from "@/public/data/care_gap_physician.json";
+import ageBands from "@/public/data/age_bands.json";
+
+export type Role = "pct" | "nurse" | "physician";
+
+/** One row per patient, but which keys exist depends on the role. */
+export type PatientRow = Record<string, string | number | boolean | null>;
+
+export const roleMeta = manifest.roles as Record<
+  Role,
+  {
+    label: string;
+    scope: string;
+    rationale: string;
+    units: string[] | null;
+    columns: string[];
+    restricted: string[];
+    patients: number;
+    gaps: number;
+  }
+>;
+
+/**
+ * Each role's rows come from a separate file that the pipeline built by never
+ * selecting the restricted columns. Nothing is filtered here in the browser -
+ * the restricted fields are absent from the payload, not hidden in the view.
+ */
+export const roleRows: Record<Role, PatientRow[]> = {
+  pct: pctRows as PatientRow[],
+  nurse: nurseRows as PatientRow[],
+  physician: physicianRows as PatientRow[],
+};
+
+export const defaultRole = manifest.default_role as Role;
+export const bands = ageBands as { band: string; patients: number; gaps: number }[];
+
+/** Column display order and labels for the patient table. */
+export const COLUMN_LABELS: Record<string, string> = {
+  mrn: "MRN",
+  age: "Age",
+  sex: "Sex",
+  unit: "Unit",
+  last_encounter_date: "Last seen",
+  gap_flag: "A1c gap",
+  last_a1c_date: "Last A1c",
+  last_a1c_value: "Value",
+  days_overdue: "Days overdue",
+  next_due_date: "Next due",
+  a1c_count_2y: "Tests, 2 yr",
+  last_a1c_controlled: "Controlled",
+  active_med_count: "Meds",
+  on_insulin: "Insulin",
+  priority: "Priority",
+  first_dx_date: "Diagnosed",
+  identity_review_pending: "ID review",
+};
+
+export const COLUMN_ORDER = [
+  "mrn", "age", "sex", "unit", "last_encounter_date", "gap_flag",
+  "last_a1c_date", "last_a1c_value", "days_overdue", "next_due_date",
+  "a1c_count_2y", "last_a1c_controlled", "active_med_count", "on_insulin",
+  "priority", "first_dx_date", "identity_review_pending",
+];
