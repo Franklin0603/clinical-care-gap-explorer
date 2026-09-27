@@ -76,7 +76,7 @@ Full reasoning: [DATA_DICTIONARY.md](docs/DATA_DICTIONARY.md).
 1. **Overview** — the headline number and how it was reached
 2. **Pipeline & Data Quality** — layer counts, six checks, quarantine, identity review queue
 3. **Patient Care** — the cohort, scoped by clinical role (PCT / Nurse / Physician)
-4. **Ask the Data** — natural language → SQL, generated SQL always shown *(Day 7)*
+4. **Ask the Data** — ten preset questions over Gold, the SQL shown above every answer, executed in the browser with DuckDB-WASM. Single SELECT only.
 
 ## Access by role
 
@@ -139,6 +139,62 @@ data four weeks later. See D2 in [DAY_1_DECISIONS.md](docs/DAY_1_DECISIONS.md).
 | `docs/DATA_QUALITY_SPEC.md` | The six defects and the six checks |
 | `docs/CLINICAL_CONCEPTS.md` | Plain-English primer for non-healthcare readers |
 | `build-plan/` | The seven-day plan, decisions log, and validation gates |
+
+## What I'd do differently at scale
+
+Written from what this build actually ran into, not from a list of tools.
+
+**Orchestration.** `run_all.py` is a linear script: no retries, no partial reruns,
+no memory of what succeeded. `corrupt.py` reloads Bronze at the top to guarantee
+idempotency, which is correct and costs four seconds — at a hundred times the
+data it is indefensible. This wants Dagster or Airflow, with each stage an asset
+that knows its own dependencies, so a failed check re-runs validation rather than
+regenerating the source data.
+
+**Checks as a test suite, not hand-rolled Python.** DQ1–DQ6 are functions I wrote.
+They work, and they will rot: a check that lives away from the model it validates
+does not get updated when the model changes. dbt tests or Great Expectations fix
+that by putting the assertion beside the thing asserted. The trade-off I would be
+accepting is real, though — neither framework routes failing rows anywhere. They
+fail the build. The quarantine-with-a-reason pattern, which is the part of this
+project I would least want to lose, would have to be rebuilt on top.
+
+**Alert on drift, not absolutes.** The catch rate is 6 of 6 today. The number worth
+paging someone about is not "quarantine exceeded 500 rows" — that either fires
+every day or never — but "the quarantine rate moved more than two standard
+deviations from its trailing thirty-day mean". Absolute thresholds are how alerting
+gets muted.
+
+**Partition Bronze by load date.** Every run is a full reload. At a million rows
+that is four seconds and partitioning would have been a day spent for nothing; at
+a hundred million it is the whole problem. The trigger to change is when a reload
+stops fitting in the window between one day's extract and the next.
+
+**Make quarantine reprocessable.** Right now it is a dead-letter queue: rows go in
+and nothing comes out. In a real system somebody fixes the upstream interface and
+those 150 orphan observations become resolvable. That needs a replay path, a
+`resolved_at` column, and a decision about whether a replayed row re-enters Silver
+under its original load date or today's.
+
+**DuckDB is a single-node engine, and I hit its edge.** It allows one writer. A
+notebook kernel holding the database blocks every script, which cost me two
+interruptions this week — a papercut here, a hard constraint with more than one
+person. It is an excellent analytical engine and a poor shared warehouse. Every
+transform in this repo is SQL rather than pandas specifically so that the
+migration to Snowflake, BigQuery or Databricks is a connection string and a
+dialect pass, not a rewrite.
+
+**Pin every source of nondeterminism, then assert on it.** Setting the random seed
+was not enough: the generator's clinician seed, reference date and simulation end
+date all defaulted to the wall clock, and the same command produced different data
+four weeks later. At scale the fix is not only pinning them but asserting a content
+hash in CI, so the next drift is caught by a build rather than by someone checking.
+
+**The limit the catch rate cannot see.** It scores my checks against defects I
+designed, so it measures coverage of my own imagination. Real data fails in ways
+nobody wrote a rule for. The complement is distribution monitoring — alerting when
+the A1c distribution shifts or a code's frequency halves — which catches the class
+of problem a rule-based check structurally cannot.
 
 ## Not in scope
 
