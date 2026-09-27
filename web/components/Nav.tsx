@@ -7,6 +7,7 @@ const PAGES = [
   { href: "/", label: "Overview" },
   { href: "/pipeline", label: "Pipeline & Data Quality" },
   { href: "/patients", label: "Patient Care" },
+  { href: "/ask", label: "Ask the Data" },
 ];
 
 export default function Nav() {

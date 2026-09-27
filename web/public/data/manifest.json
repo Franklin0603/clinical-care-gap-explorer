@@ -57,6 +57,7 @@
     "first_dx_date",
     "identity_review_pending"
    ],
+   "parquet": "care_gap_pct.parquet",
    "patients": 70,
    "gaps": 12
   },
@@ -92,6 +93,7 @@
     "first_dx_date",
     "identity_review_pending"
    ],
+   "parquet": "care_gap_nurse.parquet",
    "patients": 106,
    "gaps": 22
   },
@@ -122,6 +124,7 @@
     "identity_review_pending"
    ],
    "restricted": [],
+   "parquet": "care_gap_physician.parquet",
    "patients": 116,
    "gaps": 25
   }

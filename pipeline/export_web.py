@@ -73,12 +73,14 @@ def export_by_role(con, manifest):
                     r[k] = v.isoformat()[:10]
                 elif v is not None and not isinstance(v, (str, int, float, bool)):
                     r[k] = str(v)
+        con.sql(f"COPY (SELECT {cols} FROM gold_scoped {where}) TO '{OUT}/care_gap_{role}.parquet' (FORMAT parquet)")
         with open(f"{OUT}/care_gap_{role}.json", "w") as fh:
             json.dump(rows, fh, indent=1, default=str, allow_nan=False)
         manifest["roles"][role] = {
             "label": cfg["label"], "scope": cfg["scope"], "rationale": cfg["rationale"],
             "units": cfg["units"], "columns": cfg["columns"],
             "restricted": restricted_for(role),
+            "parquet": f"care_gap_{role}.parquet",
             "patients": len(rows),
             "gaps": sum(1 for r in rows if r["gap_flag"]),
         }
