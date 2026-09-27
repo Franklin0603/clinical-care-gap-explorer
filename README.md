@@ -121,9 +121,16 @@ pip install -r requirements.txt
 python pipeline/run_all.py --generate
 ```
 
-Without `--generate` it rebuilds the warehouse from an existing `data/raw` in
-about 13 seconds. Synthea generation needs Java 17 and takes ~4 minutes; the jar
-is downloaded separately and is gitignored.
+`--generate` downloads the Synthea jar (~200 MB, once — it is a tool, not code,
+so it is gitignored) and generates the patients. It needs **Java 17** and takes
+about four minutes. Every run after that can drop the flag and rebuilds the
+warehouse from `data/raw` in about thirteen seconds.
+
+For the web app:
+
+```bash
+cd web && npm install && npm run dev
+```
 
 Reproducibility depends on four pinned flags, not one — `-s` alone gave different
 data four weeks later. See D2 in [DAY_1_DECISIONS.md](docs/DAY_1_DECISIONS.md).

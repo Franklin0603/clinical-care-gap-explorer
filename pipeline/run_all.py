@@ -11,6 +11,7 @@ Any stage that fails its own checks raises SystemExit and stops the run.
 
 import argparse
 import os
+import shutil
 import subprocess
 import sys
 import time
@@ -40,7 +41,29 @@ def stage(name, fn):
     print(f"---- {name} done in {time.time() - t:.1f}s")
 
 
+JAR = "synthea/synthea-with-dependencies.jar"
+JAR_URL = ("https://github.com/synthetichealth/synthea/releases/download/"
+           "master-branch-latest/synthea-with-dependencies.jar")
+
+
+def ensure_jar():
+    """The jar is ~200MB of tool, not code, so it is gitignored. Fetch it once."""
+    if os.path.exists(JAR) and os.path.getsize(JAR) > 10_000_000:
+        return
+    if shutil.which("java") is None:
+        raise SystemExit(
+            "Synthea needs Java 17 and no java was found on PATH.\n"
+            "Install a JDK 17 or later, then run this again."
+        )
+    os.makedirs("synthea", exist_ok=True)
+    print(f"Downloading Synthea (~200MB, once) from\n  {JAR_URL}")
+    # -L matters: without it you get a 9-byte redirect body that fails as a jar
+    subprocess.run(["curl", "-L", "--fail", "-o", JAR, JAR_URL], check=True)
+    print(f"  saved {os.path.getsize(JAR) / 1e6:.0f} MB to {JAR}")
+
+
 def generate():
+    ensure_jar()
     subprocess.run(SYNTHEA, check=True)
 
 
@@ -56,6 +79,15 @@ def main():
     if args.fresh and os.path.exists(load_bronze.DB):
         os.remove(load_bronze.DB)
         print(f"removed {load_bronze.DB}")
+
+    if not os.path.isdir("data/raw/csv"):
+        raise SystemExit(
+            "There is no data to load yet — data/raw/csv is empty.\n\n"
+            "Run this instead, which downloads Synthea and generates the patients:\n"
+            "    python pipeline/run_all.py --generate\n\n"
+            "It needs Java 17 and takes about four minutes. Every later run can drop\n"
+            "the flag and rebuilds the warehouse from data/raw in about thirteen seconds."
+        )
 
     stage("load_bronze", load_bronze.main)
     stage("corrupt", corrupt.main)
