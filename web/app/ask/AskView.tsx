@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Role, roleMeta, defaultRole } from "@/lib/data";
-import { CHIPS, Chip, matchIntent, REFUSAL } from "@/lib/chips";
+import { CHIPS, Chip, matchIntent, checkScope, REFUSAL } from "@/lib/chips";
 import { connect, guardSelectOnly, run, QueryResult } from "@/lib/sql";
 import { Section, Card, Scroller, th, td } from "@/components/ui";
 
@@ -88,6 +88,15 @@ export default function AskView() {
     // Looks like SQL? Run it through the guard. Otherwise match it to a question.
     if (/^\s*(select|with|drop|delete|insert|update|alter|create|truncate|grant|copy|attach|pragma)\b/i.test(question)) {
       void execute(question, question);
+      return;
+    }
+    // Out-of-scope questions are refused before matching. A keyword match on an
+    // advice question would return a confident table, which is the worst outcome
+    // this page can produce.
+    const outOfScope = checkScope(question);
+    if (outOfScope) {
+      setAnswer({ kind: "refused", question, sql: null, reason: outOfScope });
+      record({ at: new Date().toISOString(), role, question, sql: null, rows: null, outcome: "refused", detail: "Out of scope" });
       return;
     }
     const chip = matchIntent(question);

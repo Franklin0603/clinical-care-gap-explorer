@@ -99,10 +99,12 @@ LIMIT 10`,
  * better failure than a confident wrong number.
  */
 const INTENTS: { keys: string[]; chip: number }[] = [
-  { keys: ["how many", "count", "total", "gap rate", "overall"], chip: 0 },
+  // Keys name the *subject*, never the question form. "how many" as a key made
+  // any counting question match this chip regardless of what it asked about.
+  { keys: ["gap", "overdue", "open", "cohort", "gap rate"], chip: 0 },
   { keys: ["never", "no test", "not tested", "untested"], chip: 1 },
   { keys: ["age", "old", "band", "decade"], chip: 2 },
-  { keys: ["overdue", "longest", "worst", "priority"], chip: 3 },
+  { keys: ["most overdue", "longest", "worst", "priority", "days overdue"], chip: 3 },
   { keys: ["unit", "setting", "clinic", "ward"], chip: 4 },
   { keys: ["insulin", "medication", "meds", "drug"], chip: 5 },
   { keys: ["quarantine", "held back", "rejected", "dropped", "failure"], chip: 6 },
@@ -110,6 +112,46 @@ const INTENTS: { keys: string[]; chip: number }[] = [
   { keys: ["corrected", "remediat", "fixed", "250"], chip: 8 },
   { keys: ["oldest", "eldest"], chip: 9 },
 ];
+
+/**
+ * Questions this page must refuse before it tries to match them.
+ *
+ * Keyword matching alone is not enough, and testing found why: "what should this
+ * patient's insulin dose be?" contains "insulin", matched the medication
+ * question, and returned a confident table of patients. A clinical-advice
+ * question answered with data is worse than no answer at all, so advice-seeking
+ * phrasing is caught first and refused on its own terms.
+ */
+const OUT_OF_SCOPE: { pattern: RegExp; reason: string }[] = [
+  {
+    pattern: /\b(should|dose|dosage|prescrib|titrat|recommend|advis|treat|diagnos|is it safe|ought to|how much .* (give|take))\b/i,
+    reason:
+      "This does not give clinical advice. It reports who is overdue for a test and what the data quality layer did — it cannot tell you what to do about any patient. That is a decision for a clinician with the whole record in front of them.",
+  },
+  {
+    pattern: /\b(note|narrative|dictation|transcript|chart note|free[- ]?text|imaging|x-?ray|radiolog|scan|claim|billing|insurance)\b/i,
+    reason:
+      "That data is not here. Clinical notes, imaging and claims are explicit non-goals for this project — the warehouse holds structured conditions, observations, medications and encounters only. Ask about the care-gap cohort or the data quality layer instead.",
+  },
+  {
+    // Plausible clinical subjects that are simply not in this warehouse. Testing
+    // found "how many patients had a colonoscopy?" matching on the phrase "how
+    // many" and returning the diabetes gap count - a confidently wrong answer.
+    pattern: /\b(colonoscop|mammogra|screening|cholesterol|lipid|blood pressure|bp\b|vaccin|immunis|immuniz|smoking|bmi|weight|allerg|procedure|surgery|admission rate|readmission)\b/i,
+    reason:
+      "This only answers questions about the diabetes A1c care gap and the data quality layer behind it. Other measures, procedures and vitals are in the warehouse but not in the tables this page can query, so there is no honest answer to give.",
+  },
+  {
+    pattern: /\b(ssn|social security|address|phone|email|next of kin|contact details)\b/i,
+    reason:
+      "No role here can see contact or identifying details beyond a record number, and the source data has none anyway. What is available is age, sex, care setting, and the care-gap fields this role is permitted.",
+  },
+];
+
+export function checkScope(input: string): string | null {
+  for (const rule of OUT_OF_SCOPE) if (rule.pattern.test(input)) return rule.reason;
+  return null;
+}
 
 export function matchIntent(input: string): Chip | null {
   const q = input.toLowerCase();
