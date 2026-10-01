@@ -30,6 +30,23 @@ const chartConfig = {
   gaps: { label: "Overdue", color: "var(--chart-2)" },
 } satisfies ChartConfig;
 
+/** Base UI renders the raw value in a closed trigger unless given a formatter, so a
+ *  filter resting on "all" showed the key rather than "All patients". Module scope,
+ *  not the component body: a fresh object each render stops the React Compiler
+ *  preserving the useMemo below. Values absent here are already their own label —
+ *  an age band, a care setting. */
+const STATUS_LABELS: Record<string, string> = {
+  all: "All patients",
+  overdue: "Overdue only",
+  never: "Never tested",
+  current: "Up to date",
+};
+const BAND_LABELS: Record<string, string> = { all: "All ages" };
+const UNIT_LABELS: Record<string, string> = { all: "All settings" };
+
+const shown = (labels: Record<string, string>) => (v: string | null) =>
+  labels[v ?? "all"] ?? v ?? "";
+
 export default function OverviewView() {
   const [band, setBand] = useState("all");
   const [status, setStatus] = useState("all");
@@ -37,6 +54,7 @@ export default function OverviewView() {
 
   /** Base UI's Select can clear to null; "all" is this page's cleared state. */
   const pick = (set: (v: string) => void) => (v: string | null) => set(v ?? "all");
+
 
   const units = useMemo(
     () => [...new Set(ALL.map((r) => String(r.unit)))].sort(),
@@ -121,7 +139,9 @@ export default function OverviewView() {
         actions={
           <div className="flex flex-wrap gap-2">
             <Select value={status} onValueChange={pick(setStatus)}>
-              <SelectTrigger className="w-[150px]" size="sm"><SelectValue /></SelectTrigger>
+              <SelectTrigger className="w-[150px]" size="sm">
+                <SelectValue>{shown(STATUS_LABELS)}</SelectValue>
+              </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All patients</SelectItem>
                 <SelectItem value="overdue">Overdue only</SelectItem>
@@ -130,7 +150,9 @@ export default function OverviewView() {
               </SelectContent>
             </Select>
             <Select value={band} onValueChange={pick(setBand)}>
-              <SelectTrigger className="w-[130px]" size="sm"><SelectValue /></SelectTrigger>
+              <SelectTrigger className="w-[130px]" size="sm">
+                <SelectValue>{shown(BAND_LABELS)}</SelectValue>
+              </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All ages</SelectItem>
                 {["18-44", "45-64", "65-75", "76+"].map((b) => (
@@ -139,7 +161,9 @@ export default function OverviewView() {
               </SelectContent>
             </Select>
             <Select value={unit} onValueChange={pick(setUnit)}>
-              <SelectTrigger className="w-[150px]" size="sm"><SelectValue /></SelectTrigger>
+              <SelectTrigger className="w-[150px]" size="sm">
+                <SelectValue>{shown(UNIT_LABELS)}</SelectValue>
+              </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All settings</SelectItem>
                 {units.map((u) => (

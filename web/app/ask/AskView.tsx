@@ -99,7 +99,13 @@ export default function AskView() {
       blurb="Every answer shows the SQL that produced it"
       actions={
         <Select value={role} onValueChange={(v) => setRole((v ?? defaultRole) as Role)}>
-          <SelectTrigger size="sm" className="w-[190px]"><SelectValue /></SelectTrigger>
+          {/* Base UI puts the raw value in the closed trigger without a formatter,
+              so this read "pct" rather than naming the person signed in. */}
+          <SelectTrigger size="sm" className="w-[190px]">
+            <SelectValue>
+              {(v: string | null) => roleMeta[(v ?? defaultRole) as Role].label}
+            </SelectValue>
+          </SelectTrigger>
           <SelectContent>
             {ROLES.map((r) => (
               <SelectItem key={r} value={r}>
