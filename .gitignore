@@ -31,3 +31,8 @@ web/.next/
 
 # pipeline run history — regenerated every run, machine-specific timings
 data/run_log.json
+
+# python packaging
+src/*.egg-info/
+build/
+dist/
