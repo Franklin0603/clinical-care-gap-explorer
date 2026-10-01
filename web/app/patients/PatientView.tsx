@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Lock, LogIn, ShieldCheck, UserRound } from "lucide-react";
+import { Lock, LogIn, UserRound } from "lucide-react";
 
 import {
   Role, roleMeta, roleRows, defaultRole, COLUMN_LABELS, COLUMN_ORDER, PatientRow,
@@ -13,8 +13,8 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 import {
-  DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
-  DropdownMenuSeparator, DropdownMenuTrigger,
+  DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup,
+  DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -71,28 +71,42 @@ export default function PatientView() {
             }
           />
           <DropdownMenuContent align="end" className="w-72">
-            <DropdownMenuLabel className="text-xs font-normal text-muted-foreground">
-              Signed in as — demonstration control, no authentication
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            {ROLES.map((r) => (
-              <DropdownMenuItem
-                key={r}
-                onClick={() => setRole(r)}
-                className="flex flex-col items-start gap-0.5 py-2"
-              >
-                <div className="flex w-full items-center gap-2">
-                  <Avatar className="size-5">
-                    <AvatarFallback className="text-[10px]">{INITIALS[r]}</AvatarFallback>
-                  </Avatar>
-                  <span className="font-medium">{roleMeta[r].label}</span>
-                  {r === role && <ShieldCheck className="ml-auto size-3.5 text-primary" />}
-                </div>
-                <span className="num pl-7 text-xs text-muted-foreground">
-                  {roleMeta[r].patients} patients · {roleMeta[r].columns.length} columns
-                </span>
-              </DropdownMenuItem>
-            ))}
+            {/* A radio group, not loose items: picking one of three roles is a
+                single-choice control, so it gets role="menuitemradio" and a real
+                checked state instead of a tick drawn by hand. It is also what
+                gives DropdownMenuLabel a parent — Base UI's GroupLabel throws
+                outside a Group or RadioGroup, which is what left this menu
+                empty and the role unchangeable. */}
+            <DropdownMenuRadioGroup
+              value={role}
+              onValueChange={(v) => setRole(v as Role)}
+            >
+              <DropdownMenuLabel className="text-xs font-normal text-muted-foreground">
+                Signed in as — demonstration control, no authentication
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              {ROLES.map((r) => (
+                <DropdownMenuRadioItem
+                  key={r}
+                  value={r}
+                  /* Base UI keeps a radio menu open on click, which suits a
+                     filter you tune repeatedly. This one re-scopes the whole
+                     page, so it should close and let you see what changed. */
+                  closeOnClick
+                  className="flex flex-col items-start gap-0.5 py-2"
+                >
+                  <div className="flex w-full items-center gap-2">
+                    <Avatar className="size-5">
+                      <AvatarFallback className="text-[10px]">{INITIALS[r]}</AvatarFallback>
+                    </Avatar>
+                    <span className="font-medium">{roleMeta[r].label}</span>
+                  </div>
+                  <span className="num pl-7 text-xs text-muted-foreground">
+                    {roleMeta[r].patients} patients · {roleMeta[r].columns.length} columns
+                  </span>
+                </DropdownMenuRadioItem>
+              ))}
+            </DropdownMenuRadioGroup>
           </DropdownMenuContent>
         </DropdownMenu>
       }
