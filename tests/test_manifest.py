@@ -49,23 +49,45 @@ def test_history_is_capped(log):
     assert len(log["runs"]) <= manifest.KEEP
 
 
-def test_compare_is_silent_when_nothing_moved(log):
-    """Re-comparing the latest run against itself must report no drift."""
-    assert manifest.compare(log["runs"][0]) == []
+def test_compare_is_silent_when_nothing_moved(tmp_path, monkeypatch):
+    """Two runs with the same numbers must report nothing.
+
+    Built from a controlled log rather than the real one: whether the last two
+    real runs happened to match is a fact about somebody's shell history, not
+    about this code, and a test that depends on it fails for the wrong reason.
+    """
+    run = {"run_id": "b", "row_counts": {"bronze": 10, "silver": 10},
+           "metrics": {"cohort": 5, "open_gaps": 2}}
+    earlier = {**run, "run_id": "a"}
+    log_file = tmp_path / "run_log.json"
+    log_file.write_text(json.dumps({"runs": [run, earlier]}))
+    monkeypatch.setattr(manifest, "LOG", log_file)
+    assert manifest.compare(run) == []
 
 
-def test_compare_reports_a_number_that_moved(log):
+def test_compare_is_silent_on_a_first_run(tmp_path, monkeypatch):
+    """Nothing to compare against is not drift."""
+    run = {"run_id": "only", "row_counts": {"bronze": 1}, "metrics": {"cohort": 1}}
+    log_file = tmp_path / "run_log.json"
+    log_file.write_text(json.dumps({"runs": [run]}))
+    monkeypatch.setattr(manifest, "LOG", log_file)
+    assert manifest.compare(run) == []
+
+
+def test_compare_reports_a_number_that_moved(tmp_path, monkeypatch):
     """The case the comparison exists for: a decision changed and the result did.
 
-    Built from the real latest run with one metric altered, rather than by
-    running the pipeline twice, so the test stays fast and deterministic.
+    Setting GAP_DAYS to 180 and re-running really does produce this, but as a
+    test it is a controlled log - the point being asserted is that drift is
+    reported with its direction and size, not that the pipeline is slow.
     """
-    moved = json.loads(json.dumps(log["runs"][0]))
-    moved["run_id"] = "synthetic"
-    moved["metrics"]["open_gaps"] += 25
-    changes = manifest.compare(moved)
-    assert any("open_gaps" in c for c in changes), f"drift went unreported: {changes}"
-    assert "+25" in " ".join(changes), "the report should say which way and by how much"
+    earlier = {"run_id": "a", "row_counts": {"bronze": 10}, "metrics": {"open_gaps": 25}}
+    later = {"run_id": "b", "row_counts": {"bronze": 10}, "metrics": {"open_gaps": 50}}
+    log_file = tmp_path / "run_log.json"
+    log_file.write_text(json.dumps({"runs": [later, earlier]}))
+    monkeypatch.setattr(manifest, "LOG", log_file)
+    changes = manifest.compare(later)
+    assert changes == ["open_gaps: 25 -> 50 (+25)"], changes
 
 
 def test_a_corrupt_log_does_not_stop_a_run(tmp_path, monkeypatch):

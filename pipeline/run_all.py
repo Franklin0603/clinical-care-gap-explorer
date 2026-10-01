@@ -116,7 +116,7 @@ def main():
     con.close()
 
     print(f"\n==== run {run_id} {'=' * (54 - len(run_id))}")
-    print(f"  {row['git_sha']}  ·  as of {row['asof']}  ·  {row['duration_s']}s")
+    print(f"  {row['git_sha']}  ·  as of {row['asof_date']}  ·  {row['duration_s']}s")
     print("  " + "  ".join(f"{k} {v:,}" for k, v in row["row_counts"].items()))
     if changes:
         print("  changed since the previous run:")

@@ -95,7 +95,7 @@ def record(con, run_id: str, started, finished, stages: dict) -> dict:
         "finished_at": finished.isoformat(timespec="seconds"),
         "duration_s": round((finished - started).total_seconds(), 1),
         "git_sha": git_sha(),
-        "asof": config.ASOF,
+        "asof_date": config.ASOF,
         "python": f"{sys.version_info.major}.{sys.version_info.minor} on {platform.system()}",
         "stages": {k: round(v, 1) for k, v in stages.items()},
         **collected,
@@ -103,7 +103,7 @@ def record(con, run_id: str, started, finished, stages: dict) -> dict:
     con.execute(
         f"INSERT INTO {TABLE} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         [row["run_id"], row["started_at"], row["finished_at"], row["duration_s"],
-         row["git_sha"], row["asof"], row["python"],
+         row["git_sha"], row["asof_date"], row["python"],
          json.dumps(row["stages"]), json.dumps(row["row_counts"]), json.dumps(row["metrics"])],
     )
     history = []
