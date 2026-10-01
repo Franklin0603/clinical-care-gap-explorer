@@ -18,7 +18,9 @@ the kind of list a care team acts on directly.
 have never been tested at all.**
 
 Those 21 are the same people three different, ordinary technical mistakes would
-each have hidden — see [FINDINGS.md](docs/FINDINGS.md).
+each have hidden — see [FINDINGS.md](docs/FINDINGS.md) for what they were, or
+[`notebooks/01_profile.ipynb`](notebooks/01_profile.ipynb) for the queries that
+found them.
 
 ![Cohort funnel: 161 patients carry a diabetes code, 116 alive on the as-of date, 25 open gaps, 21 never tested](docs/img/01_cohort_funnel.png)
 
@@ -150,7 +152,7 @@ data four weeks later. See D2 in [DECISIONS.md](docs/DECISIONS.md).
 | `src/caregap/domain/` | What the pipeline believes: diabetes codes, DQ checks, role matrix, source contracts |
 | `src/caregap/stages/` | The five stages, each runnable and self-verifying |
 | `src/caregap/manifest.py` | What each run did: commit, timings, row counts, what moved |
-| `notebooks/` | Each stage prototyped with visible output before being ported |
+| `notebooks/` | **Where the decisions were made, with the evidence attached** — see [notebooks/README.md](notebooks/README.md) |
 | `tests/` | 74 pipeline tests — reconciliation, cohort, catch rate, role scoping |
 | `web/lib/*.test.ts` | 37 web tests — the SQL guard and the question scope check |
 | `docs/FINDINGS.md` | Seven findings from building it — **start here** |
