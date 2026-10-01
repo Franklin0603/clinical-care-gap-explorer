@@ -18,7 +18,7 @@ the kind of list a care team acts on directly.
 have never been tested at all.**
 
 Those 21 are the same people three different, ordinary technical mistakes would
-each have hidden — see [FINDINGS.md](docs/FINDINGS.md) for what they were, or
+each have hidden — see [findings.md](docs/explanation/findings.md) for what they were, or
 [`notebooks/01_profile.ipynb`](notebooks/01_profile.ipynb) for the queries that
 found them.
 
@@ -71,7 +71,7 @@ as-of date) in the 365 days before it. Never tested is a gap. Ordered-but-not-
 resulted is not observable in this data and is counted the same as never ordered
 — stated rather than hidden.
 
-Full reasoning: [DATA_DICTIONARY.md](docs/DATA_DICTIONARY.md).
+Full reasoning: [data-dictionary.md](docs/reference/data-dictionary.md).
 
 ## Pages
 
@@ -141,7 +141,7 @@ cd web && npm install && npm run dev
 ```
 
 Reproducibility depends on four pinned flags, not one — `-s` alone gave different
-data four weeks later. See D2 in [DECISIONS.md](docs/DECISIONS.md).
+data four weeks later. See D2 in [decisions/](docs/decisions/).
 
 ## Repo map
 
@@ -153,15 +153,13 @@ data four weeks later. See D2 in [DECISIONS.md](docs/DECISIONS.md).
 | `src/caregap/stages/` | The five stages, each runnable and self-verifying |
 | `src/caregap/manifest.py` | What each run did: commit, timings, row counts, what moved |
 | `notebooks/` | **Where the decisions were made, with the evidence attached** — see [notebooks/README.md](notebooks/README.md) |
-| `tests/` | 74 pipeline tests — reconciliation, cohort, catch rate, role scoping |
+| `tests/` | 84 pipeline tests — reconciliation, cohort, catch rate, role scoping |
 | `web/lib/*.test.ts` | 37 web tests — the SQL guard and the question scope check |
 | [`docs/`](docs/) | **Start here** — indexed and ordered, no healthcare background assumed |
-| `docs/FINDINGS.md` | Seven findings from building it |
-| `docs/DECISIONS.md` | Why the cohort, the seed and the measure are what they are |
-| `docs/DATA_DICTIONARY.md` | Tables, columns, code systems, cohort definitions |
-| `docs/DATA_QUALITY_SPEC.md` | The six defects, the six checks, and what I'd change at scale |
-| `docs/CLINICAL_CONCEPTS.md` | Plain-English primer for non-healthcare readers |
-| `docs/planning/` | PRD, remaining work, future charts — mine, not reference |
+| `docs/explanation/` | Findings, the domain primer, and how the pipeline fits together |
+| `docs/decisions/` | Fifteen ADRs — why the cohort, the seed and the measure are what they are |
+| `docs/how-to/` | Run it, add a check, answer a clinical question |
+| `docs/reference/` | Data dictionary, the six checks, the access model |
 | `docs/planning/` | PRD, remaining work, and the seven-day build plan — working material, not reference |
 
 ## Tests

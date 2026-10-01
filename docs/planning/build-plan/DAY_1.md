@@ -5,7 +5,7 @@
 ## Why today exists
 
 You cannot define a patient cohort from a document. The blanks at the bottom
-of `DATA_DICTIONARY.md` — *diabetic patient*, *open A1c gap* — are unanswerable
+of `data-dictionary.md` — *diabetic patient*, *open A1c gap* — are unanswerable
 until you have looked at what Synthea actually emits. Today you get the data on
 disk, look at it honestly, and load it untouched.
 
@@ -109,7 +109,7 @@ questions:
 
 - **1.8** How many rows in each CSV? -> Metrics sheet
 - **1.9** Which distinct diabetes SNOMED codes appear in conditions, and how
-  many distinct patients carry each? -> into `DATA_DICTIONARY.md`
+  many distinct patients carry each? -> into `data-dictionary.md`
 - **1.10** What is the A1c LOINC code, its unit string, and the min / median /
   max of its values?
 - **1.11** What fraction of diabetes condition rows have a `resolved_date`?
@@ -227,7 +227,7 @@ Do not start Day 2 until all of these are true:
 - [ ] Bronze tables exist in DuckDB and row counts match the CSVs exactly
 - [ ] Bronze is untyped and uncleaned
 - [ ] The real diabetes SNOMED codes and A1c LOINC code are written into
-      `docs/DATA_DICTIONARY.md`
+      `docs/reference/data-dictionary.md`
 - [ ] Decisions D1 and D2 are recorded with the actual seed value
 - [ ] The Metrics sheet has all five Bronze row counts
 - [ ] Day 1 is committed

@@ -8,7 +8,7 @@ P3 shows the care-gap cohort filtered by clinical role — PCT, Nurse, Physician
 This is the page where your own experience shows up, and it's the one a
 health-tech reviewer will look at hardest.
 
-Two rules from `ACCESS_CONTROL.md` govern everything today:
+Two rules from `access-control.md` govern everything today:
 
 **Never write "HIPAA compliant."** The phrase is *"models minimum-necessary
 access by clinical role."* Compliance means BAAs, audit infrastructure, breach
@@ -33,7 +33,7 @@ By tonight you should be able to say, without notes:
 
 ### 6.1 — Rewrite the role matrix from your own experience
 
-The matrix in `ACCESS_CONTROL.md` is a starting point. The doc says your version
+The matrix in `access-control.md` is a starting point. The doc says your version
 is more credible than the one that's written there — because you worked the
 floor as a PCT and the author of the doc didn't.
 
@@ -123,7 +123,7 @@ whatever carries it) to `physician` while the UI says PCT
 so the honest answer is that the selector is a demonstration control.
 **What matters:** you *know* this and say it in the README, rather than being
 surprised by it. "There is no authentication; the role selector is a
-demonstration control" is already the language in `ACCESS_CONTROL.md`. Use it.
+demonstration control" is already the language in `access-control.md`. Use it.
 
 ### V6.5 — The word "compliant" appears nowhere
 **Check:** grep the whole repo — web source, README, docs — for "HIPAA",
@@ -134,7 +134,7 @@ that name the minimum necessary standard
 than any technical flaw on the site.
 
 ### V6.6 — The matrix is yours
-**Check:** compare your matrix against the starting one in `ACCESS_CONTROL.md`
+**Check:** compare your matrix against the starting one in `access-control.md`
 **Expect:** differences you can justify from experience
 **If it fails:** if it's unchanged, you've skipped the one part of this project
 nobody else could have written.

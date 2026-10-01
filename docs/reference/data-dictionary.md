@@ -57,7 +57,7 @@ units. Observed range in this extract: **2.3 / 4.1 / 8.8** (min / median / max).
 > values — an 11% false-positive rate before any defect is injected. Proposed
 > floor: 2.0. Nothing here exceeds 8.8, so the ceiling is untested.
 
-Why A1c and not glucose: full reasoning in `DECISIONS.md` (D13). Short
+Why A1c and not glucose: full reasoning in `decisions/` (D13). Short
 version — A1c integrates ~3 months and varies 6.7% within a patient-year against
 glucose's 21.3%; and glucose is drawn on everyone incidentally, so its absence
 carries no signal.
@@ -81,7 +81,7 @@ No typing, no validation, no dedupe. **All columns load as `VARCHAR`** — if th
 loader infers a type and meets a value it can't parse, it nulls or drops the row,
 and V1.5 fails.
 
-Five of the 18 CSVs are loaded (see `DECISIONS.md` D15):
+Five of the 18 CSVs are loaded (see `decisions/` D15):
 
 | Bronze table | Source file | Rows |
 |--------------|-------------|-----:|

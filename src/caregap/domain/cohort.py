@@ -3,7 +3,7 @@
 Substring matching on DESCRIPTION is how you *discover* codes (profile.py).
 It is not how you define a cohort - '%diabet%' also matches Prediabetes, and
 display strings are free text that can change between source systems. Join on
-codes, per DATA_DICTIONARY.md.
+codes, per data-dictionary.md.
 
 Run from the repo root:
 

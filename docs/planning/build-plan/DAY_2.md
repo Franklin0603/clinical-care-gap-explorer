@@ -13,7 +13,7 @@ That second half is what separates this project from a demo. Without
 you created today.
 
 The six defects aren't arbitrary. Each one has a real operational cause, listed
-in `DATA_QUALITY_SPEC.md`. Know the cause, not just the symptom — "duplicate
+in `data-quality.md`. Know the cause, not just the symptom — "duplicate
 rows" is a shrug; "an HL7 interface replayed the message" is a conversation.
 
 ## Learning objectives
@@ -30,7 +30,7 @@ By tonight you should be able to say, without notes:
 
 ### 2.1 — Plan it on paper first
 
-Re-read the **Principles** section of `DATA_QUALITY_SPEC.md`. Then write down,
+Re-read the **Principles** section of `data-quality.md`. Then write down,
 for each of the six defects: which table, which rows you'll pick, how many, and
 what identifier you'll log so you can find them again.
 

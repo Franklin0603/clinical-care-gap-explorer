@@ -40,7 +40,7 @@ report, because people act on it.
 
 So the build is: load raw → deliberately break it → catch the breakage → measure
 what fraction we caught → *then* report the gaps. The data quality work is the
-project. See `DATA_QUALITY_SPEC.md`.
+project. See `data-quality.md`.
 
 ## 3. Codes, and why nothing is stored as words
 
@@ -175,7 +175,7 @@ date and form the denominator the care-gap report is built on.
 
 ### The A1c range in our own spec was wrong
 
-`DATA_QUALITY_SPEC.md` proposed flagging any A1c outside 3.0–20.0 percent.
+`data-quality.md` proposed flagging any A1c outside 3.0–20.0 percent.
 
 The units checked out — Synthea reports `4548-4` in percent, so the order of
 magnitude was right. But **951 of 8,941 A1c values sit below 3.0**. That is 11%

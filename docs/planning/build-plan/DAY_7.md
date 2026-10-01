@@ -109,7 +109,7 @@ Every blank in `README_TEMPLATE.md`, from the Metrics and DQ Matrix sheets.
 
 ### 7.9 — "What I'd do differently at scale"
 
-Both in the README and in `DATA_QUALITY_SPEC.md`.
+Both in the README and in `data-quality.md`.
 
 **This is where a senior reviewer decides how you think.** Name specific tools
 and specific trade-offs, not generalities. The spec itself suggests candidates:

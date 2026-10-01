@@ -1,7 +1,7 @@
 """Validate Bronze into Silver: six checks, three output tables, one assertion (Day 3).
 
 Ported from notebooks/02_validate.ipynb after review. Three principles from
-DATA_QUALITY_SPEC.md govern every check:
+data-quality.md govern every check:
 
   1. Nothing is silently dropped - every rejected row lands in `quarantine`
      with a reason and the check that rejected it.

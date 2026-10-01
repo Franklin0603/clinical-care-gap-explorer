@@ -8,7 +8,7 @@ This is the actual subject of the project. The care-gap query is easy — you
 could write it in ten minutes. What makes the resulting list *trustworthy* is
 everything you build today.
 
-Three principles from `DATA_QUALITY_SPEC.md` govern every line you write:
+Three principles from `data-quality.md` govern every line you write:
 
 1. **Nothing is silently dropped.** Every rejected row lands in `quarantine`
    with a reason. Someone will eventually ask why a patient was missing from a
@@ -37,7 +37,7 @@ By tonight you should be able to say, without notes:
 ### 3.1 — Build the three output tables first
 
 `quarantine`, `identity_review`, `remediation_log` — exact schemas are in
-`DATA_QUALITY_SPEC.md`. Note that `identity_review.status` starts as `pending`.
+`data-quality.md`. Note that `identity_review.status` starts as `pending`.
 
 ### 3.2 — DQ1: encounter uniqueness
 

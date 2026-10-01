@@ -19,7 +19,7 @@ Log is what makes the Loom sound like you know it rather than read it.
 ## 1 — The role matrix
 
 `caregap/domain/access.py` holds the matrix as data. What's in there now is the
-starting matrix from `ACCESS_CONTROL.md` plus reasoning about derived columns —
+starting matrix from `access-control.md` plus reasoning about derived columns —
 it is **not** your experience, and that doc says outright that your version is
 more credible than its own.
 
@@ -34,7 +34,7 @@ care setting of the patient's most recent encounter as a proxy — a PCT sees th
 70 ambulatory patients. If your unit was a floor, a panel, or a service line, the
 predicate changes.
 
-**Does a nurse see condition history?** `ACCESS_CONTROL.md` says "partial". The
+**Does a nurse see condition history?** `access-control.md` says "partial". The
 build gives them none, which may be stricter than reality.
 
 When it's settled, the README's line — *"The matrix draws on my time as a patient
@@ -56,10 +56,10 @@ things that actually went wrong. The rest have the same material available:
 
 | Concept | Where the answer already is |
 |---|---|
-| Medallion architecture | `load_bronze.py` docstring; `DATA_DICTIONARY.md` |
-| Clinical code systems | `CLINICAL_CONCEPTS.md`, the mental-model table |
-| HEDIS / quality measures | `DECISIONS.md` D13; the D5/D6 definitions |
-| Ground truth and evaluation | `corrupt.py` docstring; `FINDINGS.md` DQ results |
+| Medallion architecture | `load_bronze.py` docstring; `data-dictionary.md` |
+| Clinical code systems | `clinical-concepts.md`, the mental-model table |
+| HEDIS / quality measures | `decisions/` D13; the D5/D6 definitions |
+| Ground truth and evaluation | `corrupt.py` docstring; `findings.md` DQ results |
 | Idempotency | `corrupt.py` — reload-first, and why |
 | Quarantine over dropping | `validate.py` principle 1; the reconciliation assert |
 | Referential integrity | DQ2 in `validate.py` |
@@ -74,7 +74,7 @@ things that actually went wrong. The rest have the same material available:
 | SQL injection / SELECT-only | The `WITH ... DELETE` bypass a test caught |
 | Text-to-SQL failure modes | The two confidently-wrong answers V7.1 found |
 | Honest error handling | The scope check; "I can't answer that, but here's what I can" |
-| Scale trade-offs | The at-scale section in `DATA_QUALITY_SPEC.md` |
+| Scale trade-offs | The at-scale section in `data-quality.md` |
 
 Rate yourself honestly. A 2 you admit to is more useful than a 4 you guessed.
 

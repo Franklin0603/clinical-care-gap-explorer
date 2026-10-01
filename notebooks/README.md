@@ -63,7 +63,7 @@ way with a single-file database, and worth knowing rather than rediscovering.
 ## Why notebook-first
 
 Writing a stage in a notebook first means seeing each step's output before
-committing to a structure. Three of the findings in `docs/FINDINGS.md` came out
+committing to a structure. Three of the findings in `docs/explanation/findings.md` came out
 of that gap between what a query was expected to return and what it did:
 
 - the 73 patients carrying a complication with no diagnosis code

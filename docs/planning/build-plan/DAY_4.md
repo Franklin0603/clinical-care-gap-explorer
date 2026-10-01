@@ -6,7 +6,7 @@
 
 Today you produce `care_gap_a1c` — one row per diabetic patient, the product of
 the entire pipeline. But first you have to lock two definitions, and those two
-sentences are, per `DATA_DICTIONARY.md`, the most interview-relevant lines in
+sentences are, per `data-dictionary.md`, the most interview-relevant lines in
 the whole repo.
 
 You couldn't write them on Day 1 because you had no evidence. Now you do.
@@ -31,7 +31,7 @@ By tonight you should be able to say, without notes:
 
 ### 4.1 — Lock both cohort definitions (blocking)
 
-Fill the two blanks at the bottom of `DATA_DICTIONARY.md`. Record in Decisions
+Fill the two blanks at the bottom of `data-dictionary.md`. Record in Decisions
 D5 and D6, each with a one-line justification referencing what you found on
 Day 1.
 
@@ -188,7 +188,7 @@ this same command is what a reviewer runs, and what you'll depend on all week.
 
 ## Ship gate
 
-- [ ] Both cohort definitions written into `DATA_DICTIONARY.md` and Decisions
+- [ ] Both cohort definitions written into `data-dictionary.md` and Decisions
 - [ ] V4.1, V4.2, V4.6 and V4.10 all pass
 - [ ] Three patients hand-verified
 - [ ] One command runs the whole pipeline from a clean state
