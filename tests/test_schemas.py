@@ -9,8 +9,8 @@ import csv
 
 import pytest
 
-import config
-import schemas
+from caregap import config
+from caregap.domain import schemas
 
 
 @pytest.mark.parametrize("name", list(schemas.REQUIRED))
@@ -48,7 +48,7 @@ def test_contracts_only_claim_columns_we_actually_read():
     still honest, the test had just gone stale.
     """
     sources = "\n".join(
-        f.read_text() for f in sorted((config.ROOT / "pipeline").glob("*.py"))
+        f.read_text() for f in sorted((config.ROOT / "src" / "caregap").rglob("*.py"))
     )
     unused = [
         (table, col)

@@ -1,6 +1,6 @@
 # Visuals & analytics — spec
 
-Six charts exist (`docs/img/`, built in `pipeline/day4_gold.ipynb`). This file
+Six charts exist (`docs/img/`, built in `notebooks/03_gold.ipynb`). This file
 specifies the rest: the Day 1–4 analytics to build **after Day 7**, once the app
 shell exists and nothing is blocked on it.
 

@@ -42,7 +42,7 @@ says, in effect, "complication of a disease nobody wrote down."
 Anchor the cohort on the single obvious code and 45% of it disappears, and it is
 specifically the sicker half. This is not an artefact of synthetic data; it is why
 HEDIS value sets are lists of dozens of codes rather than one. The cohort here is
-eight codes, written out with reasons in `pipeline/cohort.py`.
+eight codes, written out with reasons in `caregap/domain/cohort.py`.
 
 ## Finding 2 — An inner join deletes the highest-risk patients, silently
 
@@ -54,7 +54,7 @@ with a left join, it has 116 rows and 21.
 
 Nothing errors either way. The inner-join version looks complete and plausible.
 The 21 patients it drops are 84% of the open gaps — the ones who most need a
-call. `pipeline/day4_gold.ipynb` shows both versions side by side; `gold.py`
+call. `notebooks/03_gold.ipynb` shows both versions side by side; `gold.py`
 asserts on every run that never-tested patients are present and flagged (V4.2).
 
 ## Finding 3 — The never-tested are the complication-only patients
@@ -160,13 +160,13 @@ Stated here rather than discovered later.
 ## Reproduce it
 
 ```bash
-python pipeline/run_all.py --fresh        # deleted warehouse -> Gold in ~13 s
-python pipeline/run_all.py --generate     # also regenerate from Synthea (~4 min, Java 17)
+python caregap/cli.py --fresh        # deleted warehouse -> Gold in ~13 s
+python caregap/cli.py --generate     # also regenerate from Synthea (~4 min, Java 17)
 ```
 
 Every number above is in `data/dq_report.json` and `data/gold_report.json`
-after a run. The notebooks `pipeline/day3_validate.ipynb` and
-`pipeline/day4_gold.ipynb` show each finding with its query and output.
+after a run. The notebooks `notebooks/02_validate.ipynb` and
+`notebooks/03_gold.ipynb` show each finding with its query and output.
 
 | Finding | Where |
 |---|---|

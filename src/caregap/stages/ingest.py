@@ -14,15 +14,15 @@ Safe to re-run: every table is CREATE OR REPLACE.
 
 Run from the repo root:
 
-    python pipeline/load_bronze.py
+    caregap run
 """
 
 import os
 
 import duckdb
 
-import schemas
-from config import DB, RAW, SOURCES
+from caregap.domain import schemas
+from caregap.config import DB, RAW, SOURCES
 
 LINEAGE = ("_loaded_at", "_source_file")
 

@@ -16,8 +16,8 @@ a display string in a routine upgrade and break a report without erroring.
 
 ### Diabetes cohort — SNOMED CT
 
-Confirmed present in this extract (`pipeline/profile.py`). A patient qualifies on
-**any** of these. Authoritative list lives in `pipeline/cohort.py`.
+Confirmed present in this extract (`caregap/profile.py`). A patient qualifies on
+**any** of these. Authoritative list lives in `caregap/domain/cohort.py`.
 
 | Code | Description | Patients |
 |------|-------------|---------:|

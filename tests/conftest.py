@@ -10,16 +10,11 @@ That means the warehouse has to exist. If it does not, the tests skip with a
 message telling you what to run rather than failing with a confusing error.
 """
 
-import sys
-from pathlib import Path
-
 import pytest
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "pipeline"))
+from caregap import config
 
-import config  # noqa: E402
-
-BUILD_HINT = "Run `python pipeline/run_all.py --generate` first to build the warehouse."
+BUILD_HINT = "Run `caregap run --generate` first to build the warehouse."
 
 
 @pytest.fixture(scope="session")

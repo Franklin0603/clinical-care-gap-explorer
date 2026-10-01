@@ -2,8 +2,8 @@
 
 Locked on 2026-08-23; numbers refreshed 2026-09-20 after V1.3 forced a regeneration
 (see D2). Everything below is a decision with evidence attached, not
-a preference. Numbers come from `pipeline/profile.py`; the cohort comes from
-`pipeline/cohort.py`.
+a preference. Numbers come from `caregap/profile.py`; the cohort comes from
+`caregap/domain/cohort.py`.
 
 ---
 
@@ -189,7 +189,7 @@ a 3-minute pipeline and a 30-second one, seven days running.
 ## D5 — Cohort definition: any of 8 SNOMED codes, ever recorded
 
 Decided early, because the evidence arrived on Day 1. Full reasoning and the
-code list live in `pipeline/cohort.py`.
+code list live in `caregap/domain/cohort.py`.
 
 - **Any of 8 codes**, not just type 2 (`44054006`). 73 patients carry a diabetic
   complication with no underlying diagnosis code; anchoring on the obvious code

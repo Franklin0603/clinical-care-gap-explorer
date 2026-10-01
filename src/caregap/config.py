@@ -9,15 +9,15 @@ modules, which produced two problems a reader would trip over:
   * The LOINC code for A1c appeared as `A1C` in two modules and `A1C_LOINC` in a
     third. Three names, one value, and nothing keeping them in step.
 
-Paths are absolute, derived from this file's location, so every script runs from
-any working directory. Previously they were relative and the pipeline only
-worked when invoked from the repository root.
+Paths are absolute, derived from this file's location, so every stage runs from
+any working directory. They were relative once, and the pipeline only worked
+when invoked from the repository root.
 """
 
 from pathlib import Path
 
 # ----------------------------------------------------------------- locations
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]   # src/caregap/config.py -> repo root
 
 RAW = ROOT / "data" / "raw" / "csv"
 WAREHOUSE = ROOT / "data" / "warehouse"

@@ -11,7 +11,7 @@ the failure this project exists to prevent.
 """
 
 import pytest
-import config
+from caregap import config
 
 
 @pytest.mark.parametrize("table", config.SOURCES)

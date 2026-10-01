@@ -10,8 +10,8 @@ import json
 
 import pytest
 
-import config
-import manifest
+from caregap import config
+from caregap import manifest
 
 
 @pytest.fixture
@@ -32,7 +32,7 @@ def test_the_latest_run_is_fully_described(log):
 
 def test_every_stage_was_timed(log):
     """A stage missing from the timings is one that silently did not run."""
-    expected = {"load_bronze", "corrupt", "validate", "gold", "export_web"}
+    expected = {"ingest", "corrupt", "validate", "gold", "publish"}
     assert expected <= set(log["runs"][0]["stages"])
 
 

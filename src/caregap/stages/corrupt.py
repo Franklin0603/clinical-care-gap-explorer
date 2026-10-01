@@ -14,7 +14,7 @@ and every log entry has one cause.
 
 Run from the repo root:
 
-    python pipeline/corrupt.py
+    caregap run
 
 Writes data/injected_defects.json - small, deterministic, and committed.
 """
@@ -23,9 +23,9 @@ import json
 
 import duckdb
 
-from cohort import DIABETES_CODES
-from config import A1C, DB, DEFECT_LOG as OUT, DEFECT_VOLUME as VOLUME, SEED, SOURCES, sql_list
-from load_bronze import load
+from caregap.domain.cohort import DIABETES_CODES
+from caregap.config import A1C, DB, DEFECT_LOG as OUT, DEFECT_VOLUME as VOLUME, SEED, SOURCES, sql_list
+from caregap.stages.ingest import load
 
 DX_CODES = sql_list(DIABETES_CODES)
 

@@ -6,7 +6,7 @@ observations deletes exactly those people without erroring. This test is the
 guard against that regression.
 """
 
-import config
+from caregap import config
 
 
 def test_never_tested_patients_survive_and_are_flagged(con):

@@ -8,7 +8,7 @@ the defect it is paired with.
 
 import pytest
 
-from checks import BY_ID, CHECKS, DEFECT_FOR, QUARANTINE, REMEDIATE, REVIEW
+from caregap.domain.checks import BY_ID, CHECKS, DEFECT_FOR, QUARANTINE, REMEDIATE, REVIEW
 
 
 def test_there_are_six_checks_and_the_ids_are_unique():
@@ -73,7 +73,7 @@ def test_dq5_defers_to_dq1_on_duplicate_rows():
 def test_the_shipped_matrix_matches_the_definitions(con):
     """The Pipeline page renders from the report; the report is generated here."""
     import json
-    import config
+    from caregap import config
 
     if not config.DQ_REPORT.exists():
         pytest.skip("No dq_report.json. Run `make run` first.")

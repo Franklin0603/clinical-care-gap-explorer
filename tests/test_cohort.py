@@ -5,8 +5,8 @@ These assert the built table agrees with both, because the failure a reader
 would never notice is Gold being built on a definition nobody wrote down.
 """
 
-import config
-from cohort import DIABETES_CODES, EXCLUDED_CODES
+from caregap import config
+from caregap.domain.cohort import DIABETES_CODES, EXCLUDED_CODES
 
 DX = config.sql_list(DIABETES_CODES)
 

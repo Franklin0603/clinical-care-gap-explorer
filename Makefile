@@ -1,23 +1,28 @@
 # Everything a reviewer needs, in one place. `make` on its own lists these.
 .DEFAULT_GOAL := help
 PY := .venv/bin/python
+# Run through -m rather than the installed console script. pip's editable .pth
+# can inherit the macOS hidden flag on a synced folder, and Python's site module
+# skips hidden .pth files - so the package installs and then will not import.
+# PYTHONPATH needs none of that and works straight after a clone.
+RUN := PYTHONPATH=src $(PY) -m caregap
 
 help:  ## Show the available commands
 	@grep -hE '^[a-z-]+:.*?## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}'
 
-setup:  ## Create the virtualenv and install dependencies
+setup:  ## Create the virtualenv and install the package
 	python3 -m venv .venv
-	$(PY) -m pip install -q -r requirements.txt
+	$(PY) -m pip install -q -e ".[dev]"
 	cd web && npm install
 
 run:  ## Rebuild the warehouse from data/raw  (~15s)
-	$(PY) pipeline/run_all.py
+	$(RUN) run
 
 generate:  ## Download Synthea, generate patients, then build  (~4min, needs Java 17)
-	$(PY) pipeline/run_all.py --generate
+	$(RUN) run --generate
 
 fresh:  ## Delete the warehouse and rebuild it from scratch
-	$(PY) pipeline/run_all.py --fresh
+	$(RUN) run --fresh
 
 test: test-py test-web  ## Run every test
 

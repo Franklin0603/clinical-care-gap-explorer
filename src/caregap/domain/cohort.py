@@ -7,12 +7,12 @@ codes, per DATA_DICTIONARY.md.
 
 Run from the repo root:
 
-    python pipeline/cohort.py
+    python caregap/domain/cohort.py
 """
 
 import duckdb
 
-from config import A1C, RAW
+from caregap.config import A1C, RAW
 
 # SNOMED CT. Confirmed present in this Synthea extract - see profile.py 1.9.
 #

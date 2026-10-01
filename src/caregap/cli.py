@@ -1,11 +1,11 @@
-"""One command, Synthea to Gold (task 4.5).
+"""One command, Synthea to Gold.
 
-    python pipeline/run_all.py              # data/raw must exist; rebuilds the warehouse from it
-    python pipeline/run_all.py --generate   # also regenerates data/raw with the pinned Synthea command (~4 min, needs Java 17)
-    python pipeline/run_all.py --fresh      # delete the warehouse file first (V4.10: from nothing)
+    caregap run              # rebuild the warehouse from an existing data/raw (~13s)
+    caregap run --generate   # download Synthea and generate the patients first (~4min, Java 17)
+    caregap run --fresh      # delete the warehouse and rebuild from nothing
 
 Stages, in order and each re-runnable:
-    load_bronze  -> corrupt -> validate -> gold -> export_web
+    ingest -> corrupt -> validate -> gold -> publish
 Any stage that fails its own checks raises SystemExit and stops the run.
 """
 
@@ -18,18 +18,18 @@ import time
 import uuid
 from datetime import datetime, timezone
 
-import config
-import corrupt
-import export_web
-import gold
-import load_bronze
-import manifest
-import validate
+from caregap import config
+from caregap.stages import corrupt
+from caregap.stages import publish
+from caregap.stages import gold
+from caregap.stages import ingest
+from caregap import manifest
+from caregap.stages import validate
 
 SYNTHEA = [
-    "java", "-jar", "synthea/synthea-with-dependencies.jar",
+    "java", "-jar", str(config.ROOT / "synthea" / "synthea-with-dependencies.jar"),
     "-p", "1000", "-s", "20260823", "-cs", "20260823", "-r", "20260823", "-e", "20260823",
-    "--exporter.baseDirectory", "./data/raw",
+    "--exporter.baseDirectory", str(config.ROOT / "data" / "raw"),
     "--exporter.csv.export", "true",
     "--exporter.fhir.export", "false",
     "--exporter.hospital.fhir.export", "false",
@@ -50,7 +50,7 @@ def stage(name, fn):
     print(f"---- {name} done in {elapsed:.1f}s")
 
 
-JAR = "synthea/synthea-with-dependencies.jar"
+JAR = str(config.ROOT / "synthea" / "synthea-with-dependencies.jar")
 JAR_URL = ("https://github.com/synthetichealth/synthea/releases/download/"
            "master-branch-latest/synthea-with-dependencies.jar")
 
@@ -64,7 +64,7 @@ def ensure_jar():
             "Synthea needs Java 17 and no java was found on PATH.\n"
             "Install a JDK 17 or later, then run this again."
         )
-    os.makedirs("synthea", exist_ok=True)
+    (config.ROOT / "synthea").mkdir(exist_ok=True)
     print(f"Downloading Synthea (~200MB, once) from\n  {JAR_URL}")
     # -L matters: without it you get a 9-byte redirect body that fails as a jar
     subprocess.run(["curl", "-L", "--fail", "-o", JAR, JAR_URL], check=True)
@@ -77,7 +77,9 @@ def generate():
 
 
 def main():
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap = argparse.ArgumentParser(prog="caregap", description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("command", choices=["run"], help="the only command for now")
     ap.add_argument("--generate", action="store_true", help="regenerate data/raw with Synthea first")
     ap.add_argument("--fresh", action="store_true", help="delete the warehouse file before loading")
     args = ap.parse_args()
@@ -87,24 +89,24 @@ def main():
     started = datetime.now(timezone.utc)
     if args.generate:
         stage("synthea", generate)
-    if args.fresh and os.path.exists(load_bronze.DB):
-        os.remove(load_bronze.DB)
-        print(f"removed {load_bronze.DB}")
+    if args.fresh and config.DB.exists():
+        config.DB.unlink()
+        print(f"removed {config.DB}")
 
-    if not os.path.isdir("data/raw/csv"):
+    if not config.RAW.is_dir():
         raise SystemExit(
             "There is no data to load yet — data/raw/csv is empty.\n\n"
             "Run this instead, which downloads Synthea and generates the patients:\n"
-            "    python pipeline/run_all.py --generate\n\n"
+            "    caregap run --generate\n\n"
             "It needs Java 17 and takes about four minutes. Every later run can drop\n"
             "the flag and rebuilds the warehouse from data/raw in about thirteen seconds."
         )
 
-    stage("load_bronze", load_bronze.main)
+    stage("ingest", ingest.main)
     stage("corrupt", corrupt.main)
     stage("validate", validate.main)
     stage("gold", gold.main)
-    stage("export_web", export_web.main)   # the site reads a build-time snapshot (D9)
+    stage("publish", publish.main)   # the site reads a build-time snapshot (D9)
 
     # Record what this run did. Without it a warehouse file cannot say when it
     # was built, from which commit, or whether its numbers moved.

@@ -13,9 +13,9 @@ almost nothing and each format does the job it is good at.
 
 The trade-off D9 accepts: the app reads a snapshot taken at build time, not the
 live warehouse. Re-running the pipeline without re-running this script leaves the
-site stale. That is why run_all.py calls it as its last stage.
+site stale. That is why the CLI calls it as its last stage.
 
-    python pipeline/export_web.py
+    caregap run
 """
 
 import json
@@ -24,8 +24,8 @@ import shutil
 
 import duckdb
 
-from access import ROLES, DEFAULT_ROLE, restricted_for
-from config import ASOF, DQ_REPORT, GOLD_REPORT, DB, WEB_DATA as OUT
+from caregap.domain.access import ROLES, DEFAULT_ROLE, restricted_for
+from caregap.config import ASOF, DQ_REPORT, GOLD_REPORT, DB, WEB_DATA as OUT
 TABLES = ["care_gap_a1c", "quarantine", "identity_review", "remediation_log"]
 REPORTS = [DQ_REPORT, GOLD_REPORT]
 

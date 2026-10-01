@@ -31,8 +31,8 @@ patient from one whose patient does not resolve - and the row itself decides
 which sentence it gets.
 """
 
-from config import A1C, A1C_RANGE, ASOF, GLUCOSE_RANGE, REMEDIATION_RULE, sql_list
-from cohort import DIABETES_CODES
+from caregap.config import A1C, A1C_RANGE, ASOF, GLUCOSE_RANGE, REMEDIATION_RULE, sql_list
+from caregap.domain.cohort import DIABETES_CODES
 
 QUARANTINE, REVIEW, REMEDIATE = "QUARANTINE", "REVIEW", "REMEDIATE"
 

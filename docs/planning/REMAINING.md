@@ -18,7 +18,7 @@ Log is what makes the Loom sound like you know it rather than read it.
 
 ## 1 — The role matrix
 
-`pipeline/access.py` holds the matrix as data. What's in there now is the
+`caregap/domain/access.py` holds the matrix as data. What's in there now is the
 starting matrix from `ACCESS_CONTROL.md` plus reasoning about derived columns —
 it is **not** your experience, and that doc says outright that your version is
 more credible than its own.

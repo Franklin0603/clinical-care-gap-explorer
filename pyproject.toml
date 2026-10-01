@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "caregap"
+version = "1.0.0"
+description = "Finds diabetic patients overdue for an A1c test, and shows the data quality work behind the list"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "duckdb==1.5.5",
+    "pandas==3.0.5",
+    "numpy==2.5.2",
+    "python-dateutil==2.9.0.post0",
+]
+
+[project.optional-dependencies]
+# Kept separate so a reviewer installing to read the code does not pull in
+# matplotlib and a notebook kernel.
+dev = [
+    "pytest",
+    "matplotlib",      # the six charts in notebooks/03_gold.ipynb
+    "ipykernel",       # notebook-first prototyping
+    "nbclient",
+    "openpyxl",        # the build-plan workbook
+]
+
+[project.scripts]
+caregap = "caregap.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# A src layout needs the package on the path. Declaring it here rather than
+# relying on an editable install means `pytest` works straight after a clone,
+# with no install step and no sys.path hack in conftest.
+pythonpath = ["src"]
+# Integration tests assert against the warehouse the pipeline builds, so they
+# skip rather than fail when it has not been built yet.
+addopts = "-q"

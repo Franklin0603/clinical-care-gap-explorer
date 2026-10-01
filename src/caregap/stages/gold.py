@@ -1,6 +1,6 @@
 """Build Gold: care_gap_a1c, one row per diabetic patient (Day 4).
 
-Ported from pipeline/day4_gold.ipynb after review. Sourced from Silver only -
+Ported from notebooks/03_gold.ipynb after review. Sourced from Silver only -
 quarantined data never reaches Gold.
 
 Decision D5 - diabetic patient: any of the eight SNOMED codes in cohort.py ever
@@ -29,17 +29,17 @@ The one LEFT JOIN in build() is the whole of task 4.3. An inner join from
 cohort to observations deletes every never-tested patient - 21 of the 25 open
 gaps here - and nothing errors.
 
-Run order: load_bronze.py -> corrupt.py -> validate.py -> gold.py
+Run order: ingest -> corrupt -> validate -> gold
 
-    python pipeline/gold.py
+    caregap run
 """
 
 import json
 
 import duckdb
 
-from cohort import DIABETES_CODES
-from config import A1C, ASOF, DB, GAP_DAYS, GOLD_REPORT as REPORT, INSULIN, sql_list
+from caregap.domain.cohort import DIABETES_CODES
+from caregap.config import A1C, ASOF, DB, GAP_DAYS, GOLD_REPORT as REPORT, INSULIN, sql_list
 
 DX_CODES = sql_list(DIABETES_CODES)
 INSULIN_SQL = sql_list(INSULIN)

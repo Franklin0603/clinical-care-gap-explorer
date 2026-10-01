@@ -6,7 +6,7 @@ check that was supposed to catch it. A defect found by the wrong check is a
 coincidence, not a working check, and would otherwise inflate the number.
 """
 
-import config
+from caregap import config
 
 DESTINATIONS = """
     SELECT source_row_id AS key, check_id AS caught_by FROM quarantine

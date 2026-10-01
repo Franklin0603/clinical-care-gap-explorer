@@ -1,6 +1,6 @@
 """Validate Bronze into Silver: six checks, three output tables, one assertion (Day 3).
 
-Ported from pipeline/index.ipynb after review. Three principles from
+Ported from notebooks/02_validate.ipynb after review. Three principles from
 DATA_QUALITY_SPEC.md govern every check:
 
   1. Nothing is silently dropped - every rejected row lands in `quarantine`
@@ -13,9 +13,9 @@ DATA_QUALITY_SPEC.md govern every check:
 The assertion that makes principle 1 a test rather than a sentence:
 for every table, bronze rows == silver rows + quarantined rows.
 
-Run order: load_bronze.py -> corrupt.py -> validate.py. Run from the repo root:
+Run order: ingest -> corrupt -> validate. Run the whole pipeline with:
 
-    python pipeline/validate.py
+    caregap run
 
 Writes data/dq_report.json (reconciliation + catch rate) for the app and README.
 """
@@ -24,9 +24,9 @@ import json
 
 import duckdb
 
-from checks import CHECKS, DEFECT_FOR, OBS_KEY, REVIEW
-from cohort import DIABETES_CODES
-from config import (
+from caregap.domain.checks import CHECKS, DEFECT_FOR, OBS_KEY, REVIEW
+from caregap.domain.cohort import DIABETES_CODES
+from caregap.config import (
     A1C, A1C_RANGE, ASOF, DB, DEFECT_LOG as LOG, DQ_REPORT as REPORT,
     REMEDIATION_RULE, SOURCES, sql_list,
 )

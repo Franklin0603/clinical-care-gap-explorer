@@ -3,7 +3,7 @@
 Read-only. Answers the four questions Day 1 says you must be able to state out
 loud, and prints nothing else. Run from the repo root:
 
-    python pipeline/profile.py
+    python -m caregap.profile
 """
 
 import glob
@@ -11,7 +11,7 @@ import os
 
 import duckdb
 
-from config import RAW
+from caregap.config import RAW
 
 
 def header(title):

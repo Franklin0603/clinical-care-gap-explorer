@@ -115,7 +115,7 @@ percent. Under 5.7 normal, 5.7–6.4 prediabetes, 6.5+ diabetes.
 
 **Cohort** — the set of patients a measure applies to. Ours is "has diabetes."
 Getting the cohort wrong invalidates everything downstream, which is why it lives
-in one file with the codes written out explicitly (`pipeline/cohort.py`).
+in one file with the codes written out explicitly (`caregap/domain/cohort.py`).
 
 **Encounter** — one interaction with the health system. A visit, an admission, a
 phone consult. Most clinical data hangs off an encounter.
@@ -141,7 +141,7 @@ touched it.
 
 ## 6. What profiling this dataset actually turned up
 
-Four findings from `pipeline/profile.py`, in plain English. Each one changed a
+Four findings from `caregap/profile.py`, in plain English. Each one changed a
 decision.
 
 ### Prediabetes is not diabetes

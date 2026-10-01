@@ -55,7 +55,7 @@
  },
  {
   "source_table": "bronze_observations",
-  "source_row_id": "95feb885-62f0-2deb-2452-e500473d99a4|4548-4|2021-09-26T16:58:43Z",
+  "source_row_id": "b828e7bc-9a2f-929b-44fa-9f2e547db746|4548-4|2009-08-19T19:24:08Z",
   "field": "VALUE",
   "original_value": "250",
   "corrected_value": "10.3",
@@ -64,7 +64,7 @@
  },
  {
   "source_table": "bronze_observations",
-  "source_row_id": "b828e7bc-9a2f-929b-44fa-9f2e547db746|4548-4|2009-08-19T19:24:08Z",
+  "source_row_id": "95feb885-62f0-2deb-2452-e500473d99a4|4548-4|2021-09-26T16:58:43Z",
   "field": "VALUE",
   "original_value": "250",
   "corrected_value": "10.3",
@@ -118,7 +118,7 @@
  },
  {
   "source_table": "bronze_observations",
-  "source_row_id": "f07d90c9-b212-5011-ba21-ef7eb4707527|4548-4|2011-02-25T04:42:46Z",
+  "source_row_id": "64b7b8b0-3b23-c963-a807-41274603d708|4548-4|2019-08-14T10:18:59Z",
   "field": "VALUE",
   "original_value": "250",
   "corrected_value": "10.3",
@@ -127,7 +127,7 @@
  },
  {
   "source_table": "bronze_observations",
-  "source_row_id": "64b7b8b0-3b23-c963-a807-41274603d708|4548-4|2019-08-14T10:18:59Z",
+  "source_row_id": "f07d90c9-b212-5011-ba21-ef7eb4707527|4548-4|2011-02-25T04:42:46Z",
   "field": "VALUE",
   "original_value": "250",
   "corrected_value": "10.3",
@@ -145,7 +145,7 @@
  },
  {
   "source_table": "bronze_observations",
-  "source_row_id": "b18cdce2-6dbe-c7a5-116f-f54f7b8a5d1f|4548-4|2021-04-19T04:00:51Z",
+  "source_row_id": "f267f864-81e3-4f8e-192b-dc55c3ef82e5|4548-4|2011-01-24T07:36:17Z",
   "field": "VALUE",
   "original_value": "250",
   "corrected_value": "10.3",
@@ -154,7 +154,7 @@
  },
  {
   "source_table": "bronze_observations",
-  "source_row_id": "f267f864-81e3-4f8e-192b-dc55c3ef82e5|4548-4|2011-01-24T07:36:17Z",
+  "source_row_id": "b18cdce2-6dbe-c7a5-116f-f54f7b8a5d1f|4548-4|2021-04-19T04:00:51Z",
   "field": "VALUE",
   "original_value": "250",
   "corrected_value": "10.3",

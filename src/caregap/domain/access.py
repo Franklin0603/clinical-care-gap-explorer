@@ -11,7 +11,7 @@ There is no authentication. The role selector is a demonstration control.
 HOW THE FILTERING WORKS, AND WHAT THAT IS WORTH
 -----------------------------------------------
 Decision D9 made the site a static export, so there is no server to filter at
-request time. Instead export_web.py writes one payload per role, each built by a
+request time. Instead the publish stage writes one payload per role, each built by a
 query that never SELECTs the restricted columns and never returns the restricted
 rows. The file a PCT's page loads does not contain an A1c value anywhere - the
 fields are absent, not blanked, not hidden in CSS.

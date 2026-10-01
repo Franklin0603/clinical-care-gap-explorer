@@ -10,14 +10,14 @@ import json
 
 import pytest
 
-import config
-from access import ROLES, restricted_for
+from caregap import config
+from caregap.domain.access import ROLES, restricted_for
 
 
 def payload(role):
     path = config.WEB_DATA / f"care_gap_{role}.json"
     if not path.exists():
-        pytest.skip(f"No export at {path}. Run `python pipeline/export_web.py`.")
+        pytest.skip(f"No export at {path}. Run `python caregap/stages/publish.py`.")
     return json.loads(path.read_text())
 
 

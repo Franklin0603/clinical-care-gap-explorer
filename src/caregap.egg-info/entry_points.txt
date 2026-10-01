@@ -1,0 +1,2 @@
+[console_scripts]
+caregap = caregap.cli:main

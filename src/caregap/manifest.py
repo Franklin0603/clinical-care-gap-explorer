@@ -21,7 +21,7 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 
-import config
+from caregap import config
 
 TABLE = "pipeline_runs"
 LOG = config.ROOT / "data" / "run_log.json"

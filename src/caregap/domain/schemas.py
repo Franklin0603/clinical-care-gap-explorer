@@ -59,5 +59,5 @@ def check(name: str, columns) -> None:
             f"{', '.join(missing)}.\n"
             f"It has: {', '.join(sorted(columns))}.\n"
             "This usually means Synthea changed its export between versions. "
-            "Update pipeline/schemas.py if the rename is intentional."
+            "Update caregap/domain/schemas.py if the rename is intentional."
         )

@@ -1,3 +1,20 @@
+Metadata-Version: 2.4
+Name: caregap
+Version: 1.0.0
+Summary: Finds diabetic patients overdue for an A1c test, and shows the data quality work behind the list
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: duckdb==1.5.5
+Requires-Dist: pandas==3.0.5
+Requires-Dist: numpy==2.5.2
+Requires-Dist: python-dateutil==2.9.0.post0
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: matplotlib; extra == "dev"
+Requires-Dist: ipykernel; extra == "dev"
+Requires-Dist: nbclient; extra == "dev"
+Requires-Dist: openpyxl; extra == "dev"
+
 # Clinical Care Gap Explorer
 
 Finds diabetic patients overdue for an A1c test — and shows the data quality work
@@ -101,7 +118,7 @@ role as well as columns.
 plus 365 days and `days_overdue` is the same date in different clothes, so
 withholding the value while keeping either one reconstructs the test date
 exactly. Derived columns are restricted alongside what they derive from — see
-[`caregap/domain/access.py`](caregap/domain/access.py).
+[`pipeline/access.py`](pipeline/access.py).
 
 **What it does not do:** with no authentication, every role's file is reachable
 by anyone who guesses the URL. In a real system the same queries would sit behind
@@ -114,17 +131,11 @@ task done and when the patient was last in, not what the result was.
 ## Run it
 
 ```bash
-make setup       # virtualenv, the package, and the web dependencies
-make generate    # download Synthea, generate the patients, build everything
-make test        # 111 tests: 74 pipeline, 37 web
-make web         # the app at localhost:3000
-```
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
 
-`make` on its own lists every target. Without `make`:
-
-```bash
-python -m venv .venv && .venv/bin/pip install -e ".[dev]"
-PYTHONPATH=src .venv/bin/python -m caregap run --generate
+# generate, load, corrupt, validate, build Gold — one command
+python pipeline/run_all.py --generate
 ```
 
 `--generate` downloads the Synthea jar (~200 MB, once — it is a tool, not code,
@@ -145,13 +156,11 @@ data four weeks later. See D2 in [DECISIONS.md](docs/DECISIONS.md).
 
 | Path | What |
 |------|------|
-| `src/caregap/cli.py` | One command: ingest → corrupt → validate → gold → publish |
-| `src/caregap/config.py` | Every path, date, code and threshold, defined once |
-| `src/caregap/domain/` | What the pipeline believes: diabetes codes, DQ checks, role matrix, source contracts |
-| `src/caregap/stages/` | The five stages, each runnable and self-verifying |
-| `src/caregap/manifest.py` | What each run did: commit, timings, row counts, what moved |
-| `notebooks/` | Each stage prototyped with visible output before being ported |
-| `tests/` | 74 pipeline tests — reconciliation, cohort, catch rate, role scoping |
+| `pipeline/run_all.py` | One command: ingest → corrupt → validate → gold → publish |
+| `pipeline/config.py` | Every path, date, code and threshold, defined once |
+| `pipeline/cohort.py` · `access.py` | The clinical definitions: diabetes codes, role matrix |
+| `pipeline/day*.ipynb` | Each stage prototyped with visible output before being ported |
+| `tests/` | 30 pipeline tests — reconciliation, cohort, catch rate, role scoping |
 | `web/lib/*.test.ts` | 37 web tests — the SQL guard and the question scope check |
 | `docs/FINDINGS.md` | Seven findings from building it — **start here** |
 | `docs/DECISIONS.md` | Why the cohort, the seed and the measure are what they are |
@@ -164,7 +173,7 @@ data four weeks later. See D2 in [DECISIONS.md](docs/DECISIONS.md).
 ## Tests
 
 ```bash
-make test        # 111 tests: 74 pipeline, 37 web
+make test        # 67 tests: 30 pipeline, 37 web
 ```
 
 Two of them document bugs that testing caught and reading did not:
