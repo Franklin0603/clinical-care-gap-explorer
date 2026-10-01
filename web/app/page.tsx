@@ -1,154 +1,145 @@
 import Link from "next/link";
-import Image from "next/image";
+import { ArrowRight, GitBranch, FlaskConical, ShieldCheck } from "lucide-react";
+
 import { gold, dq, layerTotals, fmt } from "@/lib/data";
-import { Section, Stat, Card, Scroller, th, td } from "@/components/ui";
+import { Page, Section } from "@/components/shell/Page";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
-export default function Overview() {
-  const neverPct = Math.round((gold.never_tested / gold.open_gaps) * 100);
-
+export default function Introduction() {
   return (
-    <div className="pt-12">
-      <h1 className="max-w-3xl text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
-        Which diabetic patients have not had an A1c test in the last twelve months?
-      </h1>
-      <p className="mt-4 max-w-2xl text-base leading-relaxed" style={{ color: "var(--muted)" }}>
-        The query is four lines of SQL. Trusting its answer is the hard part, and
-        that is what this project is about. Every figure below is read from the
-        pipeline output, not typed in.
-      </p>
-
-      <div className="mt-10 grid gap-4 sm:grid-cols-3">
-        <Stat
-          value={`${gold.open_gaps} of ${gold.cohort}`}
-          label="have an open A1c gap"
-          note={`${gold.gap_rate_pct}% of diabetic patients alive on ${gold.asof}`}
-        />
-        <Stat
-          accent
-          value={String(gold.never_tested)}
-          label="have never been tested at all"
-          note={`${neverPct}% of the gaps. These are the highest-risk patients on the list.`}
-        />
-        <Stat
-          value={dq.catch_rate_types}
-          label="defect types caught"
-          note={`${dq.catch_rate_rows} injected rows, each caught by the check meant for it`}
-        />
+    <Page title="Introduction" blurb="What this is, and why the middle part matters">
+      <div className="flex flex-col gap-5">
+        <Badge variant="secondary" className="w-fit">Synthea · Massachusetts · as of {gold.asof}</Badge>
+        <h2 className="max-w-3xl text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+          Which diabetic patients have not had an A1c test in the last twelve months?
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">
+          An <strong className="text-foreground">A1c</strong> measures average blood
+          sugar over about three months. A diabetic patient is meant to have one
+          roughly every six months. When twelve months pass with no result, that is
+          a <strong className="text-foreground">care gap</strong> — and this finds them.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">
+          The query is four lines of SQL. The project is not about the query.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <Button render={<Link href="/overview" />}>
+            See the numbers <ArrowRight className="size-4" />
+          </Button>
+          <Button variant="outline" render={<Link href="/pipeline" />}>
+            How the data gets there
+          </Button>
+        </div>
       </div>
 
       <Section
-        title="Where the number comes from"
-        lede="Each step is a decision recorded in a decisions log, not a filter chosen to make the number look better. Two of these steps are the most consequential lines in the project."
+        title="Why it is really a data quality project"
+        blurb="A care-gap list gets handed to a nurse who picks up a phone, so a wrong list costs something in both directions."
       >
-        <Card>
-          <Image
-            src="/img/01_cohort_funnel.png"
-            alt={`Funnel: 161 patients carry a diabetes code, ${gold.cohort} are alive on the as-of date, ${gold.open_gaps} have an open gap, ${gold.never_tested} have never been tested`}
-            width={1680}
-            height={760}
-            className="w-full"
-          />
-        </Card>
-        <dl className="mt-5 grid gap-4 sm:grid-cols-2">
-          <div>
-            <dt className="text-sm font-semibold">Diabetic patient</dt>
-            <dd className="mt-1 text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-              Any of eight diabetes SNOMED codes ever recorded, on a patient alive
-              on the as-of date. Not just the type 2 code: {gold.complication_only}{" "}
-              patients carry a diabetic complication with no underlying diagnosis,
-              and anchoring on one code drops {gold.complication_only_pct}% of the
-              cohort.
-            </dd>
-          </div>
-          <div>
-            <dt className="text-sm font-semibold">Open A1c gap</dt>
-            <dd className="mt-1 text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-              No A1c result in the 365 days before the as-of date. Never tested
-              counts as a gap. A test ordered but never resulted is invisible in
-              this data and is counted the same as never ordered.
-            </dd>
-          </div>
-        </dl>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-sm">A false positive</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-muted-foreground">
+              A wasted call to someone who already had the test — their result was
+              filed under a duplicate record, or with a broken link back to the
+              patient.
+            </CardContent>
+          </Card>
+          <Card className="border-destructive/40">
+            <CardHeader>
+              <CardTitle className="text-sm">A false negative</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-muted-foreground">
+              Worse. The patient stays invisible, and everybody trusts the report
+              that hid them.
+            </CardContent>
+          </Card>
+        </div>
+        <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">
+          Real clinical data arrives with duplicate rows, lab values in the wrong
+          units, patients registered twice under different record numbers, and
+          timestamps that contradict each other. So the build order is: load it,
+          deliberately break it, catch the breakage, measure what fraction was
+          caught — and only then report the gaps.
+        </p>
       </Section>
 
-      <Section
-        title="The bug worth knowing about"
-        lede="The highest-risk person on a care-gap list is the diabetic with no A1c on record. An inner join from the cohort to observations deletes exactly those people, and nothing errors."
-      >
-        <Card>
-          <Image
-            src="/img/02_inner_join.png"
-            alt={`Left join keeps ${gold.cohort} patients; inner join keeps ${gold.inner_join_would_keep} and silently deletes ${gold.never_tested}`}
-            width={1128}
-            height={1012}
-            className="mx-auto w-full max-w-md"
-          />
-        </Card>
+      <Section title="What was found" blurb="Three numbers that between them describe the whole project.">
+        <div className="grid gap-4 sm:grid-cols-3">
+          {[
+            {
+              icon: FlaskConical,
+              stat: `${gold.open_gaps} of ${gold.cohort}`,
+              label: "have an open A1c gap",
+              note: `${gold.gap_rate_pct}% of diabetic patients alive on the as-of date`,
+            },
+            {
+              icon: GitBranch,
+              stat: String(gold.never_tested),
+              label: "have never been tested",
+              note: "Three separate ordinary mistakes would each have hidden exactly these people",
+              accent: true,
+            },
+            {
+              icon: ShieldCheck,
+              stat: dq.catch_rate_types,
+              label: "defect types caught",
+              note: `${dq.catch_rate_rows} injected rows, each by the check meant for it`,
+            },
+          ].map(({ icon: Icon, stat, label, note, accent }) => (
+            <Card key={label}>
+              <CardHeader className="pb-2">
+                <Icon className={`size-4 ${accent ? "text-destructive" : "text-primary"}`} />
+              </CardHeader>
+              <CardContent className="flex flex-col gap-1">
+                <div className={`num text-3xl font-semibold tracking-tight ${accent ? "text-destructive" : ""}`}>
+                  {stat}
+                </div>
+                <div className="text-sm font-medium">{label}</div>
+                <p className="text-xs leading-relaxed text-muted-foreground">{note}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </Section>
 
       <Section title="How the data gets here">
-        <p className="mb-5 max-w-2xl text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-          Synthea generates the patients. Bronze is a faithful copy, all text.
-          Silver is typed and validated, with every rejected row quarantined and a
-          reason attached. Gold is the care-gap table the pages read.
-        </p>
         <Card>
-          <Scroller>
-            <table className="w-full">
-              <thead>
-                <tr style={{ background: "var(--blue-wash)" }}>
-                  <th className={th}>Layer</th>
-                  <th className={th}>Rows</th>
-                  <th className={th}>What it is</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  ["Bronze", fmt(layerTotals.bronze), "Raw Synthea CSVs, every column text, nothing cleaned"],
-                  ["Silver", fmt(layerTotals.silver), "Typed and validated; rejects quarantined, not dropped"],
-                  ["Gold", String(gold.cohort), "One row per diabetic patient — the care-gap list"],
-                ].map(([layer, rows, what]) => (
-                  <tr key={layer} className="border-t" style={{ borderColor: "var(--rule)" }}>
-                    <td className={`${td} font-semibold`}>{layer}</td>
-                    <td className={`${td} num`}>{rows}</td>
-                    <td className={td} style={{ color: "var(--muted)" }}>{what}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </Scroller>
+          <CardContent className="grid gap-px overflow-hidden rounded-lg bg-border p-0 sm:grid-cols-3">
+            {[
+              ["Bronze", fmt(layerTotals.bronze), "Raw CSVs, every column text, nothing cleaned"],
+              ["Silver", fmt(layerTotals.silver), "Typed and validated; rejects quarantined with a reason"],
+              ["Gold", String(gold.cohort), "One row per diabetic patient — the care-gap list"],
+            ].map(([layer, rows, what]) => (
+              <div key={layer} className="flex flex-col gap-1 bg-card p-5">
+                <div className="text-xs font-medium uppercase tracking-wider text-primary">{layer}</div>
+                <div className="num text-xl font-semibold">{rows}</div>
+                <p className="text-xs leading-relaxed text-muted-foreground">{what}</p>
+              </div>
+            ))}
+          </CardContent>
         </Card>
-        <p className="mt-5 text-sm">
-          <Link href="/pipeline" className="font-medium" style={{ color: "var(--blue)" }}>
-            See the data quality work →
-          </Link>
-        </p>
       </Section>
 
-      <Section
-        title="What this cannot tell you"
-        lede="Stated here rather than discovered later."
-      >
-        <ul className="max-w-2xl space-y-2 text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-          <li>
-            <strong style={{ color: "var(--ink)" }}>Synthea patients are fictional</strong> and
-            their care is more diligent than a real population&apos;s.
-          </li>
-          <li>
-            <strong style={{ color: "var(--ink)" }}>No orders table</strong>, so &ldquo;we ordered
-            it and the patient never went&rdquo; is indistinguishable from &ldquo;we never ordered
-            it&rdquo; — different problems with different fixes.
-          </li>
-          <li>
-            <strong style={{ color: "var(--ink)" }}>No phone or email</strong> in the source data,
-            so whether a patient can actually be reached has no answer here.
-          </li>
-          <li>
-            <strong style={{ color: "var(--ink)" }}>The defects are the ones injected</strong>, so
-            the catch rate measures the checks against a known list, not against reality.
-          </li>
-        </ul>
+      <Section title="What this cannot tell you" blurb="Stated here rather than discovered later.">
+        <div className="grid gap-3 sm:grid-cols-2">
+          {[
+            ["Synthea patients are fictional", "Their care is more diligent than a real population's."],
+            ["There is no orders table", "“We ordered it and the patient never went” is indistinguishable from “we never ordered it”."],
+            ["No phone, no email", "Whether a patient can actually be reached has no answer here."],
+            ["The defects are the ones injected", "The catch rate measures the checks against a known list, not against reality."],
+          ].map(([t, d]) => (
+            <div key={t} className="rounded-lg border p-4">
+              <div className="text-sm font-medium">{t}</div>
+              <p className="mt-1 text-sm text-muted-foreground">{d}</p>
+            </div>
+          ))}
+        </div>
       </Section>
-    </div>
+    </Page>
   );
 }

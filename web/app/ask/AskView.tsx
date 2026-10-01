@@ -1,39 +1,40 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ArrowUp, Database, Info, Loader2, Sparkles, Terminal, User } from "lucide-react";
+
 import { Role, roleMeta, defaultRole } from "@/lib/data";
 import { CHIPS, Chip, matchIntent, checkScope, REFUSAL } from "@/lib/chips";
 import { connect, guardSelectOnly, run, QueryResult } from "@/lib/sql";
-import { Section, Card, Scroller, th, td } from "@/components/ui";
+import { Page } from "@/components/shell/Page";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from "@/components/ui/select";
+import {
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+} from "@/components/ui/table";
 
 const ROLES: Role[] = ["pct", "nurse", "physician"];
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
-type Entry = {
-  at: string;
-  role: Role;
-  question: string;
-  sql: string | null;
-  rows: number | null;
-  outcome: "answered" | "refused" | "failed";
-  detail?: string;
-};
-
-type Answer =
-  | { kind: "ok"; question: string; sql: string; result: Extract<QueryResult, { ok: true }> }
-  | { kind: "refused"; question: string; sql: string | null; reason: string };
+type Turn =
+  | { who: "you"; text: string }
+  | { who: "it"; sql: string | null; result: Extract<QueryResult, { ok: true }> | null; reason?: string };
 
 export default function AskView() {
   const [role, setRole] = useState<Role>(defaultRole);
   const [input, setInput] = useState("");
-  const [answer, setAnswer] = useState<Answer | null>(null);
-  const [log, setLog] = useState<Entry[]>([]);
+  const [turns, setTurns] = useState<Turn[]>([]);
   const [busy, setBusy] = useState(false);
-  const [engine, setEngine] = useState<"idle" | "loading" | "ready" | "error">("idle");
+  const [engine, setEngine] = useState<"loading" | "ready" | "error">("loading");
   const conn = useRef<Awaited<ReturnType<typeof connect>> | null>(null);
+  const bottom = useRef<HTMLDivElement>(null);
 
-  // Reconnect whenever the role changes: the views are rebuilt over that role's
-  // own Parquet export, so a restricted column is genuinely absent, not hidden.
+  // Reconnect on role change: the views are rebuilt over that role's own Parquet,
+  // so a restricted column is genuinely absent rather than hidden.
   useEffect(() => {
     let live = true;
     setEngine("loading");
@@ -44,276 +45,206 @@ export default function AskView() {
     return () => { live = false; };
   }, [role]);
 
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem("ccg-audit");
-      if (saved) setLog(JSON.parse(saved));
-    } catch { /* storage unavailable; the log just starts empty */ }
-  }, []);
-
-  function record(e: Entry) {
-    setLog((prev) => {
-      const next = [e, ...prev].slice(0, 40);
-      try { localStorage.setItem("ccg-audit", JSON.stringify(next)); } catch { /* ignore */ }
-      return next;
-    });
-  }
+  useEffect(() => { bottom.current?.scrollIntoView({ behavior: "smooth" }); }, [turns, busy]);
 
   async function execute(question: string, sql: string) {
+    setTurns((t) => [...t, { who: "you", text: question }]);
     const guard = guardSelectOnly(sql);
     if (!guard.ok) {
-      setAnswer({ kind: "refused", question, sql, reason: guard.reason });
-      record({ at: new Date().toISOString(), role, question, sql, rows: null, outcome: "refused", detail: guard.reason });
+      setTurns((t) => [...t, { who: "it", sql, result: null, reason: guard.reason }]);
       return;
     }
     if (!conn.current) {
-      setAnswer({ kind: "refused", question, sql, reason: "The query engine is still loading. Try again in a moment." });
+      setTurns((t) => [...t, { who: "it", sql, result: null, reason: "The query engine is still loading. Try again in a moment." }]);
       return;
     }
     setBusy(true);
     const result = await run(conn.current, guard.sql);
     setBusy(false);
-    if (result.ok) {
-      setAnswer({ kind: "ok", question, sql: guard.sql, result });
-      record({ at: new Date().toISOString(), role, question, sql: guard.sql, rows: result.rows.length, outcome: "answered" });
-    } else {
-      setAnswer({ kind: "refused", question, sql: guard.sql, reason: result.reason });
-      record({ at: new Date().toISOString(), role, question, sql: guard.sql, rows: null, outcome: "failed", detail: result.reason });
-    }
+    setTurns((t) => [
+      ...t,
+      result.ok
+        ? { who: "it", sql: guard.sql, result }
+        : { who: "it", sql: guard.sql, result: null, reason: result.reason },
+    ]);
   }
 
   function ask(raw: string) {
-    const question = raw.trim();
-    if (!question) return;
-    // Looks like SQL? Run it through the guard. Otherwise match it to a question.
-    if (/^\s*(select|with|drop|delete|insert|update|alter|create|truncate|grant|copy|attach|pragma)\b/i.test(question)) {
-      void execute(question, question);
+    const q = raw.trim();
+    if (!q) return;
+    setInput("");
+    if (/^\s*(select|with|drop|delete|insert|update|alter|create|truncate|grant|copy|attach|pragma)\b/i.test(q)) {
+      void execute(q, q);
       return;
     }
-    // Out-of-scope questions are refused before matching. A keyword match on an
-    // advice question would return a confident table, which is the worst outcome
-    // this page can produce.
-    const outOfScope = checkScope(question);
+    const outOfScope = checkScope(q);
     if (outOfScope) {
-      setAnswer({ kind: "refused", question, sql: null, reason: outOfScope });
-      record({ at: new Date().toISOString(), role, question, sql: null, rows: null, outcome: "refused", detail: "Out of scope" });
+      setTurns((t) => [...t, { who: "you", text: q }, { who: "it", sql: null, result: null, reason: outOfScope }]);
       return;
     }
-    const chip = matchIntent(question);
+    const chip = matchIntent(q);
     if (!chip) {
-      setAnswer({ kind: "refused", question, sql: null, reason: REFUSAL });
-      record({ at: new Date().toISOString(), role, question, sql: null, rows: null, outcome: "refused", detail: "No matching question" });
+      setTurns((t) => [...t, { who: "you", text: q }, { who: "it", sql: null, result: null, reason: REFUSAL }]);
       return;
     }
-    void execute(question, chip.sql);
+    void execute(q, chip.sql);
   }
 
   return (
-    <div className="pt-12">
-      <h1 className="max-w-3xl text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
-        Ask the data
-      </h1>
-      <p className="mt-4 max-w-2xl text-base leading-relaxed" style={{ color: "var(--muted)" }}>
-        Every answer shows the SQL that produced it, and that SQL runs in your
-        browser against the same files the rest of the site reads. Only a single
-        SELECT is allowed to run — you can try to break that below, and it is more
-        interesting when you do.
-      </p>
-
-      <div className="mt-8 flex flex-wrap items-center gap-2">
-        {ROLES.map((r) => (
-          <button
-            key={r}
-            onClick={() => setRole(r)}
-            aria-pressed={role === r}
-            className="rounded-md border px-3 py-1.5 text-sm font-medium"
-            style={{
-              borderColor: role === r ? "var(--blue)" : "var(--rule)",
-              background: role === r ? "var(--blue-wash)" : "var(--surface)",
-              color: role === r ? "var(--blue)" : "var(--muted)",
-            }}
-          >
-            {roleMeta[r].label}
-          </button>
-        ))}
-        <span className="text-xs" style={{ color: "var(--faint)" }}>
-          {engine === "loading" && "loading query engine…"}
-          {engine === "ready" && `${roleMeta[role].patients} patients, ${roleMeta[role].columns.length} columns visible`}
-          {engine === "error" && "query engine unavailable — the preset answers still describe what it would return"}
-        </span>
-      </div>
-
-      <form
-        className="mt-5 flex flex-wrap gap-2"
-        onSubmit={(e) => { e.preventDefault(); ask(input); }}
-      >
-        <input
-          id="ask-input"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask a question, or type a SELECT statement"
-          className="min-w-0 flex-1 rounded-md border px-3 py-2 text-sm"
-          style={{ borderColor: "var(--rule)", background: "var(--surface)", color: "var(--ink)" }}
-        />
-        <button
-          type="submit"
-          disabled={busy}
-          className="rounded-md px-4 py-2 text-sm font-medium"
-          style={{ background: "var(--blue)", color: "#fff", opacity: busy ? 0.6 : 1 }}
-        >
-          {busy ? "Running…" : "Ask"}
-        </button>
-      </form>
-
-      <div className="mt-4 flex flex-wrap gap-2">
-        {CHIPS.map((c: Chip) => (
-          <button
-            key={c.q}
-            onClick={() => { setInput(c.q); void execute(c.q, c.sql); }}
-            className="rounded-full border px-3 py-1.5 text-xs"
-            style={{ borderColor: "var(--rule)", background: "var(--surface)", color: "var(--muted)" }}
-            title={c.note}
-          >
-            {c.q}
-          </button>
-        ))}
-      </div>
-
-      {answer && (
-        <Section title="Answer">
-          <Card>
-            <div className="border-b px-4 py-3 text-sm" style={{ borderColor: "var(--rule)" }}>
-              <span style={{ color: "var(--faint)" }}>Question · </span>
-              {answer.question}
+    <Page
+      title="Ask the data"
+      blurb="Every answer shows the SQL that produced it"
+      actions={
+        <Select value={role} onValueChange={(v) => setRole((v ?? defaultRole) as Role)}>
+          <SelectTrigger size="sm" className="w-[190px]"><SelectValue /></SelectTrigger>
+          <SelectContent>
+            {ROLES.map((r) => (
+              <SelectItem key={r} value={r}>
+                {roleMeta[r].label} · {roleMeta[r].patients}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      }
+    >
+      <div className="flex min-h-[calc(100vh-18rem)] flex-col gap-6">
+        {turns.length === 0 ? (
+          <div className="flex flex-1 flex-col items-center justify-center gap-6 py-10 text-center">
+            <div className="flex size-11 items-center justify-center rounded-xl bg-primary/10">
+              <Sparkles className="size-5 text-primary" />
             </div>
-            {answer.sql && (
-              <div className="border-b" style={{ borderColor: "var(--rule)" }}>
-                <div className="px-4 pt-3 text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--faint)" }}>
-                  SQL that ran
+            <div className="flex flex-col gap-2">
+              <h2 className="text-xl font-semibold tracking-tight">
+                What would you like to know about the cohort?
+              </h2>
+              <p className="mx-auto max-w-md text-sm text-muted-foreground">
+                Pick a question, or write a SELECT statement. Only a single SELECT
+                runs — it is more interesting when you try to break that.
+              </p>
+            </div>
+            <div className="flex max-w-3xl flex-wrap justify-center gap-2">
+              {CHIPS.slice(0, 6).map((c: Chip) => (
+                <button
+                  key={c.q}
+                  onClick={() => void execute(c.q, c.sql)}
+                  title={c.note}
+                  className="rounded-full border px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
+                >
+                  {c.q}
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-6">
+            {turns.map((turn, i) =>
+              turn.who === "you" ? (
+                <div key={i} className="flex justify-end gap-3">
+                  <div className="max-w-[80%] rounded-2xl rounded-br-sm bg-primary px-4 py-2.5 text-sm text-primary-foreground">
+                    {turn.text}
+                  </div>
+                  <div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-muted">
+                    <User className="size-3.5" />
+                  </div>
                 </div>
-                <Scroller>
-                  <pre className="px-4 pb-3 pt-1 font-mono text-xs leading-relaxed" style={{ color: "var(--ink)" }}>{answer.sql}</pre>
-                </Scroller>
+              ) : (
+                <div key={i} className="flex gap-3">
+                  <div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                    <Database className="size-3.5 text-primary" />
+                  </div>
+                  <div className="flex min-w-0 flex-1 flex-col gap-3">
+                    {turn.sql && (
+                      <Card className="overflow-hidden p-0">
+                        <div className="flex items-center gap-1.5 border-b bg-muted/50 px-3 py-1.5 text-xs text-muted-foreground">
+                          <Terminal className="size-3" /> the SQL that ran
+                        </div>
+                        <pre className="overflow-x-auto px-3 py-2.5 font-mono text-xs leading-relaxed">
+                          {turn.sql}
+                        </pre>
+                      </Card>
+                    )}
+                    {turn.reason ? (
+                      <div className="flex gap-2.5 rounded-lg border border-destructive/30 bg-destructive/5 p-3.5">
+                        <Info className="mt-0.5 size-4 shrink-0 text-destructive" />
+                        <p className="text-sm leading-relaxed">{turn.reason}</p>
+                      </div>
+                    ) : turn.result ? (
+                      <Card className="overflow-hidden">
+                        <div className="max-h-[26rem] overflow-auto">
+                          <Table>
+                            <TableHeader className="sticky top-0 bg-card">
+                              <TableRow>
+                                {turn.result.columns.map((c) => <TableHead key={c}>{c}</TableHead>)}
+                              </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                              {turn.result.rows.map((row, r) => (
+                                <TableRow key={r}>
+                                  {row.map((v, c) => (
+                                    <TableCell key={c} className="num">
+                                      {v === null ? <span className="text-muted-foreground">—</span> : String(v)}
+                                    </TableCell>
+                                  ))}
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </Table>
+                        </div>
+                        <div className="border-t px-3 py-1.5 text-xs text-muted-foreground">
+                          {turn.result.rows.length} row{turn.result.rows.length === 1 ? "" : "s"} ·{" "}
+                          {turn.result.ms} ms · run in your browser
+                        </div>
+                      </Card>
+                    ) : null}
+                  </div>
+                </div>
+              ),
+            )}
+            {busy && (
+              <div className="flex gap-3">
+                <div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                  <Loader2 className="size-3.5 animate-spin text-primary" />
+                </div>
+                <span className="pt-1 text-sm text-muted-foreground">running…</span>
               </div>
             )}
-            {answer.kind === "refused" ? (
-              <p className="px-4 py-4 text-sm leading-relaxed" style={{ color: "var(--orange)" }}>
-                {answer.reason}
-              </p>
-            ) : (
-              <>
-                <Scroller>
-                  <table className="w-full">
-                    <thead>
-                      <tr style={{ background: "var(--blue-wash)" }}>
-                        {answer.result.columns.map((c) => <th key={c} className={th}>{c}</th>)}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {answer.result.rows.map((row, i) => (
-                        <tr key={i} className="border-t" style={{ borderColor: "var(--rule)" }}>
-                          {row.map((v, j) => (
-                            <td key={j} className={`${td} num`}>
-                              {v === null ? <span style={{ color: "var(--faint)" }}>—</span> : String(v)}
-                            </td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </Scroller>
-                <p className="px-4 py-2 text-xs" style={{ color: "var(--faint)" }}>
-                  {answer.result.rows.length} row{answer.result.rows.length === 1 ? "" : "s"} · {answer.result.ms} ms · run in your browser
-                </p>
-              </>
-            )}
-          </Card>
-        </Section>
-      )}
+            <div ref={bottom} />
+          </div>
+        )}
 
-      <Section
-        title="Access log"
-        lede="Every question is recorded with the role that asked it, the SQL, the row count and the outcome — refusals included. Attempted access matters as much as successful access, which is why a refused query still leaves a row."
-      >
-        <Card>
-          {log.length === 0 ? (
-            <p className="px-4 py-5 text-sm" style={{ color: "var(--muted)" }}>
-              Nothing asked yet. Click a question above and it will appear here.
-            </p>
-          ) : (
-            <Scroller>
-              <table className="w-full">
-                <thead>
-                  <tr style={{ background: "var(--blue-wash)" }}>
-                    <th className={th}>Time</th>
-                    <th className={th}>Role</th>
-                    <th className={th}>Question</th>
-                    <th className={th}>Rows</th>
-                    <th className={th}>Outcome</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {log.map((e, i) => (
-                    <tr key={i} className="border-t" style={{ borderColor: "var(--rule)" }}>
-                      <td className={`${td} num text-xs`} style={{ color: "var(--faint)" }}>
-                        {e.at.slice(11, 19)}
-                      </td>
-                      <td className={td}>{roleMeta[e.role].label}</td>
-                      <td className={td} style={{ color: "var(--muted)" }}>{e.question.slice(0, 60)}</td>
-                      <td className={`${td} num`}>{e.rows ?? "—"}</td>
-                      <td className={td}>
-                        <span
-                          className="rounded px-2 py-0.5 text-xs font-medium"
-                          style={
-                            e.outcome === "answered"
-                              ? { background: "var(--blue-wash)", color: "var(--blue)" }
-                              : { background: "var(--orange-wash)", color: "var(--orange)" }
-                          }
-                        >
-                          {e.outcome}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </Scroller>
-          )}
-        </Card>
-      </Section>
-
-      <Section title="How this works, and what it is not">
-        <div className="max-w-2xl space-y-4 text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-          <p>
-            <strong style={{ color: "var(--ink)" }}>This is a query builder, not a language model.</strong>{" "}
-            The site is a static export with no server, so there is nowhere to hold
-            an API key. The preset questions carry hand-written SQL, and the free-text
-            box matches your wording against them by keyword. Anything it does not
-            recognise gets a refusal naming what it can answer, rather than a guess.
-          </p>
-          <p>
-            <strong style={{ color: "var(--ink)" }}>The SQL shown is the SQL that ran.</strong>{" "}
-            DuckDB compiled to WebAssembly executes it in your browser against the
-            Parquet files this site already ships. Copy any statement above and run
-            it against the repo&apos;s warehouse — you will get the same rows.
-          </p>
-          <p>
-            <strong style={{ color: "var(--ink)" }}>Only a single SELECT runs.</strong>{" "}
-            The check is an allowlist on what the statement <em>is</em>, not a
-            blocklist of words it must avoid: a blocklist rejects a harmless
-            <code className="mx-1 font-mono text-xs">WHERE note LIKE &apos;%drop%&apos;</code>
-            and still misses a keyword split by a comment. Stacked statements are
-            refused too, because <code className="mx-1 font-mono text-xs">SELECT 1; DROP TABLE patients</code>
-            starts with SELECT and would pass a check that reads only the first one.
-          </p>
-          <p>
-            <strong style={{ color: "var(--ink)" }}>The role is enforced by the data.</strong>{" "}
-            Switching role reloads a different Parquet file. Ask a PCT for an A1c
-            value and the query fails because that column is not in the file — the
-            same restriction as the patient page, in a place the UI cannot undo.
-          </p>
+        <div className="sticky bottom-4 flex flex-col gap-2">
+          <form
+            onSubmit={(e) => { e.preventDefault(); ask(input); }}
+            className="flex items-end gap-2 rounded-2xl border bg-card p-2 shadow-sm"
+          >
+            <textarea
+              id="ask-input"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); ask(input); }
+              }}
+              rows={1}
+              placeholder="Ask a question, or write a SELECT statement…"
+              className="max-h-40 min-h-9 flex-1 resize-none bg-transparent px-2 py-1.5 text-sm outline-none placeholder:text-muted-foreground"
+            />
+            <Button type="submit" size="icon" disabled={busy || !input.trim()} className="size-9 rounded-xl">
+              <ArrowUp className="size-4" />
+            </Button>
+          </form>
+          <div className="flex flex-wrap items-center gap-2 px-1 text-xs text-muted-foreground">
+            <Badge variant="outline" className="font-normal">
+              {engine === "loading" && "loading query engine…"}
+              {engine === "ready" && `${roleMeta[role].patients} patients · ${roleMeta[role].columns.length} columns visible`}
+              {engine === "error" && "query engine unavailable"}
+            </Badge>
+            <span>
+              A query builder, not a language model — there is no server to hold an
+              API key. The SQL shown is the SQL that ran.
+            </span>
+          </div>
         </div>
-      </Section>
-    </div>
+      </div>
+    </Page>
   );
 }

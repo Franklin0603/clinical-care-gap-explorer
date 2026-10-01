@@ -1,17 +1,16 @@
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
-/** G4: every failure path returns a plain sentence, never a stack trace (V5.10). */
+/** G4: every failure path returns a plain sentence, never a stack trace. */
 export default function NotFound() {
   return (
-    <div className="py-24">
+    <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col justify-center gap-4 px-4 py-24">
       <h1 className="text-2xl font-semibold tracking-tight">That page does not exist</h1>
-      <p className="mt-3 max-w-lg text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-        There are two pages here: the overview, and the pipeline and data quality
-        walkthrough. Nothing was lost and nothing went wrong.
+      <p className="max-w-lg text-sm leading-relaxed text-muted-foreground">
+        There are five sections here, listed in the sidebar. Nothing was lost and
+        nothing went wrong.
       </p>
-      <Link href="/" className="mt-6 inline-block text-sm font-medium" style={{ color: "var(--blue)" }}>
-        Go to the overview
-      </Link>
+      <Button className="w-fit" render={<Link href="/" />}>Back to the introduction</Button>
     </div>
   );
 }
