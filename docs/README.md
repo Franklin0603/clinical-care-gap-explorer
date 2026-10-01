@@ -45,6 +45,7 @@ docs/
 │   └── access-control.md     role-based access, and its limits
 │
 ├── decisions/          fifteen ADRs, one per decision
+├── html/               shareable self-contained pages — open in any browser
 ├── img/                the six charts
 └── planning/           working material, not written for a reader
 ```
@@ -67,6 +68,7 @@ injected deliberately so the catch rate is a measurement rather than a claim.
 | | |
 |---|---|
 | **The site** | https://franklin0603.github.io/clinical-care-gap-explorer/ |
+| **Offline pages** | [`html/`](html/) — findings, the primer and the architecture as standalone files |
 | **The notebooks** | [`../notebooks/`](../notebooks/) — decisions with the queries that made them still attached |
 | **The pipeline** | [how-to/run-the-pipeline.md](how-to/run-the-pipeline.md) |
 

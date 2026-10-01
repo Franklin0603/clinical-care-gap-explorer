@@ -36,7 +36,16 @@ PAGES = {
             "DRIFT": "06_asof_drift.png",
         },
     },
+    # The primer and the architecture page draw their charts as inline SVG and
+    # CSS rather than embedding a PNG, so they stay small.
+    "clinical-concepts.html": {"template": "concepts.template.html", "images": {}},
+    "architecture.html": {"template": "architecture.template.html", "images": {}},
 }
+
+# The three pages are one set, so the design tokens live in a single file the
+# templates include. findings.template.html predates it and carries its own copy;
+# _shared.css.html was extracted from it.
+SHARED_STYLES = Path(__file__).parent / "_shared.css.html"
 
 # Figures the page states, and where the live value comes from. Checked, not
 # injected - the page is prose and should read as prose.
@@ -50,6 +59,8 @@ CLAIMS = [
 
 def embed(template: Path, images: dict) -> str:
     html = template.read_text()
+    if "{{STYLES}}" in html:
+        html = html.replace("{{STYLES}}", SHARED_STYLES.read_text())
     for key, filename in images.items():
         path = IMG / filename
         if not path.exists():
@@ -82,9 +93,10 @@ def main():
         (OUT / name).write_text(html)
         print(f"  docs/html/{name}  {len(html) / 1024:.0f} KB, "
               f"{len(spec['images'])} charts embedded")
-        for w in check_claims(html):
-            print(f"    ! {w}")
-    print(f"\n  open with:  open {OUT.relative_to(ROOT)}/findings.html")
+        if name == "findings.html":
+            for w in check_claims(html):
+                print(f"    ! {w}")
+    print(f"\n  open with:  open {OUT.relative_to(ROOT)}/")
 
 
 if __name__ == "__main__":

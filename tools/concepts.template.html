@@ -1,0 +1,246 @@
+<title>Care Gaps in Plain English</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+{{STYLES}}
+
+<style>
+/* ---- page-specific: the vocabulary table and the A1c scale ---- */
+.systems { width: 100%; border-collapse: collapse; font-size: .92rem; min-width: 30rem; }
+.systems th {
+  text-align: left; font-family: var(--mono); font-size: .66rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--faint); font-weight: 500;
+  padding: .5rem .9rem .5rem 0; border-bottom: 1px solid var(--rule-hi);
+}
+.systems td { padding: .6rem .9rem .6rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.systems td:first-child { font-weight: 600; white-space: nowrap; }
+.systems td.ex { font-family: var(--mono); font-size: .82rem; color: var(--muted); }
+
+.model { display: flex; flex-direction: column; gap: 0; margin: 0; padding: 0; list-style: none; }
+.model li {
+  display: grid; grid-template-columns: 7rem 1fr; gap: 1rem;
+  align-items: baseline; padding: .7rem 0; border-bottom: 1px solid var(--rule);
+}
+.model b {
+  font-family: var(--mono); font-size: .76rem; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--blue-ink); font-weight: 500;
+}
+
+.scale { position: relative; padding: 2.8rem 0 3.6rem; }
+.track { position: relative; height: 3px; background: var(--rule-hi); border-radius: 2px; }
+.band {
+  position: absolute; top: -5px; height: 13px; left: 11.5%; width: 32.5%;
+  background: var(--blue); opacity: .26; border-radius: 2px;
+}
+.tick { position: absolute; top: -9px; width: 1px; height: 21px; background: var(--ink); }
+.tick span {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  font-family: var(--mono); font-size: .7rem; white-space: nowrap;
+  color: var(--muted); line-height: 1.35; text-align: center;
+}
+.tick.up span { bottom: 26px; }
+.tick.down span { top: 26px; }
+.tick.warn { background: var(--cost); height: 27px; top: -12px; }
+.tick.warn span, .tick.warn b { color: var(--cost); }
+.tick b { display: block; color: var(--ink); font-weight: 500; }
+.axis {
+  display: flex; justify-content: space-between; margin-top: .5rem;
+  font-family: var(--mono); font-size: .68rem; color: var(--faint);
+}
+
+dl.gloss { margin: 0; display: flex; flex-direction: column; gap: 0; }
+dl.gloss > div {
+  display: flex; flex-direction: column; gap: .2rem;
+  padding: .9rem 0; border-bottom: 1px solid var(--rule);
+}
+dl.gloss > div:last-child { border-bottom: none; }
+dl.gloss dt { font-weight: 600; font-size: .97rem; }
+dl.gloss dt small {
+  font-family: var(--mono); font-weight: 400; font-size: .7rem;
+  color: var(--faint); letter-spacing: .04em; margin-left: .5rem;
+}
+dl.gloss dd { margin: 0; color: var(--muted); font-size: .93rem; line-height: 1.6; }
+
+.note {
+  background: var(--cost-wash); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 1rem 1.15rem; font-size: .94rem; line-height: 1.6;
+}
+.note b {
+  font-family: var(--mono); display: block; font-size: .64rem;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--cost);
+  font-weight: 500; margin-bottom: .4rem;
+}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <p class="kicker">Clinical Care Gap Explorer · orientation</p>
+  <h1>Care gaps in plain English</h1>
+  <p class="standfirst">Everything this project assumes you already know about clinical data, for someone who has never worked in healthcare.</p>
+  <p class="byline">
+    Synthea synthetic data · Massachusetts · 1,153 patients · as of 2026-08-23<br>
+    No real patient information is involved.
+  </p>
+</header>
+
+<article class="finding">
+  <div class="fhead"><span class="fnum">01</span><h2>What this project actually does</h2></div>
+  <p>A person with type 2 diabetes is supposed to get a blood test called an
+  <strong>A1c</strong> roughly every six months. It measures average blood sugar
+  over the previous three months. If that number drifts upward and nobody
+  notices, the damage lands on kidneys, eyes and nerves — slowly, and then all at
+  once.</p>
+  <p>Sometimes nobody notices. The patient moves, changes doctors, misses an
+  appointment, or simply falls off a list. Twelve months pass with no A1c on
+  file.</p>
+  <p><strong>That is a care gap: a patient who qualifies for a routine piece of
+  care and hasn't received it.</strong> This project finds them.</p>
+  <p>The query itself is easy. <em>Diabetic patients with no A1c in twelve
+  months</em> is about four lines of SQL. The project is not really about the
+  query.</p>
+</article>
+
+<article class="finding">
+  <div class="fhead"><span class="fnum">02</span><h2>Why it's really a data quality project</h2></div>
+  <p>A care-gap list gets handed to a nurse who picks up a phone. So a wrong list
+  costs something in both directions.</p>
+  <ul class="model">
+    <li><b>False&nbsp;positive</b><span>A wasted call to someone who already had the test — their result was filed under a duplicate record, or with a broken link back to the patient.</span></li>
+    <li><b>False&nbsp;negative</b><span>Worse. The patient stays invisible, and everyone trusts the report that hid them.</span></li>
+  </ul>
+  <p>Real clinical data arrives with duplicate rows, lab values in the wrong
+  units, patients registered twice under different record numbers, and timestamps
+  that contradict each other. A care-gap report built on unvalidated data is
+  worse than no report, because people act on it.</p>
+  <p>So the build order is: load the raw data, deliberately break it, catch the
+  breakage, measure what fraction was caught — and only then report the gaps. The
+  quality work <em>is</em> the project.</p>
+</article>
+
+<article class="finding">
+  <div class="fhead"><span class="fnum">03</span><h2>Codes, and why nothing is stored as words</h2></div>
+  <p>Healthcare does not store "diabetes" as text. It stores a number drawn from
+  an agreed vocabulary.</p>
+  <p>Free text does not survive contact with reality. One system writes
+  <code>Diabetes mellitus type 2</code>, another <code>DM Type II</code>, a third
+  <code>T2DM</code>, a fourth <code>NIDDM</code> — a term abandoned in the 1990s.
+  All four mean the same thing and no <code>WHERE description = …</code> will ever
+  match them all. Worse, a display string can be quietly reworded by a vendor
+  during a routine upgrade, and your report breaks without erroring.</p>
+  <p>A code is stable, unambiguous and international.
+  <strong>Join on codes. Never join on display names.</strong></p>
+  <div class="scroller">
+    <table class="systems">
+      <thead><tr><th>System</th><th>Describes</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>SNOMED CT</td><td>Conditions — what a patient <em>has</em></td><td class="ex">44054006 · Diabetes mellitus type 2</td></tr>
+        <tr><td>LOINC</td><td>Tests and measurements — what was <em>measured</em></td><td class="ex">4548-4 · Hemoglobin A1c</td></tr>
+        <tr><td>RxNorm</td><td>Medications — what was <em>prescribed</em></td><td class="ex">860975 · Metformin 500 mg</td></tr>
+        <tr><td>ICD-10</td><td>Diagnoses, <em>for billing</em></td><td class="ex">E11.9 · T2DM without complications</td></tr>
+        <tr><td>CPT</td><td>Procedures, for billing</td><td class="ex">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A rough mental model:</p>
+  <ul class="model">
+    <li><b>SNOMED</b><span>what the clinician means</span></li>
+    <li><b>ICD-10</b><span>what the biller submits so the visit gets paid</span></li>
+    <li><b>LOINC</b><span>the question a lab was asked</span></li>
+    <li><b>RxNorm</b><span>what the pharmacy dispenses</span></li>
+  </ul>
+  <p>This project uses SNOMED, LOINC and RxNorm. The billing systems are
+  claims-side and out of scope.</p>
+</article>
+
+<article class="finding">
+  <div class="fhead"><span class="fnum">04</span><h2>A LOINC code is a question, not an answer</h2></div>
+  <p><code>4548-4</code> means precisely one thing: <em>the proportion of
+  hemoglobin that is glycated, in blood</em>. The result value and its unit are
+  stored separately, in their own columns.</p>
+  <p>That separation is exactly where unit errors live. An A1c is reported in
+  <strong>percent</strong> — around 5 is normal, 9 is poorly controlled. Blood
+  glucose is reported in <strong>mg/dL</strong>, where normal is around 90. Put a
+  mg/dL value into a percent field and you get an A1c of 250: biologically
+  impossible, and yet a perfectly valid number as far as the database is
+  concerned. No type system catches it. Only a range check does.</p>
+
+  <figure>
+    <div class="scale">
+      <div class="track">
+        <div class="band"></div>
+        <div class="tick up"        style="left:11.5%"><span><b>2.3</b>lowest in data</span></div>
+        <div class="tick warn down" style="left:15%"><span><b>3.0</b>proposed floor<br>cuts 951 real values</span></div>
+        <div class="tick up"        style="left:28.5%"><span><b>5.7</b>prediabetes</span></div>
+        <div class="tick down"      style="left:32.5%"><span><b>6.5</b>diabetes</span></div>
+        <div class="tick up"        style="left:44%"><span><b>8.8</b>highest in data</span></div>
+      </div>
+      <div class="axis"><span>0%</span><span>20%</span></div>
+    </div>
+    <figcaption>Every A1c in this dataset, against the plausibility range the
+    specification proposed. The shaded band is where the real values live. A
+    mis-keyed glucose reading of 250 would sit roughly twelve screen-widths to
+    the right — which is what makes it catchable.</figcaption>
+  </figure>
+</article>
+
+<article class="finding">
+  <div class="fhead"><span class="fnum">05</span><h2>Where "twelve months" comes from</h2></div>
+  <p><strong>HEDIS</strong> is a set of quality measures published by NCQA. Health
+  plans are scored against them, and real money moves based on the score. The
+  relevant one here is the diabetes care measure set.</p>
+  <p>This matters for exactly one reason: the thresholds in this project are not
+  invented. <em>Diabetic patients need an A1c within twelve months</em> is a
+  published measure with a formal definition of who counts. Using the real rule
+  instead of a plausible-sounding one is the difference between a care-gap report
+  and a demo.</p>
+  <div class="note">
+    <b>Stated plainly in the app</b>
+    The genuine HEDIS specification is far stricter than what's implemented here
+    — precise enrolment requirements, exclusion criteria, hospice carve-outs.
+    This project implements the idea, not the certified measure, and says so on
+    the page rather than in a footnote.
+  </div>
+</article>
+
+<section class="sec">
+  <h3>Terms you'll hit in the repo</h3>
+  <dl class="gloss">
+    <div><dt>A1c <small>HbA1c · LOINC 4548-4</small></dt><dd>Blood test giving average blood sugar over roughly three months, reported in percent. Under 5.7 is normal, 5.7–6.4 prediabetes, 6.5 and above diabetes.</dd></div>
+    <div><dt>Care gap</dt><dd>A patient eligible for a routine piece of care who hasn't received it.</dd></div>
+    <div><dt>Cohort</dt><dd>The set of patients a measure applies to. Here: people with diabetes. Get it wrong and everything downstream is wrong, which is why it lives in one file with every code written out explicitly.</dd></div>
+    <div><dt>Encounter</dt><dd>One interaction with the health system — a visit, an admission, a phone consult. Most clinical data hangs off an encounter.</dd></div>
+    <div><dt>MRN <small>medical record number</small></dt><dd>The ID a hospital assigns a patient. Local to that organisation, which is why one human can hold several — and why duplicate-patient detection is a real problem rather than a contrived one.</dd></div>
+    <div><dt>Observation</dt><dd>One recorded measurement: a lab result, a blood pressure, a height. Carries a LOINC code, a value, and a unit.</dd></div>
+    <div><dt>PHI <small>protected health information</small></dt><dd>Identifiable patient data, legally protected under HIPAA in the US. This project uses synthetic data only — Synthea generates fictional people — so no PHI is ever involved.</dd></div>
+    <div><dt>Value set</dt><dd>The list of codes that defines a measure's population. Published measures use lists of dozens rather than single codes, for the reason finding 1 demonstrates.</dd></div>
+    <div><dt>Bronze / Silver / Gold</dt><dd>A data-engineering convention, not a clinical term. Bronze is raw as-loaded, Silver is typed and validated, Gold is the reporting tables. The value is being able to show what the data looked like before anyone touched it.</dd></div>
+  </dl>
+</section>
+
+<section class="sec">
+  <h3>What profiling this data turned up</h3>
+  <p class="intro">Four findings, each of which changed a decision that had
+  already been written down — which is the argument for profiling before
+  building rather than after.</p>
+
+  <div class="converge">
+    <ul>
+      <li><span class="count">439</span><span class="what"><strong>Prediabetes is not diabetes.</strong> A text search for "diabet" matches it, and it is the largest group. Those patients do not qualify for the measure; including them roughly triples the denominator.</span></li>
+      <li><span class="count">73</span><span class="what"><strong>One diabetes code is not enough.</strong> These patients carry a complication of diabetes with no diagnosis code on file. Anchoring on the obvious code drops 45% of the cohort, and the sicker half.</span></li>
+      <li><span class="count">951</span><span class="what"><strong>The A1c range in the spec was wrong.</strong> Clean values below the proposed floor of 3.0 — an 11% false-positive rate before any defect was injected.</span></li>
+      <li><span class="count">0</span><span class="what"><strong>Diabetes is never resolved.</strong> Of 835 diabetes condition rows, none has an end date. The cohort needs no "still active" filter, which removes a whole class of date logic.</span></li>
+    </ul>
+    <p class="foot">Each is written up with its reasoning in the decision records,
+    and asserted in the test suite so a later change has to be deliberate.</p>
+  </div>
+</section>
+
+<footer>
+  Clinical Care Gap Explorer · synthetic data only, no real patients<br>
+  <a href="https://franklin0603.github.io/clinical-care-gap-explorer/">Live demo</a> ·
+  <a href="https://github.com/Franklin0603/clinical-care-gap-explorer">Source</a>
+</footer>
+
+</div>
