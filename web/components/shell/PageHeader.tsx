@@ -4,7 +4,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 
 export function PageHeader({
   title, blurb, actions,
-}: { title: string; blurb?: string; actions?: ReactNode }) {
+}: { title: string; blurb?: ReactNode; actions?: ReactNode }) {
   return (
     <header className="sticky top-0 z-10 border-b bg-background/85 backdrop-blur">
       <div className="flex min-h-14 flex-wrap items-center gap-x-3 gap-y-2 px-4 py-2.5">

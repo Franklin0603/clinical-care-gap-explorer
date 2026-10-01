@@ -16,6 +16,7 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import { Term } from "@/components/Term";
 
 /** The full cohort. Overview is the unrestricted view — role scoping lives on
  *  the Patients page, which is the page making that argument. */
@@ -116,7 +117,7 @@ export default function OverviewView() {
     >
       <Section
         title="The cohort"
-        blurb="Every figure comes from the pipeline output. The filters apply to all four cards and both charts below."
+        blurb={<>Every figure comes from the pipeline output. The filters apply to all four cards and both charts below.</>}
         actions={
           <div className="flex flex-wrap gap-2">
             <Select value={status} onValueChange={pick(setStatus)}>

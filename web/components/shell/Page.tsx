@@ -4,7 +4,7 @@ import { PageHeader } from "./PageHeader";
 /** Every page is a sticky header plus a scrolling body on one max width. */
 export function Page({
   title, blurb, actions, children,
-}: { title: string; blurb?: string; actions?: ReactNode; children: ReactNode }) {
+}: { title: string; blurb?: ReactNode; actions?: ReactNode; children: ReactNode }) {
   return (
     <>
       <PageHeader title={title} blurb={blurb} actions={actions} />
@@ -17,7 +17,7 @@ export function Page({
 
 export function Section({
   id, title, blurb, actions, children,
-}: { id?: string; title: string; blurb?: string; actions?: ReactNode; children: ReactNode }) {
+}: { id?: string; title: string; blurb?: ReactNode; actions?: ReactNode; children: ReactNode }) {
   return (
     <section id={id} className="flex scroll-mt-20 flex-col gap-4">
       <div className="flex flex-wrap items-start justify-between gap-3">

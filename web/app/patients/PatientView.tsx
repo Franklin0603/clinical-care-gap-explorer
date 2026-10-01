@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Term } from "@/components/Term";
 
 const ROLES: Role[] = ["pct", "nurse", "physician"];
 const INITIALS: Record<Role, string> = { pct: "PT", nurse: "RN", physician: "MD" };
