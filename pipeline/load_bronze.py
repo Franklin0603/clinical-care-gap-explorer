@@ -21,20 +21,7 @@ import os
 
 import duckdb
 
-RAW = "data/raw/csv"
-DB = "data/warehouse/clinical.duckdb"
-
-# Five of the eighteen CSVs - Decision D15. The rest are billing ledgers or
-# clinical data with no bearing on an A1c gap; claims_transactions.csv alone is
-# over a million rows. Listed explicitly rather than globbed, so that adding a
-# table stays a decision.
-SOURCES = [
-    "patients",
-    "encounters",
-    "conditions",
-    "observations",
-    "medications",
-]
+from config import DB, RAW, SOURCES
 
 LINEAGE = ("_loaded_at", "_source_file")
 
@@ -115,7 +102,7 @@ def verify(con):
 
 
 def main():
-    os.makedirs(os.path.dirname(DB), exist_ok=True)
+    DB.parent.mkdir(parents=True, exist_ok=True)
     con = duckdb.connect(DB)
 
     for name in SOURCES:

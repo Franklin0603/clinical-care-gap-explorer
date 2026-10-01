@@ -24,23 +24,10 @@ import json
 import duckdb
 
 from cohort import DIABETES_CODES
-from load_bronze import DB, SOURCES, load
+from config import A1C, DB, DEFECT_LOG as OUT, DEFECT_VOLUME as VOLUME, SEED, SOURCES, sql_list
+from load_bronze import load
 
-OUT = "data/injected_defects.json"
-SEED = 20260823  # recorded in the log; sampling itself is hash-based
-
-# Decision D3. Nothing exceeds 1% of its table.
-VOLUME = {
-    "D1": 40,   # duplicate encounter rows
-    "D2": 150,  # observations with no patient
-    "D3": 20,   # A1c value of 250
-    "D4": 8,    # birth date in the future
-    "D5": 25,   # discharge before admission
-    "D6": 6,    # same patient, two MRNs
-}
-
-A1C = "4548-4"
-DX_CODES = ", ".join(f"'{c}'" for c in DIABETES_CODES)
+DX_CODES = sql_list(DIABETES_CODES)
 
 
 def header(title):

@@ -25,18 +25,12 @@ import json
 import duckdb
 
 from cohort import DIABETES_CODES
-from load_bronze import DB, SOURCES
+from config import (
+    A1C, A1C_RANGE, ASOF, DB, DEFECT_LOG as LOG, DQ_REPORT as REPORT,
+    GLUCOSE_RANGE, REMEDIATION_RULE, SOURCES, sql_list,
+)
 
-LOG = "data/injected_defects.json"
-REPORT = "data/dq_report.json"
-
-ASOF = "2026-08-23"           # Decision D7: a fixed "today". The data ends here;
-                              # a wall-clock date would move the gap count daily.
-A1C = "4548-4"
-A1C_RANGE = (2.0, 20.0)       # DQ3. Floor revised from 3.0: 951 clean values sit below it.
-GLUCOSE_RANGE = (40.0, 600.0) # Decision D4: an A1c in this band is a mis-keyed mg/dL glucose.
-REMEDIATION_RULE = "A1C_MGDL_TO_PCT_EAG"
-DX_CODES = ", ".join(f"'{c}'" for c in DIABETES_CODES)
+DX_CODES = sql_list(DIABETES_CODES)
 
 OBS_KEY = "coalesce(ENCOUNTER, '') || '|' || CODE || '|' || DATE"  # observations have no id
 

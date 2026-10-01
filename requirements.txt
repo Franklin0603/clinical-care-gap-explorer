@@ -10,3 +10,6 @@ nbclient
 
 # charts (notebook prototyping; see docs/VISUALS.md)
 matplotlib
+
+# tests
+pytest

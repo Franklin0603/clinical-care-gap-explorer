@@ -12,7 +12,7 @@ Run from the repo root:
 
 import duckdb
 
-RAW = "data/raw/csv"
+from config import A1C, RAW
 
 # SNOMED CT. Confirmed present in this Synthea extract - see profile.py 1.9.
 #
@@ -53,9 +53,6 @@ EXCLUDED_CODES = {
 # needs no 'active as of' filter. Revisit if that fraction ever moves - this
 # is Decision D5.
 DIABETES_IS_PERMANENT = True
-
-A1C_LOINC = "4548-4"  # Hemoglobin A1c/Hemoglobin.total in Blood, reported in %
-
 
 def _code_list(codes):
     return ", ".join(str(c) for c in codes)

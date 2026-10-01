@@ -174,6 +174,6 @@ after a run. The notebooks `pipeline/day3_validate.ipynb` and
 | 2 — inner join | `day4_gold.ipynb` cell 8 |
 | 3 — the 21 | `day4_gold.ipynb` §4.x, hypothesis cell |
 | 4 — deceased | `day4_gold.ipynb` cell 3; `DATA_DICTIONARY.md` cohort section |
-| 5 — DQ3 floor | `day3_validate.ipynb` §3.4; `DAY_1_DECISIONS.md` |
-| 6 — reproducibility | `DAY_1_DECISIONS.md` D2 |
+| 5 — DQ3 floor | `day3_validate.ipynb` §3.4; `DECISIONS.md` |
+| 6 — reproducibility | `DECISIONS.md` D2 |
 | 7 — value_text | `day3_validate.ipynb` §3.8, V3.10 cell |

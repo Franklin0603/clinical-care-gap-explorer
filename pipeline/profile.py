@@ -11,7 +11,7 @@ import os
 
 import duckdb
 
-RAW = "data/raw/csv"
+from config import RAW
 
 
 def header(title):

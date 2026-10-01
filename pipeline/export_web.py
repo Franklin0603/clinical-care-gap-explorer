@@ -25,11 +25,9 @@ import shutil
 import duckdb
 
 from access import ROLES, DEFAULT_ROLE, restricted_for
-from load_bronze import DB
-
-OUT = "web/public/data"
+from config import ASOF, DQ_REPORT, GOLD_REPORT, DB, WEB_DATA as OUT
 TABLES = ["care_gap_a1c", "quarantine", "identity_review", "remediation_log"]
-REPORTS = ["data/dq_report.json", "data/gold_report.json"]
+REPORTS = [DQ_REPORT, GOLD_REPORT]
 
 
 def export_by_role(con, manifest):
@@ -102,7 +100,7 @@ def export_by_role(con, manifest):
 
 
 def export(con):
-    os.makedirs(OUT, exist_ok=True)
+    OUT.mkdir(parents=True, exist_ok=True)
     manifest = {"tables": {}, "reports": []}
 
     for t in TABLES:
@@ -126,9 +124,9 @@ def export(con):
         print(f"  {t:20} {n:>5} rows")
 
     for src in REPORTS:
-        shutil.copy(src, f"{OUT}/{os.path.basename(src)}")
-        manifest["reports"].append(os.path.basename(src))
-        print(f"  {os.path.basename(src):20}       copied")
+        shutil.copy(src, OUT / src.name)
+        manifest["reports"].append(src.name)
+        print(f"  {src.name:20}       copied")
 
     export_by_role(con, manifest)
 

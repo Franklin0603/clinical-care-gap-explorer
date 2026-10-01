@@ -59,4 +59,4 @@ implements them; it does not override them.
 - `DATA_DICTIONARY.md` — tables, columns, cohort definitions
 - `DATA_QUALITY_SPEC.md` — the six defects, the six checks, three output tables
 - `ACCESS_CONTROL.md` — role matrix and the language rules
-- `README_TEMPLATE.md` — the blanks you fill on Day 7
+- `README_TEMPLATE.md` — the blanks you fill on Day 7 *(done: folded into the root `README.md` and removed)*

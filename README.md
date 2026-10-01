@@ -133,19 +133,46 @@ cd web && npm install && npm run dev
 ```
 
 Reproducibility depends on four pinned flags, not one — `-s` alone gave different
-data four weeks later. See D2 in [DAY_1_DECISIONS.md](docs/DAY_1_DECISIONS.md).
+data four weeks later. See D2 in [DECISIONS.md](docs/DECISIONS.md).
 
 ## Repo map
 
 | Path | What |
 |------|------|
-| `pipeline/` | `load_bronze` → `corrupt` → `validate` → `gold`, plus `run_all` |
+| `pipeline/run_all.py` | One command: ingest → corrupt → validate → gold → publish |
+| `pipeline/config.py` | Every path, date, code and threshold, defined once |
+| `pipeline/cohort.py` · `access.py` | The clinical definitions: diabetes codes, role matrix |
 | `pipeline/day*.ipynb` | Each stage prototyped with visible output before being ported |
-| `docs/FINDINGS.md` | Seven findings from building it — start here |
+| `tests/` | 30 pipeline tests — reconciliation, cohort, catch rate, role scoping |
+| `web/lib/*.test.ts` | 37 web tests — the SQL guard and the question scope check |
+| `docs/FINDINGS.md` | Seven findings from building it — **start here** |
+| `docs/DECISIONS.md` | Why the cohort, the seed and the measure are what they are |
 | `docs/DATA_DICTIONARY.md` | Tables, columns, code systems, cohort definitions |
-| `docs/DATA_QUALITY_SPEC.md` | The six defects and the six checks |
+| `docs/DATA_QUALITY_SPEC.md` | The six defects, the six checks, and what I'd change at scale |
 | `docs/CLINICAL_CONCEPTS.md` | Plain-English primer for non-healthcare readers |
+| `docs/planning/` | PRD, remaining work, future charts — mine, not reference |
 | `build-plan/` | The seven-day plan, decisions log, and validation gates |
+
+## Tests
+
+```bash
+make test        # 67 tests: 30 pipeline, 37 web
+```
+
+Two of them document bugs that testing caught and reading did not:
+
+- **`web/lib/sql.test.ts`** — `WITH x AS (SELECT 1) DELETE FROM patients` begins
+  with WITH, contains SELECT, and deletes rows. DuckDB accepts it, and the first
+  version of the SELECT-only guard did too.
+- **`web/lib/chips.test.ts`** — *"what should this patient's insulin dose be?"*
+  matched the keyword `insulin` and returned a table of patients. A clinical
+  advice question answered with data is worse than no answer.
+
+The pipeline tests assert against the warehouse rather than mocks, because the
+properties worth guarding are properties of the data: that
+`bronze = silver + quarantine` on every table, that the cohort matches its
+written definition, that never-tested patients survive the join, and that no
+restricted field appears in a role's payload.
 
 ## What I'd do differently at scale
 

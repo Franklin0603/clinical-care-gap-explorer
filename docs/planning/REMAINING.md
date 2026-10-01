@@ -58,7 +58,7 @@ things that actually went wrong. The rest have the same material available:
 |---|---|
 | Medallion architecture | `load_bronze.py` docstring; `DATA_DICTIONARY.md` |
 | Clinical code systems | `CLINICAL_CONCEPTS.md`, the mental-model table |
-| HEDIS / quality measures | `DAY_1_DECISIONS.md` D13; the D5/D6 definitions |
+| HEDIS / quality measures | `DECISIONS.md` D13; the D5/D6 definitions |
 | Ground truth and evaluation | `corrupt.py` docstring; `FINDINGS.md` DQ results |
 | Idempotency | `corrupt.py` — reload-first, and why |
 | Quarantine over dropping | `validate.py` principle 1; the reconciliation assert |

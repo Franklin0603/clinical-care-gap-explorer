@@ -39,13 +39,10 @@ import json
 import duckdb
 
 from cohort import DIABETES_CODES
-from load_bronze import DB
-from validate import ASOF, A1C
+from config import A1C, ASOF, DB, GAP_DAYS, GOLD_REPORT as REPORT, INSULIN, sql_list
 
-GAP_DAYS = 365
-INSULIN = "'106892', '311034'"   # RxNorm: Humulin 70/30, regular human insulin
-REPORT = "data/gold_report.json"
-DX_CODES = ", ".join(f"'{c}'" for c in DIABETES_CODES)
+DX_CODES = sql_list(DIABETES_CODES)
+INSULIN_SQL = sql_list(INSULIN)
 
 
 def build(con):
@@ -81,7 +78,7 @@ def build(con):
         ),
         active_meds AS (                                          -- active on the as-of date
             SELECT patient_id, count(*) AS active_med_count,
-                   bool_or(rxnorm_code IN ({INSULIN})) AS on_insulin
+                   bool_or(rxnorm_code IN ({INSULIN_SQL})) AS on_insulin
             FROM silver_medications
             WHERE start_date <= DATE '{ASOF}' AND (end_date IS NULL OR end_date > DATE '{ASOF}')
             GROUP BY 1
