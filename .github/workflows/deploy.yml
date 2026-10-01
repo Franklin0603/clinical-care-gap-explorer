@@ -29,17 +29,9 @@ jobs:
       - run: pip install -e ".[dev]"
       - run: PYTHONPATH=src python -m pytest tests/ -q
 
-      # Node 24, not 22, and the version is load-bearing. package-lock.json is
-      # written by npm 11 (Node 24); npm 10 (Node 22) reads the same file and
-      # calls it out of sync, because the two disagree about where a
-      # platform-specific optional dependency gets hoisted. Reproduce it with:
-      #   npx npm@10.9.4 ci --dry-run --os=linux --cpu=x64 --libc=glibc
-      #     -> Missing: @emnapi/runtime@1.11.3 from lock file
-      #   npm ci       --dry-run --os=linux --cpu=x64 --libc=glibc   -> clean
-      # Same lockfile both times. So CI pins the major that writes the lock.
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22
           cache: npm
           cache-dependency-path: web/package-lock.json
       - run: npm ci

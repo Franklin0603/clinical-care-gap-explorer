@@ -6,10 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
-  },
-  "engines": {
-    "node": ">=24"
+    "lint": "eslint",
+    "lock": "rm -rf node_modules package-lock.json && npm install --os=linux --cpu=x64 --libc=glibc",
+    "test": "node --test lib/*.test.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
