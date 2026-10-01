@@ -103,7 +103,7 @@ role as well as columns.
 plus 365 days and `days_overdue` is the same date in different clothes, so
 withholding the value while keeping either one reconstructs the test date
 exactly. Derived columns are restricted alongside what they derive from — see
-[`caregap/domain/access.py`](caregap/domain/access.py).
+[`caregap/domain/access.py`](src/caregap/domain/access.py).
 
 **What it does not do:** with no authentication, every role's file is reachable
 by anyone who guesses the URL. In a real system the same queries would sit behind
@@ -155,13 +155,14 @@ data four weeks later. See D2 in [DECISIONS.md](docs/DECISIONS.md).
 | `notebooks/` | **Where the decisions were made, with the evidence attached** — see [notebooks/README.md](notebooks/README.md) |
 | `tests/` | 74 pipeline tests — reconciliation, cohort, catch rate, role scoping |
 | `web/lib/*.test.ts` | 37 web tests — the SQL guard and the question scope check |
-| `docs/FINDINGS.md` | Seven findings from building it — **start here** |
+| [`docs/`](docs/) | **Start here** — indexed and ordered, no healthcare background assumed |
+| `docs/FINDINGS.md` | Seven findings from building it |
 | `docs/DECISIONS.md` | Why the cohort, the seed and the measure are what they are |
 | `docs/DATA_DICTIONARY.md` | Tables, columns, code systems, cohort definitions |
 | `docs/DATA_QUALITY_SPEC.md` | The six defects, the six checks, and what I'd change at scale |
 | `docs/CLINICAL_CONCEPTS.md` | Plain-English primer for non-healthcare readers |
 | `docs/planning/` | PRD, remaining work, future charts — mine, not reference |
-| `build-plan/` | The seven-day plan, decisions log, and validation gates |
+| `docs/planning/` | PRD, remaining work, and the seven-day build plan — working material, not reference |
 
 ## Tests
 
