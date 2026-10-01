@@ -29,7 +29,11 @@ export default function AskView() {
   const [input, setInput] = useState("");
   const [turns, setTurns] = useState<Turn[]>([]);
   const [busy, setBusy] = useState(false);
-  const [engine, setEngine] = useState<"loading" | "ready" | "error">("loading");
+  // Keyed by role rather than reset on role change: a settled status belongs to the
+  // role it was settled for, so switching role reads as "loading" without an effect
+  // having to synchronously set it back (react-hooks/set-state-in-effect).
+  const [settled, setSettled] = useState<{ role: Role; status: "ready" | "error" } | null>(null);
+  const engine = settled?.role === role ? settled.status : "loading";
   const conn = useRef<Awaited<ReturnType<typeof connect>> | null>(null);
   const bottom = useRef<HTMLDivElement>(null);
 
@@ -37,11 +41,10 @@ export default function AskView() {
   // so a restricted column is genuinely absent rather than hidden.
   useEffect(() => {
     let live = true;
-    setEngine("loading");
     conn.current = null;
     connect(role, BASE)
-      .then((c) => { if (live) { conn.current = c; setEngine("ready"); } })
-      .catch(() => { if (live) setEngine("error"); });
+      .then((c) => { if (live) { conn.current = c; setSettled({ role, status: "ready" }); } })
+      .catch(() => { if (live) setSettled({ role, status: "error" }); });
     return () => { live = false; };
   }, [role]);
 

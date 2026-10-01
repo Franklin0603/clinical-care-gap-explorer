@@ -82,7 +82,7 @@ export default function PipelineView() {
       <Section
         id="corrupt"
         title="Nothing is silently dropped"
-        blurb="For every table, bronze rows must equal silver rows plus quarantined rows. The pipeline asserts this on every run and stops when it fails — which is what turns the claim into a property somebody can check."
+        blurb={<>For every table, <Term k="bronze">bronze</Term> rows must equal <Term k="silver">silver</Term> rows plus <Term k="quarantine">quarantined</Term> rows. The pipeline asserts this on every run and stops when it fails — which is what turns the claim into a property somebody can check.</>}
       >
         <Card>
           <Table>
@@ -233,7 +233,7 @@ export default function PipelineView() {
       <Section
         id="remediation"
         title="One correction, in full"
-        blurb="Not every bad value is thrown away. An A1c is a percentage, so 250 is impossible — but blood glucose in mg/dL lands there routinely, which makes this a unit error rather than nonsense."
+        blurb={<>Not every bad value is thrown away. An <Term k="a1c">A1c</Term> is a percentage, so 250 is impossible — but blood glucose in mg/dL lands there routinely, which makes this a unit error rather than nonsense.</>}
       >
         <Tabs defaultValue="example">
           <TabsList>

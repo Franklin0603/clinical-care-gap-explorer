@@ -53,7 +53,7 @@ export default function PatientView() {
   return (
     <Page
       title="Patients"
-      blurb="The cohort, scoped to what the signed-in role needs"
+      blurb={<>The <Term k="cohort">cohort</Term>, scoped to what the signed-in role needs</>}
       actions={
         /* Styled as an account switcher because that is what it stands in for.
            There is no authentication here and the page says so — but a reviewer
@@ -123,10 +123,11 @@ export default function PatientView() {
             <div className="flex gap-3 rounded-lg border border-destructive/30 bg-destructive/5 p-4">
               <Lock className="mt-0.5 size-4 shrink-0 text-destructive" />
               <p className="text-sm leading-relaxed">
-                <strong>{restricted.length} fields are withheld.</strong> They are not
-                hidden in the browser — this role loads a different file, built by a
-                query that never selected them. Open the network tab and read it: the
-                fields are absent, not blank.
+                <strong>{restricted.length} fields are withheld.</strong> Each one is{" "}
+                <Term k="phi">PHI</Term> this role has no need for. They are not hidden
+                in the browser — this role loads a different file, built by a query that
+                never selected them. Open the network tab and read it: the fields are
+                absent, not blank.
               </p>
             </div>
           </CardContent>

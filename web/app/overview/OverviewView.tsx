@@ -117,7 +117,7 @@ export default function OverviewView() {
     >
       <Section
         title="The cohort"
-        blurb={<>Every figure comes from the pipeline output. The filters apply to all four cards and both charts below.</>}
+        blurb={<>Every figure describes the <Term k="cohort">diabetic cohort</Term> alive on the <Term k="as-of date">as-of date</Term>, and comes from the pipeline output. The filters apply to all four cards and both charts below.</>}
         actions={
           <div className="flex flex-wrap gap-2">
             <Select value={status} onValueChange={pick(setStatus)}>
@@ -185,8 +185,9 @@ export default function OverviewView() {
           <CardHeader>
             <CardTitle className="text-base">Gap rate by age band</CardTitle>
             <CardDescription>
-              Bands follow the HEDIS diabetes measure — 18 to 75 with a 65 to 75 split —
-              rather than round decades. The 76+ band sits outside the measure entirely.
+              Bands follow the <Term k="hedis">HEDIS</Term> diabetes measure — 18 to 75
+              with a 65 to 75 split — rather than round decades. The 76+ band sits
+              outside the measure entirely.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -209,8 +210,8 @@ export default function OverviewView() {
           <CardHeader>
             <CardTitle className="text-base">Where they were last seen</CardTitle>
             <CardDescription>
-              Care setting of the most recent encounter. This is also what scopes a
-              technician&apos;s row access on the Patients page.
+              Care setting of the most recent <Term k="encounter">encounter</Term>. This
+              is also what scopes a technician&apos;s row access on the Patients page.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -283,7 +284,7 @@ export default function OverviewView() {
 
       <Section
         title="Data quality"
-        blurb="249 rows damaged on purpose, so the catch rate is a measurement rather than a claim."
+        blurb={<>249 rows damaged on purpose, so the <Term k="catch rate">catch rate</Term> is a measurement rather than a claim.</>}
       >
         <div className="grid gap-4 sm:grid-cols-3">
           <StatCard
