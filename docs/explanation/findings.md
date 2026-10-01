@@ -1,5 +1,8 @@
 # Findings — what building the pipeline revealed
 
+*A shareable version of this page is at `docs/html/findings.html` — self-contained,
+opens in any browser with no network. Rebuild it with `make html`.*
+
 Clinical Care Gap Explorer · Synthea, Massachusetts, 1,000 patients · as of 2026-08-23
 
 ---
@@ -42,7 +45,7 @@ says, in effect, "complication of a disease nobody wrote down."
 Anchor the cohort on the single obvious code and 45% of it disappears, and it is
 specifically the sicker half. This is not an artefact of synthetic data; it is why
 HEDIS value sets are lists of dozens of codes rather than one. The cohort here is
-eight codes, written out with reasons in `caregap/domain/cohort.py`.
+eight codes, written out with reasons in `src/caregap/domain/cohort.py`.
 
 ## Finding 2 — An inner join deletes the highest-risk patients, silently
 
@@ -160,8 +163,9 @@ Stated here rather than discovered later.
 ## Reproduce it
 
 ```bash
-python caregap/cli.py --fresh        # deleted warehouse -> Gold in ~13 s
-python caregap/cli.py --generate     # also regenerate from Synthea (~4 min, Java 17)
+make run         # rebuild from existing data        (~13 s)
+make generate    # also regenerate from Synthea      (~4 min, Java 17)
+make test        # 121 tests
 ```
 
 Every number above is in `data/dq_report.json` and `data/gold_report.json`
@@ -170,10 +174,10 @@ after a run. The notebooks `notebooks/02_validate.ipynb` and
 
 | Finding | Where |
 |---|---|
-| 1 — one code misses 45% | `cohort.py` header; `day4_gold.ipynb` cell 3 |
-| 2 — inner join | `day4_gold.ipynb` cell 8 |
-| 3 — the 21 | `day4_gold.ipynb` §4.x, hypothesis cell |
-| 4 — deceased | `day4_gold.ipynb` cell 3; `data-dictionary.md` cohort section |
-| 5 — DQ3 floor | `day3_validate.ipynb` §3.4; `decisions/` |
-| 6 — reproducibility | `decisions/` D2 |
-| 7 — value_text | `day3_validate.ipynb` §3.8, V3.10 cell |
+| 1 — one code misses 45% | `domain/cohort.py`; `notebooks/01_profile.ipynb` |
+| 2 — inner join | `notebooks/03_gold.ipynb` cell 8 |
+| 3 — the 21 | `notebooks/03_gold.ipynb` §4.x |
+| 4 — deceased | `notebooks/01_profile.ipynb`; `decisions/0005` |
+| 5 — DQ3 floor | `notebooks/02_validate.ipynb` §3.4; `decisions/0004` |
+| 6 — reproducibility | `decisions/0002-pinned-seed.md` |
+| 7 — value_text | `notebooks/02_validate.ipynb` §3.8 |

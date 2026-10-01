@@ -1,0 +1,472 @@
+<title>Seven Findings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root {
+  color-scheme: light;
+  --ground:   #f4f7f9;
+  --surface:  #ffffff;
+  --sunken:   #eef2f5;
+  --ink:      #111c24;
+  --muted:    #55646f;
+  --faint:    #8696a2;
+  --rule:     #dbe3e9;
+  --rule-hi:  #c3cfd8;
+  --blue:     #2a78d6;
+  --blue-ink: #1d5ca8;
+  --blue-wash:#e9f1fb;
+  --cost:     #c24a16;
+  --cost-wash:#fbeee7;
+
+  --display: "Newsreader", Georgia, "Times New Roman", serif;
+  --body:    "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground:   #0c1317;
+    --surface:  #131d23;
+    --sunken:   #18242b;
+    --ink:      #e1eaef;
+    --muted:    #9aabb5;
+    --faint:    #71838e;
+    --rule:     #24333b;
+    --rule-hi:  #35464f;
+    --blue:     #4e99ea;
+    --blue-ink: #86bbf0;
+    --blue-wash:#13273a;
+    --cost:     #e87b45;
+    --cost-wash:#2a1c13;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground:   #0c1317;
+  --surface:  #131d23;
+  --sunken:   #18242b;
+  --ink:      #e1eaef;
+  --muted:    #9aabb5;
+  --faint:    #71838e;
+  --rule:     #24333b;
+  --rule-hi:  #35464f;
+  --blue:     #4e99ea;
+  --blue-ink: #86bbf0;
+  --blue-wash:#13273a;
+  --cost:     #e87b45;
+  --cost-wash:#2a1c13;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding-inline: 20px;
+  padding-block: 0 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+p { margin: 0; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  font-family: var(--mono);
+  font-size: .85em;
+  background: var(--sunken);
+  padding: .12em .38em;
+  border-radius: 3px;
+}
+a { color: var(--blue); text-underline-offset: 2px; }
+a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
+
+/* ---------- masthead ---------- */
+.mast { padding-block: 3.5rem 0; display: flex; flex-direction: column; gap: 1.1rem; }
+.kicker {
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--blue); margin: 0;
+}
+h1 {
+  font-family: var(--display); font-weight: 500;
+  font-size: clamp(2.4rem, 7vw, 3.6rem); line-height: 1.02;
+  letter-spacing: -.02em; margin: 0; text-wrap: balance;
+}
+.standfirst {
+  font-family: var(--display); font-size: 1.28rem; line-height: 1.5;
+  color: var(--muted); margin: 0; max-width: 34ch;
+}
+.byline {
+  font-family: var(--mono); font-size: .72rem; color: var(--faint);
+  border-top: 1px solid var(--rule); padding-top: 1rem; line-height: 1.8;
+}
+
+/* ---------- the headline figure ---------- */
+.headline {
+  display: flex; flex-direction: column; gap: 1.25rem;
+  border-block: 2px solid var(--ink); padding-block: 2rem;
+}
+.figure { display: flex; align-items: baseline; gap: .55rem; flex-wrap: wrap; }
+.figure .n {
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(3.2rem, 11vw, 5rem); line-height: .9;
+  letter-spacing: -.035em; font-variant-numeric: tabular-nums;
+}
+.figure .of { font-family: var(--display); font-size: 1.5rem; color: var(--muted); }
+.figure .unit { font-size: .95rem; color: var(--muted); flex-basis: 100%; margin-top: .2rem; }
+.headline .lede { font-size: 1.08rem; line-height: 1.6; max-width: 38ch; }
+.headline .lede b { color: var(--cost); font-weight: 600; }
+
+/* ---------- the ledger ---------- */
+.ledger { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.ledger td { padding: .5rem 0; border-bottom: 1px solid var(--rule); }
+.ledger td:last-child {
+  text-align: right; font-family: var(--mono);
+  font-variant-numeric: tabular-nums; white-space: nowrap; padding-left: 1rem;
+}
+.ledger tr.key td { font-weight: 600; }
+.ledger tr.key td:last-child { color: var(--cost); }
+.ledger td.indent { padding-left: 1.1rem; color: var(--muted); }
+
+/* ---------- findings ---------- */
+.finding { display: flex; flex-direction: column; gap: 1rem; }
+.fhead { display: flex; gap: 1rem; align-items: baseline; }
+.fnum {
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .1em;
+  color: var(--blue-ink); background: var(--blue-wash);
+  padding: .3rem .5rem; border-radius: 4px; flex: none; align-self: flex-start;
+}
+h2 {
+  font-family: var(--display); font-weight: 500;
+  font-size: clamp(1.5rem, 4.4vw, 1.95rem); line-height: 1.18;
+  letter-spacing: -.012em; margin: 0; text-wrap: balance;
+}
+.finding p + p { margin-top: -.3rem; }
+
+/* ---------- the convergence, finding 3 ---------- */
+.converge {
+  background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 10px; overflow: hidden;
+}
+.converge ul { margin: 0; padding: 0; list-style: none; }
+.converge li {
+  display: grid; grid-template-columns: 4.2rem 1fr; gap: .25rem 1rem;
+  padding: .85rem 1.1rem; align-items: baseline;
+}
+.converge li + li { border-top: 1px solid var(--rule); }
+.converge .count {
+  font-family: var(--mono); font-size: .9rem; font-weight: 500;
+  color: var(--cost); font-variant-numeric: tabular-nums;
+}
+.converge .what { font-size: .94rem; }
+.converge .foot {
+  background: var(--sunken); padding: .9rem 1.1rem;
+  font-size: .92rem; color: var(--muted); border-top: 1px solid var(--rule);
+}
+
+/* ---------- charts ---------- */
+figure { margin: 0; display: flex; flex-direction: column; gap: .7rem; }
+figure img {
+  width: 100%; max-width: 100%; display: block;
+  border: 1px solid var(--rule); border-radius: 8px; background: var(--surface);
+}
+figcaption { font-size: .85rem; color: var(--muted); line-height: 1.55; }
+
+/* ---------- scorecard ---------- */
+.scroller { overflow-x: auto; }
+.score { width: 100%; border-collapse: collapse; font-size: .9rem; min-width: 30rem; }
+.score th {
+  text-align: left; font-family: var(--mono); font-size: .66rem;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--faint);
+  padding: .5rem .8rem .5rem 0; border-bottom: 1px solid var(--rule-hi); font-weight: 500;
+}
+.score th:last-child, .score td:last-child { text-align: right; padding-right: 0; }
+.score td { padding: .55rem .8rem .55rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.score td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.score tr.total td { border-bottom: none; padding-top: .85rem; font-weight: 600; }
+.score tr.total td:last-child { color: var(--blue); }
+
+/* ---------- limits ---------- */
+.limits { display: flex; flex-direction: column; gap: .9rem; margin: 0; padding: 0; }
+.limits div { display: flex; flex-direction: column; gap: .15rem; }
+.limits dt { font-weight: 600; font-size: .95rem; }
+.limits dd { margin: 0; color: var(--muted); font-size: .93rem; line-height: 1.55; }
+
+/* ---------- section rule ---------- */
+.sec { display: flex; flex-direction: column; gap: 1.1rem; }
+.sec > h3 {
+  font-family: var(--display); font-weight: 500; font-size: 1.5rem;
+  letter-spacing: -.01em; margin: 0; padding-top: 1.4rem;
+  border-top: 2px solid var(--ink); text-wrap: balance;
+}
+.sec > p.intro { color: var(--muted); font-size: .97rem; max-width: 40ch; }
+
+/* ---------- run block ---------- */
+pre {
+  margin: 0; background: var(--sunken); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 1rem 1.1rem; overflow-x: auto;
+  font-family: var(--mono); font-size: .82rem; line-height: 1.7; color: var(--ink);
+}
+pre .c { color: var(--faint); }
+
+footer {
+  border-top: 1px solid var(--rule); padding-top: 1.4rem;
+  font-family: var(--mono); font-size: .72rem; color: var(--faint); line-height: 1.9;
+}
+footer a { color: var(--blue); }
+
+@media (max-width: 460px) {
+  .fhead { flex-direction: column; gap: .5rem; }
+  .converge li { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <p class="kicker">Clinical Care Gap Explorer</p>
+  <h1>Twenty-one patients three mistakes would have hidden</h1>
+  <p class="standfirst">Seven things that came out of building a care-gap pipeline, and the numbers behind each one.</p>
+  <p class="byline">
+    Synthea synthetic data · Massachusetts · 1,000 patients · as of 2026-08-23<br>
+    No real patient information. Every figure below is read from the pipeline output.
+  </p>
+</header>
+
+<section class="headline">
+  <div class="figure">
+    <span class="n">25</span><span class="of">of 116</span>
+    <span class="unit">living diabetic patients have had no A1c test in twelve months — 21.6%</span>
+  </div>
+  <p class="lede">
+    <b>21 of those 25 have never had one at all.</b> They carry a diabetic
+    complication but no diabetes diagnosis code. They are on no diabetes
+    medication. And most were seen by a clinician in the weeks before the
+    cut-off — one of them the day before.
+  </p>
+  <p class="lede">
+    They are not lost to the system. They are in the building, and nobody has
+    ordered the one test that says how bad it is.
+  </p>
+</section>
+
+<table class="ledger">
+  <tbody>
+    <tr><td>Patients generated</td><td>1,153</td></tr>
+    <tr><td>Carrying any diabetes code</td><td>161</td></tr>
+    <tr class="key"><td class="indent">…alive on the as-of date — the denominator</td><td>116</td></tr>
+    <tr class="key"><td>Open A1c gap</td><td>25 · 21.6%</td></tr>
+    <tr><td class="indent">…never tested at all</td><td>21</td></tr>
+    <tr><td class="indent">…last result over a year old</td><td>4</td></tr>
+    <tr><td>Due within the next 90 days</td><td>12</td></tr>
+    <tr><td>Last result at or above 7.0% — uncontrolled</td><td>19 of 95</td></tr>
+  </tbody>
+</table>
+
+<figure>
+  <img src="{{FUNNEL}}" alt="Funnel: 161 patients carry a diabetes code, 116 are alive on the as-of date, 25 have an open gap, 21 have never been tested">
+  <figcaption>Each step is a decision with a record attached, not a filter chosen to shape the number.</figcaption>
+</figure>
+
+<article class="finding">
+  <div class="fhead"><span class="fnum">01</span><h2>One diagnosis code misses 45% of the cohort</h2></div>
+  <p>The obvious definition is "patients with the type 2 diabetes code,
+  <code>44054006</code>". It yields 88 patients.</p>
+  <p>Another 73 carry a <em>complication</em> of diabetes — diabetic kidney
+  disease, retinopathy, neuropathy — with no underlying diagnosis code on file.
+  Their record says, in effect, <em>complication of a disease nobody wrote
+  down</em>.</p>
+  <p>Anchor on the single obvious code and 45% of the cohort disappears,
+  specifically the sicker half. This is not an artefact of synthetic data. It is
+  why published quality measures are defined by value sets — lists of dozens of
+  codes — rather than by one code.</p>
+</article>
+
+<article class="finding">
+  <div class="fhead"><span class="fnum">02</span><h2>An inner join deletes the highest-risk patients, silently</h2></div>
+  <p>The care-gap table is built by joining the cohort to each patient's most
+  recent A1c. Written with an inner join it has 95 rows and zero never-tested
+  patients. Written with a left join, 116 rows and 21.</p>
+  <figure>
+    <img src="{{JOIN}}" alt="Left join keeps 116 patients; inner join keeps 95 and silently deletes 21">
+    <figcaption>Both queries run without error, in milliseconds, and both look plausible.</figcaption>
+  </figure>
+  <p>The 21 patients it drops are <strong>84% of the open gaps</strong> — the
+  people who most need a call. A patient with no result has no row to join to,
+  so an inner join removes exactly the population the report exists to find.</p>
+  <p>The pipeline now asserts on every run that never-tested patients are
+  present and flagged. A test that fails when the bug returns is worth more than
+  knowing about the bug.</p>
+</article>
+
+<article class="finding">
+  <div class="fhead"><span class="fnum">03</span><h2>The never-tested are the complication-only patients</h2></div>
+  <p>Findings 1 and 2 are the same finding. Of the 21 patients who have never
+  been tested:</p>
+  <div class="converge">
+    <ul>
+      <li><span class="count">21 / 21</span><span class="what">carry no type 2 diabetes code</span></li>
+      <li><span class="count">21 / 21</span><span class="what">carry <em>disorder of kidney due to diabetes mellitus</em></span></li>
+      <li><span class="count">0 / 21</span><span class="what">are on insulin — against 45 of the 95 tested patients</span></li>
+      <li><span class="count">0 / 21</span><span class="what">are on any diabetes medication at all</span></li>
+    </ul>
+    <p class="foot">Most had been seen recently. The highest-priority patient on
+    the worklist had an encounter the day before the cut-off.</p>
+  </div>
+  <p>The pattern: patients who are <em>treated</em> get monitored. Insulin comes
+  with a pharmacist, a refill cycle and forced contact. A patient with a diabetic
+  complication on the problem list and no diabetes prescription has nobody
+  prompting the test.</p>
+  <p>Synthea's care model produces this. Real health systems do too.</p>
+</article>
+
+<article class="finding">
+  <div class="fhead"><span class="fnum">04</span><h2>Including the deceased inflated the gap nearly threefold</h2></div>
+  <p>The first profiling figure was 69 of 161 — 43%. It counted 45 patients who
+  had died before the cut-off, and the deceased carry most of the stale results
+  because nobody orders tests for them. The report was partly measuring
+  mortality.</p>
+  <p>A care-gap list is a call list. Excluding them gives 25 of 116. The number
+  got smaller and less impressive, and it is the right one.</p>
+</article>
+
+<article class="finding">
+  <div class="fhead"><span class="fnum">05</span><h2>The specification's own plausibility range was wrong</h2></div>
+  <p>The data quality spec proposed rejecting any A1c outside 3.0–20.0%. The
+  units were right. The floor was not.</p>
+  <figure>
+    <img src="{{FLOOR}}" alt="A1c distribution with 951 clean results falling below the proposed floor of 3.0">
+    <figcaption>951 of 8,941 untouched values sit below 3.0 — an 11% false-positive rate before a single defect had been injected.</figcaption>
+  </figure>
+  <p>A check that fires on clean input makes the catch rate meaningless, and the
+  catch rate is the number this project exists to report. Floor revised to 2.0.</p>
+  <p>The lesson is not that one threshold was wrong. It is that a threshold
+  written from domain knowledge and never checked against the data is a guess
+  wearing a lab coat.</p>
+</article>
+
+<article class="finding">
+  <div class="fhead"><span class="fnum">06</span><h2>"Same seed" did not mean same data</h2></div>
+  <p>Regenerating with the original command four weeks later produced 1,151
+  patients instead of 1,142, with every table 4–6% larger.</p>
+  <p>The seed pins the patient generator. It does not pin the clinician seed,
+  the reference date, or the simulation's end date — all three default to the
+  wall clock, so running it a month later simulates a month more history. Each
+  was found by pinning one and seeing what still moved.</p>
+  <figure>
+    <img src="{{DRIFT}}" alt="Open gaps climb from 25 to 116 as the assumed current date moves forward">
+    <figcaption>The same reason the reporting date is frozen: the data stops, the calendar does not.</figcaption>
+  </figure>
+  <p>Two lessons. <strong>The seed controls the data, not the calendar</strong> —
+  any generator with a notion of "now" needs "now" pinned too. And
+  <strong>reproducible means same content, not same bytes</strong>: the export is
+  multithreaded, so row order varies between runs and comparing checksums
+  reported a difference that did not exist.</p>
+</article>
+
+<article class="finding">
+  <div class="fhead"><span class="fnum">07</span><h2>A third of observations are words, not numbers</h2></div>
+  <p>315,450 of 870,510 observations carry text results — smoking status, survey
+  answers. Casting that column to a number would null every one of them while
+  the row sat in the validated layer looking clean.</p>
+  <p>A silent drop in disguise, and the kind that survives review because
+  nothing errors and the row count does not change. The validated layer keeps the
+  original text for every row; the numeric column is populated only where the
+  source was numeric, and the null counts reconcile.</p>
+</article>
+
+<section class="sec">
+  <h3>How the checks were scored</h3>
+  <p class="intro">249 rows damaged on purpose, in six realistic ways, each one
+  logged. Without that log a catch rate is a claim — "I found twelve problems"
+  says nothing about whether that was twelve of twelve or twelve of four
+  hundred.</p>
+  <div class="scroller">
+    <table class="score">
+      <thead>
+        <tr><th>Defect, and what causes it in a real system</th><th>Injected</th><th>Caught</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Duplicate encounters — an interface replayed the message</td><td class="num">40</td><td class="num">40</td></tr>
+        <tr><td>Observations with no patient — a failed foreign key on ingest</td><td class="num">150</td><td class="num">150</td></tr>
+        <tr><td>An A1c of 250 — mg/dL glucose keyed into a percent field</td><td class="num">20</td><td class="num">20</td></tr>
+        <tr><td>Birth date in the future — a registration typo</td><td class="num">8</td><td class="num">8</td></tr>
+        <tr><td>Discharge before admission — clock drift between systems</td><td class="num">25</td><td class="num">25</td></tr>
+        <tr><td>The same person registered twice — two sites, one patient</td><td class="num">6</td><td class="num">6</td></tr>
+        <tr class="total"><td>Six defect types</td><td class="num">249</td><td class="num">249</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Each was caught by the check meant for it — a defect found by a different
+  check is a coincidence, not a working check, and the score counts it as a miss.
+  The 20 impossible A1c values were corrected rather than discarded, with the
+  original kept and the row flagged, so a reviewer who disagrees can exclude them
+  in one clause. The six duplicate registrations went to a human; nothing was
+  merged, because a wrong merge combines two people's medication lists.</p>
+  <p>On every table, <code>bronze = silver + quarantine</code> balances, and the
+  pipeline stops if it does not.</p>
+</section>
+
+<section class="sec">
+  <h3>What the number cannot see</h3>
+  <p class="intro">Stated here rather than left for a reader to discover.</p>
+  <dl class="limits">
+    <div>
+      <dt>Whether the test was ordered</dt>
+      <dd>There is no orders table. "We ordered it and the patient never went" and
+      "we never ordered it" are the same row here. On real data they are different
+      failures needing different interventions.</dd>
+    </div>
+    <div>
+      <dt>Results held somewhere else</dt>
+      <dd>Invisible. The measure is really "no result <em>we can see</em>", which
+      is what every care-gap report measures.</dd>
+    </div>
+    <div>
+      <dt>Whether anyone can reach them</dt>
+      <dd>The source data has address and postcode but no phone and no email. The
+      date they were last seen is the honest proxy.</dd>
+    </div>
+    <div>
+      <dt>Who is lost to follow-up</dt>
+      <dd>Zero of 116 — these synthetic patients never disappear. The column was
+      dropped rather than shipped always-false.</dd>
+    </div>
+    <div>
+      <dt>Hospice and the other measure exclusions</dt>
+      <dd>Not implemented. This models the idea of a published quality measure,
+      not the certified measure, and says so on every page.</dd>
+    </div>
+  </dl>
+</section>
+
+<section class="sec">
+  <h3>Reproduce it</h3>
+  <pre>make generate   <span class="c"># Synthea, then the whole pipeline (~4 min, needs Java 17)</span>
+make run        <span class="c"># rebuild from existing data (~13 s)</span>
+make test       <span class="c"># 121 tests</span></pre>
+  <p>Every figure on this page comes from the pipeline's own output files after a
+  run. A clean clone, following the instructions exactly, reproduces all of them
+  in 180 seconds — which is itself finding 6 being tested rather than asserted.</p>
+</section>
+
+<footer>
+  Clinical Care Gap Explorer · synthetic data only, no real patients<br>
+  <a href="https://franklin0603.github.io/clinical-care-gap-explorer/">Live demo</a> ·
+  <a href="https://github.com/Franklin0603/clinical-care-gap-explorer">Source</a>
+</footer>
+
+</div>
