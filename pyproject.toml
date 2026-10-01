@@ -32,6 +32,11 @@ caregap = "caregap.cli:main"
 [tool.setuptools.packages.find]
 where = ["src"]
 
+# The .sql files are part of the package, not incidental data: an installed
+# copy that cannot find them cannot run a single stage.
+[tool.setuptools.package-data]
+caregap = ["sql/**/*.sql"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 # A src layout needs the package on the path. Declaring it here rather than

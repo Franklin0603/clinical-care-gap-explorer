@@ -21,6 +21,7 @@ import os
 
 import duckdb
 
+from caregap import sql
 from caregap.domain import schemas
 from caregap.config import DB, RAW, SOURCES
 
@@ -58,13 +59,7 @@ def load(con, name):
     path = f"{RAW}/{name}.csv"
     header = con.sql(f"SELECT * FROM read_csv_auto('{path}', all_varchar = true) LIMIT 0").columns
     schemas.check(name, header)
-    con.sql(f"""
-        CREATE OR REPLACE TABLE bronze_{name} AS
-        SELECT *,
-               current_timestamp AS _loaded_at,
-               '{name}.csv'      AS _source_file
-        FROM read_csv_auto('{path}', all_varchar = true)
-    """)
+    con.sql(sql.load("bronze/load.sql", table=name, path=path))
 
 
 def verify(con):

@@ -24,6 +24,7 @@ import json
 
 import duckdb
 
+from caregap import sql
 from caregap.domain.checks import CHECKS, DEFECT_FOR, OBS_KEY, REVIEW
 from caregap.domain.cohort import DIABETES_CODES
 from caregap.config import (
@@ -133,49 +134,8 @@ def _run_review(con, check):
 # ------------------------------------------------------------------ 3.8 Silver
 
 def build_silver(con):
-    """Surviving rows only, with real types. Column names per DATA_DICTIONARY.md.
-
-    observations.value is DOUBLE, but 315,450 observations carry text results
-    (smoking status, survey answers). TRY_CAST would null them while the row sat
-    in Silver looking clean, so value_text keeps the original for every row.
-    """
-    con.sql(f"""
-        CREATE OR REPLACE TABLE silver_patients AS
-        SELECT Id AS patient_id, Id AS mrn,                       -- Synthea has no MRN
-               BIRTHDATE::DATE AS birth_date, TRY_CAST(DEATHDATE AS DATE) AS death_date,
-               GENDER AS sex, FIRST AS first_name, LAST AS last_name, 'clean' AS _dq_status
-        FROM bronze_patients WHERE Id NOT IN (SELECT Id FROM rej_DQ4);
-
-        CREATE OR REPLACE TABLE silver_encounters AS
-        SELECT Id AS encounter_id, PATIENT AS patient_id,
-               START::TIMESTAMP AS admission_ts, TRY_CAST(STOP AS TIMESTAMP) AS discharge_ts,
-               ENCOUNTERCLASS AS encounter_type, CODE AS snomed_code, DESCRIPTION AS description,
-               'clean' AS _dq_status
-        FROM bronze_encounters
-        WHERE rowid NOT IN (SELECT rid FROM rej_DQ1) AND rowid NOT IN (SELECT rowid FROM rej_DQ5);
-
-        CREATE OR REPLACE TABLE silver_conditions AS
-        SELECT PATIENT AS patient_id, ENCOUNTER AS encounter_id, CODE AS snomed_code,
-               DESCRIPTION AS description, START::DATE AS onset_date, TRY_CAST(STOP AS DATE) AS resolved_date,
-               'clean' AS _dq_status
-        FROM bronze_conditions;
-
-        CREATE OR REPLACE TABLE silver_observations AS
-        SELECT o.PATIENT AS patient_id, o.ENCOUNTER AS encounter_id, o.CODE AS loinc_code,
-               o.DESCRIPTION AS description,
-               coalesce(m.corrected, TRY_CAST(o.VALUE AS DOUBLE)) AS value,
-               o.VALUE AS value_text, o.UNITS AS unit, o.DATE::TIMESTAMP AS observed_at,
-               CASE WHEN m.row_key IS NOT NULL THEN 'remediated' ELSE 'clean' END AS _dq_status
-        FROM bronze_observations o
-        LEFT JOIN rem_DQ3 m ON m.row_key = coalesce(o.ENCOUNTER, '') || '|' || o.CODE || '|' || o.DATE
-        WHERE o.rowid NOT IN (SELECT rowid FROM rej_DQ2) AND o.rowid NOT IN (SELECT rowid FROM rej_DQ3);
-
-        CREATE OR REPLACE TABLE silver_medications AS
-        SELECT PATIENT AS patient_id, ENCOUNTER AS encounter_id, CODE AS rxnorm_code,
-               DESCRIPTION AS description, START::DATE AS start_date, TRY_CAST(STOP AS DATE) AS end_date,
-               'clean' AS _dq_status
-        FROM bronze_medications;
-    """)
+    """Bronze minus the rejected rows, typed. The query is in sql/silver/build.sql."""
+    con.sql(sql.load("silver/build.sql"))
 
 
 # ------------------------------------------------------- 3.10 reconciliation
