@@ -32,7 +32,9 @@ export default function AskView() {
   // Keyed by role rather than reset on role change: a settled status belongs to the
   // role it was settled for, so switching role reads as "loading" without an effect
   // having to synchronously set it back (react-hooks/set-state-in-effect).
-  const [settled, setSettled] = useState<{ role: Role; status: "ready" | "error" } | null>(null);
+  const [settled, setSettled] = useState<
+    { role: Role; status: "ready" } | { role: Role; status: "error"; why: string } | null
+  >(null);
   const engine = settled?.role === role ? settled.status : "loading";
   const conn = useRef<Awaited<ReturnType<typeof connect>> | null>(null);
   const bottom = useRef<HTMLDivElement>(null);
@@ -44,7 +46,14 @@ export default function AskView() {
     conn.current = null;
     connect(role, BASE)
       .then((c) => { if (live) { conn.current = c; setSettled({ role, status: "ready" }); } })
-      .catch(() => { if (live) setSettled({ role, status: "error" }); });
+      /* Keep the reason. A bare catch here hid a dead query engine behind
+         "unavailable" for as long as this page has existed — the page looked
+         fine and answered nothing. */
+      .catch((e: unknown) => {
+        const why = e instanceof Error ? e.message : String(e);
+        console.error("query engine failed to start:", e);
+        if (live) setSettled({ role, status: "error", why });
+      });
     return () => { live = false; };
   }, [role]);
 
@@ -247,6 +256,14 @@ export default function AskView() {
               {engine === "ready" && `${roleMeta[role].patients} patients · ${roleMeta[role].columns.length} columns visible`}
               {engine === "error" && "query engine unavailable"}
             </Badge>
+            {settled?.status === "error" && settled.role === role && (
+              <Badge
+                variant="outline"
+                className="max-w-md border-destructive/40 font-normal text-destructive"
+              >
+                {settled.why}
+              </Badge>
+            )}
             <span>
               A query builder, not a language model — there is no server to hold an
               API key. The SQL shown is the SQL that ran.

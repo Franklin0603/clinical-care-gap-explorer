@@ -117,9 +117,19 @@ async function getDb(): Promise<duckdb.AsyncDuckDB> {
     dbPromise = (async () => {
       const bundles = duckdb.getJsDelivrBundles();
       const bundle = await duckdb.selectBundle(bundles);
-      const worker = new Worker(bundle.mainWorker!);
+
+      // The worker script lives on jsDelivr, and `new Worker(crossOriginUrl)`
+      // is a SecurityError in every browser — a worker must come from this
+      // origin. So load it from a same-origin blob that importScripts the CDN
+      // copy, which is the pattern duckdb-wasm's own CDN example uses.
+      // Without this the engine never starts and the Ask page answers nothing.
+      const workerUrl = URL.createObjectURL(
+        new Blob([`importScripts("${bundle.mainWorker!}");`], { type: "text/javascript" }),
+      );
+      const worker = new Worker(workerUrl);
       const db = new duckdb.AsyncDuckDB(new duckdb.ConsoleLogger(duckdb.LogLevel.ERROR), worker);
       await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
+      URL.revokeObjectURL(workerUrl);
       return db;
     })();
   }
