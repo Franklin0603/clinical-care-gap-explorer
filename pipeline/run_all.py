@@ -15,11 +15,15 @@ import shutil
 import subprocess
 import sys
 import time
+import uuid
+from datetime import datetime, timezone
 
+import config
 import corrupt
 import export_web
 import gold
 import load_bronze
+import manifest
 import validate
 
 SYNTHEA = [
@@ -34,11 +38,16 @@ SYNTHEA = [
 ]
 
 
+TIMINGS: dict[str, float] = {}
+
+
 def stage(name, fn):
     t = time.time()
     print(f"\n==== {name} {'=' * (60 - len(name))}")
     fn()
-    print(f"---- {name} done in {time.time() - t:.1f}s")
+    elapsed = time.time() - t
+    TIMINGS[name] = elapsed
+    print(f"---- {name} done in {elapsed:.1f}s")
 
 
 JAR = "synthea/synthea-with-dependencies.jar"
@@ -74,6 +83,8 @@ def main():
     args = ap.parse_args()
 
     t0 = time.time()
+    run_id = uuid.uuid4().hex[:8]
+    started = datetime.now(timezone.utc)
     if args.generate:
         stage("synthea", generate)
     if args.fresh and os.path.exists(load_bronze.DB):
@@ -94,7 +105,24 @@ def main():
     stage("validate", validate.main)
     stage("gold", gold.main)
     stage("export_web", export_web.main)   # the site reads a build-time snapshot (D9)
-    print(f"\nSynthea-to-Gold complete in {time.time() - t0:.1f}s")
+
+    # Record what this run did. Without it a warehouse file cannot say when it
+    # was built, from which commit, or whether its numbers moved.
+    import duckdb
+
+    con = duckdb.connect(str(config.DB))
+    row = manifest.record(con, run_id, started, datetime.now(timezone.utc), TIMINGS)
+    changes = manifest.compare(row)
+    con.close()
+
+    print(f"\n==== run {run_id} {'=' * (54 - len(run_id))}")
+    print(f"  {row['git_sha']}  ·  as of {row['asof']}  ·  {row['duration_s']}s")
+    print("  " + "  ".join(f"{k} {v:,}" for k, v in row["row_counts"].items()))
+    if changes:
+        print("  changed since the previous run:")
+        for c in changes:
+            print(f"    {c}")
+    print(f"  -> {manifest.LOG.relative_to(config.ROOT)}")
 
 
 if __name__ == "__main__":

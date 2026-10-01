@@ -1,0 +1,120 @@
+{
+ "runs": [
+  {
+   "run_id": "34308cda",
+   "started_at": "2026-10-01T01:45:02+00:00",
+   "finished_at": "2026-10-01T01:45:15+00:00",
+   "duration_s": 13.3,
+   "git_sha": "58c0579-dirty",
+   "asof": "2026-08-23",
+   "python": "3.12 on Darwin",
+   "stages": {
+    "load_bronze": 4.9,
+    "corrupt": 5.1,
+    "validate": 2.6,
+    "gold": 0.4,
+    "export_web": 0.3
+   },
+   "row_counts": {
+    "bronze": 1039548,
+    "silver": 1039325,
+    "quarantined": 223,
+    "remediated": 20,
+    "gold": 116
+   },
+   "metrics": {
+    "cohort": 116,
+    "open_gaps": 25,
+    "never_tested": 21,
+    "identity_review_pending": 6
+   }
+  },
+  {
+   "run_id": "96126fa9",
+   "started_at": "2026-10-01T01:44:48+00:00",
+   "finished_at": "2026-10-01T01:45:01+00:00",
+   "duration_s": 13.3,
+   "git_sha": "58c0579-dirty",
+   "asof": "2026-08-23",
+   "python": "3.12 on Darwin",
+   "stages": {
+    "load_bronze": 4.7,
+    "corrupt": 5.2,
+    "validate": 2.6,
+    "gold": 0.5,
+    "export_web": 0.3
+   },
+   "row_counts": {
+    "bronze": 1039548,
+    "silver": 1039325,
+    "quarantined": 223,
+    "remediated": 20,
+    "gold": 116
+   },
+   "metrics": {
+    "cohort": 116,
+    "open_gaps": 50,
+    "never_tested": 21,
+    "identity_review_pending": 6
+   }
+  },
+  {
+   "run_id": "bcca732d",
+   "started_at": "2026-10-01T01:44:34+00:00",
+   "finished_at": "2026-10-01T01:44:47+00:00",
+   "duration_s": 13.2,
+   "git_sha": "58c0579-dirty",
+   "asof": "2026-08-23",
+   "python": "3.12 on Darwin",
+   "stages": {
+    "load_bronze": 4.5,
+    "corrupt": 4.9,
+    "validate": 3.0,
+    "gold": 0.4,
+    "export_web": 0.3
+   },
+   "row_counts": {
+    "bronze": 1039548,
+    "silver": 1039325,
+    "quarantined": 223,
+    "remediated": 20,
+    "gold": 116
+   },
+   "metrics": {
+    "cohort": 116,
+    "open_gaps": 25,
+    "never_tested": 21,
+    "identity_review_pending": 6
+   }
+  },
+  {
+   "run_id": "8d60231b",
+   "started_at": "2026-10-01T01:44:02+00:00",
+   "finished_at": "2026-10-01T01:44:15+00:00",
+   "duration_s": 13.4,
+   "git_sha": "58c0579-dirty",
+   "asof": "2026-08-23",
+   "python": "3.12 on Darwin",
+   "stages": {
+    "load_bronze": 4.6,
+    "corrupt": 5.1,
+    "validate": 2.9,
+    "gold": 0.4,
+    "export_web": 0.3
+   },
+   "row_counts": {
+    "bronze": 1039548,
+    "silver": 1039325,
+    "quarantined": 223,
+    "remediated": 20,
+    "gold": 116
+   },
+   "metrics": {
+    "cohort": 116,
+    "open_gaps": 25,
+    "never_tested": 21,
+    "identity_review_pending": 6
+   }
+  }
+ ]
+}

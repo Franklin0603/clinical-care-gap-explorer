@@ -21,6 +21,7 @@ import os
 
 import duckdb
 
+import schemas
 from config import DB, RAW, SOURCES
 
 LINEAGE = ("_loaded_at", "_source_file")
@@ -48,8 +49,15 @@ def csv_row_count(path):
 
 
 def load(con, name):
-    """Load one CSV into bronze_<name>, as text, with lineage attached."""
+    """Load one CSV into bronze_<name>, as text, with lineage attached.
+
+    The schema contract is checked first, so a source that changed shape fails
+    here - naming the file and the missing columns - rather than as a binder
+    error deep in Silver.
+    """
     path = f"{RAW}/{name}.csv"
+    header = con.sql(f"SELECT * FROM read_csv_auto('{path}', all_varchar = true) LIMIT 0").columns
+    schemas.check(name, header)
     con.sql(f"""
         CREATE OR REPLACE TABLE bronze_{name} AS
         SELECT *,
