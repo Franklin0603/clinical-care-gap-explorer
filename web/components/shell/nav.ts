@@ -25,15 +25,16 @@ export const NAV: NavItem[] = [
     href: "/pipeline",
     label: "Pipeline",
     icon: "Workflow",
-    blurb: "Five stages, and the checks between them",
+    blurb: "Four stages, and the checks between them",
+    /* Every entry must land on a section that answers to its name. Dropped
+       "Ingest", which pointed at the stage-overview grid rather than a section
+       of its own, and "Gold", whose anchor only ever hit a card in that grid. */
     items: [
-      { href: "/pipeline#ingest", label: "Ingest" },
-      { href: "/pipeline#corrupt", label: "Inject defects" },
-      { href: "/pipeline#validate", label: "Validate" },
+      { href: "/pipeline#reconciliation", label: "Reconciliation" },
+      { href: "/pipeline#validate", label: "The six checks" },
       { href: "/pipeline#quarantine", label: "Quarantine" },
       { href: "/pipeline#identity", label: "Identity review" },
       { href: "/pipeline#remediation", label: "Remediation" },
-      { href: "/pipeline#gold", label: "Gold" },
     ],
   },
   {

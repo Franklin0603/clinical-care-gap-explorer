@@ -121,8 +121,8 @@ export default function AskView() {
                 What would you like to know about the cohort?
               </h2>
               <p className="mx-auto max-w-md text-sm text-muted-foreground">
-                Pick a question, or write a SELECT statement. Only a single SELECT
-                runs — it is more interesting when you try to break that.
+                Ask in plain words. These are the questions a physician, a nurse or a
+                care technician asks on the floor — pick one, or type your own.
               </p>
             </div>
             <div className="flex max-w-3xl flex-wrap justify-center gap-2">
@@ -228,7 +228,7 @@ export default function AskView() {
                 if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); ask(input); }
               }}
               rows={1}
-              placeholder="Ask a question, or write a SELECT statement…"
+              placeholder="Ask about these patients…"
               className="max-h-40 min-h-9 flex-1 resize-none bg-transparent px-2 py-1.5 text-sm outline-none placeholder:text-muted-foreground"
             />
             <Button type="submit" size="icon" disabled={busy || !input.trim()} className="size-9 rounded-xl">

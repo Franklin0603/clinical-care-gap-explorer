@@ -20,7 +20,9 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Term } from "@/components/Term";
 
-/** The five stages, as the sidebar's subtasks list them. */
+/** The four stages, as overview cards. The sidebar's subtasks anchor to the
+ *  sections below instead — these cards carry no id, or the anchors would be
+ *  ambiguous between a card and the section of the same name. */
 const STAGES = [
   { id: "ingest", icon: Database, name: "Ingest", sub: "Raw CSVs into Bronze",
     detail: "Every column loaded as text. Nothing cast, deduped or filtered — the only additions are a load timestamp and the source filename.",
@@ -46,7 +48,7 @@ export default function PipelineView() {
   return (
     <Page
       title="Pipeline"
-      blurb="Five stages, and the checks between them"
+      blurb="Four stages, and the checks between them"
       actions={
         <Badge variant="outline" className="gap-1.5">
           <CheckCircle2 className="size-3.5 text-primary" />
@@ -55,13 +57,13 @@ export default function PipelineView() {
       }
     >
       <Section
-        id="ingest"
+        id="stages"
         title="The stages"
         blurb="Each is re-runnable and verifies its own work. A stage that cannot prove what it did raises rather than printing a warning nobody reads."
       >
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {STAGES.map((s, i) => (
-            <Card key={s.id} id={s.id} className="scroll-mt-20">
+            <Card key={s.id}>
               <CardHeader className="pb-3">
                 <div className="flex items-center gap-2">
                   <s.icon className="size-4 text-primary" />
@@ -80,7 +82,7 @@ export default function PipelineView() {
       </Section>
 
       <Section
-        id="corrupt"
+        id="reconciliation"
         title="Nothing is silently dropped"
         blurb={<>For every table, <Term k="bronze">bronze</Term> rows must equal <Term k="silver">silver</Term> rows plus <Term k="quarantine">quarantined</Term> rows. The pipeline asserts this on every run and stops when it fails — which is what turns the claim into a property somebody can check.</>}
       >
@@ -119,7 +121,7 @@ export default function PipelineView() {
       <Section
         id="validate"
         title="The six checks"
-        blurb="Each defect has a real operational cause — knowing the cause is the difference between “duplicate rows” and “an interface replayed the message”. A defect found by the wrong check is a coincidence, so the score only counts a check that caught its own."
+        blurb="Each check cleans one failure mode, and each has a real operational cause — knowing the cause is the difference between “duplicate rows” and “an interface replayed the message”, which is what tells you whether to fix the data or the interface. Every row a check catches is quarantined with its reason attached, never dropped."
       >
         <Card>
           <Table>
@@ -128,8 +130,7 @@ export default function PipelineView() {
                 <TableHead>Check</TableHead>
                 <TableHead>Rule</TableHead>
                 <TableHead>What causes it in a real system</TableHead>
-                <TableHead className="text-right">Injected</TableHead>
-                <TableHead className="text-right">Caught</TableHead>
+                <TableHead className="text-right">Rows cleaned</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -141,9 +142,18 @@ export default function PipelineView() {
                   </TableCell>
                   <TableCell className="max-w-[16rem] text-muted-foreground">{c.rule}</TableCell>
                   <TableCell className="max-w-[16rem] text-muted-foreground">{c.cause}</TableCell>
-                  <TableCell className="num text-right">{c.injected}</TableCell>
+                  {/* Coloured against c.injected without showing it: a check that
+                      left something behind should look wrong here, and the count it
+                      was scored against belongs in the defect-injection section. */}
                   <TableCell className="num text-right font-semibold">
-                    <span className={c.caught === c.injected ? "text-primary" : "text-destructive"}>
+                    <span
+                      className={c.caught === c.injected ? "text-primary" : "text-destructive"}
+                      title={
+                        c.caught === c.injected
+                          ? "This check caught every row it was responsible for"
+                          : `This check left ${c.injected - c.caught} rows uncaught`
+                      }
+                    >
                       {c.caught}
                     </span>
                   </TableCell>
