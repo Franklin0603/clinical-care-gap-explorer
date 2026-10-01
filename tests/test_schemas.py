@@ -40,10 +40,15 @@ def test_extra_columns_are_allowed():
 
 
 def test_contracts_only_claim_columns_we_actually_read():
-    """A contract listing an unused column would lie about the real coupling."""
+    """A contract listing an unused column would lie about the real coupling.
+
+    Scans every module in the package rather than a hand-maintained list. An
+    earlier version named the files explicitly and broke the moment DQ6's
+    identity matching moved from validate.py into checks.py - the contract was
+    still honest, the test had just gone stale.
+    """
     sources = "\n".join(
-        (config.ROOT / "pipeline" / f).read_text()
-        for f in ("load_bronze.py", "corrupt.py", "validate.py", "gold.py", "export_web.py", "cohort.py")
+        f.read_text() for f in sorted((config.ROOT / "pipeline").glob("*.py"))
     )
     unused = [
         (table, col)

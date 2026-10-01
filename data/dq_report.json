@@ -1,5 +1,55 @@
 {
  "asof": "2026-08-23",
+ "checks": [
+  {
+   "id": "DQ1",
+   "name": "Encounter uniqueness",
+   "rule": "One row per patient and encounter",
+   "cause": "An interface replayed the message",
+   "catches": "D1",
+   "action": "QUARANTINE"
+  },
+  {
+   "id": "DQ2",
+   "name": "Referential integrity",
+   "rule": "Every observation points at a patient that exists",
+   "cause": "A result arrived with an unresolvable patient id",
+   "catches": "D2",
+   "action": "QUARANTINE"
+  },
+  {
+   "id": "DQ3",
+   "name": "A1c plausibility",
+   "rule": "A1c between 2.0 and 20.0 percent",
+   "cause": "A glucose in mg/dL keyed into a percent field",
+   "catches": "D3",
+   "action": "QUARANTINE"
+  },
+  {
+   "id": "DQ4",
+   "name": "Birth date sanity",
+   "rule": "In the past, implied age 120 or less",
+   "cause": "A registration typo in the year",
+   "catches": "D4",
+   "action": "QUARANTINE"
+  },
+  {
+   "id": "DQ5",
+   "name": "Encounter chronology",
+   "rule": "Discharge is not before admission",
+   "cause": "Clock drift between two systems",
+   "catches": "D5",
+   "action": "QUARANTINE"
+  },
+  {
+   "id": "DQ6",
+   "name": "Patient identity",
+   "rule": "No two patients share a name and birth date",
+   "cause": "The same person registered twice",
+   "catches": "D6",
+   "action": "REVIEW"
+  }
+ ],
  "a1c_range": [
   2.0,
   20.0

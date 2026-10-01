@@ -52,7 +52,7 @@
   "days_overdue": null,
   "a1c_count_2y": 0,
   "last_a1c_controlled": null,
-  "priority": 4,
+  "priority": 3,
   "active_med_count": 6,
   "on_insulin": false
  },
@@ -71,7 +71,7 @@
   "days_overdue": null,
   "a1c_count_2y": 0,
   "last_a1c_controlled": null,
-  "priority": 3,
+  "priority": 4,
   "active_med_count": 11,
   "on_insulin": false
  },
