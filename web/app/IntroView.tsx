@@ -35,10 +35,7 @@ export default function IntroView() {
               An <Term k="a1c">A1c</Term> measures average blood sugar over about three
               months. A diabetic patient is meant to have one roughly every six months.
               When twelve months pass with no result, that is a{" "}
-              <Term k="care gap">care gap</Term> — and this finds them.
-            </p>
-            <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">
-              The query is four lines of SQL. The project is not about the query.
+              <Term k="care gap">care gap</Term>, and this project finds them.
             </p>
             <p className="text-sm text-muted-foreground">
               New to clinical data? The{" "}
@@ -70,7 +67,7 @@ export default function IntroView() {
               <Card>
                 <CardHeader><CardTitle className="text-sm">A false positive</CardTitle></CardHeader>
                 <CardContent className="text-sm text-muted-foreground">
-                  A wasted call to someone who already had the test — their result was
+                  A wasted call to someone who already had the test. Their result was
                   filed under a duplicate record, or with a broken link back to the
                   patient.
                 </CardContent>
@@ -88,7 +85,7 @@ export default function IntroView() {
               units, patients registered twice under different record numbers, and
               timestamps that contradict each other. So the build order is: load it,
               deliberately break it, catch the breakage, measure what fraction was
-              caught — and only then report the gaps.
+              caught, and only then report the gaps.
             </p>
           </section>
 
@@ -139,7 +136,7 @@ export default function IntroView() {
                 {[
                   ["bronze", "Bronze", fmt(layerTotals.bronze), "Raw CSVs, every column text, nothing cleaned"],
                   ["silver", "Silver", fmt(layerTotals.silver), "Typed and validated; rejects quarantined with a reason"],
-                  ["gold", "Gold", String(gold.cohort), "One row per diabetic patient — the care-gap list"],
+                  ["gold", "Gold", String(gold.cohort), "One row per diabetic patient. This is the care-gap list"],
                 ].map(([key, layer, rows, what]) => (
                   <div key={layer} className="flex flex-col gap-1 bg-card p-5">
                     <div className="text-xs font-medium uppercase tracking-wider text-primary">
@@ -167,11 +164,11 @@ export default function IntroView() {
           <div className="grid gap-3 sm:grid-cols-2">
             {[
               ["Synthea patients are fictional", "Their care is more diligent than a real population's, so the gap rate here is not a claim about any real clinic."],
-              ["There is no orders table", "“We ordered it and the patient never went” is indistinguishable from “we never ordered it”. On real data those are different failures needing different interventions."],
+              ["There is no orders table", "A clinician can order an A1c and the patient simply never goes for the test. That patient looks exactly the same here as one nobody ever ordered a test for, because this data only records results, never requests. In a real clinic they are two different problems: the first needs someone to call the patient, the second needs someone to ask the clinician why no test was ordered."],
               ["No phone, no email", "Whether a patient can actually be reached has no answer here. The date they were last seen is the honest proxy."],
-              ["Nobody is lost to follow-up", "Zero of 116 — these synthetic patients never disappear. The column was dropped rather than shipped always-false."],
+              ["Nobody is lost to follow-up", "Zero of 116. These synthetic patients never disappear, so the column was dropped rather than shipped always false."],
               ["The defects are the ones injected", "The catch rate measures the checks against a known list, not against reality. Real data fails in ways nobody wrote a rule for."],
-              ["Not a certified quality measure", "This implements the idea of the HEDIS diabetes measure, not the specification — which has enrolment requirements, exclusion criteria and hospice carve-outs this does not."],
+              ["Not a certified quality measure", "This implements the idea of the HEDIS diabetes measure, not the specification. The real one has enrolment requirements, exclusion criteria and hospice carve-outs that this does not."],
             ].map(([t, d]) => (
               <div key={t} className="rounded-lg border p-4">
                 <div className="text-sm font-medium">{t}</div>

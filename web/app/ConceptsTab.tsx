@@ -22,8 +22,8 @@ export function ConceptsTab() {
             A person with type 2 diabetes is supposed to get a blood test called an{" "}
             <strong>A1c</strong> roughly every six months. It measures average blood
             sugar over the previous three months. If that number drifts upward and
-            nobody notices, the damage lands on kidneys, eyes and nerves — slowly,
-            and then all at once.
+            nobody notices, the damage lands on kidneys, eyes and nerves, slowly at
+            first and then all at once.
           </p>
           <p className="text-muted-foreground">
             Sometimes nobody notices. The patient moves, changes doctors, misses an
@@ -49,7 +49,7 @@ export function ConceptsTab() {
               One system writes <code className="font-mono text-xs">Diabetes mellitus type 2</code>,
               another <code className="font-mono text-xs">DM Type II</code>, a third{" "}
               <code className="font-mono text-xs">T2DM</code>, a fourth{" "}
-              <code className="font-mono text-xs">NIDDM</code> — a term abandoned in the
+              <code className="font-mono text-xs">NIDDM</code>, a term abandoned in the
               1990s. All four mean the same thing and no text match will ever catch
               them all. Worse, a display string can be quietly reworded by a vendor
               during a routine upgrade, and a report breaks without erroring.
@@ -91,15 +91,16 @@ export function ConceptsTab() {
               The result value and its unit are stored in separate columns.
             </p>
             <p>
-              An A1c is reported in <strong className="text-foreground">percent</strong> —
-              around 5 is normal, 9 is poorly controlled. Blood glucose is reported in{" "}
+              An A1c is reported in <strong className="text-foreground">percent</strong>,
+              where around 5 is normal and 9 is poorly controlled. Blood glucose is
+              reported in{" "}
               <strong className="text-foreground">mg/dL</strong>, where normal is around
               90. Put a mg/dL value into a percent field and you get an A1c of 250:
               biologically impossible, and a perfectly valid number as far as the
               database is concerned.
             </p>
             <p className="rounded-lg border border-destructive/30 bg-destructive/5 p-3 text-foreground">
-              No type system catches that. Only a range check does — which is why one
+              No type system catches that. Only a range check does, which is why one
               of the six checks is a plausibility range, and why getting that range
               wrong mattered.
             </p>
@@ -112,7 +113,7 @@ export function ConceptsTab() {
           <h3 className="text-base font-semibold">Every term, defined</h3>
           <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
             Grouped by what they are about rather than alphabetically. Terms used
-            elsewhere in this app carry the same definition inline — look for the
+            elsewhere in this app carry the same definition inline. Look for the
             dotted underline.
           </p>
         </div>
@@ -152,7 +153,7 @@ export function ConceptsTab() {
           <ArrowRight className="size-4 shrink-0 text-primary" />
           <span>
             That is the whole vocabulary. Everything else on this site is ordinary
-            data engineering — layers, checks, and a reconciliation that has to
+            data engineering: layers, checks, and a reconciliation that has to
             balance.
           </span>
         </CardContent>
