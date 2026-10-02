@@ -71,7 +71,15 @@ def main():
     except anthropic.APIConnectionError as e:
         sys.exit(f"Could not reach the API: {e.__cause__}")
 
-    print(resp.content[0].text)
+    # Not resp.content[0].text. A model that thinks puts a ThinkingBlock first,
+    # so index 0 is whatever the model happened to emit first and only has a
+    # .text attribute some of the time. Pick the text blocks by type instead.
+    said = "".join(b.text for b in resp.content if b.type == "text").strip()
+    if not said:
+        kinds = ", ".join(sorted({b.type for b in resp.content})) or "nothing"
+        sys.exit(f"The reply carried no text block, only: {kinds}")
+    print(said)
+    sys.stdout.flush()      # or the stderr line below jumps ahead of the reply
     print(
         f"\n  {MODEL}  ·  {resp.usage.input_tokens} in, "
         f"{resp.usage.output_tokens} out  ·  stop: {resp.stop_reason}",
