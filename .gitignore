@@ -20,6 +20,12 @@ node_modules/
 .DS_Store
 .idea/
 .vscode/
+# Secrets. This said `.envs` for a while, which matches nothing, so a real
+# .env holding an API key sat untracked in a public repo one `git add -A`
+# away from being published.
+.env
+.env.*
+!.env.example
 
 # next
 web/out/
