@@ -16,10 +16,13 @@ decision next to the query that produced it is an argument.
 | `02_validate.ipynb` | The six data quality checks, and scoring them against known defects | **D7** a fixed as-of date · **D4** remediate the unit error, reversibly |
 | `03_gold.ipynb` | The care-gap table, and what else it can answer | **D5/D6** both cohort definitions locked · the nine worklist columns · the six charts |
 | `04_playground.ipynb` | **Answering a question somebody just asked** — not a record, a working surface | — |
+| `05_text_to_sql.ipynb` | Whether a model writes better SQL than the ten hand-written queries | **D12** no language model — now tested rather than assumed |
 
 `01`–`03` are history: decisions already made, with the evidence that made them.
 `04` is for now. If a clinician asks something, that is where the answer gets
-found, as a table or a chart.
+found, as a table or a chart. `05` revisits a decision with a measurement, which
+is what the other four are for — it needs a key in `.env`, and it is the only
+notebook that calls out to anything.
 
 ## Running them
 

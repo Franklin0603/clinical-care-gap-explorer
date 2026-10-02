@@ -41,10 +41,13 @@ og:  ## Rebuild the social card from the pipeline's own reports
 smoke:  ## Check the API key and the warehouse  (see smoke_test_hardened.py)
 	PYTHONPATH=src $(PY) -m caregap.scripts.smoke_test
 
+ask:  ## Ask the warehouse a question in English  —  make ask Q="who is overdue?"
+	PYTHONPATH=src $(PY) -m caregap.agent.text_to_sql "$(Q)"
+
 web:  ## Start the app at localhost:3000
 	cd web && npm run dev
 
 build:  ## Build the static site into web/out
 	cd web && npm run build
 
-.PHONY: help setup run generate fresh test test-py test-web html og smoke web build
+.PHONY: help setup run generate fresh test test-py test-web html og smoke ask web build

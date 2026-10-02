@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | Accepted |
+| **Status** | Accepted, tested 2026-10-02 |
 | **Date** | 2026-09-27 |
 | **Affects** | what the question page can honestly claim |
 
@@ -41,3 +41,24 @@ about a different lab that matched on the phrase "how many".
 ---
 
 *Evidence: `web/lib/chips.test.ts` · 37 cases*
+
+## Tested, 2026-10-02
+
+The decision was made on deployment grounds and the capability question was
+never asked. [`notebooks/05_text_to_sql.ipynb`](../../notebooks/05_text_to_sql.ipynb)
+asks it: Claude gets the schema and the definitions, writes SQL for the same ten
+questions, and the answers are compared against the hand-written queries.
+
+Two of ten came back identical and one more returned the same figures in a
+different shape. Most of the rest are defensible readings of an ambiguous
+question rather than errors.
+
+One was not. Asked which records are waiting on a human decision, it queried
+`patients.identity_review_pending` instead of the `identity_review` table and
+returned **zero rows** — not an error, not a refusal, an empty result that reads
+as "nothing needs review" while six duplicate-patient pairs sit unadjudicated.
+
+So the decision stands, and now for a tested reason: the preset page refuses
+what it does not recognise, which is a worse experience and a safer failure. The
+thing that would change the answer is better grounding rather than a better
+model, and the notebook says what that would have to include.
