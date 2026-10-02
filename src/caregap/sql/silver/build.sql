@@ -73,5 +73,22 @@ SELECT PATIENT                      AS patient_id,
        DESCRIPTION                  AS description,
        START::DATE                  AS start_date,
        TRY_CAST(STOP AS DATE)       AS end_date,       -- null means still active
+       TRY_CAST(DISPENSES AS INTEGER) AS dispenses,    -- times handed over; no dose exists
        'clean'                      AS _dq_status
 FROM bronze_medications;
+
+-- performed_date, not ordered_date. Synthea exports procedures that happened;
+-- there is no requisition anywhere in the dataset, so this table cannot answer
+-- "was a test ordered and missed". The column name is the guard against anyone
+-- reading it that way later.
+CREATE OR REPLACE TABLE silver_procedures AS
+SELECT PATIENT                      AS patient_id,
+       ENCOUNTER                    AS encounter_id,
+       CODE                         AS snomed_code,
+       DESCRIPTION                  AS description,
+       START::DATE                  AS performed_date,
+       TRY_CAST(STOP AS DATE)       AS finished_date,
+       REASONCODE                   AS reason_code,
+       REASONDESCRIPTION            AS reason,
+       'clean'                      AS _dq_status
+FROM bronze_procedures;

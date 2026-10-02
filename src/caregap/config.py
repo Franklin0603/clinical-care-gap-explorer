@@ -28,9 +28,15 @@ DEFECT_LOG = ROOT / "data" / "injected_defects.json"
 DQ_REPORT = ROOT / "data" / "dq_report.json"
 GOLD_REPORT = ROOT / "data" / "gold_report.json"
 
-# The five Synthea exports loaded into Bronze — Decision D15. The other thirteen
-# are billing ledgers or clinical data with no bearing on an A1c gap.
-SOURCES = ["patients", "encounters", "conditions", "observations", "medications"]
+# The six Synthea exports loaded into Bronze, Decision D15. The other twelve are
+# billing ledgers or clinical data with no bearing on an A1c gap.
+#
+# procedures joined later, for the patient detail view: it answers "what has
+# actually been done for this person", which is the question a clinician asks
+# next after seeing a gap. It is not an orders table and must never be described
+# as one, since Synthea records only completed procedures.
+SOURCES = ["patients", "encounters", "conditions", "observations", "medications",
+           "procedures"]
 
 # ---------------------------------------------------------------------- time
 # Decision D7. The simulated data ends on this date; a wall-clock "today" would

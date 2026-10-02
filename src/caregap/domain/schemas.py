@@ -35,8 +35,18 @@ REQUIRED = {
     "observations": ["DATE", "PATIENT", "ENCOUNTER", "CODE", "DESCRIPTION", "VALUE", "UNITS"],
 
     # CODE is the RxNorm code; START and STOP decide whether a prescription is
-    # active on the as-of date.
-    "medications": ["PATIENT", "ENCOUNTER", "CODE", "DESCRIPTION", "START", "STOP"],
+    # active on the as-of date. DISPENSES is how many times it was handed over,
+    # which is the only supply quantity Synthea exports - there is no dose, so a
+    # rising insulin burden can be shown as fills, never as units per day.
+    "medications": ["PATIENT", "ENCOUNTER", "CODE", "DESCRIPTION", "START", "STOP",
+                    "DISPENSES"],
+
+    # What was performed, not what was ordered - Synthea has no requisition, so
+    # a procedure here is always a completed one. CODE is SNOMED. REASONCODE is
+    # the condition it was done for, which is how a foot exam is told apart from
+    # an unrelated one on the same patient.
+    "procedures": ["PATIENT", "ENCOUNTER", "CODE", "DESCRIPTION", "START", "STOP",
+                   "REASONCODE", "REASONDESCRIPTION"],
 }
 
 

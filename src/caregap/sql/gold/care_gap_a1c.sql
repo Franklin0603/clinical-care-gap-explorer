@@ -80,9 +80,17 @@ base AS (
     LEFT JOIN last_enc    e USING (patient_id)
     LEFT JOIN active_meds m USING (patient_id)
 )
+-- patient_id is the last ORDER BY key and it is load-bearing, not decoration.
+-- Two never-tested patients of the same age, neither on insulin, tie on every
+-- clinical key above it; row_number() then ranked them in whatever order the
+-- scan happened to produce, and they swapped places between runs. The numbers
+-- are supposed to be reproducible from the seed (ADR-0002), so a published
+-- worklist rank cannot depend on DuckDB's parallelism. An arbitrary but stable
+-- tiebreaker is the honest answer to a genuine tie.
 SELECT *,
        CASE WHEN gap_flag THEN row_number() OVER (                       -- worklist rank, open gaps only
             PARTITION BY gap_flag
             ORDER BY last_a1c_date IS NULL DESC, days_overdue DESC NULLS LAST,
-                     last_a1c_value DESC NULLS LAST, on_insulin DESC, age DESC) END AS priority
+                     last_a1c_value DESC NULLS LAST, on_insulin DESC, age DESC,
+                     patient_id) END AS priority
 FROM base

@@ -42,14 +42,23 @@ def test_extra_columns_are_allowed():
 def test_contracts_only_claim_columns_we_actually_read():
     """A contract listing an unused column would lie about the real coupling.
 
-    Scans every module in the package rather than a hand-maintained list. An
-    earlier version named the files explicitly and broke the moment DQ6's
-    identity matching moved from validate.py into checks.py - the contract was
-    still honest, the test had just gone stale.
+    Scans the package rather than a hand-maintained list. An earlier version
+    named the files explicitly and broke the moment DQ6's identity matching
+    moved from validate.py into checks.py - the contract was still honest, the
+    test had just gone stale.
+
+    Two things it then got wrong, and no longer does. It scanned only *.py,
+    while most column references live in sql/*.sql, so a column used solely in
+    SQL counted as unread. And it scanned schemas.py itself, which holds the
+    contract literals, so every column matched itself and the test could never
+    fail. It passed on a technicality for as long as it existed.
     """
-    sources = "\n".join(
-        f.read_text() for f in sorted((config.ROOT / "src" / "caregap").rglob("*.py"))
-    )
+    pkg = config.ROOT / "src" / "caregap"
+    files = [
+        f for f in sorted([*pkg.rglob("*.py"), *pkg.rglob("*.sql")])
+        if f.name != "schemas.py"
+    ]
+    sources = "\n".join(f.read_text() for f in files)
     unused = [
         (table, col)
         for table, cols in schemas.REQUIRED.items()
