@@ -90,6 +90,13 @@
    "silver": 59273,
    "quarantined": 0,
    "balances": true
+  },
+  {
+   "table": "procedures",
+   "bronze": 187126,
+   "silver": 187126,
+   "quarantined": 0,
+   "balances": true
   }
  ],
  "quarantine_by_check": {

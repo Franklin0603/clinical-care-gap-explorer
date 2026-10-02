@@ -45,21 +45,21 @@
   "gap_flag": true
  },
  {
-  "patient_id": "f52c7b09-9aa3-c2b6-2891-9422737ce2e2",
-  "mrn": "f52c7b09-9aa3-c2b6-2891-9422737ce2e2",
-  "age": 63,
-  "sex": "M",
-  "unit": "ambulatory",
-  "last_encounter_date": "2026-08-20",
-  "gap_flag": true
- },
- {
   "patient_id": "45902090-75ec-096d-13fa-dd1aece24f40",
   "mrn": "45902090-75ec-096d-13fa-dd1aece24f40",
   "age": 63,
   "sex": "M",
   "unit": "ambulatory",
   "last_encounter_date": "2026-07-07",
+  "gap_flag": true
+ },
+ {
+  "patient_id": "f52c7b09-9aa3-c2b6-2891-9422737ce2e2",
+  "mrn": "f52c7b09-9aa3-c2b6-2891-9422737ce2e2",
+  "age": 63,
+  "sex": "M",
+  "unit": "ambulatory",
+  "last_encounter_date": "2026-08-20",
   "gap_flag": true
  },
  {
@@ -81,21 +81,21 @@
   "gap_flag": true
  },
  {
-  "patient_id": "dcbb4855-fa56-b26c-c62b-2b7fdebc8e05",
-  "mrn": "dcbb4855-fa56-b26c-c62b-2b7fdebc8e05",
-  "age": 57,
-  "sex": "M",
-  "unit": "ambulatory",
-  "last_encounter_date": "2026-05-04",
-  "gap_flag": true
- },
- {
   "patient_id": "1e6d838f-8beb-a7f1-525e-5938ce602fb5",
   "mrn": "1e6d838f-8beb-a7f1-525e-5938ce602fb5",
   "age": 57,
   "sex": "F",
   "unit": "ambulatory",
   "last_encounter_date": "2026-06-29",
+  "gap_flag": true
+ },
+ {
+  "patient_id": "dcbb4855-fa56-b26c-c62b-2b7fdebc8e05",
+  "mrn": "dcbb4855-fa56-b26c-c62b-2b7fdebc8e05",
+  "age": 57,
+  "sex": "M",
+  "unit": "ambulatory",
+  "last_encounter_date": "2026-05-04",
   "gap_flag": true
  },
  {
@@ -180,21 +180,21 @@
   "gap_flag": false
  },
  {
-  "patient_id": "a445c3e2-715e-e5f2-987d-ad21ae8860ae",
-  "mrn": "a445c3e2-715e-e5f2-987d-ad21ae8860ae",
-  "age": 79,
-  "sex": "M",
-  "unit": "ambulatory",
-  "last_encounter_date": "2026-04-13",
-  "gap_flag": false
- },
- {
   "patient_id": "27b7483c-ad21-92d6-a0aa-93da015413f6",
   "mrn": "27b7483c-ad21-92d6-a0aa-93da015413f6",
   "age": 79,
   "sex": "F",
   "unit": "ambulatory",
   "last_encounter_date": "2026-02-21",
+  "gap_flag": false
+ },
+ {
+  "patient_id": "a445c3e2-715e-e5f2-987d-ad21ae8860ae",
+  "mrn": "a445c3e2-715e-e5f2-987d-ad21ae8860ae",
+  "age": 79,
+  "sex": "M",
+  "unit": "ambulatory",
+  "last_encounter_date": "2026-04-13",
   "gap_flag": false
  },
  {
@@ -216,12 +216,12 @@
   "gap_flag": false
  },
  {
-  "patient_id": "bf11c599-51b6-0b29-4ef0-6685557ba1f1",
-  "mrn": "bf11c599-51b6-0b29-4ef0-6685557ba1f1",
+  "patient_id": "5cd03951-9345-7795-e778-37648d325c31",
+  "mrn": "5cd03951-9345-7795-e778-37648d325c31",
   "age": 73,
   "sex": "M",
   "unit": "ambulatory",
-  "last_encounter_date": "2026-08-06",
+  "last_encounter_date": "2026-04-15",
   "gap_flag": false
  },
  {
@@ -234,12 +234,12 @@
   "gap_flag": false
  },
  {
-  "patient_id": "5cd03951-9345-7795-e778-37648d325c31",
-  "mrn": "5cd03951-9345-7795-e778-37648d325c31",
+  "patient_id": "bf11c599-51b6-0b29-4ef0-6685557ba1f1",
+  "mrn": "bf11c599-51b6-0b29-4ef0-6685557ba1f1",
   "age": 73,
   "sex": "M",
   "unit": "ambulatory",
-  "last_encounter_date": "2026-04-15",
+  "last_encounter_date": "2026-08-06",
   "gap_flag": false
  },
  {
@@ -270,21 +270,21 @@
   "gap_flag": false
  },
  {
-  "patient_id": "e805779b-2047-44ea-f79d-85ab6386d252",
-  "mrn": "e805779b-2047-44ea-f79d-85ab6386d252",
-  "age": 70,
-  "sex": "F",
-  "unit": "ambulatory",
-  "last_encounter_date": "2026-08-08",
-  "gap_flag": false
- },
- {
   "patient_id": "401cd1e2-16e9-43c8-330e-4e875fb5bda5",
   "mrn": "401cd1e2-16e9-43c8-330e-4e875fb5bda5",
   "age": 70,
   "sex": "F",
   "unit": "ambulatory",
   "last_encounter_date": "2026-08-07",
+  "gap_flag": false
+ },
+ {
+  "patient_id": "e805779b-2047-44ea-f79d-85ab6386d252",
+  "mrn": "e805779b-2047-44ea-f79d-85ab6386d252",
+  "age": 70,
+  "sex": "F",
+  "unit": "ambulatory",
+  "last_encounter_date": "2026-08-08",
   "gap_flag": false
  },
  {
@@ -342,21 +342,21 @@
   "gap_flag": false
  },
  {
-  "patient_id": "adf69155-879b-6230-2234-c7d962a711a6",
-  "mrn": "adf69155-879b-6230-2234-c7d962a711a6",
-  "age": 67,
-  "sex": "F",
-  "unit": "ambulatory",
-  "last_encounter_date": "2026-08-15",
-  "gap_flag": false
- },
- {
   "patient_id": "6ae48208-ee5a-9ace-ac14-9016e26d0dbd",
   "mrn": "6ae48208-ee5a-9ace-ac14-9016e26d0dbd",
   "age": 67,
   "sex": "M",
   "unit": "ambulatory",
   "last_encounter_date": "2026-06-08",
+  "gap_flag": false
+ },
+ {
+  "patient_id": "adf69155-879b-6230-2234-c7d962a711a6",
+  "mrn": "adf69155-879b-6230-2234-c7d962a711a6",
+  "age": 67,
+  "sex": "F",
+  "unit": "ambulatory",
+  "last_encounter_date": "2026-08-15",
   "gap_flag": false
  },
  {
@@ -378,21 +378,21 @@
   "gap_flag": false
  },
  {
-  "patient_id": "ca3e488c-0f19-7d95-643d-245f9cc0a6df",
-  "mrn": "ca3e488c-0f19-7d95-643d-245f9cc0a6df",
-  "age": 66,
-  "sex": "M",
-  "unit": "ambulatory",
-  "last_encounter_date": "2026-08-22",
-  "gap_flag": false
- },
- {
   "patient_id": "af39a148-8c46-1f54-caef-d471736e4392",
   "mrn": "af39a148-8c46-1f54-caef-d471736e4392",
   "age": 66,
   "sex": "F",
   "unit": "ambulatory",
   "last_encounter_date": "2026-03-16",
+  "gap_flag": false
+ },
+ {
+  "patient_id": "ca3e488c-0f19-7d95-643d-245f9cc0a6df",
+  "mrn": "ca3e488c-0f19-7d95-643d-245f9cc0a6df",
+  "age": 66,
+  "sex": "M",
+  "unit": "ambulatory",
+  "last_encounter_date": "2026-08-22",
   "gap_flag": false
  },
  {
@@ -432,6 +432,15 @@
   "gap_flag": false
  },
  {
+  "patient_id": "a88d9334-334c-0a7b-3be9-7bc8c4b13a51",
+  "mrn": "a88d9334-334c-0a7b-3be9-7bc8c4b13a51",
+  "age": 62,
+  "sex": "M",
+  "unit": "ambulatory",
+  "last_encounter_date": "2026-07-07",
+  "gap_flag": false
+ },
+ {
   "patient_id": "cebadfea-f866-e1aa-0946-4ad1cd0f4c27",
   "mrn": "cebadfea-f866-e1aa-0946-4ad1cd0f4c27",
   "age": 62,
@@ -441,12 +450,12 @@
   "gap_flag": false
  },
  {
-  "patient_id": "a88d9334-334c-0a7b-3be9-7bc8c4b13a51",
-  "mrn": "a88d9334-334c-0a7b-3be9-7bc8c4b13a51",
-  "age": 62,
+  "patient_id": "3b6522a7-4bf7-26ce-027a-184e8d9e6c5f",
+  "mrn": "3b6522a7-4bf7-26ce-027a-184e8d9e6c5f",
+  "age": 60,
   "sex": "M",
   "unit": "ambulatory",
-  "last_encounter_date": "2026-07-07",
+  "last_encounter_date": "2026-05-08",
   "gap_flag": false
  },
  {
@@ -468,21 +477,12 @@
   "gap_flag": false
  },
  {
-  "patient_id": "3b6522a7-4bf7-26ce-027a-184e8d9e6c5f",
-  "mrn": "3b6522a7-4bf7-26ce-027a-184e8d9e6c5f",
-  "age": 60,
-  "sex": "M",
-  "unit": "ambulatory",
-  "last_encounter_date": "2026-05-08",
-  "gap_flag": false
- },
- {
-  "patient_id": "d41749a3-6e5b-0ec9-9843-b1d1085b8dfb",
-  "mrn": "d41749a3-6e5b-0ec9-9843-b1d1085b8dfb",
+  "patient_id": "522feb3c-210d-2e0a-689d-26f085cf5575",
+  "mrn": "522feb3c-210d-2e0a-689d-26f085cf5575",
   "age": 58,
   "sex": "M",
   "unit": "ambulatory",
-  "last_encounter_date": "2026-08-09",
+  "last_encounter_date": "2026-04-01",
   "gap_flag": false
  },
  {
@@ -495,21 +495,21 @@
   "gap_flag": false
  },
  {
-  "patient_id": "522feb3c-210d-2e0a-689d-26f085cf5575",
-  "mrn": "522feb3c-210d-2e0a-689d-26f085cf5575",
+  "patient_id": "d41749a3-6e5b-0ec9-9843-b1d1085b8dfb",
+  "mrn": "d41749a3-6e5b-0ec9-9843-b1d1085b8dfb",
   "age": 58,
   "sex": "M",
   "unit": "ambulatory",
-  "last_encounter_date": "2026-04-01",
+  "last_encounter_date": "2026-08-09",
   "gap_flag": false
  },
  {
-  "patient_id": "82ba6a2c-834a-f8dd-4833-0756791ea61d",
-  "mrn": "82ba6a2c-834a-f8dd-4833-0756791ea61d",
+  "patient_id": "1d96e5bb-a42f-71b2-6647-00a188e9f580",
+  "mrn": "1d96e5bb-a42f-71b2-6647-00a188e9f580",
   "age": 56,
-  "sex": "F",
+  "sex": "M",
   "unit": "ambulatory",
-  "last_encounter_date": "2026-07-19",
+  "last_encounter_date": "2026-08-18",
   "gap_flag": false
  },
  {
@@ -522,12 +522,21 @@
   "gap_flag": false
  },
  {
-  "patient_id": "1d96e5bb-a42f-71b2-6647-00a188e9f580",
-  "mrn": "1d96e5bb-a42f-71b2-6647-00a188e9f580",
+  "patient_id": "82ba6a2c-834a-f8dd-4833-0756791ea61d",
+  "mrn": "82ba6a2c-834a-f8dd-4833-0756791ea61d",
   "age": 56,
-  "sex": "M",
+  "sex": "F",
   "unit": "ambulatory",
-  "last_encounter_date": "2026-08-18",
+  "last_encounter_date": "2026-07-19",
+  "gap_flag": false
+ },
+ {
+  "patient_id": "47139758-6356-b3a2-a0ef-27f5bc944d8d",
+  "mrn": "47139758-6356-b3a2-a0ef-27f5bc944d8d",
+  "age": 54,
+  "sex": "F",
+  "unit": "ambulatory",
+  "last_encounter_date": "2026-07-13",
   "gap_flag": false
  },
  {
@@ -549,15 +558,6 @@
   "gap_flag": false
  },
  {
-  "patient_id": "47139758-6356-b3a2-a0ef-27f5bc944d8d",
-  "mrn": "47139758-6356-b3a2-a0ef-27f5bc944d8d",
-  "age": 54,
-  "sex": "F",
-  "unit": "ambulatory",
-  "last_encounter_date": "2026-07-13",
-  "gap_flag": false
- },
- {
   "patient_id": "facd28ba-09d6-dc5e-a6ac-edf2c3f2ee79",
   "mrn": "facd28ba-09d6-dc5e-a6ac-edf2c3f2ee79",
   "age": 53,
@@ -567,21 +567,21 @@
   "gap_flag": false
  },
  {
-  "patient_id": "ecbb104f-7e0f-7d2a-6ec1-b6a51fd6c325",
-  "mrn": "ecbb104f-7e0f-7d2a-6ec1-b6a51fd6c325",
-  "age": 52,
-  "sex": "F",
-  "unit": "ambulatory",
-  "last_encounter_date": "2026-07-05",
-  "gap_flag": false
- },
- {
   "patient_id": "111a682b-9d60-3e3e-05af-52ade04261c3",
   "mrn": "111a682b-9d60-3e3e-05af-52ade04261c3",
   "age": 52,
   "sex": "F",
   "unit": "ambulatory",
   "last_encounter_date": "2026-05-07",
+  "gap_flag": false
+ },
+ {
+  "patient_id": "ecbb104f-7e0f-7d2a-6ec1-b6a51fd6c325",
+  "mrn": "ecbb104f-7e0f-7d2a-6ec1-b6a51fd6c325",
+  "age": 52,
+  "sex": "F",
+  "unit": "ambulatory",
+  "last_encounter_date": "2026-07-05",
   "gap_flag": false
  },
  {

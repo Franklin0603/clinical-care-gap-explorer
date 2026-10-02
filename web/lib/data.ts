@@ -52,7 +52,7 @@ export const identityRows = identityReview as IdentityRow[];
 export const remediationRows = remediationLog as RemediationRow[];
 export const cohort = careGap;
 
-/** Bronze/Silver totals across all five tables, summed rather than restated. */
+/** Bronze/Silver totals across all six source tables, summed rather than restated. */
 export const layerTotals = recon.reduce(
   (a, r) => ({
     bronze: a.bronze + r.bronze,
@@ -79,47 +79,26 @@ export const checks = [
 
 export const fmt = (n: number) => n.toLocaleString("en-US");
 
-// ---------------------------------------------------------------- Day 6: roles
+// ------------------------------------------------------------------ the cohort
 import manifest from "@/public/data/manifest.json";
-import pctRows from "@/public/data/care_gap_pct.json";
-import nurseRows from "@/public/data/care_gap_nurse.json";
-import physicianRows from "@/public/data/care_gap_physician.json";
+import fullRows from "@/public/data/care_gap_full.json";
 import ageBands from "@/public/data/age_bands.json";
 
-export type Role = "pct" | "nurse" | "physician";
-
-/** One row per patient, but which keys exist depends on the role. */
+/** One row per patient in the care-gap report. */
 export type PatientRow = Record<string, string | number | boolean | null>;
 
-export const roleMeta = manifest.roles as Record<
-  Role,
-  {
-    label: string;
-    scope: string;
-    rationale: string;
-    units: string[] | null;
-    columns: string[];
-    restricted: string[];
-    patients: number;
-    gaps: number;
-  }
->;
-
 /**
- * Each role's rows come from a separate file that the pipeline built by never
- * selecting the restricted columns. Nothing is filtered here in the browser -
- * the restricted fields are absent from the payload, not hidden in the view.
+ * Every patient, every column. One dataset, not one per role.
+ *
+ * The pipeline still builds the three role-scoped exports, and the access
+ * matrix, its nine tests and ADR 0012 still describe them - that argument is
+ * worth keeping and is made in the docs. It is just no longer a control in the
+ * UI, where a reader had to switch roles to discover that the full list existed.
  */
-export const roleRows: Record<Role, PatientRow[]> = {
-  pct: pctRows as PatientRow[],
-  nurse: nurseRows as PatientRow[],
-  physician: physicianRows as PatientRow[],
-};
-
-export const defaultRole = manifest.default_role as Role;
+export const patients = fullRows as PatientRow[];
+export const patientColumns = manifest.full.columns as string[];
 export const bands = ageBands as { band: string; patients: number; gaps: number }[];
 
-/** Column display order and labels for the patient table. */
 export const COLUMN_LABELS: Record<string, string> = {
   mrn: "MRN",
   age: "Age",

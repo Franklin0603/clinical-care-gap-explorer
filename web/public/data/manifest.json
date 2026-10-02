@@ -129,5 +129,39 @@
    "gaps": 25
   }
  },
- "default_role": "pct"
+ "default_role": "pct",
+ "full": {
+  "json": "care_gap_full.json",
+  "parquet": "care_gap_full.parquet",
+  "patients": 116,
+  "gaps": 25,
+  "columns": [
+   "patient_id",
+   "mrn",
+   "age",
+   "sex",
+   "unit",
+   "last_encounter_date",
+   "gap_flag",
+   "last_a1c_date",
+   "last_a1c_value",
+   "days_since_a1c",
+   "next_due_date",
+   "days_overdue",
+   "a1c_count_2y",
+   "last_a1c_controlled",
+   "priority",
+   "active_med_count",
+   "on_insulin",
+   "first_dx_date",
+   "identity_review_pending"
+  ]
+ },
+ "patient_detail": {
+  "patients": 116,
+  "a1c_points": 3392,
+  "med_rows": 1330,
+  "procedure_rows": 4859,
+  "json": "patient_detail.json"
+ }
 }

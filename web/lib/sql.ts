@@ -6,7 +6,6 @@
 // that actually produced it — not a pretty-printed approximation.
 
 import * as duckdb from "@duckdb/duckdb-wasm";
-import type { Role } from "@/lib/data";
 
 /* ------------------------------------------------------------------ guard */
 
@@ -139,31 +138,32 @@ async function getDb(): Promise<duckdb.AsyncDuckDB> {
 const registered = new Set<string>();
 
 /**
- * Register the Parquet files this role is allowed to see.
+ * Register the Parquet files the question box reads.
  *
- * The role's own export is registered as `patients`, so a question that asks for
- * a restricted column fails because the column genuinely is not there — the same
- * restriction as on the patient page, enforced by the data rather than the UI.
+ * One dataset, registered as `patients`. This used to take a role and load that
+ * role's scoped export, so the same question returned different answers
+ * depending on a dropdown most readers never touched. The role-scoped exports
+ * still exist and the access matrix still documents them; they are no longer
+ * what this page runs against.
  */
-export async function connect(role: Role, basePath: string) {
+export async function connect(basePath: string) {
   const db = await getDb();
   const files: [string, string][] = [
-    ["patients", `care_gap_${role}.parquet`],
+    ["patients", "care_gap_full.parquet"],
     ["quarantine", "quarantine.parquet"],
     ["identity_review", "identity_review.parquet"],
     ["remediation_log", "remediation_log.parquet"],
   ];
   const conn = await db.connect();
   for (const [view, file] of files) {
-    const key = `${role}:${file}`;
-    if (!registered.has(key)) {
+    if (!registered.has(file)) {
       const res = await fetch(`${basePath}/data/${file}`);
       if (!res.ok) throw new Error(`Could not load ${file}`);
-      await db.registerFileBuffer(`${role}_${file}`, new Uint8Array(await res.arrayBuffer()));
-      registered.add(key);
+      await db.registerFileBuffer(file, new Uint8Array(await res.arrayBuffer()));
+      registered.add(file);
     }
     await conn.query(
-      `CREATE OR REPLACE VIEW ${view} AS SELECT * FROM parquet_scan('${role}_${file}')`,
+      `CREATE OR REPLACE VIEW ${view} AS SELECT * FROM parquet_scan('${file}')`,
     );
   }
   return conn;
@@ -179,7 +179,7 @@ export function explain(message: string): string {
   const missingCol = m.match(/column "?([\w.]+)"? not found|Referenced column "?([\w.]+)"?/i);
   if (missingCol) {
     const col = missingCol[1] ?? missingCol[2];
-    return `There is no column called "${col}" in the data this role can see. It may be restricted for this role, or it may not exist at all — the column list above the results shows what is available.`;
+    return `There is no column called "${col}" in this data. The column list above the results shows what is available.`;
   }
   if (/Table with name (\w+) does not exist|does not exist!/i.test(m)) {
     const t = m.match(/Table with name (\w+)/i)?.[1];

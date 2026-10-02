@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUp, Database, Info, Loader2, Sparkles, Terminal, User } from "lucide-react";
 
-import { Role, roleMeta, defaultRole } from "@/lib/data";
+import { patients, patientColumns } from "@/lib/data";
 import { CHIPS, Chip, matchIntent, checkScope, REFUSAL } from "@/lib/chips";
 import { connect, guardSelectOnly, run, QueryResult } from "@/lib/sql";
 import { Page } from "@/components/shell/Page";
@@ -11,13 +11,9 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
-} from "@/components/ui/select";
-import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 
-const ROLES: Role[] = ["pct", "nurse", "physician"];
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 type Turn =
@@ -25,37 +21,31 @@ type Turn =
   | { who: "it"; sql: string | null; result: Extract<QueryResult, { ok: true }> | null; reason?: string };
 
 export default function AskView() {
-  const [role, setRole] = useState<Role>(defaultRole);
   const [input, setInput] = useState("");
   const [turns, setTurns] = useState<Turn[]>([]);
   const [busy, setBusy] = useState(false);
-  // Keyed by role rather than reset on role change: a settled status belongs to the
-  // role it was settled for, so switching role reads as "loading" without an effect
-  // having to synchronously set it back (react-hooks/set-state-in-effect).
   const [settled, setSettled] = useState<
-    { role: Role; status: "ready" } | { role: Role; status: "error"; why: string } | null
+    { status: "ready" } | { status: "error"; why: string } | null
   >(null);
-  const engine = settled?.role === role ? settled.status : "loading";
+  const engine = settled?.status ?? "loading";
   const conn = useRef<Awaited<ReturnType<typeof connect>> | null>(null);
   const bottom = useRef<HTMLDivElement>(null);
 
-  // Reconnect on role change: the views are rebuilt over that role's own Parquet,
-  // so a restricted column is genuinely absent rather than hidden.
   useEffect(() => {
     let live = true;
     conn.current = null;
-    connect(role, BASE)
-      .then((c) => { if (live) { conn.current = c; setSettled({ role, status: "ready" }); } })
+    connect(BASE)
+      .then((c) => { if (live) { conn.current = c; setSettled({ status: "ready" }); } })
       /* Keep the reason. A bare catch here hid a dead query engine behind
          "unavailable" for as long as this page has existed — the page looked
          fine and answered nothing. */
       .catch((e: unknown) => {
         const why = e instanceof Error ? e.message : String(e);
         console.error("query engine failed to start:", e);
-        if (live) setSettled({ role, status: "error", why });
+        if (live) setSettled({ status: "error", why });
       });
     return () => { live = false; };
-  }, [role]);
+  }, []);
 
   useEffect(() => { bottom.current?.scrollIntoView({ behavior: "smooth" }); }, [turns, busy]);
 
@@ -106,24 +96,6 @@ export default function AskView() {
     <Page
       title="Ask the data"
       blurb="Every answer shows the SQL that produced it"
-      actions={
-        <Select value={role} onValueChange={(v) => setRole((v ?? defaultRole) as Role)}>
-          {/* Base UI puts the raw value in the closed trigger without a formatter,
-              so this read "pct" rather than naming the person signed in. */}
-          <SelectTrigger size="sm" className="w-[190px]">
-            <SelectValue>
-              {(v: string | null) => roleMeta[(v ?? defaultRole) as Role].label}
-            </SelectValue>
-          </SelectTrigger>
-          <SelectContent>
-            {ROLES.map((r) => (
-              <SelectItem key={r} value={r}>
-                {roleMeta[r].label} · {roleMeta[r].patients}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      }
     >
       <div className="flex min-h-[calc(100vh-18rem)] flex-col gap-6">
         {turns.length === 0 ? (
@@ -253,10 +225,10 @@ export default function AskView() {
           <div className="flex flex-wrap items-center gap-2 px-1 text-xs text-muted-foreground">
             <Badge variant="outline" className="font-normal">
               {engine === "loading" && "loading query engine…"}
-              {engine === "ready" && `${roleMeta[role].patients} patients · ${roleMeta[role].columns.length} columns visible`}
+              {engine === "ready" && `${patients.length} patients · ${patientColumns.length} columns`}
               {engine === "error" && "query engine unavailable"}
             </Badge>
-            {settled?.status === "error" && settled.role === role && (
+            {settled?.status === "error" && (
               <Badge
                 variant="outline"
                 className="max-w-md border-destructive/40 font-normal text-destructive"

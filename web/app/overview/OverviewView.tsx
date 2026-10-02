@@ -6,7 +6,7 @@ import {
 } from "recharts";
 import { AlertTriangle, CalendarClock, Target, Users2 } from "lucide-react";
 
-import { gold, dq, roleRows, PatientRow } from "@/lib/data";
+import { gold, dq, patients, PatientRow } from "@/lib/data";
 import { Page, Section } from "@/components/shell/Page";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -18,9 +18,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Term } from "@/components/Term";
 
-/** The full cohort. Overview is the unrestricted view — role scoping lives on
- *  the Patients page, which is the page making that argument. */
-const ALL = roleRows.physician;
+/** The full cohort, every column. */
+const ALL = patients;
 
 const BAND = (age: number) =>
   age < 45 ? "18-44" : age < 65 ? "45-64" : age <= 75 ? "65-75" : "76+";

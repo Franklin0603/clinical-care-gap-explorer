@@ -59,7 +59,7 @@ why — a known, explained gap reads better than a claimed perfect score.
 Result: **6 of 6** defect types detected (100%); 249 of 249 injected rows, each by the
 check meant to catch it. Measured by `validate.py` against `injected_defects.json`
 and written to `data/dq_report.json`. Reconciliation `bronze = silver + quarantine`
-balances on all five tables.
+balances on all six tables.
 
 ## What I'd do differently at scale
 

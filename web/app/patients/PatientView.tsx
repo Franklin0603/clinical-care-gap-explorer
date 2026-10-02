@@ -1,27 +1,36 @@
 "use client";
 
-import { useState } from "react";
-import { Lock, LogIn, UserRound } from "lucide-react";
+import { useMemo, useState } from "react";
+import { ChevronRight, Search, Syringe } from "lucide-react";
 
-import {
-  Role, roleMeta, roleRows, defaultRole, COLUMN_LABELS, COLUMN_ORDER, PatientRow,
-} from "@/lib/data";
+import { patients, COLUMN_LABELS, PatientRow, fmt } from "@/lib/data";
 import { Page, Section } from "@/components/shell/Page";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 import {
-  DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup,
-  DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from "@/components/ui/select";
 import { Term } from "@/components/Term";
+import { PatientDetailSheet } from "./PatientDetail";
 
-const ROLES: Role[] = ["pct", "nurse", "physician"];
-const INITIALS: Record<Role, string> = { pct: "PT", nurse: "RN", physician: "MD" };
+/** Columns worth showing in the list. The rest are in the detail panel. */
+const LIST = [
+  "mrn", "age", "sex", "unit", "gap_flag", "last_a1c_date", "last_a1c_value",
+  "days_overdue", "on_insulin",
+];
+
+const STATUS_LABELS: Record<string, string> = {
+  all: "All patients",
+  overdue: "Overdue only",
+  never: "Never tested",
+  current: "Up to date",
+};
+const shown = (labels: Record<string, string>) => (v: string | null) =>
+  labels[v ?? "all"] ?? v ?? "";
 
 function cell(row: PatientRow, key: string) {
   const v = row[key];
@@ -34,183 +43,180 @@ function cell(row: PatientRow, key: string) {
         <span className="text-muted-foreground">current</span>
       );
     }
+    if (key === "on_insulin") {
+      return v ? <Syringe className="size-3.5 text-primary" /> : null;
+    }
     return v ? "yes" : "no";
   }
-  if (key === "mrn" || key === "patient_id") {
-    return <span className="font-mono text-xs">{String(v).slice(0, 8)}</span>;
-  }
+  if (key === "mrn") return <span className="font-mono text-xs">{String(v).slice(0, 8)}</span>;
   return <span className="num">{String(v)}</span>;
 }
 
 export default function PatientView() {
-  const [role, setRole] = useState<Role>(defaultRole);
-  const meta = roleMeta[role];
-  const rows = roleRows[role];
+  const [status, setStatus] = useState("all");
+  const [unit, setUnit] = useState("all");
+  const [q, setQ] = useState("");
+  const [open, setOpen] = useState<PatientRow | null>(null);
 
-  const visible = COLUMN_ORDER.filter((c) => meta.columns.includes(c));
-  const restricted = COLUMN_ORDER.filter((c) => meta.restricted.includes(c));
+  const units = useMemo(
+    () => [...new Set(patients.map((r) => String(r.unit)))].sort(),
+    [],
+  );
+
+  const rows = useMemo(
+    () =>
+      patients.filter((r) => {
+        if (unit !== "all" && r.unit !== unit) return false;
+        if (status === "overdue" && !r.gap_flag) return false;
+        if (status === "current" && r.gap_flag) return false;
+        if (status === "never" && r.last_a1c_date !== null) return false;
+        if (q && !String(r.mrn).toLowerCase().includes(q.toLowerCase())) return false;
+        return true;
+      }),
+    [status, unit, q],
+  );
+
+  const gaps = rows.filter((r) => r.gap_flag).length;
+  const insulin = rows.filter((r) => r.on_insulin).length;
+  const never = rows.filter((r) => r.last_a1c_date === null).length;
 
   return (
     <Page
       title="Patients"
-      blurb={<>The <Term k="cohort">cohort</Term>, scoped to what the signed-in role needs</>}
+      blurb={
+        <>
+          The diabetic <Term k="cohort">cohort</Term>. Open a row for that
+          person&apos;s A1c history, medications and what has been done.
+        </>
+      }
       actions={
-        /* Styled as an account switcher because that is what it stands in for.
-           There is no authentication here and the page says so — but a reviewer
-           should see the shape of the thing being modelled. */
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            render={
-              <Button variant="outline" size="sm" className="gap-2">
-                <Avatar className="size-5">
-                  <AvatarFallback className="text-[10px]">{INITIALS[role]}</AvatarFallback>
-                </Avatar>
-                <span className="hidden sm:inline">{meta.label}</span>
-                <LogIn className="size-3.5 opacity-60" />
-              </Button>
-            }
-          />
-          <DropdownMenuContent align="end" className="w-72">
-            {/* A radio group, not loose items: picking one of three roles is a
-                single-choice control, so it gets role="menuitemradio" and a real
-                checked state instead of a tick drawn by hand. It is also what
-                gives DropdownMenuLabel a parent — Base UI's GroupLabel throws
-                outside a Group or RadioGroup, which is what left this menu
-                empty and the role unchangeable. */}
-            <DropdownMenuRadioGroup
-              value={role}
-              onValueChange={(v) => setRole(v as Role)}
-            >
-              <DropdownMenuLabel className="text-xs font-normal text-muted-foreground">
-                Signed in as — demonstration control, no authentication
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {ROLES.map((r) => (
-                <DropdownMenuRadioItem
-                  key={r}
-                  value={r}
-                  /* Base UI keeps a radio menu open on click, which suits a
-                     filter you tune repeatedly. This one re-scopes the whole
-                     page, so it should close and let you see what changed. */
-                  closeOnClick
-                  className="flex flex-col items-start gap-0.5 py-2"
-                >
-                  <div className="flex w-full items-center gap-2">
-                    <Avatar className="size-5">
-                      <AvatarFallback className="text-[10px]">{INITIALS[r]}</AvatarFallback>
-                    </Avatar>
-                    <span className="font-medium">{roleMeta[r].label}</span>
-                  </div>
-                  <span className="num pl-7 text-xs text-muted-foreground">
-                    {roleMeta[r].patients} patients · {roleMeta[r].columns.length} columns
-                  </span>
-                </DropdownMenuRadioItem>
+        <div className="flex flex-wrap gap-2">
+          <div className="relative">
+            <Search className="absolute left-2.5 top-2.5 size-3.5 text-muted-foreground" />
+            <Input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Find an MRN"
+              className="h-9 w-[150px] pl-8"
+            />
+          </div>
+          <Select value={status} onValueChange={(v) => setStatus(v ?? "all")}>
+            <SelectTrigger className="w-[150px]" size="sm">
+              <SelectValue>{shown(STATUS_LABELS)}</SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All patients</SelectItem>
+              <SelectItem value="overdue">Overdue only</SelectItem>
+              <SelectItem value="never">Never tested</SelectItem>
+              <SelectItem value="current">Up to date</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select value={unit} onValueChange={(v) => setUnit(v ?? "all")}>
+            <SelectTrigger className="w-[150px]" size="sm">
+              <SelectValue>{shown({ all: "All settings" })}</SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All settings</SelectItem>
+              {units.map((u) => (
+                <SelectItem key={u} value={u}>{u}</SelectItem>
               ))}
-            </DropdownMenuRadioGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+            </SelectContent>
+          </Select>
+        </div>
       }
     >
       <Card>
-        <CardHeader>
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-            <div className="flex items-center gap-2">
-              <UserRound className="size-4 text-primary" />
-              <CardTitle className="text-base">{meta.label}</CardTitle>
+        <CardContent className="flex flex-wrap items-baseline gap-x-8 gap-y-3 pt-6">
+          {[
+            [String(rows.length), "patients in view", "text-primary"],
+            [String(gaps), "with an open gap", "text-destructive"],
+            [String(never), "never tested", "text-destructive"],
+            [String(insulin), "on insulin", "text-primary"],
+          ].map(([n, label, tone]) => (
+            <div key={label} className="flex items-baseline gap-1.5">
+              <span className={`num text-2xl font-semibold ${tone}`}>{n}</span>
+              <span className="text-sm text-muted-foreground">{label}</span>
             </div>
-            <div className="flex items-baseline gap-1.5">
-              <span className="num text-2xl font-semibold text-primary">{meta.patients}</span>
-              <span className="text-sm text-muted-foreground">patients visible</span>
-            </div>
-            <div className="flex items-baseline gap-1.5">
-              <span className="num text-2xl font-semibold text-destructive">{meta.gaps}</span>
-              <span className="text-sm text-muted-foreground">with an open gap</span>
-            </div>
+          ))}
+          {rows.length !== patients.length && (
             <Badge variant="secondary" className="ml-auto">
-              {meta.scope}{meta.units && ` — ${meta.units.join(", ")}`}
+              filtered from {fmt(patients.length)}
             </Badge>
-          </div>
-          <CardDescription className="max-w-3xl pt-2">{meta.rationale}</CardDescription>
-        </CardHeader>
-        {restricted.length > 0 && (
-          <CardContent>
-            <div className="flex gap-3 rounded-lg border border-destructive/30 bg-destructive/5 p-4">
-              <Lock className="mt-0.5 size-4 shrink-0 text-destructive" />
-              <p className="text-sm leading-relaxed">
-                <strong>{restricted.length} fields are withheld.</strong> Each one is{" "}
-                <Term k="phi">PHI</Term> this role has no need for. They are not hidden
-                in the browser — this role loads a different file, built by a query that
-                never selected them. Open the network tab and read it: the fields are
-                absent, not blank.
-              </p>
-            </div>
-          </CardContent>
-        )}
+          )}
+        </CardContent>
       </Card>
 
       <Section
-        title="Patients"
-        blurb={`First 20 of ${rows.length}. Columns marked "not available" carry no value in this role's payload at all.`}
+        title="The cohort"
+        blurb="Sorted with the open gaps first, most overdue at the top. Click any row."
       >
         <Card className="overflow-auto">
           <Table>
             <TableHeader>
               <TableRow>
-                {visible.map((c) => <TableHead key={c}>{COLUMN_LABELS[c]}</TableHead>)}
-                {restricted.map((c) => (
-                  <TableHead key={c} className="italic text-muted-foreground/60">
-                    {COLUMN_LABELS[c]}
-                  </TableHead>
-                ))}
+                {LIST.map((c) => <TableHead key={c}>{COLUMN_LABELS[c]}</TableHead>)}
+                <TableHead />
               </TableRow>
             </TableHeader>
             <TableBody>
-              {rows.slice(0, 20).map((row, i) => (
-                <TableRow key={i}>
-                  {visible.map((c) => <TableCell key={c}>{cell(row, c)}</TableCell>)}
-                  {restricted.map((c) => (
-                    <TableCell
-                      key={c}
-                      className="bg-muted/40 text-xs italic text-muted-foreground/70"
-                      title="Not available for this role"
-                    >
-                      not available
-                    </TableCell>
-                  ))}
+              {rows.map((row) => (
+                <TableRow
+                  key={String(row.patient_id)}
+                  onClick={() => setOpen(row)}
+                  className="cursor-pointer"
+                >
+                  {LIST.map((c) => <TableCell key={c}>{cell(row, c)}</TableCell>)}
+                  <TableCell className="w-8 text-right">
+                    <ChevronRight className="size-4 text-muted-foreground" />
+                  </TableCell>
                 </TableRow>
               ))}
+              {rows.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={LIST.length + 1} className="py-10 text-center text-sm text-muted-foreground">
+                    No patient matches those filters.
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </Card>
       </Section>
 
-      <Section title="How the restriction actually works">
+      <Section
+        title="What the report does not carry"
+        blurb="Stated here because the detail panel looks like a chart, and a chart invites conclusions it cannot support."
+      >
         <div className="grid gap-4 lg:grid-cols-3">
           {[
             {
-              title: "Filtering is in the query layer",
-              body: "The site is a static export, so there is no request-time server. Instead the pipeline writes one payload per role, each from SQL that never selects the restricted columns and never returns out-of-unit rows. Hiding a column with CSS would not be access control — which is why the row counts change too, not only the columns.",
+              title: "No orders, anywhere",
+              body: "A clinician can order an A1c and the patient never goes. This data records results and procedures that happened, never requests, so that patient is indistinguishable from one nobody ordered a test for. It is the single biggest thing a real deployment would add.",
             },
             {
-              title: "Column filtering alone would leak",
-              body: "next_due_date is the last A1c date plus 365 days, and days_overdue is the same date in different clothes. Withhold the value but keep either one and the test date is reconstructable exactly, so the derived columns are restricted alongside what they derive from.",
+              title: "Fills are not doses",
+              body: "The medication table counts dispenses, because that is the only quantity the source exports. A rising fill count suggests a rising insulin burden; it does not measure one, and nothing here should be read as a dose.",
             },
             {
-              title: "What this does not do",
-              body: "There is no authentication, so every role's file is reachable by anyone who guesses its URL. In a real system the same queries would sit behind a session and an authorization check. What is demonstrated here is where the restriction lives, not that this deployment is secure.",
+              title: "Columns are no longer scoped by role",
+              body: "The pipeline still builds a separate export per role, and the access matrix and its tests still describe which fields a technician, a nurse and a physician may each see. That argument moved to the documentation; this page now shows the whole record.",
             },
           ].map((c) => (
             <Card key={c.title}>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm">{c.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm leading-relaxed text-muted-foreground">
-                {c.body}
+              <CardContent className="flex flex-col gap-1.5 pt-6">
+                <div className="text-sm font-medium">{c.title}</div>
+                <p className="text-sm leading-relaxed text-muted-foreground">{c.body}</p>
               </CardContent>
             </Card>
           ))}
         </div>
       </Section>
+
+      <PatientDetailSheet
+        patient={open}
+        cohort={patients}
+        onClose={() => setOpen(null)}
+      />
     </Page>
   );
 }

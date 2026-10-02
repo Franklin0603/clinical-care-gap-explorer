@@ -36,15 +36,20 @@ reflects how access is scoped on a real unit, not a textbook.
 
 ## Implementation
 
-- Role is a UI selector. There is no authentication, and the README says so.
-- Filtering happens **server-side, in the query layer** — not by hiding
+- **Role is not a control in the web app.** It was a switcher on the patient
+  page; [ADR-0016](../decisions/0016-patient-detail-over-role-views.md) records
+  why it came out. The scoping below is still built on every run, and this
+  document plus `tests/test_access.py` are now where the argument is made.
+  There is no authentication anywhere and never was.
+- Filtering happens **in the query layer, at build time** — not by hiding
   columns in the browser. A reviewer may open dev tools. If restricted
   data is in the payload, the demo argues against itself.
 - Row-level and column-level filtering both apply: a PCT sees fewer
   columns *and* only patients on their assigned unit.
-- When a role cannot see a field, show a labeled placeholder
-  ("Not available for this role") rather than omitting the column
-  silently. The restriction should be visible — that's the point.
+- `publish.py` writes one export per role, plus `care_gap_full` with nothing
+  withheld, which is what the site reads. Comparing `care_gap_pct.parquet`
+  against `care_gap_full.parquet` is the quickest way to see that the
+  restricted fields are absent from the file rather than hidden in a view.
 
 ## Audit log
 

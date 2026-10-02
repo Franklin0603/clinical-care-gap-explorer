@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | Accepted |
+| **Status** | Accepted, amended by [0016](0016-patient-detail-over-role-views.md) |
 | **Date** | 2026-08-23 |
 | **Affects** | pipeline runtime |
 
@@ -37,3 +37,13 @@ times a week.
 ---
 
 *Evidence: `notebooks/01_profile.ipynb` § what arrived*
+
+## Amended, 2026-10-01
+
+Six, not five. `procedures` was added for the patient detail view: it answers
+"what has actually been done for this person", which is the question that
+follows seeing a gap. 187,126 rows, and it reconciles like the others.
+
+The reasoning below is unchanged and is why the other twelve files are still
+out. `procedures` qualified on the same test the others failed: a stated
+question that cannot be answered without it.
