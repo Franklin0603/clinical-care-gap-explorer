@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Term } from "@/components/Term";
+import { Figure } from "@/components/Figure";
 
 /** The four stages, as overview cards. The sidebar's subtasks anchor to the
  *  sections below instead — these cards carry no id, or the anchors would be
@@ -238,6 +239,19 @@ export default function PipelineView() {
             </TableBody>
           </Table>
         </Card>
+      </Section>
+
+      <Section
+        id="floor"
+        title="The range nearly threw away 951 good results"
+        blurb="The plausibility check needs a floor. Picking one by eye would have made the check itself the biggest source of error on the page."
+      >
+        <Figure
+          src="04_a1c_floor.png"
+          alt="A histogram of clean A1c values, with 951 of 8,941 results falling below a proposed floor of 3.0 percent."
+          caption="The specification proposed rejecting any A1c below 3.0%. Run against the clean data first, that floor would have quarantined 951 of 8,941 real results, an 11% false-positive rate on a check meant to catch 20 injected errors. The floor shipped at 2.0% because the data was checked before the rule was written, not after."
+          source="notebooks/01_profile.ipynb"
+        />
       </Section>
 
       <Section

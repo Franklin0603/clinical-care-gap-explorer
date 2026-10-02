@@ -32,6 +32,7 @@ export const NAV: NavItem[] = [
     items: [
       { href: "/pipeline#reconciliation", label: "Reconciliation" },
       { href: "/pipeline#validate", label: "The six checks" },
+      { href: "/pipeline#floor", label: "The A1c floor" },
       { href: "/pipeline#quarantine", label: "Quarantine" },
       { href: "/pipeline#identity", label: "Identity review" },
       { href: "/pipeline#remediation", label: "Remediation" },

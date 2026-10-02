@@ -35,10 +35,13 @@ test-web:  ## Web tests — the SQL guard and the question scope check
 html:  ## Build the shareable HTML pages into docs/html/
 	$(PY) tools/build_html.py
 
+og:  ## Rebuild the social card from the pipeline's own reports
+	$(PY) tools/build_og.py
+
 web:  ## Start the app at localhost:3000
 	cd web && npm run dev
 
 build:  ## Build the static site into web/out
 	cd web && npm run build
 
-.PHONY: help setup run generate fresh test test-py test-web html web build
+.PHONY: help setup run generate fresh test test-py test-web html og web build

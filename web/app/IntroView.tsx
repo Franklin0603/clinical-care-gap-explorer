@@ -7,6 +7,7 @@ import { gold, dq, layerTotals, fmt } from "@/lib/data";
 import { Page } from "@/components/shell/Page";
 import { Term } from "@/components/Term";
 import { ConceptsTab } from "./ConceptsTab";
+import { Figure } from "@/components/Figure";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -24,6 +25,23 @@ export default function IntroView() {
 
         {/* ---------------------------------------------------- the project */}
         <TabsContent value="project" className="flex flex-col gap-8 pt-2">
+          {/* Decoration, and it says so: aria-hidden, empty alt, and it carries
+              no number. The dots are a population with one cluster picked out,
+              which is the whole job. Contained rather than full-bleed because
+              the artwork is warm off-white and would glare against dark mode. */}
+          <div
+            aria-hidden
+            className="h-28 w-full overflow-hidden rounded-xl border bg-[#faf7f2] sm:h-36"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/img/hero.webp`}
+              alt=""
+              width={1600}
+              height={380}
+              className="size-full object-cover object-right"
+            />
+          </div>
           <div className="flex flex-col gap-5">
             <Badge variant="secondary" className="w-fit">
               Synthea · Massachusetts · as of {gold.asof}
@@ -87,6 +105,12 @@ export default function IntroView() {
               deliberately break it, catch the breakage, measure what fraction was
               caught, and only then report the gaps.
             </p>
+            <Figure
+              src="02_inner_join.png"
+              alt="Two bars. LEFT JOIN keeps 116 patients. INNER JOIN keeps 95, with 21 patients shown as silently deleted."
+              caption="Here is what that costs when it goes wrong. Joining the cohort to its lab results with INNER JOIN instead of LEFT JOIN deletes every patient who has no result, which is every patient the report exists to find. Both queries run, neither errors, and the shorter list looks entirely reasonable."
+              source="notebooks/01_profile.ipynb"
+            />
           </section>
 
           <section className="flex flex-col gap-4">
@@ -127,6 +151,12 @@ export default function IntroView() {
                 </Card>
               ))}
             </div>
+            <Figure
+              src="01_cohort_funnel.png"
+              alt="A funnel from 161 patients carrying a diabetes code, to 116 alive on the as-of date, to 25 with an open A1c gap, to 21 never tested."
+              caption="Every step from 1,151 patients to the 25 on the list is a decision somebody made and wrote down, not a filter chosen to make the number look a certain way. The two that move it most are excluding the deceased and counting a complication code as diabetes."
+              source="notebooks/01_profile.ipynb"
+            />
           </section>
 
           <section className="flex flex-col gap-4">
