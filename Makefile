@@ -38,7 +38,7 @@ html:  ## Build the shareable HTML pages into docs/html/
 og:  ## Rebuild the social card from the pipeline's own reports
 	$(PY) tools/build_og.py
 
-smoke:  ## One Anthropic API call, to check the key works
+smoke:  ## Check the API key and the warehouse  (see smoke_test_hardened.py)
 	PYTHONPATH=src $(PY) -m caregap.scripts.smoke_test
 
 web:  ## Start the app at localhost:3000
