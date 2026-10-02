@@ -25,6 +25,7 @@ export type ProcRow = {
   name: string;
   code: string;
   times: number;
+  first: string | null;
   last: string | null;
 };
 

@@ -176,7 +176,14 @@ export function PatientDetailSheet({
 
   return (
     <Sheet open={!!patient} onOpenChange={(o) => { if (!o) onClose(); }}>
-      <SheetContent className="w-full overflow-y-auto sm:max-w-3xl">
+      {/* Wide. At max-w-3xl the three charts sat in a column barely 300px across:
+          the box plot lost its y-axis numbers entirely and its four band labels
+          overlapped into one smear. */}
+      {/* The width classes carry the same data-[side=right] prefix the component
+          uses. A plain sm:max-w-5xl loses to its data-[side=right]:sm:max-w-sm on
+          specificity and tailwind-merge cannot dedupe them, so the panel stayed
+          384px wide and the charts kept their 136px columns. */}
+      <SheetContent className="w-full overflow-y-auto data-[side=right]:sm:max-w-4xl data-[side=right]:lg:max-w-6xl">
         {patient && (
           <>
             <SheetHeader>
@@ -185,7 +192,14 @@ export function PatientDetailSheet({
                 <span className="text-muted-foreground">
                   {patient.age} year old {String(patient.sex) === "M" ? "man" : "woman"}
                 </span>
-                {patient.gap_flag ? (
+                {/* days_overdue is null for a patient who was never tested, and
+                    Number(null) is 0 - so the panel announced "0 days overdue"
+                    over a header that also said the A1c was never recorded. */}
+                {patient.last_a1c_date === null ? (
+                  <Badge variant="outline" className="border-destructive/40 text-destructive">
+                    never tested
+                  </Badge>
+                ) : patient.gap_flag ? (
                   <Badge variant="outline" className="border-destructive/40 text-destructive">
                     {fmt(Number(patient.days_overdue))} days overdue
                   </Badge>
@@ -311,7 +325,7 @@ export function PatientDetailSheet({
                   </Card>
 
                   {/* --------------------------------------- bar + box pair */}
-                  <div className="grid gap-4 lg:grid-cols-2">
+                  <div className="grid gap-4 xl:grid-cols-2">
                     <Card>
                       <CardHeader className="pb-2">
                         <CardTitle className="flex items-center gap-2 text-sm">
@@ -426,9 +440,11 @@ export function PatientDetailSheet({
                         Procedures performed ({detail.procs.length})
                       </CardTitle>
                       <p className="text-xs leading-relaxed text-muted-foreground">
-                        What was done, not what was ordered. This data has no orders
-                        table, so it cannot say whether a test was requested and
-                        missed.
+                        What was done, not what was ordered. Both ends of the range
+                        are shown, because &ldquo;20 screenings, last in April&rdquo;
+                        does not say whether that is a decade of routine care or a
+                        burst last year. This data has no orders table, so it cannot
+                        say whether a test was requested and missed.
                       </p>
                     </CardHeader>
                     <CardContent className="overflow-auto p-0">
@@ -436,6 +452,7 @@ export function PatientDetailSheet({
                         <TableHeader>
                           <TableRow>
                             <TableHead>Procedure</TableHead>
+                            <TableHead>First done</TableHead>
                             <TableHead>Last done</TableHead>
                             <TableHead className="text-right">Times</TableHead>
                           </TableRow>
@@ -444,6 +461,7 @@ export function PatientDetailSheet({
                           {detail.procs.slice(0, 25).map((p) => (
                             <TableRow key={`${p.code}-${p.last}`}>
                               <TableCell className="max-w-[24rem]">{p.name}</TableCell>
+                              <TableCell className="num text-xs">{date(p.first)}</TableCell>
                               <TableCell className="num text-xs">{date(p.last)}</TableCell>
                               <TableCell className="num text-right text-xs">{p.times}</TableCell>
                             </TableRow>

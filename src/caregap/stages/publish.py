@@ -207,16 +207,22 @@ def export_patient_detail(con, manifest):
 
     procs = con.sql("""
         SELECT p.patient_id, p.description AS name, p.snomed_code AS code,
-               count(*) AS times, max(p.performed_date) AS last_done
+               count(*) AS times,
+               min(p.performed_date) AS first_done,
+               max(p.performed_date) AS last_done
         FROM silver_procedures p
         JOIN care_gap_a1c g USING (patient_id)
         GROUP BY p.patient_id, p.description, p.snomed_code
         ORDER BY p.patient_id, last_done DESC, p.description
     """).fetchall()
-    for pid, name, code, times, last_done in procs:
+    for pid, name, code, times, first_done, last_done in procs:
         detail.setdefault(pid, {"a1c": [], "meds": [], "procs": []})
         detail[pid]["procs"].append({
             "name": name, "code": code, "times": int(times),
+            # Both ends, not just the last. "20 depression screenings, last one
+            # in April" says nothing about whether this is a decade of routine
+            # care or a burst last year; first plus last says which.
+            "first": first_done.isoformat() if first_done else None,
             "last": last_done.isoformat() if last_done else None,
         })
 
