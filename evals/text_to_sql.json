@@ -1,0 +1,208 @@
+{
+  "name": "text-to-SQL eval, clinical care gap",
+  "as_of": "2026-08-23",
+  "built": "2026-10-03",
+  "about": [
+    "Questions for scoring a text-to-SQL agent against this warehouse.",
+    "Truth is a reference query, not a saved number. Run both, compare the answers.",
+    "Hard-coding expected values would make this stale the first time the pipeline",
+    "is re-run with a different seed, which is the one thing the project promises",
+    "not to let happen quietly.",
+    "",
+    "Compare values, not SQL text, and not column names. There are many correct",
+    "ways to write any of these, and a model naming a column `total` instead of",
+    "`patients` has made a labelling choice, not an error."
+  ],
+
+  "views": {
+    "_comment": [
+      "Register these before running. The first four are what the web app exposes.",
+      "The silver_* tables are added because no join across the first four returns",
+      "a single row: the Gold table is pre-joined, the quarantined patients are by",
+      "definition absent from it, and none of the six identity-review pairs is in",
+      "the diabetic cohort. Joins in this schema live against Silver, so an eval",
+      "that only exposes Gold cannot test joins at all."
+    ],
+    "patients": "parquet_scan('web/public/data/care_gap_full.parquet')",
+    "quarantine": "quarantine",
+    "identity_review": "identity_review",
+    "remediation_log": "remediation_log",
+    "observations": "silver_observations",
+    "medications": "silver_medications",
+    "procedures": "silver_procedures",
+    "encounters": "silver_encounters"
+  },
+
+  "questions": [
+    {
+      "id": "q01",
+      "kind": "count",
+      "difficulty": "easy",
+      "question": "How many patients have an open A1c gap?",
+      "reference_sql": "SELECT count(*) AS open_gaps FROM patients WHERE gap_flag",
+      "expect": { "refuse": false, "rows": 1 },
+      "watch_for": "The floor. If this one is wrong, nothing below is worth reading."
+    },
+    {
+      "id": "q02",
+      "kind": "filter",
+      "difficulty": "easy",
+      "question": "Which patients over 65 have an open A1c gap?",
+      "reference_sql": "SELECT mrn, age, days_overdue FROM patients WHERE age > 65 AND gap_flag ORDER BY mrn",
+      "expect": { "refuse": false, "rows": 9 },
+      "watch_for": [
+        "`over 65` is ambiguous: > or >=. It happens not to matter here, because no",
+        "patient is exactly 65, so a model picking the other one still scores. That",
+        "is luck, not correctness, and on other data it would diverge silently."
+      ]
+    },
+    {
+      "id": "q03",
+      "kind": "filter",
+      "difficulty": "easy",
+      "question": "Which patients have never had an A1c recorded?",
+      "reference_sql": "SELECT mrn, age, unit FROM patients WHERE last_a1c_date IS NULL ORDER BY mrn",
+      "expect": { "refuse": false, "rows": 21 },
+      "watch_for": "A model filtering on days_since_a1c = 0 instead of IS NULL returns nothing."
+    },
+    {
+      "id": "q04",
+      "kind": "aggregate",
+      "difficulty": "medium",
+      "question": "What is the average number of days since the last A1c?",
+      "reference_sql": "SELECT round(avg(days_since_a1c), 1) AS avg_days, count(days_since_a1c) AS over_patients, count(*) AS in_cohort FROM patients",
+      "expect": { "refuse": false, "rows": 1 },
+      "watch_for": [
+        "The answer is about 170 days and it describes 95 patients, not 116. avg()",
+        "skips nulls, and the 21 never-tested have no days-since at all - the group",
+        "with the longest possible gap is silently excluded from the average that is",
+        "supposed to describe them. A bare avg() is not wrong SQL; it is a misleading",
+        "answer. Credit a model that returns the denominator alongside the number."
+      ]
+    },
+    {
+      "id": "q05",
+      "kind": "aggregate",
+      "difficulty": "medium",
+      "question": "What is the gap rate by age band?",
+      "reference_sql": "SELECT CASE WHEN age < 45 THEN '18-44' WHEN age < 65 THEN '45-64' WHEN age <= 75 THEN '65-75' ELSE '76+' END AS band, count(*) AS patients, count(*) FILTER (WHERE gap_flag) AS gaps FROM patients GROUP BY 1 ORDER BY 1",
+      "expect": { "refuse": false, "rows": 4 },
+      "watch_for": [
+        "The bands are the HEDIS measure's (18-44, 45-64, 65-75, 76+), not round",
+        "decades. A model not told this invents its own and produces six rows that",
+        "are individually correct and not comparable to anything the project reports."
+      ]
+    },
+    {
+      "id": "q06",
+      "kind": "join",
+      "difficulty": "medium",
+      "question": "How many A1c results does each patient with an open gap have on file?",
+      "reference_sql": "SELECT p.mrn, count(o.value) AS a1c_results FROM patients p LEFT JOIN observations o ON o.patient_id = p.patient_id AND o.loinc_code = '4548-4' WHERE p.gap_flag GROUP BY 1 ORDER BY a1c_results, p.mrn",
+      "expect": { "refuse": false, "rows": 25 },
+      "watch_for": [
+        "LEFT JOIN, not JOIN. An inner join drops the 21 never-tested, returning 4",
+        "rows instead of 25 - and 4 is a plausible-looking answer. This is the same",
+        "mistake the project's own findings are built on."
+      ]
+    },
+    {
+      "id": "q07",
+      "kind": "join",
+      "difficulty": "hard",
+      "question": "Which patients are currently on insulin, and how many of them have an open A1c gap?",
+      "reference_sql": "SELECT count(DISTINCT p.patient_id) AS on_insulin, count(DISTINCT p.patient_id) FILTER (WHERE p.gap_flag) AS also_overdue FROM patients p JOIN medications m USING (patient_id) WHERE m.rxnorm_code IN ('106892', '311034') AND m.start_date <= DATE '2026-08-23' AND (m.end_date IS NULL OR m.end_date > DATE '2026-08-23')",
+      "expect": { "refuse": false, "rows": 1 },
+      "watch_for": [
+        "The trap in the set. 'On insulin' means a prescription active on the as-of",
+        "date, which is 45 patients. A join that asks who was ever dispensed insulin",
+        "returns 53. Both queries run, neither errors, and the difference is eight",
+        "people. The patients.on_insulin column already encodes the right definition;",
+        "a model that uses it gets 45 for free, and one that rolls its own join from",
+        "medications usually gets 53.",
+        "",
+        "The overlap with open gaps is genuinely zero either way - insulin-treated",
+        "patients in this data all get tested. Verify before calling that a bug."
+      ]
+    },
+    {
+      "id": "q08",
+      "kind": "join",
+      "difficulty": "hard",
+      "question": "For the most overdue patient who has actually been tested, what are their last five A1c results?",
+      "reference_sql": "SELECT o.observed_at::DATE AS taken, round(o.value, 1) AS a1c FROM patients p JOIN observations o USING (patient_id) WHERE o.loinc_code = '4548-4' AND p.gap_flag AND p.days_overdue IS NOT NULL AND p.days_overdue = (SELECT max(days_overdue) FROM patients WHERE gap_flag) ORDER BY taken DESC LIMIT 5",
+      "expect": { "refuse": false, "rows": 1 },
+      "watch_for": [
+        "Only one result comes back, and that is correct: this patient has exactly",
+        "one A1c on file, from 2019. The phrase 'who has actually been tested' is",
+        "doing real work - drop it and the most overdue patient is priority 1, an",
+        "85-year-old who has never been tested, whose A1c history is empty."
+      ]
+    },
+    {
+      "id": "q09",
+      "kind": "join",
+      "difficulty": "hard",
+      "question": "How many procedures has each patient with an open gap had, and which of them have had an eye examination?",
+      "reference_sql": "SELECT p.mrn, count(*) AS procedures, count(*) FILTER (WHERE lower(s.description) LIKE '%eye%') AS eye_exams FROM patients p JOIN procedures s USING (patient_id) WHERE p.gap_flag GROUP BY 1 ORDER BY procedures DESC",
+      "expect": { "refuse": false, "rows": 25 },
+      "watch_for": [
+        "Two of the 25 have an eye exam on record. Diabetic retinopathy screening is",
+        "a real care gap of its own, so a low number here is a finding rather than a",
+        "query bug - but procedures are things that happened, never things ordered."
+      ]
+    },
+    {
+      "id": "q10",
+      "kind": "join",
+      "difficulty": "medium",
+      "question": "Which patient records are waiting on a human decision about whether they are duplicates?",
+      "reference_sql": "SELECT candidate_a_mrn, candidate_b_mrn, match_fields, confidence FROM identity_review WHERE status = 'pending' ORDER BY confidence DESC",
+      "expect": { "refuse": false, "rows": 6 },
+      "watch_for": [
+        "The routing test. The answer is six pairs in identity_review. A model that",
+        "reaches for patients.identity_review_pending instead returns zero rows -",
+        "not an error, not a refusal, an empty table that reads as 'nothing to",
+        "review' while six pairs sit unadjudicated. That flag is false for all 116",
+        "patients, because none of the duplicate records is in the diabetic cohort.",
+        "This is the most dangerous failure in the set: silently empty, and wrong."
+      ]
+    },
+    {
+      "id": "q11",
+      "kind": "unanswerable",
+      "difficulty": "easy",
+      "question": "What did the doctor write in the clinical notes for the most overdue patient?",
+      "reference_sql": null,
+      "expect": { "refuse": true },
+      "watch_for": [
+        "There is no notes field anywhere. A correct response says so and writes no",
+        "SQL. Watch for a model latching onto silver_observations.value_text, which",
+        "holds free-text lab results and is the nearest thing by name."
+      ]
+    },
+    {
+      "id": "q12",
+      "kind": "unanswerable",
+      "difficulty": "hard",
+      "question": "For the overdue patients, was an A1c ordered that they never attended?",
+      "reference_sql": null,
+      "expect": { "refuse": true },
+      "watch_for": [
+        "The harder refusal, because the data looks like it should answer it. There",
+        "is no orders table: Synthea records results and completed procedures, never",
+        "requisitions. So 'ordered and missed' is indistinguishable from 'never",
+        "ordered'. A model that answers this from the procedures table is confidently",
+        "wrong, and the question is the single biggest gap in the dataset."
+      ]
+    }
+  ],
+
+  "scoring": {
+    "match": "Same values as the reference query, ignoring column names and row order.",
+    "covers": "Different shape, but every value the reference produced is present. Counts as a pass with a note; several questions can honestly be answered with fewer columns.",
+    "differs": "Ran, but the values disagree. Read it before calling it a failure - about half of these are an ambiguous question rather than a wrong query.",
+    "refused": "No SQL produced. Correct for q11 and q12, a failure anywhere else.",
+    "error": "SQL that would not execute. Always a failure."
+  }
+}
