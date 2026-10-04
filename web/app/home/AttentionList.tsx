@@ -1,18 +1,14 @@
 "use client";
 
-import { useRef, useState } from "react";
-import Link from "next/link";
-import { ArrowRight, CircleCheck } from "lucide-react";
-
-import { PatientRow, fmt, patients } from "@/lib/data";
-import { gapStatus } from "@/lib/cohort";
+import { PatientRow, fmt } from "@/lib/data";
+import { daysOverdue, gapStatus, lastA1cValue } from "@/lib/cohort";
 import { longDate } from "@/lib/dates";
 import { GapStatusBadge } from "@/components/GapStatusBadge";
-import { Button } from "@/components/ui/button";
+import { NoOpenGaps } from "@/components/NoOpenGaps";
+import { shortMrn as mrn, usePatientReview } from "@/components/PatientReview";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
-import { PatientDetailSheet } from "@/app/patients/PatientDetail";
 
 /**
  * The first few open gaps, with a way into each record.
@@ -23,60 +19,18 @@ import { PatientDetailSheet } from "@/app/patients/PatientDetail";
  * the patient, the status, the one timing fact that matters and Review.
  */
 
-const mrn = (r: PatientRow) => String(r.mrn).slice(0, 8);
-
-/** Last A1c as value and date, or a plain statement that there is none.
- *  Never a blank or a zero: a missing result is the finding. */
+/** Last A1c as value and date, or null - shown as "No result", never a
+ *  blank or a zero: a missing result is the finding. */
 function lastA1c(r: PatientRow) {
-  if (r.last_a1c_date === null || r.last_a1c_date === undefined) return null;
-  const v = r.last_a1c_value === null || r.last_a1c_value === undefined ? null : Number(r.last_a1c_value);
+  if (!r.last_a1c_date) return null;
+  const v = lastA1cValue(r);
   return { value: v === null ? null : `${v.toFixed(1)}%`, date: longDate(String(r.last_a1c_date)) };
 }
 
-/** Days overdue exists only for a patient with an earlier result. For the
- *  never tested there is no due date to be late against, so it says so. */
-function overdue(r: PatientRow) {
-  return r.days_overdue === null || r.days_overdue === undefined ? null : Number(r.days_overdue);
-}
-
 export function AttentionList({ rows }: { rows: PatientRow[] }) {
-  const [open, setOpen] = useState<PatientRow | null>(null);
-  // The drawer is opened from code, not from a dialog trigger, so on close it
-  // has nowhere to send focus and drops it on the page. Keyboard users would
-  // land back at the top; this returns them to the Review they pressed.
-  const opener = useRef<HTMLButtonElement | null>(null);
-  const close = () => {
-    setOpen(null);
-    setTimeout(() => opener.current?.focus(), 0);
-  };
+  const { button: review, drawer } = usePatientReview();
 
-  if (rows.length === 0) {
-    return (
-      <div className="flex flex-col items-center gap-3 rounded-lg border bg-card px-6 py-10 text-center">
-        <CircleCheck className="size-6 text-status-success" aria-hidden />
-        <div className="flex flex-col gap-1">
-          <p className="text-base font-semibold">No open A1c gaps</p>
-          <p className="max-w-md text-sm text-muted-foreground">
-            Every patient in the cohort has an A1c result within the last twelve months.
-          </p>
-        </div>
-        <Link
-          href="/patients"
-          className="inline-flex items-center gap-1 rounded-sm text-sm font-medium text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-        >
-          View all patients
-          <ArrowRight className="size-3.5" aria-hidden />
-        </Link>
-      </div>
-    );
-  }
-
-  const review = (r: PatientRow) => (
-    <Button variant="outline" size="sm" onClick={(e) => { opener.current = e.currentTarget; setOpen(r); }}>
-      Review<span className="sr-only"> patient {mrn(r)}</span>
-      <ArrowRight aria-hidden />
-    </Button>
-  );
+  if (rows.length === 0) return <NoOpenGaps />;
 
   return (
     <>
@@ -98,7 +52,7 @@ export function AttentionList({ rows }: { rows: PatientRow[] }) {
           <TableBody>
             {rows.map((r) => {
               const a1c = lastA1c(r);
-              const late = overdue(r);
+              const late = daysOverdue(r);
               return (
                 <TableRow key={String(r.patient_id)}>
                   <TableCell className="pl-4">
@@ -143,7 +97,7 @@ export function AttentionList({ rows }: { rows: PatientRow[] }) {
       <ul className="flex flex-col gap-3 md:hidden">
         {rows.map((r) => {
           const a1c = lastA1c(r);
-          const late = overdue(r);
+          const late = daysOverdue(r);
           return (
             <li key={String(r.patient_id)} className="flex flex-col gap-3 rounded-lg border bg-card p-4">
               <div className="flex items-start justify-between gap-3">
@@ -168,7 +122,7 @@ export function AttentionList({ rows }: { rows: PatientRow[] }) {
         })}
       </ul>
 
-      <PatientDetailSheet patient={open} cohort={patients} onClose={close} />
+      {drawer}
     </>
   );
 }

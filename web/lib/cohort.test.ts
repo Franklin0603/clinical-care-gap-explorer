@@ -84,3 +84,66 @@ test("dates format without a timezone shift", () => {
   assert.equal(longDate("2026-01-01"), "Jan 1, 2026");
   assert.equal(longDate(null), null);
 });
+
+import { NO_FILTERS, daysOverdue, filterGaps, lastA1cValue, optionCounts, settingLabel, sortGaps } from "./cohort.ts";
+
+test("the queue holds every open gap and nothing else", () => {
+  const all = filterGaps(rows, NO_FILTERS);
+  assert.equal(all.length, gold.open_gaps);
+  assert.equal(filterGaps(rows, { ...NO_FILTERS, status: "never" }).length, gold.never_tested);
+  assert.equal(filterGaps(rows, { ...NO_FILTERS, status: "overdue" }).length, gold.open_gaps - gold.never_tested);
+});
+
+test("each filter narrows, and the option counts add back up", () => {
+  const settings = [...new Set(filterGaps(rows, NO_FILTERS).map((r) => String(r.unit)))];
+  const bySetting = optionCounts(rows, NO_FILTERS, "setting", settings);
+  assert.equal([...bySetting.values()].reduce((a, b) => a + b, 0), gold.open_gaps);
+  const byBand = optionCounts(rows, NO_FILTERS, "band", [...AGE_BANDS]);
+  assert.equal([...byBand.values()].reduce((a, b) => a + b, 0), gold.open_gaps);
+  const byInsulin = optionCounts(rows, NO_FILTERS, "insulin", ["yes", "no"]);
+  assert.equal(byInsulin.get("yes")! + byInsulin.get("no")!, gold.open_gaps);
+});
+
+test("search matches the start of an MRN, case and spaces ignored", () => {
+  const first = String(needingAttention(rows, 1)[0].mrn);
+  const hit = filterGaps(rows, { ...NO_FILTERS, query: `  ${first.slice(0, 8).toUpperCase()} ` });
+  assert.deepEqual(hit.map((r) => r.mrn), [first]);
+  assert.equal(filterGaps(rows, { ...NO_FILTERS, query: "zzzz" }).length, 0);
+});
+
+test("sorting reorders without losing anyone, and priority matches Home", () => {
+  const gaps = filterGaps(rows, NO_FILTERS);
+  for (const by of ["priority", "seen-recent", "seen-oldest"] as const) {
+    assert.equal(sortGaps(gaps, by).length, gaps.length, by);
+  }
+  assert.deepEqual(
+    sortGaps(gaps, "priority").slice(0, 5).map((r) => r.patient_id),
+    needingAttention(rows, 5).map((r) => r.patient_id),
+  );
+  const recent = sortGaps(gaps, "seen-recent").map((r) => String(r.last_encounter_date));
+  assert.deepEqual(recent, [...recent].sort().reverse());
+  // Same order whatever order the rows arrive in, so ties never shuffle.
+  for (const by of ["priority", "seen-recent", "seen-oldest"] as const) {
+    assert.deepEqual(sortGaps([...gaps].reverse(), by).map((r) => r.patient_id),
+                     sortGaps(gaps, by).map((r) => r.patient_id), `${by} is deterministic`);
+  }
+});
+
+test("care settings read as words", () => {
+  assert.equal(settingLabel("snf"), "Skilled nursing");
+  assert.equal(settingLabel("urgentcare"), "Urgent care");
+  assert.equal(settingLabel("somewhere-new"), "somewhere-new");
+  assert.equal(settingLabel(null), "Unknown");
+});
+
+test("a missing result stays missing, never a zero", () => {
+  for (const r of rows) {
+    if (gapStatus(r) === "never") {
+      assert.equal(lastA1cValue(r), null, r.mrn);
+      assert.equal(daysOverdue(r), null, r.mrn);
+    }
+  }
+  assert.equal(lastA1cValue({ last_a1c_value: null }), null);
+  assert.equal(lastA1cValue({ last_a1c_value: 7.2 }), 7.2);
+  assert.equal(daysOverdue({ days_overdue: 0 }), 0, "a real zero survives");
+});

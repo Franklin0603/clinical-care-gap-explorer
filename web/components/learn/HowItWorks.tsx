@@ -28,16 +28,16 @@ const STEPS: Step[] = [
   {
     name: "Prioritize",
     does: "Put the most urgent patients first.",
-    status: { tone: "neutral", label: "Partial" },
-    where: { href: "/home", label: "Home" },
-    detail: "Home lists the first open gaps in the pipeline's priority order, never tested first. The Patients list sorts most overdue first. A dedicated, ranked work queue is planned.",
+    status: { tone: "success", label: "Available" },
+    where: { href: "/care-gaps", label: "Care Gaps" },
+    detail: "Care Gaps lists every open gap in the pipeline's priority order, never tested first, with filters by status, setting, age and insulin. Home shows the first five.",
   },
   {
     name: "Review",
     does: "Open a patient's A1c history, medications and procedures.",
     status: { tone: "success", label: "Available" },
     where: { href: "/patients", label: "Patients" },
-    detail: "Select Review on Home, or any patient in the Patients list, to open their record.",
+    detail: "Select Review on Home or Care Gaps, or any patient in the Patients list, to open their record.",
   },
   {
     name: "Act",

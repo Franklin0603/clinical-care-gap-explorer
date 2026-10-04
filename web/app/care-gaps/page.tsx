@@ -1,27 +1,25 @@
-import { CircleAlert } from "lucide-react";
-
-import { gold } from "@/lib/data";
+import { gold, patients } from "@/lib/data";
+import { cohortSummary } from "@/lib/cohort";
 import { Page } from "@/components/shell/Page";
-import { EmptyState } from "@/components/shell/EmptyState";
+import { CareGapsView } from "./CareGapsView";
 
 export const metadata = { title: "Care Gaps" };
 
+const summary = cohortSummary(patients, gold.asof);
+
 export default function CareGapsPage() {
+  const n = summary.openGaps;
   return (
     <Page
       title="Care Gaps"
-      description="Review and prioritize patients with potential A1c monitoring gaps."
+      description={
+        n === 0
+          ? "No patient currently has an A1c monitoring gap."
+          : `${n} ${n === 1 ? "patient currently has" : "patients currently have"} an A1c monitoring gap.`
+      }
+      width="wide"
     >
-      <EmptyState
-        icon={CircleAlert}
-        title="The care-gap work queue"
-        description="A focused list of the patients whose A1c is overdue, ranked by urgency, where each gap can be reviewed and worked through to closure."
-        note={`Not built yet. The Patients list already shows all ${gold.open_gaps} open gaps, most overdue first, and opens any patient's record.`}
-        links={[
-          { href: "/patients", label: "Patients", about: "Every patient in the cohort, open gaps first." },
-          { href: "/overview", label: "Overview", about: "How the gaps break down by age band and care setting." },
-        ]}
-      />
+      <CareGapsView />
     </Page>
   );
 }

@@ -32,6 +32,22 @@ export function gapStatus(r: PatientRow): GapStatus {
   return r.gap_flag ? "overdue" : "current";
 }
 
+/** The last A1c value, or null when there is none. Never 0: Number(null) is 0,
+ *  and a 0% A1c reads as a result when the finding is that there is no result. */
+export function lastA1cValue(r: PatientRow): number | null {
+  if (r.last_a1c_value === null || r.last_a1c_value === undefined) return null;
+  const v = Number(r.last_a1c_value);
+  return Number.isFinite(v) ? v : null;
+}
+
+/** Days overdue exists only for a patient with an earlier result. The never
+ *  tested have no due date to be late against, so this is null for them. */
+export function daysOverdue(r: PatientRow): number | null {
+  if (r.days_overdue === null || r.days_overdue === undefined) return null;
+  const v = Number(r.days_overdue);
+  return Number.isFinite(v) ? v : null;
+}
+
 /* ------------------------------------------------------------------ bands */
 
 /** The HEDIS diabetes measure's boundaries (ADR-0011), not round decades. */
@@ -120,4 +136,86 @@ export function gapsByAgeBand(rows: PatientRow[]): BandRow[] {
     if (r.gap_flag) b.gaps += 1;
   }
   return [...out.values()];
+}
+
+/* --------------------------------------------------------- care-gap queue */
+
+/** The care setting of the patient's last encounter, as the data spells it,
+ *  to the words a care team would use. Unknown values show as themselves. */
+export const SETTING_LABELS: Record<string, string> = {
+  ambulatory: "Ambulatory",
+  outpatient: "Outpatient",
+  wellness: "Wellness",
+  urgentcare: "Urgent care",
+  emergency: "Emergency",
+  snf: "Skilled nursing",
+  hospice: "Hospice",
+};
+
+export const settingLabel = (unit: unknown) =>
+  unit === null || unit === undefined ? "Unknown" : SETTING_LABELS[String(unit)] ?? String(unit);
+
+export type GapFilters = {
+  status: "all" | "never" | "overdue";
+  /** Matched against the start of the MRN, ignoring case and spaces. */
+  query: string;
+  setting: string;
+  band: AgeBand | "all";
+  insulin: "all" | "yes" | "no";
+};
+
+export const NO_FILTERS: GapFilters = { status: "all", query: "", setting: "all", band: "all", insulin: "all" };
+
+/** Open gaps only, narrowed by every filter that is set. Filters that are not
+ *  set ("all", or an empty search) do nothing. */
+export function filterGaps(rows: PatientRow[], f: GapFilters): PatientRow[] {
+  const q = f.query.trim().toLowerCase();
+  return rows.filter((r) => {
+    if (!r.gap_flag) return false;
+    if (f.status !== "all" && gapStatus(r) !== f.status) return false;
+    if (q && !String(r.mrn).toLowerCase().startsWith(q)) return false;
+    if (f.setting !== "all" && String(r.unit) !== f.setting) return false;
+    if (f.band !== "all" && ageBand(Number(r.age)) !== f.band) return false;
+    if (f.insulin !== "all" && Boolean(r.on_insulin) !== (f.insulin === "yes")) return false;
+    return true;
+  });
+}
+
+/**
+ * Sort orders for the queue.
+ *
+ *   priority     the pipeline's rank (never tested first, then most overdue)
+ *   seen-recent  last seen most recently first: still in contact, easiest to reach
+ *   seen-oldest  last seen longest ago first: most at risk of being lost
+ *
+ * No "most overdue" order: 21 of the 25 have never been tested and so have no
+ * days-overdue figure, and the four who do are already ordered that way within
+ * priority. Every order ends on patient_id, so ties never shuffle.
+ */
+export type GapSort = "priority" | "seen-recent" | "seen-oldest";
+
+export const GAP_SORTS: Record<GapSort, string> = {
+  priority: "Priority",
+  "seen-recent": "Recently seen",
+  "seen-oldest": "Longest since seen",
+};
+
+export function sortGaps(rows: PatientRow[], by: GapSort): PatientRow[] {
+  const seen = (r: PatientRow) => (r.last_encounter_date ? String(r.last_encounter_date) : "");
+  const tie = (a: PatientRow, b: PatientRow) => String(a.patient_id).localeCompare(String(b.patient_id));
+  const cmp: Record<GapSort, (a: PatientRow, b: PatientRow) => number> = {
+    priority: (a, b) => Number(a.priority ?? Infinity) - Number(b.priority ?? Infinity),
+    // ISO dates sort as strings. A missing date sorts as oldest.
+    "seen-recent": (a, b) => seen(b).localeCompare(seen(a)),
+    "seen-oldest": (a, b) => seen(a).localeCompare(seen(b)),
+  };
+  return [...rows].sort((a, b) => cmp[by](a, b) || tie(a, b));
+}
+
+/** How many open gaps each option of a filter would leave, given the others.
+ *  Shown beside each option so a choice that empties the list says so first. */
+export function optionCounts<K extends keyof GapFilters>(
+  rows: PatientRow[], f: GapFilters, key: K, values: GapFilters[K][],
+): Map<GapFilters[K], number> {
+  return new Map(values.map((v) => [v, filterGaps(rows, { ...f, [key]: v }).length]));
 }
