@@ -94,7 +94,7 @@ export default function AskView() {
 
   return (
     <Page
-      title="Ask the data"
+      title="Ask the Data"
       blurb="Every answer shows the SQL that produced it"
     >
       <div className="flex min-h-[calc(100vh-18rem)] flex-col gap-6">

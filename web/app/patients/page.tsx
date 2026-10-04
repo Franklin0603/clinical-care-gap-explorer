@@ -1,8 +1,8 @@
 import PatientView from "./PatientView";
 
 export const metadata = {
-  title: "Patient Care — Clinical Care Gap Explorer",
-  description: "The care-gap cohort, scoped by clinical role. Models minimum-necessary access.",
+  title: "Patients",
+  description: "Every patient in the diabetic cohort, open A1c gaps first, with each patient's history a click away.",
 };
 
 export default function Page() {

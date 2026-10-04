@@ -223,6 +223,7 @@ export default function PatientView() {
   return (
     <Page
       title="Patients"
+      width="wide"
       blurb={
         <>
           The diabetic <Term k="cohort">cohort</Term>. Open a row for that
