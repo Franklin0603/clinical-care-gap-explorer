@@ -37,7 +37,10 @@ export const LEARN_MODULES: LearnModule[] = [
     title: "Learn how to use the app",
     summary:
       "Finding the patients who need attention, opening a patient, and reading what each page can and cannot tell you.",
-    today: [{ href: "/help", label: "Help" }],
+    today: [
+      { href: "/learn#how-it-works", label: "How Care Gap Explorer works" },
+      { href: "/help", label: "Help" },
+    ],
   },
   {
     slug: "the-data",

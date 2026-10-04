@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { gold } from "@/lib/data";
+import { longDate } from "@/lib/dates";
 import { locate } from "./nav";
 import { SyntheticDataBadge } from "./SyntheticDataBadge";
 import {
@@ -13,17 +14,6 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-/** "2026-08-23" -> "Aug 23, 2026", without going through Date.
- *  new Date("2026-08-23") is midnight UTC, which is still the 22nd anywhere
- *  west of Greenwich, so the obvious version prints the wrong day in the US. */
-function longDate(iso: string) {
-  const [y, m, d] = iso.split("-").map(Number);
-  return `${MONTHS[m - 1]} ${d}, ${y}`;
-}
 
 /**
  * The bar across the top of every route.

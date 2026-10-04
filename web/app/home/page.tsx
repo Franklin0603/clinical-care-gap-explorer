@@ -1,106 +1,132 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChartNoAxesCombined, GraduationCap, Sparkles, Users } from "lucide-react";
 
-import { gold } from "@/lib/data";
+import { gold, patients } from "@/lib/data";
+import { cohortSummary, gapsByAgeBand, needingAttention } from "@/lib/cohort";
 import { Page, Section } from "@/components/shell/Page";
-import { StatusBadge, StatusTone } from "@/components/shell/StatusBadge";
+import { MetricCard } from "@/components/MetricCard";
+import { AttentionList } from "./AttentionList";
+import { GapsByAgeBand, MonitoringStatus } from "./PopulationMonitoring";
 
 export const metadata = { title: "Home" };
 
 /**
- * Not the Home dashboard - that is a later phase. This is the workflow the
- * application is organised around, with each step saying honestly whether it
- * exists today and where. A healthcare user landing here should learn what
- * needs attention and what they can do next; three of the six steps are not
- * built, and the page says which three.
+ * The care team's starting point: how the population is doing, who needs
+ * attention first, and where to go next.
+ *
+ * Every figure is derived from the exported rows by lib/cohort.ts, and a test
+ * holds those derivations equal to the pipeline's own gold report. Nothing is
+ * shown that the data does not record: there are no orders, outreach or task
+ * events in it, so there are no metrics about them here.
  */
-type Step = {
-  name: string;
-  does: string;
-  status: { tone: StatusTone; label: string };
-  where?: { href: string; label: string };
-  detail?: string;
-};
+const summary = cohortSummary(patients, gold.asof);
+const attention = needingAttention(patients, 5);
+const bands = gapsByAgeBand(patients);
 
-const STEPS: Step[] = [
-  {
-    name: "Detect",
-    does: "Find diabetic patients with no A1c result in the last twelve months.",
-    status: { tone: "success", label: "Available" },
-    where: { href: "/patients", label: "Patients" },
-    detail: `${gold.open_gaps} of ${gold.cohort} patients have an open gap, and ${gold.never_tested} of them have never been tested.`,
-  },
-  {
-    name: "Prioritize",
-    does: "Put the most urgent patients first.",
-    status: { tone: "neutral", label: "Partial" },
-    where: { href: "/patients", label: "Patients" },
-    detail: "The patient list is ordered most-overdue first. A dedicated, ranked work queue is planned.",
-  },
-  {
-    name: "Review",
-    does: "Open a patient's A1c history, medications and procedures.",
-    status: { tone: "success", label: "Available" },
-    where: { href: "/patients", label: "Patients" },
-    detail: "Select any patient in the list to open their record.",
-  },
-  {
-    name: "Act",
-    does: "Record what was done about a gap: a call, a message, an order.",
-    status: { tone: "info", label: "Planned" },
-    where: { href: "/tasks", label: "Tasks" },
-  },
-  {
-    name: "Track",
-    does: "Follow each patient until the test actually happens.",
-    status: { tone: "info", label: "Planned" },
-  },
-  {
-    name: "Close",
-    does: "Confirm the result arrived and close the gap.",
-    status: { tone: "info", label: "Planned" },
-    detail: "This data records results but never orders, so a gap can only be seen to close when a new result appears.",
-  },
+const NEXT = [
+  { href: "/patients", label: "Patients", about: "The full cohort, every column, with filters.", icon: Users },
+  { href: "/analytics", label: "Analytics", about: "Gap rates by age band and care setting.", icon: ChartNoAxesCombined },
+  { href: "/ask", label: "Ask AI", about: "Ask questions of the cohort data.", icon: Sparkles },
+  { href: "/learn#how-it-works", label: "How it works", about: "The care-gap workflow, step by step.", icon: GraduationCap },
 ];
 
+const linkClass =
+  "inline-flex items-center gap-1 rounded-sm text-sm font-medium text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
+
 export default function HomePage() {
+  const s = summary;
   return (
     <Page
       title="Home"
-      description="Where your diabetes population needs attention, and what you can do about it today."
+      description="Here's where your diabetes population needs attention."
+      width="wide"
     >
+      <section aria-label="Summary" className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <MetricCard
+          label="Total cohort"
+          value={s.total.toLocaleString("en-US")}
+          caption="Patients with diabetes in the report"
+          hint="Every patient with a diabetes diagnosis on record who was alive on the data date. Records that failed data-quality checks are held back and never counted here."
+          href="/patients"
+          hrefLabel="View patients"
+        />
+        <MetricCard
+          label="Open A1c gaps"
+          value={s.openGaps.toLocaleString("en-US")}
+          status={{ tone: s.openGaps ? "danger" : "success", label: s.openGaps ? "Needs attention" : "None open" }}
+          context={`${s.gapRatePct}% of the cohort`}
+          caption="No A1c in the last 12 months"
+          hint="Patients with no A1c result in the twelve months before the data date. Includes those who have never been tested."
+          href="/care-gaps"
+          hrefLabel="View care gaps"
+        />
+        <MetricCard
+          label="Never tested"
+          value={s.neverTested.toLocaleString("en-US")}
+          context={`${s.neverTested} of ${s.openGaps} open gaps`}
+          caption="No A1c result on record at all"
+          hint="Open gaps with no A1c in the record at any time. Part of the open-gap count, not in addition to it."
+        />
+        <MetricCard
+          label="Current"
+          value={s.current.toLocaleString("en-US")}
+          status={{ tone: "success", label: "Up to date" }}
+          context={`${s.dueWithin90} due again within 90 days`}
+          caption="A1c within the last 12 months"
+          hint="Patients whose most recent A1c is within twelve months of the data date. Due within 90 days counts those whose next test falls due in the next three months."
+        />
+      </section>
+
       <Section
-        title="The care-gap workflow"
-        blurb="Detect, prioritize, review, act, track, close. The application is organised around these six steps; this is where each one stands."
+        title="Patients needing attention"
+        blurb={
+          attention.length
+            ? `The first ${attention.length} of ${s.openGaps} open gaps, in the pipeline's priority order: never tested first, then the longest overdue.`
+            : undefined
+        }
+        actions={
+          <Link href="/care-gaps" className={linkClass}>
+            View all care gaps
+            <ArrowRight className="size-3.5" aria-hidden />
+          </Link>
+        }
       >
-        <ol className="flex flex-col divide-y rounded-lg border bg-card">
-          {STEPS.map((s, i) => (
-            <li key={s.name} className="flex flex-col gap-2 p-4 sm:flex-row sm:items-start sm:gap-5 sm:p-5">
-              <div className="flex items-center gap-3 sm:w-40 sm:shrink-0">
-                <span className="num flex size-7 shrink-0 items-center justify-center rounded-full border text-xs font-medium text-muted-foreground">
-                  {i + 1}
+        <AttentionList rows={attention} />
+      </Section>
+
+      <Section
+        title="Population monitoring"
+        blurb="How A1c monitoring stands across the whole cohort."
+        actions={
+          <Link href="/analytics" className={linkClass}>
+            View analytics
+            <ArrowRight className="size-3.5" aria-hidden />
+          </Link>
+        }
+      >
+        <div className="grid gap-4 lg:grid-cols-2">
+          <MonitoringStatus s={s} />
+          <GapsByAgeBand bands={bands} />
+        </div>
+      </Section>
+
+      <Section title="Where to next">
+        <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          {NEXT.map((n) => (
+            <li key={n.href}>
+              <Link
+                href={n.href}
+                className="group flex h-full items-start gap-3 rounded-lg border bg-card p-4 transition-colors hover:bg-muted/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              >
+                <n.icon className="mt-0.5 size-4 shrink-0 text-muted-foreground" aria-hidden />
+                <span className="flex flex-col gap-0.5">
+                  <span className="text-sm font-medium group-hover:underline">{n.label}</span>
+                  <span className="text-xs text-muted-foreground">{n.about}</span>
                 </span>
-                <span className="text-base font-semibold">{s.name}</span>
-              </div>
-              <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-                <p className="text-sm">{s.does}</p>
-                {s.detail && <p className="text-sm text-muted-foreground">{s.detail}</p>}
-              </div>
-              <div className="flex items-center gap-3 sm:shrink-0 sm:justify-end">
-                <StatusBadge tone={s.status.tone} label={s.status.label} />
-                {s.where && (
-                  <Link
-                    href={s.where.href}
-                    className="inline-flex items-center gap-1 rounded-sm text-sm font-medium text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-                  >
-                    {s.where.label}
-                    <ArrowRight className="size-3.5" aria-hidden />
-                  </Link>
-                )}
-              </div>
+              </Link>
             </li>
           ))}
-        </ol>
+        </ul>
       </Section>
     </Page>
   );

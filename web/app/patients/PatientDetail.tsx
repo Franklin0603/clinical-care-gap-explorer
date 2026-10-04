@@ -8,6 +8,7 @@ import {
 import { Syringe, TrendingUp, Activity, Stethoscope } from "lucide-react";
 
 import { PatientRow, fmt } from "@/lib/data";
+import { ageBand } from "@/lib/cohort";
 import {
   A1C_TARGET, Box, PatientDetail as Detail, boxes, insulinPerYear, insulinStart,
   loadPatientDetail, testsPerYear,
@@ -155,8 +156,7 @@ export function PatientDetailSheet({
       if (r.last_a1c_value === null || r.last_a1c_value === undefined) continue;
       const v = Number(r.last_a1c_value);
       if (!Number.isFinite(v)) continue;
-      const age = Number(r.age);
-      const band = age < 45 ? "18-44" : age < 65 ? "45-64" : age <= 75 ? "65-75" : "76+";
+      const band = ageBand(Number(r.age));
       if (!g.has(band)) g.set(band, []);
       g.get(band)!.push(v);
     }

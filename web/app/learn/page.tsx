@@ -1,14 +1,16 @@
 import Link from "next/link";
 
 import { LEARN_MODULES } from "@/lib/learn";
-import { Page } from "@/components/shell/Page";
+import { Page, Section } from "@/components/shell/Page";
+import { HowItWorks } from "@/components/learn/HowItWorks";
 import { StatusBadge } from "@/components/shell/StatusBadge";
 
 export const metadata = { title: "Learn" };
 
 /**
  * Four modules, none written yet, each pointing at what already covers part of
- * it. Driven by lib/learn.ts so a module goes live by gaining an `href`.
+ * it. Driven by lib/learn.ts so a module goes live by gaining an `href`. Below
+ * them, the care-gap workflow and where each step stands.
  */
 export default function LearnPage() {
   return (
@@ -56,6 +58,14 @@ export default function LearnPage() {
           </li>
         ))}
       </ul>
+
+      <Section
+        id="how-it-works"
+        title="How Care Gap Explorer works"
+        blurb="Detect, prioritize, review, act, track, close. The application is organised around these six steps; this is where each one stands today."
+      >
+        <HowItWorks />
+      </Section>
     </Page>
   );
 }

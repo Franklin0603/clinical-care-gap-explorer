@@ -11,7 +11,7 @@
 import type { LucideIcon } from "lucide-react";
 import {
   BookOpen, ChartNoAxesCombined, CircleAlert, CircleHelp, Database, House,
-  ListChecks, MessageSquareText, Settings, Users,
+  ListChecks, Settings, Sparkles, Users,
 } from "lucide-react";
 
 import { gold } from "@/lib/data";
@@ -67,14 +67,13 @@ export const NAV_SECTIONS: NavSection[] = [
         legacy: [{ href: "/overview", label: "Overview" }],
       },
       {
-        // "Ask the Data", not "Ask AI". The page is a query builder over preset
-        // questions and says so in its own footer (ADR-0012); notebook 05 then
-        // tested a model against it and found one silently wrong answer. A nav
-        // label promising AI would contradict the page it opens. When a model
-        // ships, this becomes "Ask AI" here and nowhere else needs to change.
+        // Labelled "Ask AI" by the redesign brief. The page it opens is still
+        // the query builder over preset questions (ADR-0012) and still titles
+        // itself "Ask the Data"; the label leads the page, which is redesigned
+        // in a later phase. The route stays /ask so no link breaks.
         href: "/ask",
-        label: "Ask the Data",
-        icon: MessageSquareText,
+        label: "Ask AI",
+        icon: Sparkles,
       },
     ],
   },

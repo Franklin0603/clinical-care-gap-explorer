@@ -7,6 +7,7 @@ import {
 import { AlertTriangle, CalendarClock, Target, Users2 } from "lucide-react";
 
 import { gold, dq, patients, PatientRow } from "@/lib/data";
+import { ageBand } from "@/lib/cohort";
 import { Page, Section } from "@/components/shell/Page";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -20,9 +21,6 @@ import { Term } from "@/components/Term";
 
 /** The full cohort, every column. */
 const ALL = patients;
-
-const BAND = (age: number) =>
-  age < 45 ? "18-44" : age < 65 ? "45-64" : age <= 75 ? "65-75" : "76+";
 
 const chartConfig = {
   patients: { label: "In cohort", color: "var(--chart-1)" },
@@ -63,7 +61,7 @@ export default function OverviewView() {
   const filtered = useMemo(
     () =>
       ALL.filter((r) => {
-        if (band !== "all" && BAND(Number(r.age)) !== band) return false;
+        if (band !== "all" && ageBand(Number(r.age)) !== band) return false;
         if (unit !== "all" && r.unit !== unit) return false;
         if (status === "overdue" && !r.gap_flag) return false;
         if (status === "current" && r.gap_flag) return false;
@@ -92,7 +90,7 @@ export default function OverviewView() {
         ["18-44", "45-64", "65-75", "76+"].map((b) => [b, { band: b, patients: 0, gaps: 0 }]),
       );
     for (const r of filtered) {
-      const b = seed[BAND(Number(r.age))];
+      const b = seed[ageBand(Number(r.age))];
       b.patients += 1;
       if (r.gap_flag) b.gaps += 1;
     }
