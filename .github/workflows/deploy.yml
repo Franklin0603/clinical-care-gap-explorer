@@ -39,7 +39,7 @@ jobs:
       # The guard and scope tests gate the deploy. Both document real bugs
       # (a WITH...DELETE bypass, and a clinical-advice question that returned
       # a table), so a regression should stop the site shipping.
-      - run: node --test lib/*.test.ts
+      - run: node --test lib/*.test.ts lib/ask/*.test.ts
         working-directory: web
       - run: npm run build
         working-directory: web

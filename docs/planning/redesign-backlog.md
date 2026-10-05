@@ -8,10 +8,8 @@ Each phase adds what it leaves behind to its own section.
 
 ## From phase 2 (Home)
 
-**"Ask AI" label vs the Ask page.** The sidebar says "Ask AI", as the brief
-asked. The page it opens still has the heading "Ask the Data", and its footer
-says it is not a language model. One of them should change when the Ask page
-is redesigned.
+**"Ask AI" label vs the Ask page.** Resolved in phase 8: the page is now
+Ask AI throughout, and says under its input how answers are produced.
 
 **Two links land on placeholder pages.** "View analytics" on Home goes to
 /analytics, which is still the phase 1 placeholder pointing at Overview. (Care
@@ -132,3 +130,36 @@ browser has saved, so the number would change on load.
 
 **No task column on Care Gaps.** Deliberate, to keep that table clean: the way
 from a care gap to its task is Review, then the Follow-up card.
+
+## From phase 8 (Ask AI)
+
+**There is no language model behind Ask AI.** The site is a static export on
+GitHub Pages: no server to hold an API key, and a key shipped to the browser
+would be public. So questions are interpreted by rules (lib/ask/engine.ts) over
+the same cohort functions every page uses, and the page says so under its
+input. It understands the questions it has rules for - counts, lists and
+shares of the cohort by gap status, age band, care setting, insulin and recent
+encounters; group comparisons; testing over time; a patient by MRN; follow-ups
+on all of these; method and SQL on request; the known limitations - and says
+plainly when it cannot answer anything else. To put a model in front of it,
+add a small server function (or let a user supply their own key) and expose
+the engine's answer functions to the model as tools, so the numbers still come
+from one place.
+
+**Conversations live in one browser**, like tasks: localStorage, a separate
+key, never mixed with clinical data or tasks.
+
+**The SQL for testing over time is illustrative.** Population answers show SQL
+that runs against the patients view and was checked against DuckDB for 17
+populations. The per-year testing answer comes from the per-patient history
+export, which the in-browser query engine does not load, so its SQL names an
+a1c_observations table that does not exist there. The SQL says so in a comment.
+Loading the history into DuckDB would make it runnable.
+
+**The SQL check is not in CI.** The comparison of answer counts with the SQL
+run in DuckDB was a one-off script. Making it a pipeline test would need Node
+and Python in the same CI job.
+
+**A typed SELECT still runs.** The earlier Ask page's read-only query engine
+and its guard are kept: a message that is a SELECT statement runs in the
+browser and returns a table. Anything that would change data is refused.

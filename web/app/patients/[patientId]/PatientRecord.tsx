@@ -14,6 +14,7 @@ const BACK: Record<string, { href: string; label: string }> = {
   "care-gaps": { href: "/care-gaps", label: "Back to Care Gaps" },
   patients: { href: "/patients", label: "Back to Patients" },
   tasks: { href: "/tasks", label: "Back to Tasks" },
+  ask: { href: "/ask", label: "Back to Ask AI" },
 };
 
 const linkClass =

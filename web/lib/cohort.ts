@@ -405,10 +405,16 @@ export const monitoringBySetting = (rows: PatientRow[]) =>
 /** Open gaps whose last encounter falls within `months` calendar months of the
  *  data date: patients who were recently seen, yet have no A1c in a year. */
 export function gapsSeenWithin(rows: PatientRow[], asof: string, months: number) {
+  const since = monthsBefore(asof, months);
+  return rows.filter((r) => r.gap_flag && r.last_encounter_date && String(r.last_encounter_date) >= since).length;
+}
+
+/** The calendar date `months` months before an ISO date, as ISO. The same
+ *  arithmetic as SQL's `DATE x - INTERVAL n MONTH`. */
+export function monthsBefore(asof: string, months: number): string {
   const d = new Date(`${asof.slice(0, 10)}T00:00:00Z`);
   d.setUTCMonth(d.getUTCMonth() - months);
-  const since = d.toISOString().slice(0, 10);
-  return rows.filter((r) => r.gap_flag && r.last_encounter_date && String(r.last_encounter_date) >= since).length;
+  return d.toISOString().slice(0, 10);
 }
 
 /**

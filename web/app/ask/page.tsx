@@ -1,10 +1,7 @@
-import AskView from "./AskView";
+import { AskWorkspace } from "@/components/ask/AskWorkspace";
 
-export const metadata = {
-  title: "Ask the Data",
-  description: "Ask questions of the care-gap cohort. Every answer shows the SQL that produced it.",
-};
+export const metadata = { title: "Ask AI" };
 
-export default function Page() {
-  return <AskView />;
+export default function AskPage() {
+  return <AskWorkspace />;
 }

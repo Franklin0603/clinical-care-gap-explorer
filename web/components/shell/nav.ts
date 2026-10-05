@@ -67,10 +67,9 @@ export const NAV_SECTIONS: NavSection[] = [
         legacy: [{ href: "/overview", label: "Overview" }],
       },
       {
-        // Labelled "Ask AI" by the redesign brief. The page it opens is still
-        // the query builder over preset questions (ADR-0012) and still titles
-        // itself "Ask the Data"; the label leads the page, which is redesigned
-        // in a later phase. The route stays /ask so no link breaks.
+        // Ask AI: a conversational assistant over the cohort (phase 8). It
+        // interprets questions with rules, not a language model, and the page
+        // says so under its input. The route stays /ask so no link breaks.
         href: "/ask",
         label: "Ask AI",
         icon: Sparkles,
