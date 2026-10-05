@@ -126,8 +126,11 @@ function FollowUp({ id, task, gapOpen }: { id: string; task: Task; gapOpen: bool
 
       {done && gapOpen && (
         <p className="rounded-md bg-muted/60 p-3 text-xs leading-relaxed text-muted-foreground">
-          The care gap is still open. {statusLabel(task.status)} records the follow-up work; only a
-          qualifying A1c result in the source data closes the gap.
+          <span className="font-medium text-foreground">The care gap is still open.</span>{" "}
+          {task.status === "completed"
+            ? "Completed means the follow-up work was completed, not that the A1c monitoring gap closed."
+            : "Closing the task ends the follow-up work; it does not close the A1c monitoring gap."}{" "}
+          Only a qualifying A1c result in the source data closes the gap.
         </p>
       )}
 

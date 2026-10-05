@@ -9,7 +9,7 @@ import { readFileSync } from "node:fs";
 
 import { cohortSummary, gapStatus } from "./cohort.ts";
 import {
-  DEMO_USER, NO_TASK_FILTERS, QUICK_ACTIONS, TASK_STATUSES, applyChange, dueBucket, filterTasks,
+  DEMO_USER, NO_TASK_FILTERS, TASK_SORTS, shortEvent, sortTasks, QUICK_ACTIONS, TASK_STATUSES, applyChange, dueBucket, filterTasks,
   initialTask, isOpen, localToday, parseStore, taskCounts, tasksFor,
 } from "./tasks.ts";
 
@@ -29,7 +29,7 @@ test("every open gap has a task, in its initial state, with no invented activity
   }
   assert.deepEqual(taskCounts(tasks), {
     total: gold.open_gaps, open: gold.open_gaps, needsReview: gold.open_gaps,
-    outreachNeeded: 0, scheduled: 0, completed: 0,
+    outreachNeeded: 0, contacted: 0, scheduled: 0, unableToReach: 0, completed: 0, closed: 0,
   });
 });
 
@@ -105,4 +105,48 @@ test("storage: well-formed tasks survive, anything else is dropped", () => {
   assert.deepEqual(parseStore("not json"), {});
   assert.deepEqual(parseStore(JSON.stringify({ b: { status: "teleported", events: [] } })), {});
   assert.equal(parseStore(JSON.stringify({ c: { ...initialTask("c"), due: "tomorrow" } })).c.due, null);
+});
+
+test("the summary adds up whatever state the tasks are in", () => {
+  const ids = tasksFor(rows, {}).map((t) => t.patientId);
+  const statuses = TASK_STATUSES.map((s) => s.key);
+  // Spread the 25 tasks across every status.
+  const store = Object.fromEntries(ids.map((id, i) => [id, { ...initialTask(id), status: statuses[i % statuses.length] }]));
+  const c = taskCounts(tasksFor(rows, store));
+  assert.equal(c.total, gold.open_gaps, "one task per open gap");
+  assert.equal(c.open + c.completed + c.closed, c.total, "open + completed + closed = total");
+  assert.equal(c.needsReview + c.outreachNeeded + c.contacted + c.scheduled + c.unableToReach, c.open, "open statuses sum to open");
+  // And not one clinical value moved.
+  assert.deepEqual(cohortSummary(rows, gold.asof), cohortSummary(JSON.parse(JSON.stringify(rows)), gold.asof));
+});
+
+test("assignment, due dates and notes never touch clinical data", () => {
+  const snapshot = JSON.stringify(rows);
+  let t = initialTask(rows.find((r: { gap_flag: boolean }) => r.gap_flag).patient_id);
+  t = applyChange(t, { kind: "assignee", to: DEMO_USER }, NOW);
+  t = applyChange(t, { kind: "due", to: "2026-10-06" }, NOW);
+  t = applyChange(t, { kind: "note", text: "Review at next outreach." }, NOW);
+  t = applyChange(t, { kind: "status", to: "completed" }, NOW);
+  assert.equal(t.events.length, 4);
+  assert.equal(JSON.stringify(rows), snapshot, "patient rows unchanged");
+});
+
+test("sorts are deterministic and operational", () => {
+  const tasks = tasksFor(rows, {});
+  const careGaps = sortTasks(tasks, "care-gaps", rowOf).map((t) => (byId.get(t.patientId) as { priority: number }).priority);
+  assert.deepEqual(careGaps, [...careGaps].sort((a, b) => a - b), "same order as Care Gaps");
+  for (const by of Object.keys(TASK_SORTS) as (keyof typeof TASK_SORTS)[]) {
+    assert.deepEqual(sortTasks([...tasks].reverse(), by, rowOf).map((t) => t.patientId),
+                     sortTasks(tasks, by, rowOf).map((t) => t.patientId), by);
+  }
+  const ids = tasks.map((t) => t.patientId);
+  const dated = tasksFor(rows, { [ids[5]]: { ...initialTask(ids[5]), due: "2026-10-06" }, [ids[9]]: { ...initialTask(ids[9]), due: "2026-10-05" } });
+  assert.deepEqual(sortTasks(dated, "due", rowOf).slice(0, 2).map((t) => t.patientId), [ids[9], ids[5]], "soonest first, undated last");
+});
+
+test("short event labels", () => {
+  assert.equal(shortEvent({ at: NOW, by: DEMO_USER, kind: "status", from: "needs_review", to: "outreach_needed" }), "Needs review → Outreach needed");
+  assert.equal(shortEvent({ at: NOW, by: DEMO_USER, kind: "note", text: "x" }), "Note added");
+  assert.equal(shortEvent({ at: NOW, by: DEMO_USER, kind: "assignee", from: null, to: DEMO_USER }), "Assigned: Demo user");
+  assert.equal(shortEvent({ at: NOW, by: DEMO_USER, kind: "due", from: null, to: "2026-10-06" }, () => "Oct 6, 2026"), "Due Oct 6, 2026");
 });

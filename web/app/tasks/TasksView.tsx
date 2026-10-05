@@ -8,8 +8,8 @@ import { PatientRow, fmt, patients } from "@/lib/data";
 import { gapStatus } from "@/lib/cohort";
 import { eventTime, longDate } from "@/lib/dates";
 import {
-  NO_TASK_FILTERS, TASK_STATUSES, Task, TaskFilters, describeEvent, dueBucket,
-  filterTasks, localToday, taskCounts, tasksFor,
+  DEMO_USER, NO_TASK_FILTERS, TASK_SORTS, TASK_STATUSES, Task, TaskFilters, TaskSort, dueBucket,
+  filterTasks, localToday, shortEvent, sortTasks, taskCounts, tasksFor,
 } from "@/lib/tasks";
 import { resetTasks, useTaskStore } from "@/lib/taskStore";
 import { GapStatusBadge } from "@/components/GapStatusBadge";
@@ -33,8 +33,9 @@ import {
  * assignee, due, last action) come from the task store. The two never mix:
  * nothing here writes to a patient row.
  *
- * Ordered by the pipeline's priority, the same as Care Gaps, unless sorted by
- * due date.
+ * Ordered by due date by default - an operational order, not a clinical
+ * one. Untouched tasks have no due date and fall back to the Care Gaps order,
+ * which is available as its own sort with its rule written out beside it.
  */
 
 const byId = new Map(patients.map((r) => [String(r.patient_id), r]));
@@ -45,12 +46,18 @@ const STATUS_FILTER: Record<string, string> = {
   ...Object.fromEntries(TASK_STATUSES.map((s) => [s.key, s.label])),
 };
 const GAP_FILTER: Record<string, string> = { all: "Any gap type", never: "Never tested", overdue: "Overdue" };
-const ASSIGN_FILTER: Record<string, string> = { all: "Anyone", me: "Assigned to me", unassigned: "Unassigned" };
+const ASSIGN_FILTER: Record<string, string> = { all: "Any assignee", me: DEMO_USER, unassigned: "Unassigned" };
 const DUE_FILTER: Record<string, string> = {
   all: "Any due date", overdue: "Overdue tasks", today: "Due today", week: "Due this week", none: "No due date",
 };
-type Sort = "priority" | "due";
-const SORTS: Record<Sort, string> = { priority: "Priority", due: "Due date, soonest" };
+
+/** The rule behind each order, shown beside the count so no sort implies a
+ *  model the application does not have. */
+const SORT_RULE: Record<TaskSort, string> = {
+  due: "Soonest due first; tasks without a due date follow in Care Gaps order.",
+  activity: "Most recently changed first; untouched tasks follow in Care Gaps order.",
+  "care-gaps": "As on Care Gaps: never tested first, then most days overdue. A fixed rule from the data, not a risk score.",
+};
 
 const shown = (labels: Record<string, string>) => (v: string | null) => labels[v ?? "all"] ?? v ?? "";
 
@@ -68,19 +75,15 @@ export function TasksView({ initialOpen = null }: { initialOpen?: string | null 
   const store = useTaskStore();
   const today = useToday();
   const [f, setF] = useState<TaskFilters>(NO_TASK_FILTERS);
-  const [sort, setSort] = useState<Sort>("priority");
+  const [sort, setSort] = useState<TaskSort>("due");
   const [openId, setOpenId] = useState<string | null>(initialOpen && byId.has(initialOpen) ? initialOpen : null);
 
   const tasks = useMemo(() => tasksFor(patients, store), [store]);
   const counts = taskCounts(tasks);
-  const rows = useMemo(() => {
-    const list = filterTasks(tasks, f, today ?? "0000-00-00", rowOf, gapStatus);
-    const pri = (t: Task) => Number(rowOf(t.patientId)?.priority ?? Infinity);
-    return [...list].sort((a, b) =>
-      sort === "due"
-        ? (a.due ?? "9999").localeCompare(b.due ?? "9999") || pri(a) - pri(b)
-        : pri(a) - pri(b) || a.patientId.localeCompare(b.patientId));
-  }, [tasks, f, sort, today]);
+  const rows = useMemo(
+    () => sortTasks(filterTasks(tasks, f, today ?? "0000-00-00", rowOf, gapStatus), sort, rowOf),
+    [tasks, f, sort, today],
+  );
 
   const set = <K extends keyof TaskFilters>(k: K) => (v: string | null) =>
     setF((cur) => ({ ...cur, [k]: (v ?? NO_TASK_FILTERS[k]) as TaskFilters[K] }));
@@ -100,13 +103,34 @@ export function TasksView({ initialOpen = null }: { initialOpen?: string | null 
 
   return (
     <div className="flex flex-col gap-4">
-      <ul aria-label="Task summary" className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5">
-        <Kpi label="Open tasks" value={fmt(counts.open)} context={`of ${fmt(counts.total)}`} />
-        <Kpi label="Needs review" value={fmt(counts.needsReview)} />
-        <Kpi label="Outreach needed" value={fmt(counts.outreachNeeded)} />
-        <Kpi label="Scheduled" value={fmt(counts.scheduled)} />
-        <Kpi label="Completed" value={fmt(counts.completed)} />
-      </ul>
+      <div className="flex flex-col gap-2">
+        <ul aria-label="Task summary" className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5">
+          <Kpi label="Open tasks" value={fmt(counts.open)} context={`of ${fmt(counts.total)} total`} />
+          <Kpi label="Needs review" value={fmt(counts.needsReview)} context="open" />
+          <Kpi label="Outreach needed" value={fmt(counts.outreachNeeded)} context="open" />
+          <Kpi label="Scheduled" value={fmt(counts.scheduled)} context="open" />
+          <Kpi label="Completed" value={fmt(counts.completed)} context="workflow done" tone="success" />
+        </ul>
+        {/* The arithmetic, written out, so the cards can be checked against
+            each other at a glance. Statuses with no tasks are left out. */}
+        <p className="num text-xs text-muted-foreground">
+          <span className="font-medium text-foreground">{fmt(counts.total)} tasks</span>
+          {" = "}{fmt(counts.open)} open + {fmt(counts.completed)} completed
+          {counts.closed > 0 && <> + {fmt(counts.closed)} closed</>}
+          {counts.open > 0 && (
+            <>
+              {" · Open: "}
+              {[
+                [counts.needsReview, "needs review"],
+                [counts.outreachNeeded, "outreach needed"],
+                [counts.contacted, "contacted"],
+                [counts.scheduled, "scheduled"],
+                [counts.unableToReach, "unable to reach"],
+              ].filter(([n]) => Number(n) > 0).map(([n, l]) => `${fmt(Number(n))} ${l}`).join(" · ")}
+            </>
+          )}
+        </p>
+      </div>
 
       <div className="flex flex-wrap items-center gap-2">
         <div className="relative w-full sm:w-56">
@@ -126,28 +150,33 @@ export function TasksView({ initialOpen = null }: { initialOpen?: string | null 
         <Filter label="Due" value={f.due} labels={DUE_FILTER} onChange={set("due")} />
         <div className="flex items-center gap-2 sm:ml-auto">
           <span className="text-sm text-muted-foreground" id="tasks-sort-label">Sort</span>
-          <Select value={sort} onValueChange={(v) => setSort((v as Sort | null) ?? "priority")}>
-            <SelectTrigger aria-labelledby="tasks-sort-label" className="min-w-36">
-              <SelectValue>{shown(SORTS)}</SelectValue>
+          <Select value={sort} onValueChange={(v) => setSort((v as TaskSort | null) ?? "due")}>
+            <SelectTrigger aria-labelledby="tasks-sort-label" aria-describedby="tasks-sort-rule" className="min-w-44">
+              <SelectValue>{shown(TASK_SORTS)}</SelectValue>
             </SelectTrigger>
             <SelectContent>
-              {(Object.keys(SORTS) as Sort[]).map((k) => <SelectItem key={k} value={k}>{SORTS[k]}</SelectItem>)}
+              {(Object.keys(TASK_SORTS) as TaskSort[]).map((k) => <SelectItem key={k} value={k}>{TASK_SORTS[k]}</SelectItem>)}
             </SelectContent>
           </Select>
         </div>
       </div>
 
-      <div className="flex min-h-8 items-center justify-between gap-3">
+      <div className="flex min-h-8 flex-wrap items-center justify-between gap-x-3 gap-y-1">
         <p aria-live="polite" className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
           {filtering
             ? <><span className="num">{fmt(rows.length)}</span> of <span className="num">{fmt(tasks.length)}</span> tasks</>
             : <><span className="num">{fmt(rows.length)}</span> tasks</>}
         </p>
-        {filtering && (
-          <Button variant="ghost" size="sm" onClick={() => setF(NO_TASK_FILTERS)}>
-            <X aria-hidden /> Clear filters
-          </Button>
-        )}
+        <span className="flex items-center gap-3">
+          <span id="tasks-sort-rule" className="text-xs text-muted-foreground">
+            {SORT_RULE[sort]}
+          </span>
+          {filtering && (
+            <Button variant="ghost" size="sm" onClick={() => setF(NO_TASK_FILTERS)}>
+              <X aria-hidden /> Clear filters
+            </Button>
+          )}
+        </span>
       </div>
 
       {rows.length === 0 ? (
@@ -280,7 +309,7 @@ function LastAction({ task }: { task: Task }) {
   if (!e) return <Muted>No activity yet</Muted>;
   return (
     <div className="flex flex-col">
-      <span className="truncate text-sm">{describeEvent(e)}</span>
+      <span className="truncate text-sm">{shortEvent(e, (d) => longDate(d) ?? d)}</span>
       <span className="text-xs text-muted-foreground">{eventTime(e.at)}</span>
     </div>
   );

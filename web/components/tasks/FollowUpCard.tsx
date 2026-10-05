@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { PatientRow } from "@/lib/data";
 import { gapStatus } from "@/lib/cohort";
 import { eventTime, longDate } from "@/lib/dates";
-import { describeEvent, initialTask } from "@/lib/tasks";
+import { initialTask, shortEvent } from "@/lib/tasks";
 import { useTaskStore } from "@/lib/taskStore";
 import { Facts, Panel } from "@/components/patient/parts";
 import { TaskStatusBadge } from "./TaskStatusBadge";
@@ -59,7 +59,7 @@ export function FollowUpCard({ patient: r }: { patient: PatientRow }) {
           {
             label: "Last activity",
             value: last
-              ? <>{describeEvent(last)} <span className="block text-xs text-muted-foreground">{eventTime(last.at)}</span></>
+              ? <>{shortEvent(last, (d) => longDate(d) ?? d)} <span className="block text-xs text-muted-foreground">{eventTime(last.at)}</span></>
               : <span className="text-muted-foreground">No activity yet</span>,
           },
         ]}

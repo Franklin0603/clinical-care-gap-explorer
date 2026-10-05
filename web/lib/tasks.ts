@@ -181,7 +181,12 @@ export function filterTasks(
   });
 }
 
-/** Counts for the summary row, from the task records themselves. */
+/**
+ * Counts for the summary row, from the task records themselves. They add up
+ * by construction: total = open + completed + closed, and the open statuses
+ * sum to open. Closed is kept apart from completed - a task closed after
+ * "unable to reach" is finished, but the follow-up work was not completed.
+ */
 export function taskCounts(tasks: Task[]) {
   const by = (s: TaskStatus) => tasks.filter((t) => t.status === s).length;
   return {
@@ -189,9 +194,64 @@ export function taskCounts(tasks: Task[]) {
     open: tasks.filter((t) => isOpen(t.status)).length,
     needsReview: by("needs_review"),
     outreachNeeded: by("outreach_needed"),
+    contacted: by("contacted"),
     scheduled: by("scheduled"),
+    unableToReach: by("unable_to_reach"),
     completed: by("completed"),
+    closed: by("closed"),
   };
+}
+
+/* --------------------------------------------------------------- sorting */
+
+/**
+ * Sort orders for the follow-up queue. Operational, not clinical: none of
+ * them is a risk score.
+ *
+ *   due        due date, soonest first; tasks with no due date last
+ *   activity   most recently changed first; untouched tasks last
+ *   care-gaps  the same order as the Care Gaps page - the pipeline's worklist
+ *              rank: never tested first (older patients first), then most days
+ *              overdue. A deterministic rule from the data, not a model.
+ *
+ * Ties in every order fall back to the Care Gaps order, then patient id, so
+ * the list never shuffles.
+ */
+export type TaskSort = "due" | "activity" | "care-gaps";
+
+export const TASK_SORTS: Record<TaskSort, string> = {
+  due: "Due date, soonest",
+  activity: "Last activity, most recent",
+  "care-gaps": "Care Gaps order",
+};
+
+export function sortTasks(
+  tasks: Task[], by: TaskSort, rowOf: (id: string) => PatientRow | undefined,
+): Task[] {
+  const rank = (t: Task) => Number(rowOf(t.patientId)?.priority ?? Infinity);
+  const last = (t: Task) => t.events.at(-1)?.at ?? "";
+  const tie = (a: Task, b: Task) => rank(a) - rank(b) || a.patientId.localeCompare(b.patientId);
+  const cmp: Record<TaskSort, (a: Task, b: Task) => number> = {
+    due: (a, b) => (a.due ?? "9999-12-31").localeCompare(b.due ?? "9999-12-31"),
+    activity: (a, b) => last(b).localeCompare(last(a)),
+    "care-gaps": () => 0,
+  };
+  return [...tasks].sort((a, b) => cmp[by](a, b) || tie(a, b));
+}
+
+/**
+ * An event in a few words, for the queue's Last action column and the
+ * follow-up card: "Needs review → Outreach needed", "Note added". The task
+ * workspace's activity list keeps the full sentence (describeEvent). Due
+ * dates are passed through `day` so the caller formats them.
+ */
+export function shortEvent(e: TaskEvent, day: (iso: string) => string = (d) => d): string {
+  switch (e.kind) {
+    case "status": return `${statusLabel(e.from as TaskStatus)} → ${statusLabel(e.to as TaskStatus)}`;
+    case "assignee": return e.to ? `Assigned: ${e.to}` : "Unassigned";
+    case "due": return e.to ? `Due ${day(e.to)}` : "Due date removed";
+    case "note": return "Note added";
+  }
 }
 
 /** One line describing an event, for the activity list and "last action". */
