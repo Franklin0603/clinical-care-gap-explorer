@@ -1,93 +1,92 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import { gold } from "@/lib/data";
-import { StatusBadge, StatusTone } from "@/components/shell/StatusBadge";
+import { cn } from "cn";
 
 /**
- * The workflow the application is organised around, with each step saying
- * honestly whether it exists today and where. It opened Home in the first
- * redesign phase; Home became the dashboard, and the explanation moved here.
+ * The care-gap workflow, step by step, as a hypothetical care-team member
+ * would move through the application. Each step names where it happens and
+ * what kind of data it rests on, so the line between clinical source data,
+ * the application's derived status and demo workflow data is visible at every
+ * step.
  */
-type Step = {
-  name: string;
-  does: string;
-  status: { tone: StatusTone; label: string };
-  where?: { href: string; label: string };
-  detail?: string;
+type Kind = "source" | "derived" | "workflow";
+
+const KIND: Record<Kind, { label: string; tone: string }> = {
+  source: { label: "Clinical source", tone: "border-status-info/30 bg-status-info/10 text-status-info" },
+  derived: { label: "Derived status", tone: "border-border bg-muted text-muted-foreground" },
+  workflow: { label: "Demo workflow data", tone: "border-status-warning/30 bg-status-warning/10 text-status-warning" },
 };
+
+type Step = { name: string; does: string; where: { href: string; label: string }; kinds: Kind[]; detail?: string };
 
 const STEPS: Step[] = [
   {
-    name: "Detect",
-    does: "Find diabetic patients with no A1c result in the last twelve months.",
-    status: { tone: "success", label: "Available" },
-    where: { href: "/patients", label: "Patients" },
-    detail: `${gold.open_gaps} of ${gold.cohort} patients have an open gap, and ${gold.never_tested} of them have never been tested.`,
-  },
-  {
-    name: "Prioritize",
-    does: "Put the most urgent patients first.",
-    status: { tone: "success", label: "Available" },
+    name: "Identify an open monitoring gap",
+    does: "Start from the patients with no A1c result in the 365 days before the data date.",
     where: { href: "/care-gaps", label: "Care Gaps" },
-    detail: "Care Gaps lists every open gap in the pipeline's priority order, never tested first, with filters by status, setting, age and insulin. Home shows the first five.",
+    kinds: ["derived"],
+    detail: "Home shows the first five; Care Gaps lists every open gap, never tested first.",
   },
   {
-    name: "Review",
-    does: "Open a patient's A1c history, medications and procedures.",
-    status: { tone: "success", label: "Available" },
+    name: "Review the supporting evidence",
+    does: "Check why the patient has the status: the latest A1c, its date, days overdue, last encounter and care setting.",
+    where: { href: "/care-gaps", label: "Review on Care Gaps" },
+    kinds: ["source", "derived"],
+  },
+  {
+    name: "Inspect the patient's history",
+    does: "Open the patient workspace for every A1c on file, testing per year, medications and procedures.",
     where: { href: "/patients", label: "Patients" },
-    detail: "Select Review on Home or Care Gaps, or any patient in the Patients list, to open their record.",
+    kinds: ["source"],
+    detail: "There is no orders table, so the history shows tests that happened, never tests that were requested.",
   },
   {
-    name: "Act",
-    does: "Record what is being done about a gap: review, outreach, scheduling.",
-    status: { tone: "success", label: "Available" },
+    name: "Record follow-up",
+    does: "Move the gap's task through review, outreach and scheduling; assign it, set a due date, add a workflow note.",
     where: { href: "/tasks", label: "Tasks" },
-    detail: "Each open gap has a follow-up task. Its status, assignee, due date and notes are demo workflow data saved in this browser; nothing is sent to a patient.",
+    kinds: ["workflow"],
+    detail: "Nothing is sent to a patient. Task data is saved in this browser only.",
   },
   {
-    name: "Track",
-    does: "Follow each patient until the test actually happens.",
-    status: { tone: "success", label: "Available" },
+    name: "Monitor completion",
+    does: "Follow open tasks to completion, and watch for the qualifying A1c result that actually closes the gap.",
     where: { href: "/tasks", label: "Tasks" },
-    detail: "Every change to a task is recorded as workflow activity, with the time it was made.",
+    kinds: ["workflow", "derived"],
+    detail: "Completing a task never closes the gap. Only a new qualifying result in the source data does.",
   },
   {
-    name: "Close",
-    does: "Confirm the result arrived and close the gap.",
-    status: { tone: "info", label: "Planned" },
-    detail: "This data records results but never orders, so a gap can only be seen to close when a new result appears.",
+    name: "Review population analytics",
+    does: "Step back to coverage, the make-up of the gaps, where they sit by age and setting, and testing over time.",
+    where: { href: "/analytics", label: "Analytics" },
+    kinds: ["derived", "source"],
   },
 ];
 
 export function HowItWorks() {
   return (
-    <ol className="flex flex-col divide-y rounded-lg border bg-card">
+    <ol className="flex flex-col divide-y rounded-xl border bg-card">
       {STEPS.map((s, i) => (
         <li key={s.name} className="flex flex-col gap-2 p-4 sm:flex-row sm:items-start sm:gap-5 sm:p-5">
-          <div className="flex items-center gap-3 sm:w-40 sm:shrink-0">
-            <span className="num flex size-7 shrink-0 items-center justify-center rounded-full border text-xs font-medium text-muted-foreground">
-              {i + 1}
-            </span>
-            <span className="text-base font-semibold">{s.name}</span>
-          </div>
+          <span className="num flex size-7 shrink-0 items-center justify-center rounded-full border text-xs font-medium text-muted-foreground" aria-hidden>
+            {i + 1}
+          </span>
           <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+            <h3 className="text-sm font-semibold"><span className="sr-only">Step {i + 1}: </span>{s.name}</h3>
             <p className="text-sm">{s.does}</p>
             {s.detail && <p className="text-sm text-muted-foreground">{s.detail}</p>}
+            <ul className="flex flex-wrap gap-1.5 pt-0.5" aria-label="Data this step uses">
+              {s.kinds.map((k) => (
+                <li key={k} className={cn("rounded-md border px-1.5 py-0.5 text-[11px] font-medium", KIND[k].tone)}>{KIND[k].label}</li>
+              ))}
+            </ul>
           </div>
-          <div className="flex items-center gap-3 sm:shrink-0 sm:justify-end">
-            <StatusBadge tone={s.status.tone} label={s.status.label} />
-            {s.where && (
-              <Link
-                href={s.where.href}
-                className="inline-flex items-center gap-1 rounded-sm text-sm font-medium text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-              >
-                {s.where.label}
-                <ArrowRight className="size-3.5" aria-hidden />
-              </Link>
-            )}
-          </div>
+          <Link
+            href={s.where.href}
+            className="inline-flex shrink-0 items-center gap-1 rounded-sm text-sm font-medium text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          >
+            {s.where.label} <ArrowRight className="size-3.5" aria-hidden />
+          </Link>
         </li>
       ))}
     </ol>

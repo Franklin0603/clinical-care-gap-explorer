@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 
 import { gold, patients } from "@/lib/data";
 import { shortMrn } from "@/lib/cohort";
+import { moduleBySlug } from "@/lib/learn";
 import { longDate } from "@/lib/dates";
 import { locate } from "./nav";
 import { SyntheticDataBadge } from "./SyntheticDataBadge";
@@ -16,12 +17,18 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
-/** "MRN dd31b260" on a patient record's route, otherwise null. */
+/** The last crumb on a page below its nav item: "MRN dd31b260" on a patient
+ *  record, the module title on a Learn module. Otherwise null. */
 function recordCrumb(pathname: string | null) {
-  const m = /\/patients\/([^/]+)\/?$/.exec(pathname ?? "");
-  if (!m) return null;
-  const r = patients.find((p) => String(p.patient_id) === decodeURIComponent(m[1]));
-  return r ? `MRN ${shortMrn(r)}` : "Patient";
+  const path = pathname ?? "";
+  const m = /\/patients\/([^/]+)\/?$/.exec(path);
+  if (m) {
+    const r = patients.find((p) => String(p.patient_id) === decodeURIComponent(m[1]));
+    return r ? `MRN ${shortMrn(r)}` : "Patient";
+  }
+  const l = /\/learn\/([^/]+)\/?$/.exec(path);
+  if (l) return moduleBySlug(l[1])?.title ?? null;
+  return null;
 }
 
 /**

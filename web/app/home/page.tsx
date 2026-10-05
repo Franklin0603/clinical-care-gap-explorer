@@ -27,7 +27,7 @@ const NEXT = [
   { href: "/patients", label: "Patients", about: "The full cohort, every column, with filters.", icon: Users },
   { href: "/analytics", label: "Analytics", about: "Gap rates by age band and care setting.", icon: ChartNoAxesCombined },
   { href: "/ask", label: "Ask AI", about: "Ask questions of the cohort data.", icon: Sparkles },
-  { href: "/learn#how-it-works", label: "How it works", about: "The care-gap workflow, step by step.", icon: GraduationCap },
+  { href: "/learn/care-teams#how-it-works", label: "How it works", about: "The care-gap workflow, step by step.", icon: GraduationCap },
 ];
 
 const linkClass =

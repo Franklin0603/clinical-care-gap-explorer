@@ -33,8 +33,8 @@ export default function HelpPage() {
           </li>
           <li>
             <strong className="font-medium">Insights</strong> covers the population as a
-            whole, and <Link href="/ask" className={linkCls}>Ask the Data</Link> answers
-            questions with the SQL that produced each answer.
+            whole, and <Link href="/ask" className={linkCls}>Ask AI</Link> answers
+            questions about the cohort in plain words, and explains any answer on request.
           </li>
           <li>
             <strong className="font-medium">Data &amp; Quality</strong> is how the data

@@ -163,3 +163,22 @@ and Python in the same CI job.
 **A typed SELECT still runs.** The earlier Ask page's read-only query engine
 and its guard are kept: a message that is a SELECT statement runs in the
 browser and returns a table. Anything that would change data is refused.
+
+## From phase 9 (Learn)
+
+**Media is waiting.** Three videos (no file, duration or thumbnail yet: each
+card says "Coming soon" with a disabled play button), four illustrations (each
+slot shows the brief for the image it will hold), and six screenshot slots on
+Using Care Gap Explorer. Adding any of them is a field in lib/learn.ts - a src,
+a duration, a poster - and no page changes. Illustration briefs are written to
+hand to whoever produces the images.
+
+**The Introduction page overlaps Learn.** "/" still holds the project
+introduction and its clinical-concepts section, and is mapped under Learn in
+the nav. Learn now links to it from "About the project and its data". Decide
+whether its clinical background should move into the Understanding Diabetes
+module and the Introduction stay as the project story only.
+
+**Spelling.** The new Learn copy uses British spelling (haemoglobin, anaemia)
+to match the rest of the app; "A1c" follows the app's own casing rather than
+the brief's "A1C". Worth one consistent decision before the landing page.
