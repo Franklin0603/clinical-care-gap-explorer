@@ -159,30 +159,56 @@ export const SETTING_LABELS: Record<string, string> = {
 export const settingLabel = (unit: unknown) =>
   unit === null || unit === undefined ? "Unknown" : SETTING_LABELS[String(unit)] ?? String(unit);
 
-export type GapFilters = {
-  status: "all" | "never" | "overdue";
-  /** Matched against the start of the MRN, ignoring case and spaces. */
+/**
+ * Filters over the cohort, shared by Care Gaps and Patients so the two pages
+ * cannot disagree about who matches.
+ *
+ *   status   all, current, gap (any open gap), never, overdue - views of the
+ *            three monitoring states, never a fourth
+ *   query    the start of the MRN, ignoring case and spaces
+ *   setting  care setting of the last encounter, as the data spells it
+ *   band     age band
+ *   insulin  an insulin prescription active on the data date (on_insulin),
+ *            documented or not. "Not documented" is not "not on insulin".
+ */
+export type StatusFilter = "all" | "current" | "gap" | "never" | "overdue";
+
+export type PatientFilters = {
+  status: StatusFilter;
   query: string;
   setting: string;
   band: AgeBand | "all";
   insulin: "all" | "yes" | "no";
 };
 
+/** Care Gaps' filters: the same, minus the statuses that mean "no gap". */
+export type GapFilters = PatientFilters & { status: "all" | "never" | "overdue" };
+
 export const NO_FILTERS: GapFilters = { status: "all", query: "", setting: "all", band: "all", insulin: "all" };
 
-/** Open gaps only, narrowed by every filter that is set. Filters that are not
+function matchesStatus(r: PatientRow, s: StatusFilter) {
+  if (s === "all") return true;
+  if (s === "gap") return Boolean(r.gap_flag);
+  return gapStatus(r) === s;
+}
+
+/** Every patient, narrowed by every filter that is set. Filters that are not
  *  set ("all", or an empty search) do nothing. */
-export function filterGaps(rows: PatientRow[], f: GapFilters): PatientRow[] {
+export function filterPatients(rows: PatientRow[], f: PatientFilters): PatientRow[] {
   const q = f.query.trim().toLowerCase();
   return rows.filter((r) => {
-    if (!r.gap_flag) return false;
-    if (f.status !== "all" && gapStatus(r) !== f.status) return false;
+    if (!matchesStatus(r, f.status)) return false;
     if (q && !String(r.mrn).toLowerCase().startsWith(q)) return false;
     if (f.setting !== "all" && String(r.unit) !== f.setting) return false;
     if (f.band !== "all" && ageBand(Number(r.age)) !== f.band) return false;
     if (f.insulin !== "all" && Boolean(r.on_insulin) !== (f.insulin === "yes")) return false;
     return true;
   });
+}
+
+/** Open gaps only, narrowed the same way. */
+export function filterGaps(rows: PatientRow[], f: GapFilters): PatientRow[] {
+  return filterPatients(rows.filter((r) => r.gap_flag), f);
 }
 
 /**
@@ -222,4 +248,99 @@ export function optionCounts<K extends keyof GapFilters>(
   rows: PatientRow[], f: GapFilters, key: K, values: GapFilters[K][],
 ): Map<GapFilters[K], number> {
   return new Map(values.map((v) => [v, filterGaps(rows, { ...f, [key]: v }).length]));
+}
+
+/** The same, over the whole cohort, for the Patients directory. */
+export function cohortOptionCounts<K extends keyof PatientFilters>(
+  rows: PatientRow[], f: PatientFilters, key: K, values: PatientFilters[K][],
+): Map<PatientFilters[K], number> {
+  return new Map(values.map((v) => [v, filterPatients(rows, { ...f, [key]: v }).length]));
+}
+
+/* ------------------------------------------------------ patients directory */
+
+/**
+ * Directory sorts. Patients is a register, not a queue, so the default is the
+ * MRN: stable, neutral, and the same for everyone. Every other order is one a
+ * reader picks, and each ends on patient_id so ties never shuffle.
+ *
+ *   mrn          MRN, A to Z (default)
+ *   age          oldest first
+ *   seen-recent  last seen most recently first
+ *   a1c-high     latest A1c, highest first; no result last
+ *   status       never tested, then overdue, then current
+ *   overdue      days overdue, most first; patients with none last
+ */
+export type PatientSort = "mrn" | "age" | "seen-recent" | "a1c-high" | "status" | "overdue";
+
+export const PATIENT_SORTS: Record<PatientSort, string> = {
+  mrn: "MRN",
+  age: "Age, oldest first",
+  "seen-recent": "Last seen, most recent",
+  "a1c-high": "Latest A1c, highest first",
+  status: "Gap status",
+  overdue: "Days overdue, most first",
+};
+
+const STATUS_ORDER: Record<GapStatus, number> = { never: 0, overdue: 1, current: 2 };
+
+/** Nulls last whichever way the sort runs: a missing value is not a small one. */
+const desc = (a: number | null, b: number | null) =>
+  a === null ? (b === null ? 0 : 1) : b === null ? -1 : b - a;
+
+export function sortPatients(rows: PatientRow[], by: PatientSort): PatientRow[] {
+  const id = (r: PatientRow) => String(r.patient_id);
+  const seen = (r: PatientRow) => (r.last_encounter_date ? String(r.last_encounter_date) : "");
+  const cmp: Record<PatientSort, (a: PatientRow, b: PatientRow) => number> = {
+    mrn: (a, b) => String(a.mrn).localeCompare(String(b.mrn)),
+    age: (a, b) => Number(b.age) - Number(a.age),
+    "seen-recent": (a, b) => seen(b).localeCompare(seen(a)),
+    "a1c-high": (a, b) => desc(lastA1cValue(a), lastA1cValue(b)),
+    status: (a, b) => STATUS_ORDER[gapStatus(a)] - STATUS_ORDER[gapStatus(b)],
+    overdue: (a, b) => desc(daysOverdue(a), daysOverdue(b)),
+  };
+  return [...rows].sort((a, b) => cmp[by](a, b) || id(a).localeCompare(id(b)));
+}
+
+/* ------------------------------------------------------------ URL state */
+
+/**
+ * Directory state <-> the address bar, so a filtered view can be linked,
+ * refreshed and walked back through. Defaults are left out of the URL, so the
+ * unfiltered page is plain /patients/. Anything unrecognised falls back to its
+ * default rather than producing an empty list from a typo.
+ */
+export type DirectoryState = PatientFilters & { sort: PatientSort; page: number };
+
+export const DIRECTORY_DEFAULTS: DirectoryState = {
+  status: "all", query: "", setting: "all", band: "all", insulin: "all", sort: "mrn", page: 1,
+};
+
+const STATUS_VALUES: StatusFilter[] = ["all", "current", "gap", "never", "overdue"];
+
+export function readDirectory(p: { get(k: string): string | null }): DirectoryState {
+  const pick = <T extends string>(v: string | null, allowed: readonly T[], d: T) =>
+    v !== null && (allowed as readonly string[]).includes(v) ? (v as T) : d;
+  const page = Number(p.get("page"));
+  return {
+    status: pick(p.get("status"), STATUS_VALUES, "all"),
+    query: p.get("q") ?? "",
+    setting: p.get("setting") ?? "all",
+    band: pick(p.get("age"), [...AGE_BANDS, "all"] as const, "all"),
+    insulin: pick(p.get("insulin"), ["all", "yes", "no"] as const, "all"),
+    sort: pick(p.get("sort"), Object.keys(PATIENT_SORTS) as PatientSort[], "mrn"),
+    page: Number.isInteger(page) && page > 1 ? page : 1,
+  };
+}
+
+export function writeDirectory(s: DirectoryState): string {
+  const p = new URLSearchParams();
+  if (s.status !== "all") p.set("status", s.status);
+  if (s.query.trim()) p.set("q", s.query.trim());
+  if (s.setting !== "all") p.set("setting", s.setting);
+  if (s.band !== "all") p.set("age", s.band);
+  if (s.insulin !== "all") p.set("insulin", s.insulin);
+  if (s.sort !== "mrn") p.set("sort", s.sort);
+  if (s.page > 1) p.set("page", String(s.page));
+  return p.toString();
 }

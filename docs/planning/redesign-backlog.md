@@ -24,17 +24,15 @@ correct for the data. Worth a look if the list feels repetitive.
 
 ## From phase 3 (Care Gaps)
 
-**Patients sorts in a different order from Home and Care Gaps.** Home and Care
-Gaps use the pipeline's priority: never tested first, then most overdue. The
-Patients table sorts by days overdue, which puts the never tested last because
-they have no days-overdue figure. A care team seeing the same patient at the
-top of one list and the bottom of another will ask why. Pick one order, most
-likely priority, when Patients is redesigned.
+**Patients sorts in a different order from Home and Care Gaps.** Resolved in
+phase 5: Patients is now a directory sorted by MRN, and its "Gap status" and
+"Days overdue" sorts are choices a reader makes, not a competing queue.
 
-**Filters are only partly in the URL.** Phase 4 made Care Gaps read
-?status= (Home's "Review 21 patients" uses /care-gaps?status=never). Search,
-setting, age, insulin and sort still live only in the page, so those views
-cannot be bookmarked or shared yet.
+**Care Gaps filters are only partly in the URL.** Care Gaps reads ?status=
+(Home's "Review 21 patients" uses /care-gaps?status=never), but search,
+setting, age, insulin and sort live only in the page. Patients keeps all of
+its state in the URL as of phase 5 (readDirectory / writeDirectory in
+lib/cohort.ts); Care Gaps could use the same approach.
 
 ## From phase 4 (Patient workspace)
 
@@ -58,6 +56,30 @@ source carries per-fill dates.
 **The workspace opens on Overview every time.** The tab is not in the URL, so
 a link to a patient cannot point at their A1c tab.
 
-**Patients page still has its own status badges.** Its A1c gap column uses the
-older badge styles (orange "overdue", plain "current") rather than the shared
-GapStatusBadge. Left for the Patients redesign.
+**Patients page still has its own status badges.** Resolved in phase 5:
+Patients uses the shared GapStatusBadge and the shared cells.
+
+## From phase 5 (Patients)
+
+**Four cohort figures now appear nowhere.** The old Patients page opened with
+eight metric cards. Four duplicated Home (cohort, open gaps, never tested,
+insulin). The other four did not: median last A1c, last result at or over 7%,
+longest overdue (2,175 days), and "seen, not tested" (open gap, in clinic
+within six months - 24 of the 25). The last one is the most actionable figure
+in the project. They belong on the Analytics redesign. "At or over 7%" should
+come back with the careful reference-point wording, not as "above target".
+
+**The column picker is gone.** The old table could show sex, diagnosis date,
+tests in 2 years, active medication count and priority as extra columns. All
+of these are in the patient workspace now; none is in the directory table.
+
+**The old data-table components are unused.** components/data-table/* and the
+@tanstack/react-table dependency have no callers after phase 5. Delete them, or
+reuse them if Analytics wants sortable column headers.
+
+**No sticky table header.** The directory pages at 25 rows, so the header is
+rarely far away, but a sticky header was not added.
+
+**Search matches the start of the MRN only.** Typing a fragment from the
+middle of an MRN finds nothing. Deliberate (prefix search is how MRNs are
+read aloud), but worth confirming.

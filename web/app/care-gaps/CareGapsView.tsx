@@ -7,14 +7,16 @@ import { Search, X } from "lucide-react";
 import { PatientRow, fmt, patients } from "@/lib/data";
 import {
   AGE_BANDS, GAP_SORTS, GapFilters, GapSort, NO_FILTERS,
-  daysOverdue, filterGaps, gapStatus, lastA1cValue, optionCounts, settingLabel, sortGaps,
+  filterGaps, gapStatus, optionCounts, settingLabel, sortGaps,
 } from "@/lib/cohort";
 import { longDate } from "@/lib/dates";
 import { cn } from "cn";
 import { GapStatusBadge } from "@/components/GapStatusBadge";
 import { NoOpenGaps } from "@/components/NoOpenGaps";
-import { shortMrn, usePatientReview } from "@/components/PatientReview";
-import { InsulinBadge } from "@/components/patient/PatientTabs";
+import { usePatientReview } from "@/components/PatientReview";
+import {
+  InsulinCell, LastSeen, LastTest, LatestA1c, PatientCell, TimingLine,
+} from "@/components/patient/cells";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -44,7 +46,7 @@ const STATUS_OPTIONS = [
   { value: "overdue", label: "Overdue" },
 ] as const;
 
-const INSULIN_LABELS: Record<string, string> = { all: "Any insulin", yes: "Insulin documented", no: "No insulin documented" };
+const INSULIN_LABELS: Record<string, string> = { all: "Any insulin", yes: "Active insulin documented", no: "No active insulin documented" };
 
 /** Base UI shows the raw value in a closed trigger unless given a formatter. */
 const shown = (label: (v: string) => string) => (v: string | null) => label(v ?? "all");
@@ -238,68 +240,29 @@ export function CareGapsView({ initialStatus = "all" }: { initialStatus?: GapFil
 type Review = (r: PatientRow) => ReactNode;
 
 function GapRow({ r, review }: { r: PatientRow; review: Review }) {
-  const a1c = lastA1cValue(r);
-  const late = daysOverdue(r);
   return (
     <TableRow>
-      <TableCell className="pl-4">
-        <div className="flex flex-col">
-          <span className="font-mono text-sm"><span className="text-muted-foreground">MRN </span>{shortMrn(r)}</span>
-          <span className="text-xs text-muted-foreground">Age {String(r.age)}</span>
-        </div>
-      </TableCell>
+      <TableCell className="pl-4"><PatientCell r={r} /></TableCell>
       <TableCell><GapStatusBadge status={gapStatus(r)} /></TableCell>
-      <TableCell className="num hidden text-right lg:table-cell">
-        {a1c === null ? <span className="text-muted-foreground">No result</span> : `${a1c.toFixed(1)}%`}
-      </TableCell>
-      <TableCell>
-        {r.last_a1c_date ? (
-          <div className="flex flex-col">
-            <span>{dateOrDash(r.last_a1c_date)}</span>
-            {late !== null && <span className="num text-xs text-muted-foreground">{fmt(late)} days overdue</span>}
-          </div>
-        ) : (
-          <span className="text-muted-foreground">
-            <span aria-hidden>—</span><span className="sr-only">Never tested</span>
-          </span>
-        )}
-      </TableCell>
-      <TableCell>
-        <div className="flex flex-col">
-          <span>{dateOrDash(r.last_encounter_date)}</span>
-          <span className="text-xs text-muted-foreground">{settingLabel(r.unit)}</span>
-        </div>
-      </TableCell>
-      <TableCell className="hidden lg:table-cell">
-        {r.on_insulin ? <InsulinBadge /> : (
-          <span className="text-muted-foreground">
-            <span aria-hidden>—</span><span className="sr-only">No insulin documented</span>
-          </span>
-        )}
-      </TableCell>
+      <TableCell className="hidden text-right lg:table-cell"><LatestA1c r={r} /></TableCell>
+      <TableCell><LastTest r={r} /></TableCell>
+      <TableCell><LastSeen r={r} /></TableCell>
+      <TableCell className="hidden lg:table-cell"><InsulinCell r={r} /></TableCell>
       <TableCell className="pr-4 text-right">{review(r)}</TableCell>
     </TableRow>
   );
 }
 
 function GapCard({ r, review }: { r: PatientRow; review: Review }) {
-  const late = daysOverdue(r);
   return (
     <li className="flex flex-col gap-3 rounded-lg border bg-card p-4">
       <div className="flex items-start justify-between gap-3">
-        <div className="flex flex-col">
-          <span className="font-mono text-sm"><span className="text-muted-foreground">MRN </span>{shortMrn(r)}</span>
-          <span className="text-xs text-muted-foreground">Age {String(r.age)}</span>
-        </div>
+        <PatientCell r={r} />
         <GapStatusBadge status={gapStatus(r)} />
       </div>
       <div className="flex items-end justify-between gap-3">
         <div className="flex flex-col gap-0.5 text-sm text-muted-foreground">
-          <span>
-            {late !== null
-              ? <><span className="num font-medium text-foreground">{fmt(late)}</span> days overdue</>
-              : r.last_a1c_date ? <>Last A1c {dateOrDash(r.last_a1c_date)}</> : <>No A1c result on file</>}
-          </span>
+          <span><TimingLine r={r} /></span>
           <span className="text-xs">Last seen {dateOrDash(r.last_encounter_date)} · {settingLabel(r.unit)}</span>
         </div>
         {review(r)}

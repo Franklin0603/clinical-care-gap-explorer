@@ -25,8 +25,12 @@ export function usePatientReview(from: ReviewFrom) {
   const [open, setOpen] = useState<PatientRow | null>(null);
   const opener = useRef<HTMLElement | null>(null);
 
-  const show = (r: PatientRow) => {
-    const el = document.activeElement;
+  // The control that opened the sheet is passed in, not read from
+  // document.activeElement: Safari does not focus a button on click, so the
+  // active element can be whatever was focused before - a filter, say - and
+  // closing the sheet would send focus there instead.
+  const show = (r: PatientRow, from?: HTMLElement | null) => {
+    const el = from ?? document.activeElement;
     opener.current = el instanceof HTMLElement && el !== document.body ? el : null;
     setOpen(r);
   };
@@ -37,7 +41,7 @@ export function usePatientReview(from: ReviewFrom) {
   };
 
   const button = (r: PatientRow) => (
-    <Button variant="outline" size="sm" onClick={() => show(r)}>
+    <Button variant="outline" size="sm" onClick={(e) => show(r, e.currentTarget)}>
       Review<span className="sr-only"> patient {shortMrn(r)}</span>
       <ArrowRight aria-hidden />
     </Button>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, Syringe } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { PatientRow, fmt } from "@/lib/data";
 import { lastA1cValue, settingLabel } from "@/lib/cohort";
@@ -9,7 +9,6 @@ import { longDate } from "@/lib/dates";
 import {
   INSULIN_DOC_TEXT, InsulinDoc, PatientDetail, a1cSummary, insulinPerYear, insulinStart, testsPerYear,
 } from "@/lib/patientDetail";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
@@ -17,20 +16,14 @@ import {
 import { Term } from "@/components/Term";
 import { A1cSeriesChart, CohortComparisonChart, TestsPerYearChart } from "./A1cCharts";
 import { CareGapAssessment } from "./CareGapAssessment";
+import { InsulinBadge } from "./cells";
+
+export { InsulinBadge };
 import { Facts, NoData, None, Panel } from "./parts";
 
 export type TabKey = "overview" | "a1c" | "medications" | "procedures";
 
 const day = (v: unknown) => longDate(v as string | null);
-
-/** The neutral insulin marker used in every table: a word, the icon optional. */
-export function InsulinBadge() {
-  return (
-    <Badge variant="outline" className="gap-1 font-normal">
-      <Syringe className="size-3" aria-hidden /> Insulin
-    </Badge>
-  );
-}
 
 /* ---------------------------------------------------------------- overview */
 

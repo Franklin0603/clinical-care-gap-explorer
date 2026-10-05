@@ -147,3 +147,72 @@ test("a missing result stays missing, never a zero", () => {
   assert.equal(lastA1cValue({ last_a1c_value: 7.2 }), 7.2);
   assert.equal(daysOverdue({ days_overdue: 0 }), 0, "a real zero survives");
 });
+
+import {
+  DIRECTORY_DEFAULTS, PATIENT_SORTS, cohortOptionCounts, filterPatients, readDirectory,
+  sortPatients, writeDirectory,
+} from "./cohort.ts";
+
+const ALL = { ...NO_FILTERS } as const;
+
+test("the directory's segments are views of one cohort", () => {
+  const n = (status: "all" | "current" | "gap" | "never" | "overdue") =>
+    filterPatients(rows, { ...ALL, status }).length;
+  assert.equal(n("all"), gold.cohort);
+  assert.equal(n("current") + n("gap"), gold.cohort, "current and open gap partition the cohort");
+  assert.equal(n("gap"), gold.open_gaps);
+  assert.equal(n("never") + n("overdue"), n("gap"), "never and overdue partition the gaps");
+  assert.equal(n("never"), gold.never_tested);
+});
+
+test("Care Gaps and Patients agree on who matches", () => {
+  // filterGaps is filterPatients over the gap rows; any filter combination
+  // must give Care Gaps exactly the open-gap subset of what Patients shows.
+  for (const insulin of ["all", "yes", "no"] as const) {
+    for (const band of ["all", ...AGE_BANDS] as const) {
+      const f = { ...ALL, insulin, band };
+      assert.deepEqual(
+        filterGaps(rows, f).map((r) => r.patient_id),
+        filterPatients(rows, { ...f, status: "gap" }).map((r) => r.patient_id),
+        `${insulin} ${band}`,
+      );
+    }
+  }
+});
+
+test("filters combine, and the option counts match what they would leave", () => {
+  const f = { ...ALL, status: "current" as const, band: "45-64" as const };
+  const counts = cohortOptionCounts(rows, f, "insulin", ["yes", "no"]);
+  assert.equal(counts.get("yes")! + counts.get("no")!, filterPatients(rows, f).length);
+  assert.equal(counts.get("yes"), filterPatients(rows, { ...f, insulin: "yes" }).length);
+});
+
+test("the default sort is neutral: MRN order, not priority", () => {
+  const byMrn = sortPatients(rows, "mrn").map((r) => String(r.mrn));
+  assert.deepEqual(byMrn, [...byMrn].sort((a, b) => a.localeCompare(b)));
+  assert.equal(DIRECTORY_DEFAULTS.sort, "mrn");
+});
+
+test("every sort keeps everyone, puts missing values last, and is deterministic", () => {
+  for (const by of Object.keys(PATIENT_SORTS) as (keyof typeof PATIENT_SORTS)[]) {
+    const a = sortPatients(rows, by), b = sortPatients([...rows].reverse(), by);
+    assert.equal(a.length, rows.length, by);
+    assert.deepEqual(a.map((r) => r.patient_id), b.map((r) => r.patient_id), `${by} deterministic`);
+  }
+  const a1c = sortPatients(rows, "a1c-high");
+  const firstNull = a1c.findIndex((r) => lastA1cValue(r) === null);
+  assert.ok(a1c.slice(firstNull).every((r) => lastA1cValue(r) === null), "no result sorts last");
+  const od = sortPatients(rows, "overdue");
+  assert.equal(daysOverdue(od[0]), Math.max(...rows.map((r: Parameters<typeof daysOverdue>[0]) => daysOverdue(r) ?? -1)));
+  const st = sortPatients(rows, "status").map((r) => gapStatus(r));
+  assert.equal(st.indexOf("current"), gold.open_gaps, "gaps first, then current");
+});
+
+test("directory state survives a round trip through the URL", () => {
+  const s = { ...DIRECTORY_DEFAULTS, status: "overdue" as const, setting: "ambulatory",
+              band: "65-75" as const, insulin: "no" as const, query: "bc50", sort: "age" as const, page: 2 };
+  assert.deepEqual(readDirectory(new URLSearchParams(writeDirectory(s))), s);
+  assert.equal(writeDirectory(DIRECTORY_DEFAULTS), "", "defaults stay out of the address");
+  const junk = readDirectory(new URLSearchParams("status=bogus&sort=risk&age=99&page=-3"));
+  assert.deepEqual(junk, DIRECTORY_DEFAULTS, "unknown values fall back to defaults");
+});
