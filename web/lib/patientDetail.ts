@@ -50,7 +50,9 @@ export function loadPatientDetail(): Promise<Record<string, PatientDetail>> {
 
 /* ------------------------------------------------------------------ shaping */
 
-/** Control threshold. Below 7% is the usual target for a non-frail adult. */
+/** A reference line, not a verdict. 7% is a common goal for many adults with
+ *  diabetes, but individual goals differ, so the charts call it a reference
+ *  point and nothing here colours a patient by it. */
 export const A1C_TARGET = 7;
 
 /** A1c tests per calendar year, which is where a lapse in testing shows up. */
@@ -133,4 +135,56 @@ export function boxes(groups: Map<string, number[]>): Box[] {
     });
   }
   return out;
+}
+
+/* ----------------------------------------------------------- summaries */
+
+/**
+ * What the medication data documents about insulin. Worded as documentation,
+ * never as fact about the patient: an absent record is not proof of absence.
+ *
+ *   active   an insulin prescription with no end date on or after the as-of date
+ *            (the pipeline's own on_insulin)
+ *   past     insulin appears in the history, none active on the as-of date
+ *   none     no insulin anywhere in the medication data
+ *   unknown  not active, and the history has not loaded yet to say which
+ */
+export type InsulinDoc = "active" | "past" | "none" | "unknown";
+
+export function insulinDoc(onInsulin: boolean, meds: MedRow[] | null): InsulinDoc {
+  if (onInsulin) return "active";
+  if (!meds) return "unknown";
+  return meds.some((m) => m.insulin) ? "past" : "none";
+}
+
+export const INSULIN_DOC_TEXT: Record<InsulinDoc, { short: string; long: string }> = {
+  active: {
+    short: "Insulin documented",
+    long: "An insulin prescription active on the data date is documented in the available medication data.",
+  },
+  past: {
+    short: "Past insulin documented",
+    long: "Insulin appears earlier in the available medication data, but no insulin prescription is active on the data date.",
+  },
+  none: {
+    short: "No insulin documented",
+    long: "No insulin is documented in the available medication data.",
+  },
+  unknown: {
+    short: "No active insulin documented",
+    long: "No insulin prescription active on the data date is documented in the available medication data.",
+  },
+};
+
+/** The patient's own A1c history in a few numbers. */
+export function a1cSummary(a1c: A1cPoint[]) {
+  if (a1c.length === 0) return null;
+  const latest = a1c[a1c.length - 1];
+  return {
+    count: a1c.length,
+    latest,
+    previous: a1c.length > 1 ? a1c[a1c.length - 2] : null,
+    firstYear: a1c[0].d.slice(0, 4),
+    lastYear: latest.d.slice(0, 4),
+  };
 }

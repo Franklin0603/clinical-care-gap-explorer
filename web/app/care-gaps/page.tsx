@@ -1,7 +1,9 @@
+import { Suspense } from "react";
+
 import { gold, patients } from "@/lib/data";
 import { cohortSummary } from "@/lib/cohort";
 import { Page } from "@/components/shell/Page";
-import { CareGapsView } from "./CareGapsView";
+import { CareGapsFromUrl, CareGapsView } from "./CareGapsView";
 
 export const metadata = { title: "Care Gaps" };
 
@@ -19,7 +21,11 @@ export default function CareGapsPage() {
       }
       width="wide"
     >
-      <CareGapsView />
+      {/* ?status= is read on the client. The prerendered page is the whole
+          queue, so it is never a blank shell; a filtered link swaps on load. */}
+      <Suspense fallback={<CareGapsView />}>
+        <CareGapsFromUrl />
+      </Suspense>
     </Page>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { Search, Syringe, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 
 import { patients, PatientRow, gold, fmt } from "@/lib/data";
 import { Page, Section } from "@/components/shell/Page";
@@ -16,7 +16,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Term } from "@/components/Term";
-import { PatientDetailSheet } from "./PatientDetail";
+import { usePatientReview } from "@/components/PatientReview";
+import { InsulinBadge } from "@/components/patient/PatientTabs";
 
 /** Above this, a last result is not at goal. The usual adult target. */
 const TARGET = 7;
@@ -42,8 +43,17 @@ const columns: ColumnDef<PatientRow, unknown>[] = [
   {
     accessorKey: "mrn",
     header: ({ column }) => <DataTableColumnHeader column={column} title="MRN" />,
+    // A real button, so the record opens from the keyboard too. It has no
+    // handler of its own: the click bubbles to the row, which opens the
+    // workspace, so mouse and keyboard take the same path and never open twice.
     cell: ({ row }) => (
-      <span className="font-mono text-xs">{String(row.original.mrn).slice(0, 8)}</span>
+      <button
+        type="button"
+        className="rounded-sm font-mono text-xs text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+      >
+        {String(row.original.mrn).slice(0, 8)}
+        <span className="sr-only">, open patient record</span>
+      </button>
     ),
     enableHiding: false,
   },
@@ -156,11 +166,16 @@ const columns: ColumnDef<PatientRow, unknown>[] = [
   {
     accessorKey: "on_insulin",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Insulin" />,
+    // Information, not a control: a worded badge when an active insulin
+    // prescription is documented, a dash when none is.
     cell: ({ row }) =>
       row.original.on_insulin ? (
-        <Syringe className="size-3.5 text-primary" />
+        <InsulinBadge />
       ) : (
-        <span className="sr-only">no</span>
+        <span className="text-muted-foreground">
+          <span aria-hidden>—</span>
+          <span className="sr-only">No insulin documented</span>
+        </span>
       ),
     filterFn: (row, id, value: string[]) =>
       value.includes(row.getValue(id) ? "yes" : "no"),
@@ -168,7 +183,7 @@ const columns: ColumnDef<PatientRow, unknown>[] = [
 ];
 
 export default function PatientView() {
-  const [open, setOpen] = useState<PatientRow | null>(null);
+  const { show, drawer } = usePatientReview("patients");
   /** A card's filter, applied to the table through its own column. */
   const [card, setCard] = useState<string | null>(null);
   const [q, setQ] = useState("");
@@ -299,7 +314,7 @@ export default function PatientView() {
           data={rows}
           noun="patient"
           empty="No patient matches those filters."
-          onRowClick={setOpen}
+          onRowClick={show}
           initialSorting={[{ id: "days_overdue", desc: true }]}
           initialHidden={{ sex: false, a1c_count_2y: false, active_med_count: false }}
           toolbar={(table) => (
@@ -391,7 +406,7 @@ export default function PatientView() {
         </div>
       </Section>
 
-      <PatientDetailSheet patient={open} cohort={patients} onClose={() => setOpen(null)} />
+      {drawer}
     </Page>
   );
 }

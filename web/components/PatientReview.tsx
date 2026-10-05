@@ -4,23 +4,32 @@ import { useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 
 import { PatientRow, patients } from "@/lib/data";
+import { shortMrn } from "@/lib/cohort";
 import { Button } from "@/components/ui/button";
-import { PatientDetailSheet } from "@/app/patients/PatientDetail";
+import { PatientWorkspaceSheet, ReviewFrom } from "@/components/patient/PatientWorkspaceSheet";
 
-export const shortMrn = (r: PatientRow) => String(r.mrn).slice(0, 8);
+export { shortMrn };
 
 /**
- * Review, wherever a list of patients offers it: a button per row and the one
- * patient drawer the Patients page already uses, so a record looks the same
- * from every page and there is one detail view to maintain.
+ * Review, wherever a list of patients offers it: a button per row, and the one
+ * patient workspace every page shares, so a record looks the same from Home,
+ * Care Gaps and Patients and there is one detail view to maintain.
  *
- * The drawer is opened from code rather than a dialog trigger, so on close it
+ * The sheet is opened from code rather than a dialog trigger, so on close it
  * has nowhere to send focus and drops it on the page; keyboard users would
- * land back at the top. This returns them to the Review they pressed.
+ * land back at the top. This remembers what had focus when the sheet opened -
+ * a Review button, or a patient identifier in the Patients table - and
+ * returns there.
  */
-export function usePatientReview() {
+export function usePatientReview(from: ReviewFrom) {
   const [open, setOpen] = useState<PatientRow | null>(null);
-  const opener = useRef<HTMLButtonElement | null>(null);
+  const opener = useRef<HTMLElement | null>(null);
+
+  const show = (r: PatientRow) => {
+    const el = document.activeElement;
+    opener.current = el instanceof HTMLElement && el !== document.body ? el : null;
+    setOpen(r);
+  };
 
   const close = () => {
     setOpen(null);
@@ -28,17 +37,13 @@ export function usePatientReview() {
   };
 
   const button = (r: PatientRow) => (
-    <Button
-      variant="outline"
-      size="sm"
-      onClick={(e) => { opener.current = e.currentTarget; setOpen(r); }}
-    >
+    <Button variant="outline" size="sm" onClick={() => show(r)}>
       Review<span className="sr-only"> patient {shortMrn(r)}</span>
       <ArrowRight aria-hidden />
     </Button>
   );
 
-  const drawer = <PatientDetailSheet patient={open} cohort={patients} onClose={close} />;
+  const drawer = <PatientWorkspaceSheet patient={open} cohort={patients} from={from} onClose={close} />;
 
-  return { button, drawer };
+  return { button, show, drawer };
 }

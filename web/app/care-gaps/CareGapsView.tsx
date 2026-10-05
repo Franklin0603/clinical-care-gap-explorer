@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Search, X } from "lucide-react";
 
 import { PatientRow, fmt, patients } from "@/lib/data";
@@ -13,6 +14,7 @@ import { cn } from "cn";
 import { GapStatusBadge } from "@/components/GapStatusBadge";
 import { NoOpenGaps } from "@/components/NoOpenGaps";
 import { shortMrn, usePatientReview } from "@/components/PatientReview";
+import { InsulinBadge } from "@/components/patient/PatientTabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -42,17 +44,29 @@ const STATUS_OPTIONS = [
   { value: "overdue", label: "Overdue" },
 ] as const;
 
-const INSULIN_LABELS: Record<string, string> = { all: "Any insulin", yes: "On insulin", no: "Not on insulin" };
+const INSULIN_LABELS: Record<string, string> = { all: "Any insulin", yes: "Insulin documented", no: "No insulin documented" };
 
 /** Base UI shows the raw value in a closed trigger unless given a formatter. */
 const shown = (label: (v: string) => string) => (v: string | null) => label(v ?? "all");
 
 const dateOrDash = (v: unknown) => longDate(v as string | null) ?? "—";
 
-export function CareGapsView() {
-  const [f, setF] = useState<GapFilters>(NO_FILTERS);
+const STATUSES = ["all", "never", "overdue"] as const;
+
+/** Reads ?status= so a link elsewhere (Home's "Review 21 patients") can open
+ *  the queue already filtered. Only status is read from the address; the
+ *  other filters stay in the page. */
+export function CareGapsFromUrl() {
+  const raw = useSearchParams().get("status");
+  const status = (STATUSES as readonly string[]).includes(raw ?? "") ? (raw as GapFilters["status"]) : "all";
+  // Keyed, so following a different status link resets the queue to it.
+  return <CareGapsView key={status} initialStatus={status} />;
+}
+
+export function CareGapsView({ initialStatus = "all" }: { initialStatus?: GapFilters["status"] }) {
+  const [f, setF] = useState<GapFilters>({ ...NO_FILTERS, status: initialStatus });
   const [sort, setSort] = useState<GapSort>("priority");
-  const { button: review, drawer } = usePatientReview();
+  const { button: review, drawer } = usePatientReview("care-gaps");
 
   const set = <K extends keyof GapFilters>(k: K) => (v: GapFilters[K] | null) =>
     setF((cur) => ({ ...cur, [k]: v ?? NO_FILTERS[k] }));
@@ -256,7 +270,13 @@ function GapRow({ r, review }: { r: PatientRow; review: Review }) {
           <span className="text-xs text-muted-foreground">{settingLabel(r.unit)}</span>
         </div>
       </TableCell>
-      <TableCell className="hidden lg:table-cell">{r.on_insulin ? "Yes" : "No"}</TableCell>
+      <TableCell className="hidden lg:table-cell">
+        {r.on_insulin ? <InsulinBadge /> : (
+          <span className="text-muted-foreground">
+            <span aria-hidden>—</span><span className="sr-only">No insulin documented</span>
+          </span>
+        )}
+      </TableCell>
       <TableCell className="pr-4 text-right">{review(r)}</TableCell>
     </TableRow>
   );

@@ -48,6 +48,10 @@ export function daysOverdue(r: PatientRow): number | null {
   return Number.isFinite(v) ? v : null;
 }
 
+/** The identifier shown for a patient: the first eight characters of the MRN.
+ *  Synthetic data has no names, and none are invented. */
+export const shortMrn = (r: PatientRow) => String(r.mrn).slice(0, 8);
+
 /* ------------------------------------------------------------------ bands */
 
 /** The HEDIS diabetes measure's boundaries (ADR-0011), not round decades. */

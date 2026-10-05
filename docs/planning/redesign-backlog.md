@@ -31,9 +31,33 @@ they have no days-overdue figure. A care team seeing the same patient at the
 top of one list and the bottom of another will ask why. Pick one order, most
 likely priority, when Patients is redesigned.
 
-**Filters are not in the URL.** Care Gaps keeps its filters in the page only.
-So Home's "Never tested 21" card cannot link straight to that filtered list,
-and a filtered view cannot be bookmarked or shared. Adding it means reading
-the filters from the address, for example /care-gaps?status=never. With a
-static export this needs a Suspense boundary around the part that reads them.
-It is a small change.
+**Filters are only partly in the URL.** Phase 4 made Care Gaps read
+?status= (Home's "Review 21 patients" uses /care-gaps?status=never). Search,
+setting, age, insulin and sort still live only in the page, so those views
+cannot be bookmarked or shared yet.
+
+## From phase 4 (Patient workspace)
+
+**Tests per year shares one axis between A1c tests and insulin fills.** A
+patient with 280 insulin fills in one year flattens every A1c bar to a sliver
+(MRN 64b7b8b0 shows it). Two axes, or two small charts, would keep both
+readable. The chart was moved into the workspace unchanged, so it still does
+this.
+
+**The cohort box plot draws no median line.** Its own comment says the median
+is a reference line per box, but the code never draws one, so each box shows
+the quartiles without the middle. Its "this patient" label can also sit on top
+of a box.
+
+**Insulin fills are counted in the year the prescription started.** A
+prescription filled every month for five years puts all sixty fills in its
+first year. The chart caption now says so, but the shaping in
+lib/patientDetail.ts (insulinPerYear) could spread fills across years if the
+source carries per-fill dates.
+
+**The workspace opens on Overview every time.** The tab is not in the URL, so
+a link to a patient cannot point at their A1c tab.
+
+**Patients page still has its own status badges.** Its A1c gap column uses the
+older badge styles (orange "overdue", plain "current") rather than the shared
+GapStatusBadge. Left for the Patients redesign.

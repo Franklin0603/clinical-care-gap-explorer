@@ -28,7 +28,7 @@ function lastA1c(r: PatientRow) {
 }
 
 export function AttentionList({ rows }: { rows: PatientRow[] }) {
-  const { button: review, drawer } = usePatientReview();
+  const { button: review, drawer } = usePatientReview("home");
 
   if (rows.length === 0) return <NoOpenGaps />;
 

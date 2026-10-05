@@ -4,7 +4,8 @@ import { Fragment } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { gold } from "@/lib/data";
+import { gold, patients } from "@/lib/data";
+import { shortMrn } from "@/lib/cohort";
 import { longDate } from "@/lib/dates";
 import { locate } from "./nav";
 import { SyntheticDataBadge } from "./SyntheticDataBadge";
@@ -14,6 +15,14 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+
+/** "MRN dd31b260" on a patient record's route, otherwise null. */
+function recordCrumb(pathname: string | null) {
+  const m = /\/patients\/([^/]+)\/?$/.exec(pathname ?? "");
+  if (!m) return null;
+  const r = patients.find((p) => String(p.patient_id) === decodeURIComponent(m[1]));
+  return r ? `MRN ${shortMrn(r)}` : "Patient";
+}
 
 /**
  * The bar across the top of every route.
@@ -25,16 +34,23 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
  * notice keeps the promise the old full-width banner made.
  */
 export function AppHeader() {
-  const here = locate(usePathname());
+  const pathname = usePathname();
+  const here = locate(pathname);
 
   // Section > item > adopted page. Sections are groupings, not pages, so they
   // are text. The item is a link only when we are on one of its older pages.
   const crumbs: { label: string; href?: string; hideOnMobile?: boolean }[] = [];
   if (here.section) crumbs.push({ label: here.section.label, hideOnMobile: true });
+  // A patient record sits under Patients: /patients/<id>/.
+  const record = recordCrumb(pathname);
   if (here.item) {
-    crumbs.push({ label: here.item.label, href: here.legacy ? here.item.href : undefined });
+    crumbs.push({
+      label: here.item.label,
+      href: here.legacy || record ? here.item.href : undefined,
+    });
   }
   if (here.legacy) crumbs.push({ label: here.legacy.label });
+  if (record) crumbs.push({ label: record });
 
   return (
     <header className="sticky top-0 z-20 flex h-14 shrink-0 items-center gap-3 border-b bg-background px-4 sm:px-6">

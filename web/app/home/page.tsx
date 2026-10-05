@@ -66,6 +66,8 @@ export default function HomePage() {
           context={`${s.neverTested} of ${s.openGaps} open gaps`}
           caption="No A1c result on record at all"
           hint="Open gaps with no A1c in the record at any time. Part of the open-gap count, not in addition to it."
+          href={s.neverTested ? "/care-gaps?status=never" : undefined}
+          hrefLabel={`Review ${s.neverTested} ${s.neverTested === 1 ? "patient" : "patients"}`}
         />
         <MetricCard
           label="Current"
