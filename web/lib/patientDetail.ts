@@ -188,3 +188,42 @@ export function a1cSummary(a1c: A1cPoint[]) {
     lastYear: latest.d.slice(0, 4),
   };
 }
+
+/* ------------------------------------------------------- cohort history */
+
+export type YearRow = {
+  year: string;
+  /** A1c results recorded in the year. */
+  tests: number;
+  /** Distinct patients with at least one recorded result in the year. */
+  patients: number;
+};
+
+/**
+ * A1c results and patients tested per calendar year, across every patient's
+ * record, with the empty years drawn rather than skipped - the same rule as a
+ * patient's own tests-per-year chart. Also returns the first and last result
+ * dates, because the end years are only partly covered and must be labelled.
+ */
+export function cohortTestsByYear(all: Record<string, PatientDetail>) {
+  const tests = new Map<string, number>();
+  const who = new Map<string, Set<string>>();
+  let first: string | null = null, last: string | null = null;
+  for (const [pid, d] of Object.entries(all)) {
+    for (const p of d.a1c) {
+      const y = p.d.slice(0, 4);
+      tests.set(y, (tests.get(y) ?? 0) + 1);
+      if (!who.has(y)) who.set(y, new Set());
+      who.get(y)!.add(pid);
+      if (first === null || p.d < first) first = p.d;
+      if (last === null || p.d > last) last = p.d;
+    }
+  }
+  if (first === null || last === null) return { years: [] as YearRow[], first: null, last: null };
+  const years: YearRow[] = [];
+  for (let y = Number(first.slice(0, 4)); y <= Number(last.slice(0, 4)); y++) {
+    const k = String(y);
+    years.push({ year: k, tests: tests.get(k) ?? 0, patients: who.get(k)?.size ?? 0 });
+  }
+  return { years, first, last };
+}

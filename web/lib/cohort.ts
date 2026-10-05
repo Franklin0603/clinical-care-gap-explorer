@@ -154,6 +154,7 @@ export const SETTING_LABELS: Record<string, string> = {
   emergency: "Emergency",
   snf: "Skilled nursing",
   hospice: "Hospice",
+  unknown: "Unknown",
 };
 
 export const settingLabel = (unit: unknown) =>
@@ -343,4 +344,69 @@ export function writeDirectory(s: DirectoryState): string {
   if (s.sort !== "mrn") p.set("sort", s.sort);
   if (s.page > 1) p.set("page", String(s.page));
   return p.toString();
+}
+
+/* -------------------------------------------------------------- analytics */
+
+/** A share as a percentage to one decimal place, the precision every page
+ *  uses. 0 when the denominator is 0, never NaN. */
+export const pct1 = (n: number, of: number) => (of ? Math.round((n / of) * 1000) / 10 : 0);
+
+/** The same, as text: always one decimal, so 20% reads "20.0%" beside "29.4%". */
+export const pctText = (n: number, of: number) => `${pct1(n, of).toFixed(1)}%`;
+
+/** One subgroup's monitoring picture. Gap rate is gaps / total in the group. */
+export type GroupRow = {
+  key: string;
+  total: number;
+  current: number;
+  gaps: number;
+  never: number;
+  overdue: number;
+  gapRate: number;
+};
+
+/**
+ * Monitoring status by any grouping of the cohort - age band, care setting.
+ * Statuses come from gapStatus, so a patient counted as overdue here is
+ * overdue on every other page. `order` fixes the row order and includes empty
+ * groups; without it, groups appear in the order first met.
+ */
+export function monitoringBy(
+  rows: PatientRow[], groupOf: (r: PatientRow) => string, order?: readonly string[],
+): GroupRow[] {
+  const m = new Map<string, GroupRow>();
+  const blank = (key: string): GroupRow => ({ key, total: 0, current: 0, gaps: 0, never: 0, overdue: 0, gapRate: 0 });
+  for (const k of order ?? []) m.set(k, blank(k));
+  for (const r of rows) {
+    const k = groupOf(r);
+    if (!m.has(k)) m.set(k, blank(k));
+    const g = m.get(k)!;
+    const s = gapStatus(r);
+    g.total += 1;
+    g[s] += 1;
+    if (s !== "current") g.gaps += 1;
+  }
+  for (const g of m.values()) g.gapRate = pct1(g.gaps, g.total);
+  return [...m.values()];
+}
+
+export const monitoringByAgeBand = (rows: PatientRow[]) =>
+  monitoringBy(rows, (r) => ageBand(Number(r.age)), AGE_BANDS);
+
+/** By care setting of the last encounter, largest group first so the eye
+ *  lands on the settings that hold most of the cohort; a one-patient setting
+ *  sorted by rate would top the chart at 100%. A missing setting is its own
+ *  group, "unknown", rather than dropped. */
+export const monitoringBySetting = (rows: PatientRow[]) =>
+  monitoringBy(rows, (r) => (r.unit === null || r.unit === undefined ? "unknown" : String(r.unit)))
+    .sort((a, b) => b.total - a.total || a.key.localeCompare(b.key));
+
+/** Open gaps whose last encounter falls within `months` calendar months of the
+ *  data date: patients who were recently seen, yet have no A1c in a year. */
+export function gapsSeenWithin(rows: PatientRow[], asof: string, months: number) {
+  const d = new Date(`${asof.slice(0, 10)}T00:00:00Z`);
+  d.setUTCMonth(d.getUTCMonth() - months);
+  const since = d.toISOString().slice(0, 10);
+  return rows.filter((r) => r.gap_flag && r.last_encounter_date && String(r.last_encounter_date) >= since).length;
 }

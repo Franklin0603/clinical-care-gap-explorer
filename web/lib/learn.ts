@@ -48,6 +48,7 @@ export const LEARN_MODULES: LearnModule[] = [
     summary:
       "Where the data comes from, how it is checked before it reaches a list, and the questions it cannot answer at all.",
     today: [
+      { href: "/data-quality#limitations", label: "Data limitations" },
       { href: "/data-quality", label: "Data & Quality" },
       { href: "/pipeline", label: "Pipeline" },
     ],

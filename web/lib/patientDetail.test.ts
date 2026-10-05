@@ -53,3 +53,18 @@ test("tests per year draws the empty years", () => {
   assert.deepEqual(perYear.map((y) => y.tests), [1, 0, 0, 1]);
   assert.deepEqual(testsPerYear([]), []);
 });
+
+import { cohortTestsByYear } from "./patientDetail.ts";
+
+test("cohort testing by year counts every result once and keeps empty years", () => {
+  const { years, first, last } = cohortTestsByYear(detail);
+  const total = Object.values(detail).reduce((n: number, d) => n + (d as { a1c: unknown[] }).a1c.length, 0);
+  assert.equal(years.reduce((n, y) => n + y.tests, 0), total);
+  assert.equal(years[0].year, first!.slice(0, 4));
+  assert.equal(years.at(-1)!.year, last!.slice(0, 4));
+  for (let i = 1; i < years.length; i++) assert.equal(Number(years[i].year), Number(years[i - 1].year) + 1, "no year skipped");
+  for (const y of years) assert.ok(y.patients <= y.tests && y.patients <= rows.length, y.year);
+  const gap = cohortTestsByYear({ a: { a1c: [{ d: "2018-01-01", v: 7 }, { d: "2021-01-01", v: 7 }], meds: [], procs: [] } });
+  assert.deepEqual(gap.years.map((y) => y.tests), [1, 0, 0, 1]);
+  assert.deepEqual(cohortTestsByYear({}).years, []);
+});

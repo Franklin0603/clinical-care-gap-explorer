@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ChartNoAxesCombined, GraduationCap, Sparkles, Users } from "lucide-react";
 
 import { gold, patients } from "@/lib/data";
-import { cohortSummary, gapsByAgeBand, needingAttention } from "@/lib/cohort";
+import { cohortSummary, monitoringByAgeBand, needingAttention, pctText } from "@/lib/cohort";
 import { Page, Section } from "@/components/shell/Page";
 import { MetricCard } from "@/components/MetricCard";
 import { AttentionList } from "./AttentionList";
@@ -21,7 +21,7 @@ export const metadata = { title: "Home" };
  */
 const summary = cohortSummary(patients, gold.asof);
 const attention = needingAttention(patients, 5);
-const bands = gapsByAgeBand(patients);
+const bands = monitoringByAgeBand(patients);
 
 const NEXT = [
   { href: "/patients", label: "Patients", about: "The full cohort, every column, with filters.", icon: Users },
@@ -54,7 +54,7 @@ export default function HomePage() {
           label="Open A1c gaps"
           value={s.openGaps.toLocaleString("en-US")}
           status={{ tone: s.openGaps ? "danger" : "success", label: s.openGaps ? "Needs attention" : "None open" }}
-          context={`${s.gapRatePct}% of the cohort`}
+          context={`${pctText(s.openGaps, s.total)} of the cohort`}
           caption="No A1c in the last 12 months"
           hint="Patients with no A1c result in the twelve months before the data date. Includes those who have never been tested."
           href="/care-gaps"

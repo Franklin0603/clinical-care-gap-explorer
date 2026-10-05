@@ -61,13 +61,12 @@ Patients uses the shared GapStatusBadge and the shared cells.
 
 ## From phase 5 (Patients)
 
-**Four cohort figures now appear nowhere.** The old Patients page opened with
-eight metric cards. Four duplicated Home (cohort, open gaps, never tested,
-insulin). The other four did not: median last A1c, last result at or over 7%,
-longest overdue (2,175 days), and "seen, not tested" (open gap, in clinic
-within six months - 24 of the 25). The last one is the most actionable figure
-in the project. They belong on the Analytics redesign. "At or over 7%" should
-come back with the careful reference-point wording, not as "above target".
+**Four cohort figures now appear nowhere.** Partly resolved in phase 6.
+Analytics now states "seen, not tested" (24 of the 25 open gaps had an
+encounter in the six months before the data date) and the longest overdue
+result (2,175 days). Median last A1c and "last result at or over 7%" were left
+out on purpose: they describe results, not monitoring, and the phase 6 brief
+rules out turning 7% into a population target.
 
 **The column picker is gone.** The old table could show sex, diagnosis date,
 tests in 2 years, active medication count and priority as extra columns. All
@@ -83,3 +82,24 @@ rarely far away, but a sticky header was not added.
 **Search matches the start of the MRN only.** Typing a fragment from the
 middle of an MRN finds nothing. Deliberate (prefix search is how MRNs are
 read aloud), but worth confirming.
+
+## From phase 6 (Analytics)
+
+**The Overview page now overlaps Analytics.** /overview still has its own
+filters, cards and charts, computed inline rather than through lib/cohort.ts.
+Its one unique view is "how the gap count would grow as the reporting date
+moves", which Analytics links to. Either move that chart into Analytics and
+retire Overview, or keep Overview as an engineering view and say so.
+
+**Tests per year cannot be filtered.** The testing-history chart covers the
+whole cohort. Splitting it by age band or setting would need the per-patient
+history joined to the cohort rows on the client, which is easy, but was not
+asked for.
+
+**Care Gaps cannot filter by age or setting from a link.** Analytics links age
+bands and care settings to Patients (?status=gap&age=...), because only
+Patients reads those from the URL. Once Care Gaps reads its full filter state
+from the URL, those links could go to Care Gaps instead.
+
+**Patients' "View patients" lands on a paged list.** /patients?status=current
+shows 25 of 91 per page. Fine for browsing; worth knowing.

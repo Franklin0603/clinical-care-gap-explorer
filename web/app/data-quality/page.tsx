@@ -9,6 +9,26 @@ import { StatusBadge } from "@/components/shell/StatusBadge";
 export const metadata = { title: "Data & Quality" };
 
 /**
+ * What the record cannot tell you. Moved here from the Patients page, where it
+ * interrupted a directory; the workspace tabs repeat the relevant line beside
+ * the data it qualifies.
+ */
+const LIMITS = [
+  {
+    title: "Orders",
+    body: "The source has no orders table. The application can see A1c results and procedures that were recorded, but not whether a test was ordered and never completed, so a patient whose test was ordered and missed looks the same as one who was never sent for it.",
+  },
+  {
+    title: "Medications",
+    body: "Medication records carry dispense (fill) counts, not doses. A fill count does not establish that a medication was taken, or how much, and nothing here should be read as adherence or confirmed use.",
+  },
+  {
+    title: "Role-scoped exports",
+    body: "The pipeline still writes a separate export for each of three roles - patient care technician, nurse and physician - and an access matrix with its own tests decides which columns each may see. The web application shows the whole record and does not enforce those roles; the reasoning is kept in the documentation.",
+  },
+];
+
+/**
  * The way into the engineering work, kept out of the care workflow but one
  * click from it. Not a placeholder: every link lands on an existing section of
  * the Pipeline page, and the figures are the pipeline's own reports.
@@ -60,6 +80,21 @@ export default function DataQualityPage() {
                   aria-hidden
                 />
               </Link>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      <Section
+        id="limitations"
+        title="Data limitations"
+        blurb="What the available data cannot tell you, whatever page you read it on."
+      >
+        <ul className="grid gap-4 lg:grid-cols-3">
+          {LIMITS.map((c) => (
+            <li key={c.title} className="flex flex-col gap-1.5 rounded-lg border bg-card p-4">
+              <h3 className="text-sm font-semibold">{c.title}</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">{c.body}</p>
             </li>
           ))}
         </ul>

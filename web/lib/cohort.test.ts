@@ -216,3 +216,42 @@ test("directory state survives a round trip through the URL", () => {
   const junk = readDirectory(new URLSearchParams("status=bogus&sort=risk&age=99&page=-3"));
   assert.deepEqual(junk, DIRECTORY_DEFAULTS, "unknown values fall back to defaults");
 });
+
+import { gapsSeenWithin, monitoringByAgeBand, monitoringBySetting, pct1, pctText } from "./cohort.ts";
+
+test("analytics breakdowns reconcile with the cohort and with Home", () => {
+  for (const groups of [monitoringByAgeBand(rows), monitoringBySetting(rows)]) {
+    const sum = (k: "total" | "current" | "gaps" | "never" | "overdue") => groups.reduce((n, g) => n + g[k], 0);
+    assert.equal(sum("total"), summary.total);
+    assert.equal(sum("current"), summary.current);
+    assert.equal(sum("gaps"), summary.openGaps);
+    assert.equal(sum("never"), summary.neverTested);
+    assert.equal(sum("overdue"), summary.gapPreviouslyTested);
+    for (const g of groups) {
+      assert.equal(g.current + g.gaps, g.total, g.key);
+      assert.equal(g.never + g.overdue, g.gaps, g.key);
+      assert.equal(g.gapRate, pct1(g.gaps, g.total), g.key);
+    }
+  }
+  // Age bands are the same numbers Home's chart and the pipeline report.
+  assert.deepEqual(
+    monitoringByAgeBand(rows).map((g) => ({ band: g.key, patients: g.total, gaps: g.gaps })),
+    goldBands,
+  );
+  const settings = monitoringBySetting(rows);
+  assert.ok(settings.every((g, i) => i === 0 || settings[i - 1].total >= g.total), "largest first");
+});
+
+test("percentages always carry one decimal", () => {
+  assert.equal(pctText(1, 5), "20.0%");
+  assert.equal(pctText(25, 116), "21.6%");
+  assert.equal(pctText(21, 25), "84.0%");
+  assert.equal(pctText(0, 0), "0.0%");
+});
+
+test("recently seen open gaps are a subset of open gaps", () => {
+  const six = gapsSeenWithin(rows, gold.asof, 6);
+  assert.ok(six <= gold.open_gaps);
+  assert.ok(gapsSeenWithin(rows, gold.asof, 1200) === gold.open_gaps, "everyone was seen at some point");
+  assert.ok(gapsSeenWithin(rows, gold.asof, 1) <= six);
+});
