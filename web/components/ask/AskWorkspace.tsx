@@ -130,7 +130,9 @@ export function AskWorkspace() {
   }
 
   return (
-    <div className="flex h-[calc(100dvh-3.5rem)] min-h-0">
+    // Exactly the viewport under the app header, and nothing outside it: the
+    // messages scroll inside their own region and the composer stays put.
+    <div className="flex h-[calc(100dvh-3.5rem)] min-h-0 overflow-hidden">
       <h1 className="sr-only">Ask AI</h1>
 
       {/* Desktop: a persistent, collapsible panel. */}
@@ -223,8 +225,13 @@ function ConversationMenu({ id, title, pinned, onDeleted }: { id: string; title:
 function Messages({ messages, busy, onAsk, empty }: {
   messages: Message[]; busy: boolean; onAsk: (q: string) => void; empty: "new" | "first";
 }) {
-  const end = useRef<HTMLDivElement>(null);
-  useEffect(() => { end.current?.scrollIntoView({ block: "end" }); }, [messages.length, busy]);
+  // Scroll the message region, not the page. scrollIntoView also scrolled
+  // every ancestor, which dragged the whole app down with long chats.
+  const scroller = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = scroller.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [messages.length, busy]);
 
   if (messages.length === 0 && !busy) {
     const prompts = empty === "first" ? FIRST_RUN : START;
@@ -261,12 +268,15 @@ function Messages({ messages, busy, onAsk, empty }: {
   }
 
   return (
-    <div className="min-h-0 flex-1 overflow-y-auto" aria-live="polite">
-      <ol className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-4 py-6">
+    // relative: screen-reader-only text is absolutely positioned, and without a
+    // containing block here it was placed against the page and stretched it
+    // thousands of pixels below the conversation.
+    <div ref={scroller} className="relative min-h-0 flex-1 overflow-y-auto overscroll-contain" aria-live="polite">
+      <ol className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-4 py-6 sm:px-6">
         {messages.map((m) => (
           <li key={m.id} className={cn("flex", m.role === "user" ? "justify-end" : "justify-start")}>
             {m.role === "user" ? (
-              <p className="max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-br-md bg-primary px-3.5 py-2 text-sm text-primary-foreground">
+              <p className="max-w-[min(85%,42rem)] whitespace-pre-wrap rounded-2xl rounded-br-md bg-primary px-3.5 py-2 text-sm text-primary-foreground">
                 <span className="sr-only">You asked: </span>{m.text}
               </p>
             ) : (
@@ -288,7 +298,6 @@ function Messages({ messages, busy, onAsk, empty }: {
           </li>
         )}
       </ol>
-      <div ref={end} />
     </div>
   );
 }
@@ -306,7 +315,7 @@ function Composer({ busy, onSend }: { busy: boolean; onSend: (q: string) => void
   };
   return (
     <div className="shrink-0 border-t bg-background px-3 pb-3 pt-2 sm:px-4">
-      <form onSubmit={submit} className="mx-auto flex w-full max-w-3xl flex-col gap-1.5">
+      <form onSubmit={submit} className="mx-auto flex w-full max-w-5xl flex-col gap-1 sm:px-2">
         <div className="flex items-end gap-2 rounded-xl border bg-card p-1.5 focus-within:ring-2 focus-within:ring-ring/40">
           <Textarea
             value={text}
@@ -321,10 +330,11 @@ function Composer({ busy, onSend }: { busy: boolean; onSend: (q: string) => void
             {busy ? <Loader2 className="animate-spin" aria-hidden /> : <ArrowUp aria-hidden />}
           </Button>
         </div>
-        <p className="text-center text-[11px] leading-relaxed text-muted-foreground">
-          Answers are computed in this browser from the synthetic cohort, using the app&apos;s own definitions.
-          Ask AI interprets questions with rules, not a language model, and gives no clinical advice.
-          Conversations are saved in this browser only.
+        {/* Kept, but quiet: it explains the answers without competing with
+            the input above it. */}
+        <p className="px-1 text-center text-[10.5px] leading-snug text-muted-foreground/75">
+          Synthetic data. Answers are computed in this browser by rules, not a language model, and are not
+          clinical advice. Conversations stay in this browser.
         </p>
       </form>
     </div>

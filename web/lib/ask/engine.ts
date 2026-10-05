@@ -497,8 +497,14 @@ export function answer(question: string, ctx: Ctx, data: Data): Result {
     if (!ctx.sql) return say("Ask a question first, and I can show the query behind the answer.", ctx);
     return {
       blocks: [
-        { kind: "text", text: "This is the query equivalent to the last answer, against the patients view of the care-gap report:" },
-        { kind: "sql", sql: ctx.sql, note: "It returns the same result as the answer above." },
+        { kind: "text", text: "Here is the last answer written as SQL. It is an equivalent representation, not the query that was run: the answer was computed in your browser by the app's own cohort functions." },
+        {
+          kind: "sql",
+          sql: ctx.sql,
+          note: ctx.sql.includes("a1c_observations")
+            ? "Not executed. The yearly counts come from the per-patient A1c history, which this browser's query engine does not load."
+            : "Not executed to produce the answer. It expresses the same filters against the patients view of the care-gap report.",
+        },
       ],
       ctx: { ...ctx, last: "explain" },
     };

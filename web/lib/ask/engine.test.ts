@@ -152,3 +152,32 @@ test("wording: whole cohort, percentages, and re-showing a follow-up keeps its d
   const [, , c] = chat("How many patients have an open gap?", "How many of them were seen in the last 6 months?", "Show them");
   assert.match(metric(c)!.detail!, /Of 25 patients with an open A1c gap/);
 });
+
+test("phase 8.1: the brief's context chain keeps its reference", () => {
+  const [a, b, c] = chat(
+    "Which age group has the highest gap rate?",
+    "How many of them were seen in the last 6 months?",
+    "How many of those have an open gap?",
+  );
+  assert.match(metric(a)!.label, /45–64/);
+  assert.match(metric(a)!.detail!, /15 of 51/);
+  assert.equal(metric(a)!.value, "29.4%");
+  // "them" = patients aged 45-64.
+  const band = rows.filter((r: { age: number }) => r.age >= 45 && r.age <= 64);
+  const seen = band.filter((r: { last_encounter_date: string }) => r.last_encounter_date >= "2026-02-23");
+  assert.equal(metric(b)!.value, String(seen.length));
+  assert.match(metric(b)!.label, /aged 45–64, seen in the last 6 months/);
+  // "those" = that seen-recently 45-64 group; now narrowed to open gaps.
+  const gapSeen = seen.filter((r: { gap_flag: boolean }) => r.gap_flag);
+  assert.equal(metric(c)!.value, String(gapSeen.length));
+  assert.match(metric(c)!.label, /open A1c gap aged 45–64, seen in the last 6 months/);
+  assert.match(metric(c)!.detail!, new RegExp(`Of ${seen.length} patients aged 45–64`));
+});
+
+test("phase 8.1: SQL on request says it was not executed", () => {
+  const [, sql] = chat("How many patients have never been tested?", "Show me the SQL");
+  assert.match(text(sql), /equivalent representation, not the query that was run/);
+  assert.match(text(sql), /Not executed to produce the answer/);
+  const [, , ySql] = chat("How has A1C testing changed over time?", "How did you calculate this?", "Show me the SQL");
+  assert.match(text(ySql), /does not load/);
+});

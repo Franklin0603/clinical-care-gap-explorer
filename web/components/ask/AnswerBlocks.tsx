@@ -37,7 +37,7 @@ export function AnswerBlocks({ blocks, onAsk }: { blocks: AssistantBlock[]; onAs
 function BlockView({ b, onAsk }: { b: AssistantBlock; onAsk: (q: string) => void }) {
   switch (b.kind) {
     case "text":
-      return <p className="text-sm leading-relaxed">{b.text}</p>;
+      return <p className="max-w-3xl text-sm leading-relaxed">{b.text}</p>;
     case "metric":
       return (
         <div className="flex flex-col gap-0.5">
@@ -45,7 +45,7 @@ function BlockView({ b, onAsk }: { b: AssistantBlock; onAsk: (q: string) => void
             <span className="num text-3xl font-semibold tracking-tight">{b.value}</span>
             <span className="text-sm font-medium">{b.label}</span>
           </div>
-          {b.detail && <p className="text-xs text-muted-foreground">{b.detail}</p>}
+          {b.detail && <p className="max-w-3xl text-xs text-muted-foreground">{b.detail}</p>}
         </div>
       );
     case "patients":
@@ -101,7 +101,7 @@ function BlockView({ b, onAsk }: { b: AssistantBlock; onAsk: (q: string) => void
       );
     case "method":
       return (
-        <dl className="flex flex-col gap-2 rounded-lg border bg-muted/30 p-3 text-sm">
+        <dl className="flex max-w-3xl flex-col gap-2 rounded-lg border bg-muted/30 p-3 text-sm">
           {b.items.map((it) => (
             <div key={it.label} className="grid gap-0.5 sm:grid-cols-[8rem_1fr] sm:gap-3">
               <dt className="text-xs font-medium text-muted-foreground">{it.label}</dt>
@@ -114,7 +114,7 @@ function BlockView({ b, onAsk }: { b: AssistantBlock; onAsk: (q: string) => void
       return <SqlBlock sql={b.sql} note={b.note} />;
     case "limitation":
       return (
-        <p className="flex items-start gap-2 rounded-lg border border-status-warning/30 bg-status-warning/5 p-3 text-sm leading-relaxed">
+        <p className="flex max-w-3xl items-start gap-2 rounded-lg border border-status-warning/30 bg-status-warning/5 p-3 text-sm leading-relaxed">
           <TriangleAlert className="mt-0.5 size-4 shrink-0 text-status-warning" aria-hidden />
           <span>{b.text}</span>
         </p>
