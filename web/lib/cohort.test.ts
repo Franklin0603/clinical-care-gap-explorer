@@ -255,3 +255,14 @@ test("recently seen open gaps are a subset of open gaps", () => {
   assert.ok(gapsSeenWithin(rows, gold.asof, 1200) === gold.open_gaps, "everyone was seen at some point");
   assert.ok(gapsSeenWithin(rows, gold.asof, 1) <= six);
 });
+
+import { latestA1cDistribution } from "./cohort.ts";
+
+test("the A1c distribution places every recorded result once and no missing one", () => {
+  const d = latestA1cDistribution(rows);
+  assert.equal(d.bins.reduce((n, b) => n + b.n, 0), d.withResult);
+  assert.equal(d.withResult + d.without, gold.cohort);
+  assert.equal(d.without, gold.never_tested, "no result = never tested, the same 21");
+  for (let i = 1; i < d.bins.length; i++) assert.equal(d.bins[i].lo, d.bins[i - 1].lo + 1, "contiguous one-point ranges");
+  assert.deepEqual(latestA1cDistribution([]), { bins: [], withResult: 0, without: 0 });
+});

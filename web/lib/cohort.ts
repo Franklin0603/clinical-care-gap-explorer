@@ -410,3 +410,23 @@ export function gapsSeenWithin(rows: PatientRow[], asof: string, months: number)
   const since = d.toISOString().slice(0, 10);
   return rows.filter((r) => r.gap_flag && r.last_encounter_date && String(r.last_encounter_date) >= since).length;
 }
+
+/**
+ * Each patient's latest recorded A1c, counted into equal one-point ranges
+ * (2.0-2.9%, 3.0-3.9%, ...) from the lowest value to the highest. The ranges
+ * are arithmetic, not clinical: nothing here labels a range controlled,
+ * uncontrolled or risky. Patients with no result are counted separately and
+ * never placed in a range - a missing value is not a low one.
+ */
+export type A1cBin = { lo: number; hi: number; label: string; n: number };
+
+export function latestA1cDistribution(rows: PatientRow[]) {
+  const values = rows.map(lastA1cValue).filter((v): v is number => v !== null);
+  const without = rows.length - values.length;
+  if (values.length === 0) return { bins: [] as A1cBin[], withResult: 0, without };
+  const lo = Math.floor(Math.min(...values)), hi = Math.floor(Math.max(...values));
+  const bins: A1cBin[] = [];
+  for (let b = lo; b <= hi; b++) bins.push({ lo: b, hi: b + 0.9, label: `${b}.0–${b}.9%`, n: 0 });
+  for (const v of values) bins[Math.floor(v) - lo].n += 1;
+  return { bins, withResult: values.length, without };
+}

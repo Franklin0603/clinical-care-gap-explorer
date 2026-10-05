@@ -1,16 +1,19 @@
 import Link from "next/link";
-import { ArrowRight, Building2, Layers, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, BarChart3, Building2, Layers, ShieldCheck, Users } from "lucide-react";
 
 import { fmt, gold, patients } from "@/lib/data";
 import {
-  GroupRow, cohortSummary, daysOverdue, gapsSeenWithin, monitoringByAgeBand, monitoringBySetting,
-  pctText, settingLabel,
+  GroupRow, cohortSummary, daysOverdue, gapsSeenWithin, latestA1cDistribution, monitoringByAgeBand,
+  monitoringBySetting, pctText, settingLabel,
 } from "@/lib/cohort";
 import { cn } from "cn";
 import { Page } from "@/components/shell/Page";
 import { ChartCard, headerLink } from "@/components/analytics/ChartCard";
-import { ProportionBar } from "@/components/analytics/ProportionBar";
-import { RateBars } from "@/components/analytics/RateBars";
+import { A1cDistribution } from "@/components/analytics/A1cDistribution";
+import { Donut } from "@/components/analytics/Donut";
+import { GapRateBars } from "@/components/analytics/GapRateBars";
+import { GapRateColumns } from "@/components/analytics/GapRateColumns";
+import { FILL } from "@/components/analytics/chartBits";
 import { TestingOverTime } from "@/components/analytics/TestingOverTime";
 
 export const metadata = { title: "Analytics" };
@@ -48,6 +51,8 @@ const topAge = highest(byAge);
 const topSetting = highest(bySetting);
 const smallSettings = bySetting.filter((r) => r.total > 0 && r.total < SMALL);
 const smallAges = byAge.filter((r) => r.total > 0 && r.total < SMALL);
+const settingLabels = Object.fromEntries(bySetting.map((r) => [r.key, settingLabel(r.key)]));
+const dist = latestA1cDistribution(patients);
 
 function Kpi({ label, value, context, tone }: {
   label: string; value: string; context?: string; tone?: "success" | "danger";
@@ -101,14 +106,16 @@ export default function AnalyticsPage() {
               metric={<>{pctText(s.current, s.total)} <span className="text-sm font-normal text-muted-foreground">current</span></>}
               insight={`${fmt(s.openGaps)} of ${fmt(s.total)} patients have no A1c result in the 365 days before the data date.`}
             >
-              <ProportionBar
-                compact
+              <Donut
                 total={s.total}
+                of={`${fmt(s.total)} patients`}
+                center={pctText(s.current, s.total)}
+                centerLabel="Current"
                 parts={[
                   { key: "current", label: "Current", about: "A1c result within 365 days", n: s.current,
-                    tone: "bg-status-success", href: "/patients?status=current" },
+                    fill: FILL.current, href: "/patients?status=current" },
                   { key: "gap", label: "Open gap", about: "No A1c result within 365 days", n: s.openGaps,
-                    tone: "bg-status-danger", href: "/care-gaps" },
+                    fill: FILL.gap, href: "/care-gaps" },
                 ]}
               />
             </ChartCard>
@@ -125,14 +132,17 @@ export default function AnalyticsPage() {
                 </>
               }
             >
-              <ProportionBar
-                compact
+              <Donut
                 total={s.openGaps}
+                of={`${fmt(s.openGaps)} open gaps`}
+                ofNote={`not ${fmt(s.total)} patients`}
+                center={fmt(s.openGaps)}
+                centerLabel="Open gaps"
                 parts={[
                   { key: "never", label: "Never tested", about: "No A1c result found in the available data", n: s.neverTested,
-                    tone: "bg-status-danger", href: "/care-gaps?status=never" },
+                    fill: FILL.gap, href: "/care-gaps?status=never" },
                   { key: "overdue", label: "Overdue", about: "An earlier result, more than 365 days old", n: s.gapPreviouslyTested,
-                    tone: "bg-status-danger/55", href: "/care-gaps?status=overdue" },
+                    fill: FILL.gap, opacity: 0.5, href: "/care-gaps?status=overdue" },
                 ]}
               />
             </ChartCard>
@@ -151,16 +161,11 @@ export default function AnalyticsPage() {
               <>
                 Bands follow the measure&apos;s age boundaries. Descriptive only: a difference between bands
                 does not show its cause.
-                {smallAges.length > 0 && <> Under {SMALL} patients: {smallAges.map((r) => r.key).join(", ")}.</>}
+                {smallAges.length > 0 && <> * Under {SMALL} patients: {smallAges.map((r) => r.key).join(", ")}.</>}
               </>
             }
           >
-            <RateBars
-              rows={byAge}
-              small={SMALL}
-              label={(k) => `Age ${k}`}
-              href={(r) => `/patients?status=gap&age=${encodeURIComponent(r.key)}`}
-            />
+            <GapRateColumns rows={byAge} small={SMALL} linkParam="age" />
           </ChartCard>
 
           <ChartCard
@@ -174,18 +179,31 @@ export default function AnalyticsPage() {
             note={
               <>
                 Setting of each patient&apos;s last encounter, largest group first. Descriptive only.
-                {smallSettings.length > 0 && <> Under {SMALL} patients: {smallSettings.map((r) => settingLabel(r.key)).join(", ")}.</>}
+                {smallSettings.length > 0 && <> * Under {SMALL} patients: {smallSettings.map((r) => settingLabel(r.key)).join(", ")}.</>}
               </>
             }
           >
-            <RateBars
-              rows={bySetting}
-              small={SMALL}
-              label={settingLabel}
-              href={(r) => `/patients?status=gap&setting=${encodeURIComponent(r.key)}`}
-            />
+            <GapRateBars rows={bySetting} labels={settingLabels} small={SMALL} linkParam="setting" />
           </ChartCard>
         </div>
+
+        <ChartCard
+          icon={BarChart3}
+          title="Latest A1c result distribution"
+          metric={<>{fmt(dist.withResult)} <span className="text-sm font-normal text-muted-foreground">patients with a recorded A1c</span></>}
+          insight={`No A1c result available: ${fmt(dist.without)} patients, not shown in the chart.`}
+          note={
+            <>
+              Each patient&apos;s most recent result, whenever it was taken, including results more than
+              a year old. Equal one-point ranges, not clinical categories; individual A1c goals differ.
+              Values below 3% come from the synthetic records and are shown as recorded.
+            </>
+          }
+        >
+          {dist.bins.length
+            ? <A1cDistribution bins={dist.bins} withResult={dist.withResult} />
+            : <p className="py-10 text-center text-sm text-muted-foreground">No data available for this view.</p>}
+        </ChartCard>
 
         <p className="text-xs text-muted-foreground">
           The earlier <Link href="/overview" className="font-medium text-primary hover:underline">Overview</Link> is

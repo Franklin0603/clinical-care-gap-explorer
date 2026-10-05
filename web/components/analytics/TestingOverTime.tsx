@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
-import { Bar, BarChart, CartesianGrid, Cell, Tooltip as RTooltip, XAxis, YAxis } from "recharts";
+import { Area, CartesianGrid, ComposedChart, Line, Tooltip as RTooltip, XAxis, YAxis } from "recharts";
 import { Activity, CircleAlert } from "lucide-react";
 
 import { fmt, gold } from "@/lib/data";
@@ -23,9 +23,11 @@ import { ChartCard, DataTip } from "./ChartCard";
  * patient. The header switch picks which the bars show; the tooltip and the
  * table always give both.
  *
- * The first and last years are only partly covered - the history starts at
- * the first result on file and stops at the data date - so they are drawn
- * lighter, starred, and named partial in the tooltip, the note and the table.
+ * Drawn as a line with a faint area beneath it. The first and last years are
+ * only partly covered - the history starts at the first result on file and
+ * stops at the data date - so the segments into them are dashed, their points
+ * hollow, their labels starred, and the tooltip, note and table name them
+ * partial. A drop into 2026 is the calendar, not a collapse in testing.
  */
 
 type Measure = "tests" | "patients";
@@ -112,7 +114,21 @@ export function TestingOverTime({ className }: { className?: string }) {
 
   const firstYear = years[0].year, lastYear = years[years.length - 1].year;
   const partial = new Set([firstYear, lastYear]);
-  const data = years.map((y) => ({ ...y, label: partial.has(y.year) ? `${y.year}*` : y.year }));
+  // Two series over one measure: `solid` holds the full years, `edge` the
+  // partial years and the full year beside each, so the line is continuous
+  // but the segments into partial years can be drawn dashed.
+  const data = years.map((y, i) => {
+    const v = y[measure];
+    const isPartial = partial.has(y.year);
+    const besidePartial = partial.has(years[i - 1]?.year ?? "") || partial.has(years[i + 1]?.year ?? "");
+    return {
+      ...y,
+      label: isPartial ? `${y.year}*` : y.year,
+      partial: isPartial,
+      solid: isPartial ? null : v,
+      edge: isPartial || besidePartial ? v : null,
+    };
+  });
   const full = years.filter((y) => !partial.has(y.year));
   const peak = full.length ? full.reduce((a, b) => (b[measure] > a[measure] ? b : a)) : null;
   const total = years.reduce((n, y) => n + y.tests, 0);
@@ -120,20 +136,26 @@ export function TestingOverTime({ className }: { className?: string }) {
   return card(
     <>
       <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground" aria-hidden>
-        <span className="flex items-center gap-1.5"><span className="size-2.5 rounded-sm bg-chart-1" />Full year</span>
-        <span className="flex items-center gap-1.5"><span className="size-2.5 rounded-sm bg-chart-1/40" />Partial year *</span>
+        <span className="flex items-center gap-1.5">
+          <svg width="18" height="8"><line x1="0" y1="4" x2="18" y2="4" stroke="var(--chart-1)" strokeWidth="2" /></svg>
+          Full year
+        </span>
+        <span className="flex items-center gap-1.5">
+          <svg width="18" height="8"><line x1="0" y1="4" x2="18" y2="4" stroke="var(--chart-1)" strokeWidth="2" strokeDasharray="3 3" /></svg>
+          Partial year *
+        </span>
       </div>
 
-      <ChartContainer config={config} className="h-64 w-full sm:h-72" aria-hidden>
-        <BarChart data={data} margin={{ top: 8, right: 4, left: 0, bottom: 0 }}>
+      <ChartContainer config={config} className="h-64 w-full sm:h-72 lg:h-96" aria-hidden>
+        <ComposedChart data={data} margin={{ top: 12, right: 12, left: 0, bottom: 0 }}>
           <CartesianGrid vertical={false} strokeDasharray="3 3" />
           {/* preserveStartEnd: on a phone eleven year labels collide, so some
               are dropped - never the partial first and last years. Every year
               is in the table below. */}
-          <XAxis dataKey="label" tickLine={false} axisLine={false} tickMargin={8} fontSize={11} interval="preserveStartEnd" minTickGap={6} />
+          <XAxis dataKey="label" tickLine={false} axisLine={false} tickMargin={8} fontSize={11} interval="preserveStartEnd" minTickGap={6} padding={{ left: 8, right: 8 }} />
           <YAxis tickLine={false} axisLine={false} width={40} allowDecimals={false} domain={[0, "auto"]} fontSize={11} />
           <RTooltip
-            cursor={{ fill: "var(--muted)", opacity: 0.6 }}
+            cursor={{ stroke: "var(--border)", strokeWidth: 1 }}
             content={({ active, payload }) => {
               const y = active ? (payload?.[0]?.payload as (YearRow & { label: string }) | undefined) : undefined;
               if (!y) return null;
@@ -150,12 +172,32 @@ export function TestingOverTime({ className }: { className?: string }) {
               );
             }}
           />
-          <Bar dataKey={measure} radius={[4, 4, 0, 0]} maxBarSize={56} isAnimationActive={false}>
-            {data.map((y) => (
-              <Cell key={y.year} fill={`var(--color-${measure})`} fillOpacity={partial.has(y.year) ? 0.4 : 1} />
-            ))}
-          </Bar>
-        </BarChart>
+          <Area dataKey="solid" type="linear" stroke="none" fill="var(--chart-1)" fillOpacity={0.08} isAnimationActive={false} connectNulls={false} activeDot={false} />
+          <Line
+            dataKey="edge"
+            type="linear"
+            stroke="var(--chart-1)"
+            strokeWidth={2}
+            strokeDasharray="4 4"
+            connectNulls={false}
+            isAnimationActive={false}
+            dot={(p: { cx?: number; cy?: number; index?: number }) =>
+              data[p.index ?? -1]?.partial && p.cx !== undefined && p.cy !== undefined
+                ? <circle key={`e${p.index}`} cx={p.cx} cy={p.cy} r={3.5} fill="var(--background)" stroke="var(--chart-1)" strokeWidth={2} />
+                : <g key={`e${p.index}`} />}
+            activeDot={false}
+          />
+          <Line
+            dataKey="solid"
+            type="linear"
+            stroke="var(--chart-1)"
+            strokeWidth={2}
+            connectNulls={false}
+            isAnimationActive={false}
+            dot={{ r: 3, fill: "var(--chart-1)", strokeWidth: 0 }}
+            activeDot={{ r: 5, fill: "var(--chart-1)", stroke: "var(--background)", strokeWidth: 2 }}
+          />
+        </ComposedChart>
       </ChartContainer>
 
       <details className="text-sm">
@@ -198,7 +240,7 @@ export function TestingOverTime({ className }: { className?: string }) {
         <>
           Available history: {longDate(first)} to {longDate(last)}, from synthetic records rather than
           anyone&apos;s complete care. * {firstYear} starts at the first result on file and {lastYear} ends
-          at the data date ({longDate(gold.asof)}). Empty years are drawn as zero.
+          at the data date ({longDate(gold.asof)}), so both are partial years. Empty years are drawn as zero.
         </>
       ),
     },
