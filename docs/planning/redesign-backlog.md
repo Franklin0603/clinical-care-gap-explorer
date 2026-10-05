@@ -88,8 +88,11 @@ read aloud), but worth confirming.
 **The Overview page now overlaps Analytics.** /overview still has its own
 filters, cards and charts, computed inline rather than through lib/cohort.ts.
 Its one unique view is "how the gap count would grow as the reporting date
-moves", which Analytics links to. Either move that chart into Analytics and
-retire Overview, or keep Overview as an engineering view and say so.
+moves". Since the phase 6 QA pass, Analytics no longer links to it; the only
+way in is a button on the Introduction page (IntroView), plus the Phase 1 nav
+mapping that keeps its breadcrumb under Analytics. Either move that chart into
+Analytics, retire Overview and point the Introduction button at Analytics, or
+keep Overview as an engineering view linked from Data & Quality.
 
 **Tests per year cannot be filtered.** The testing-history chart covers the
 whole cohort. Splitting it by age band or setting would need the per-patient

@@ -205,10 +205,6 @@ export default function AnalyticsPage() {
             : <p className="py-10 text-center text-sm text-muted-foreground">No data available for this view.</p>}
         </ChartCard>
 
-        <p className="text-xs text-muted-foreground">
-          The earlier <Link href="/overview" className="font-medium text-primary hover:underline">Overview</Link> is
-          still available, including how the open-gap count would grow as the reporting date moves forward.
-        </p>
       </div>
     </Page>
   );
