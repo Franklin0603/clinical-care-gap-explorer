@@ -16,6 +16,7 @@ import {
 import { Term } from "@/components/Term";
 import { A1cSeriesChart, CohortComparisonChart, TestsPerYearChart } from "./A1cCharts";
 import { CareGapAssessment } from "./CareGapAssessment";
+import { FollowUpCard } from "@/components/tasks/FollowUpCard";
 import { InsulinBadge } from "./cells";
 
 export { InsulinBadge };
@@ -49,6 +50,8 @@ export function OverviewTab({
   return (
     <div className="flex flex-col gap-4">
       <CareGapAssessment patient={r} />
+
+      <FollowUpCard patient={r} />
 
       <Panel as="h2" title="Clinical context">
         <Facts

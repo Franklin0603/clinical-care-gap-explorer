@@ -106,3 +106,29 @@ from the URL, those links could go to Care Gaps instead.
 
 **Patients' "View patients" lands on a paged list.** /patients?status=current
 shows 25 of 91 per page. Fine for browsing; worth knowing.
+
+## From phase 7 (Tasks)
+
+**Tasks live in one browser.** The site is a static export with no server, so
+task state is saved in localStorage: it survives reloads and is shared between
+tabs, but another person or device sees its own. A real deployment needs a
+server-side store, real users, and an audit trail that cannot be edited from
+the browser.
+
+**There is one assignee.** With no sign-in, "Assigned to" offers Unassigned or
+Demo user. Real assignment needs real accounts.
+
+**Tasks only exist for open gaps.** A patient who is current has no task and
+cannot be given one; the patient workspace says so. If the data ever moves a
+patient from gap to current, any task already recorded for them is kept and
+still listed.
+
+**Task filters are not in the URL.** Only the open task is (?open=<patient
+id>), which is what the patient workspace's "View task" link uses.
+
+**No task figures on Home or in the sidebar.** The brief made Home optional.
+A sidebar count was left out because the static HTML cannot know what a
+browser has saved, so the number would change on load.
+
+**No task column on Care Gaps.** Deliberate, to keep that table clean: the way
+from a care gap to its task is Review, then the Follow-up card.

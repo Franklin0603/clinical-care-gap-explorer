@@ -6,8 +6,8 @@ import {
   GroupRow, cohortSummary, daysOverdue, gapsSeenWithin, latestA1cDistribution, monitoringByAgeBand,
   monitoringBySetting, pctText, settingLabel,
 } from "@/lib/cohort";
-import { cn } from "cn";
 import { Page } from "@/components/shell/Page";
+import { Kpi } from "@/components/Kpi";
 import { ChartCard, headerLink } from "@/components/analytics/ChartCard";
 import { A1cDistribution } from "@/components/analytics/A1cDistribution";
 import { Donut } from "@/components/analytics/Donut";
@@ -53,31 +53,6 @@ const smallSettings = bySetting.filter((r) => r.total > 0 && r.total < SMALL);
 const smallAges = byAge.filter((r) => r.total > 0 && r.total < SMALL);
 const settingLabels = Object.fromEntries(bySetting.map((r) => [r.key, settingLabel(r.key)]));
 const dist = latestA1cDistribution(patients);
-
-function Kpi({ label, value, context, tone }: {
-  label: string; value: string; context?: string; tone?: "success" | "danger";
-}) {
-  return (
-    <li className="flex flex-col gap-2 rounded-xl border bg-card px-4 py-3.5 shadow-xs">
-      <span className="text-xs font-medium text-muted-foreground">{label}</span>
-      <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <span className="num text-2xl font-semibold tracking-tight">{value}</span>
-        {context && (
-          <span
-            className={cn(
-              "num rounded-md border px-1.5 py-0.5 text-xs",
-              tone === "success" && "border-status-success/30 bg-status-success/10 text-status-success",
-              tone === "danger" && "border-status-danger/30 bg-status-danger/10 text-status-danger",
-              !tone && "bg-muted text-muted-foreground",
-            )}
-          >
-            {context}
-          </span>
-        )}
-      </div>
-    </li>
-  );
-}
 
 export default function AnalyticsPage() {
   return (

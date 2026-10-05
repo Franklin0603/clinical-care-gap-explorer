@@ -9,7 +9,7 @@ import { PatientWorkspace } from "./PatientWorkspace";
 
 /** Where a review was opened from, carried to the full record so it can send
  *  the reader back to the same list. */
-export type ReviewFrom = "home" | "care-gaps" | "patients";
+export type ReviewFrom = "home" | "care-gaps" | "patients" | "tasks";
 
 export const recordHref = (r: PatientRow, from?: ReviewFrom) =>
   `/patients/${encodeURIComponent(String(r.patient_id))}/${from ? `?from=${from}` : ""}`;

@@ -41,14 +41,17 @@ const STEPS: Step[] = [
   },
   {
     name: "Act",
-    does: "Record what was done about a gap: a call, a message, an order.",
-    status: { tone: "info", label: "Planned" },
+    does: "Record what is being done about a gap: review, outreach, scheduling.",
+    status: { tone: "success", label: "Available" },
     where: { href: "/tasks", label: "Tasks" },
+    detail: "Each open gap has a follow-up task. Its status, assignee, due date and notes are demo workflow data saved in this browser; nothing is sent to a patient.",
   },
   {
     name: "Track",
     does: "Follow each patient until the test actually happens.",
-    status: { tone: "info", label: "Planned" },
+    status: { tone: "success", label: "Available" },
+    where: { href: "/tasks", label: "Tasks" },
+    detail: "Every change to a task is recorded as workflow activity, with the time it was made.",
   },
   {
     name: "Close",

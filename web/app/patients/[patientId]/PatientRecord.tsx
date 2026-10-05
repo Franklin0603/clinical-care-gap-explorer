@@ -13,6 +13,7 @@ const BACK: Record<string, { href: string; label: string }> = {
   home: { href: "/home", label: "Back to Home" },
   "care-gaps": { href: "/care-gaps", label: "Back to Care Gaps" },
   patients: { href: "/patients", label: "Back to Patients" },
+  tasks: { href: "/tasks", label: "Back to Tasks" },
 };
 
 const linkClass =

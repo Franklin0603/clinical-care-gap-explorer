@@ -20,7 +20,7 @@ import { Facts, None, Panel } from "./parts";
  * The wording is evidence-aware throughout: "no qualifying result was found in
  * the available data", never "this patient has never been tested".
  */
-export function CareGapAssessment({ patient: r }: { patient: PatientRow }) {
+export function CareGapAssessment({ patient: r, title }: { patient: PatientRow; title?: string }) {
   const status = gapStatus(r);
   const asof = longDate(gold.asof);
   const a1c = lastA1cValue(r);
@@ -35,7 +35,7 @@ export function CareGapAssessment({ patient: r }: { patient: PatientRow }) {
     return (
       <Panel
         as="h2"
-        title="A1c care-gap assessment"
+        title={title ?? "A1c care-gap assessment"}
         actions={<StatusBadge tone="danger" label="Needs attention" />}
       >
         <Verdict status={status} summary="Open A1c monitoring gap">
@@ -58,7 +58,7 @@ export function CareGapAssessment({ patient: r }: { patient: PatientRow }) {
     return (
       <Panel
         as="h2"
-        title="A1c care-gap assessment"
+        title={title ?? "A1c care-gap assessment"}
         actions={<StatusBadge tone="danger" label="Needs attention" />}
       >
         <Verdict status={status} summary="Open A1c monitoring gap">
@@ -82,7 +82,7 @@ export function CareGapAssessment({ patient: r }: { patient: PatientRow }) {
   return (
     <Panel
       as="h2"
-      title="A1c monitoring status"
+      title={title ?? "A1c monitoring status"}
       actions={<StatusBadge tone="success" label="Up to date" />}
     >
       <Verdict status={status} summary="No current A1c monitoring gap">

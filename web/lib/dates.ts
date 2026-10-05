@@ -17,3 +17,14 @@ export function longDate(iso: string | null | undefined): string | null {
   if (!y || !m || !d) return null;
   return `${MONTHS[m - 1]} ${d}, ${y}`;
 }
+
+/** A workflow timestamp in the reader's own time zone: "Oct 4, 2026 · 11:15 PM".
+ *  Only for application events, which carry a real time; clinical dates are
+ *  calendar days and go through longDate. Call it in the browser only. */
+export function eventTime(iso: string): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  const day = d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  const time = d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+  return `${day} · ${time}`;
+}
