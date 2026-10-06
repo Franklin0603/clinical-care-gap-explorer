@@ -154,17 +154,24 @@ export function IllustrationSlot({ id, className }: { id: string; className?: st
   );
 }
 
-/** Where a screenshot of the app will go, sized like the app. */
-export function ScreenshotSlot({ label }: { label: string }) {
+/** A screenshot of the app, linked to the full-size file for a closer look. */
+export function Screenshot({ src, width, height, alt, caption }: { src: string; width: number; height: number; alt: string; caption: string }) {
   return (
-    <div className="flex aspect-video w-full max-w-full flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed bg-muted/30 p-4 text-center" role="img" aria-label={`Screenshot to come: ${label}`}>
-      <MonitorPlay className="size-5 text-muted-foreground" aria-hidden />
-      <span className="text-xs font-medium text-muted-foreground">Screenshot to come</span>
-      <span className="text-xs text-muted-foreground/80">{label}</span>
-    </div>
+    <figure className="flex min-w-0 flex-col gap-2">
+      <a
+        href={`${BASE}${src}`}
+        target="_blank"
+        rel="noopener"
+        className="group block overflow-hidden rounded-xl border bg-card shadow-sm transition-shadow hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element -- static export, no image optimisation */}
+        <img src={`${BASE}${src}`} alt={alt} width={width} height={height} loading="lazy" decoding="async" className="block h-auto w-full max-w-full" />
+        <span className="sr-only"> (opens the full-size screenshot)</span>
+      </a>
+      <figcaption className="text-xs leading-relaxed text-muted-foreground">{caption}</figcaption>
+    </figure>
   );
 }
-
 
 /**
  * A video card: the player above, title, duration and description below.
