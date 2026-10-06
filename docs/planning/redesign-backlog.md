@@ -211,3 +211,7 @@ second version.
 
 **The Gold SQL comment calls never-tested patients "highest-risk".** The
 application no longer does; the comment could follow.
+
+## Learn: Diabetes illustrations
+
+- At phone width (390px), a long Learn breadcrumb ("Learn > Understanding Diabetes") runs into the "Synthetic data" badge in the header. Truncate the last crumb or hide the badge text below `sm`.

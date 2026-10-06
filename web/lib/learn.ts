@@ -1,12 +1,12 @@
 /**
- * The Learn area, as data: four modules, three videos and the illustration
- * slots that will hold them.
+ * The Learn area, as data: four modules, three videos and the illustrations
+ * that go with them.
  *
  * Media is not invented. A video without a real file has no source, duration
  * or poster, and its card shows an honest "coming soon" state instead of a
  * fake player; all three videos now have their files. Every illustration
- * slot carries a description of what it will show - written as the brief for
- * the image - and renders that
+ * carries a description of what it shows - written as the brief for the
+ * image - and an illustration without a file renders that
  * description until a file is supplied. Adding a file is a one-line change
  * here; no page needs to change.
  */
@@ -102,32 +102,47 @@ export const videoById = (id: string) => VIDEOS.find((v) => v.id === id);
 
 export type Illustration = {
   id: string;
-  /** Alt text once the image exists; also the visible caption. */
+  /** What the image shows, for a screen reader. */
   alt: string;
+  /** The visible caption: what to notice. Falls back to the alt text. */
+  caption?: string;
   /** What the image should show: the brief for whoever makes it. */
   brief: string;
   ratio: "16/9" | "4/3" | "1/1" | "21/9";
+  /** Path under public/, without the base path. */
   src: string | null;
+  /** The file's pixel size, so the page does not jump as it loads. */
+  size?: { width: number; height: number };
 };
 
 export const ILLUSTRATIONS: Record<string, Illustration> = {
+  food: {
+    id: "food",
+    alt: "Bread, rice and an apple, with an arrow to glucose molecules",
+    caption: "Carbohydrates in food, such as bread, rice and fruit, are broken down into glucose.",
+    brief: "Everyday carbohydrate foods on one side, glucose molecules on the other.",
+    ratio: "4/3", src: "/img/learn/food-to-glucose.webp", size: { width: 1168, height: 872 },
+  },
   bloodstream: {
     id: "bloodstream",
-    alt: "Glucose carried in the bloodstream",
+    alt: "A cut-away blood vessel with red blood cells and glucose molecules flowing through it",
+    caption: "Glucose travels in the blood alongside red blood cells, to the cells that need it.",
     brief: "Glucose molecules travelling through a blood vessel after a meal, among red blood cells. Calm, clinical, labelled.",
-    ratio: "4/3", src: null,
+    ratio: "4/3", src: "/img/learn/bloodstream.webp", size: { width: 1168, height: 880 },
   },
   insulin: {
     id: "insulin",
-    alt: "Insulin helping glucose enter a cell",
+    alt: "Two panels: insulin approaching a receptor on a cell surface, then the receptor open and glucose moving into the cell",
+    caption: "Before: glucose waits outside the cell. After: insulin binds to its receptor and glucose moves in.",
     brief: "Insulin binding to a cell and glucose moving from the blood into the cell, shown as a simple before-and-after.",
-    ratio: "4/3", src: null,
+    ratio: "4/3", src: "/img/learn/insulin.webp", size: { width: 1168, height: 880 },
   },
   "red-cells": {
     id: "red-cells",
-    alt: "Glucose attached to haemoglobin in red blood cells",
+    alt: "Red blood cells along a timeline, collecting more glucose on their haemoglobin, with one cell magnified",
+    caption: "Over a red cell's life, about 120 days, more glucose attaches to its haemoglobin. A1c measures that share.",
     brief: "Red blood cells with glucose attached to the haemoglobin inside them, with a note that a red cell lives about 120 days.",
-    ratio: "4/3", src: null,
+    ratio: "4/3", src: "/img/learn/red-cells.webp", size: { width: 1168, height: 880 },
   },
   workflow: {
     id: "workflow",

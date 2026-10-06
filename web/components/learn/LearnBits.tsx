@@ -6,6 +6,8 @@ import { LEARN_MODULES, ILLUSTRATIONS, LearnVideo, moduleBySlug } from "@/lib/le
 import { cn } from "cn";
 import { Page } from "@/components/shell/Page";
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 /**
  * Building blocks for the Learn pages. The same cards, borders and type as the
  * rest of the app; a little more room and imagery, no marketing.
@@ -55,15 +57,17 @@ function PagerLink({ href, dir, title }: { href: string; dir: string; title: str
   );
 }
 
-/** A titled section of a module, optionally beside an illustration. */
+/** A titled section of a module, optionally beside an illustration, and
+ *  optionally numbered as one step of a sequence. */
 export function LearnSection({
-  id, title, children, figure, flip = false,
+  id, title, children, figure, flip = false, step,
 }: {
   id?: string;
   title: string;
   children: ReactNode;
   figure?: string;
   flip?: boolean;
+  step?: number;
 }) {
   return (
     <section id={id} className="scroll-mt-20">
@@ -71,12 +75,23 @@ export function LearnSection({
       <div
         className={cn(
           "grid items-start gap-6",
-          figure && !flip && "lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)]",
-          figure && flip && "lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)]",
+          figure && !flip && "lg:grid-cols-[minmax(0,1fr)_minmax(0,28rem)]",
+          figure && flip && "lg:grid-cols-[minmax(0,28rem)_minmax(0,1fr)]",
         )}
       >
         <div className={cn("flex min-w-0 flex-col gap-3", flip && figure && "lg:order-2")}>
-          <h2 className="text-lg font-semibold tracking-tight">{title}</h2>
+          {step ? (
+            <div className="flex items-center gap-3">
+              <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary tabular-nums" aria-hidden>
+                {step}
+              </span>
+              <h2 className="text-lg font-semibold tracking-tight">
+                <span className="sr-only">Step {step}: </span>{title}
+              </h2>
+            </div>
+          ) : (
+            <h2 className="text-lg font-semibold tracking-tight">{title}</h2>
+          )}
           <div className="flex max-w-prose flex-col gap-3 text-sm leading-relaxed text-foreground/90">{children}</div>
         </div>
         {figure && <IllustrationSlot id={figure} />}
@@ -99,7 +114,7 @@ export function GoDeeper({ title = "Go deeper", children }: { title?: string; ch
 }
 
 /**
- * An illustration's place on the page: the image once it exists, and until
+ * An illustration: the image once it exists, at its own shape, and until
  * then a container of the right shape that says what will go there. Not a
  * stock image, and not empty.
  */
@@ -107,20 +122,34 @@ export function IllustrationSlot({ id, className }: { id: string; className?: st
   const ill = ILLUSTRATIONS[id];
   if (!ill) return null;
   return (
-    <figure className={cn("flex flex-col gap-2", className)}>
-      <div className="relative w-full max-w-full overflow-hidden rounded-xl border bg-muted/40" style={{ aspectRatio: ill.ratio }}>
-        {ill.src ? (
-          // eslint-disable-next-line @next/next/no-img-element -- static export, no image optimisation
-          <img src={ill.src} alt={ill.alt} className="size-full object-cover" />
-        ) : (
-          <div className="flex size-full flex-col items-center justify-center gap-2 border-2 border-dashed border-border/80 p-4 text-center" role="img" aria-label={`Illustration to come: ${ill.alt}`}>
-            <ImageIcon className="size-5 text-muted-foreground" aria-hidden />
-            <span className="text-xs font-medium text-muted-foreground">Illustration to come</span>
-            <span className="max-w-xs text-xs leading-relaxed text-muted-foreground/80">{ill.brief}</span>
-          </div>
-        )}
-      </div>
-      <figcaption className="text-xs text-muted-foreground">{ill.alt}</figcaption>
+    <figure className={cn("flex min-w-0 flex-col gap-2", className)}>
+      {ill.src ? (
+        // The illustrations carry their own light frame; no second border.
+        <div className="overflow-hidden rounded-xl">
+          {/* eslint-disable-next-line @next/next/no-img-element -- static export, no image optimisation */}
+          <img
+            src={`${BASE}${ill.src}`}
+            alt={ill.alt}
+            width={ill.size?.width}
+            height={ill.size?.height}
+            loading="lazy"
+            decoding="async"
+            className="block h-auto w-full max-w-full"
+          />
+        </div>
+      ) : (
+        <div
+          className="flex w-full max-w-full flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-border/80 bg-muted/40 p-4 text-center"
+          style={{ aspectRatio: ill.ratio }}
+          role="img"
+          aria-label={`Illustration to come: ${ill.alt}`}
+        >
+          <ImageIcon className="size-5 text-muted-foreground" aria-hidden />
+          <span className="text-xs font-medium text-muted-foreground">Illustration to come</span>
+          <span className="max-w-xs text-xs leading-relaxed text-muted-foreground/80">{ill.brief}</span>
+        </div>
+      )}
+      <figcaption className="text-xs leading-relaxed text-muted-foreground">{ill.caption ?? ill.alt}</figcaption>
     </figure>
   );
 }
@@ -136,7 +165,6 @@ export function ScreenshotSlot({ label }: { label: string }) {
   );
 }
 
-const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 /**
  * A video card: the player above, title, duration and description below.

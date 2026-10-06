@@ -1,11 +1,22 @@
+import { ArrowRight } from "lucide-react";
+
 import { videoById } from "@/lib/learn";
 import { Term } from "@/components/Term";
 import { GoDeeper, LearnModulePage, LearnSection, VideoCard } from "@/components/learn/LearnBits";
 
 export const metadata = { title: "Understanding Diabetes" };
 
+/** The four steps from a meal to an A1c result; each is a section below. */
+const STEPS = [
+  { id: "food", title: "Food becomes glucose" },
+  { id: "blood", title: "Glucose travels in the blood" },
+  { id: "insulin", title: "Insulin moves it into cells" },
+  { id: "a1c", title: "Some sticks to red blood cells" },
+];
+
 /**
- * Plain-language background on diabetes and A1c. Educational only: general
+ * Plain-language background on diabetes and A1c, told as one sequence: from a
+ * meal to the glucose that an A1c test measures. Educational only: general
  * facts, no advice for any person, and no single A1c goal presented as right
  * for everyone.
  */
@@ -31,21 +42,51 @@ export default function DiabetesModule() {
         </GoDeeper>
       </LearnSection>
 
-      <LearnSection title="What is glucose?" figure="bloodstream">
-        <p>
-          Glucose is the body&apos;s main fuel. Much of it comes from food: carbohydrates are broken down into
-          glucose, which passes into the blood and is carried to the cells that need it.
+      <section aria-labelledby="sequence" className="flex flex-col gap-3 rounded-xl border bg-muted/30 p-4 sm:p-5">
+        <h2 id="sequence" className="text-sm font-semibold">From a meal to an A1c result</h2>
+        <ol className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+          {STEPS.map((s, i) => (
+            <li key={s.id} className="flex items-center gap-2">
+              <a
+                href={`#${s.id}`}
+                className="flex min-w-0 flex-1 items-center gap-2.5 rounded-lg border bg-card px-3 py-2.5 text-sm font-medium transition-colors hover:bg-muted/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              >
+                <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary tabular-nums">
+                  {i + 1}
+                </span>
+                {s.title}
+              </a>
+              {i < STEPS.length - 1 && <ArrowRight className="hidden size-4 shrink-0 text-muted-foreground lg:block" aria-hidden />}
+            </li>
+          ))}
+        </ol>
+        <p className="text-xs leading-relaxed text-muted-foreground">
+          Diabetes changes step 3, so more glucose stays in the blood. An A1c test measures step 4.
         </p>
+      </section>
+
+      <LearnSection id="food" step={1} title="Food becomes glucose" figure="food">
         <p>
-          The amount of glucose in the blood rises after a meal and falls between meals. In people without
-          diabetes, the body keeps it within a fairly narrow range.
+          Glucose is the body&apos;s main fuel. Much of it comes from food: carbohydrates, such as bread, rice
+          and fruit, are broken down during digestion into glucose, which passes into the blood.
         </p>
       </LearnSection>
 
-      <LearnSection title="What does insulin do?" figure="insulin" flip>
+      <LearnSection id="blood" step={2} title="Glucose travels in the blood" figure="bloodstream" flip>
         <p>
-          Insulin is a hormone made by the pancreas. It works like a key: it helps glucose move out of the
-          blood and into the body&apos;s cells, where it is used for energy or stored.
+          The blood carries glucose to the cells that need it. The amount in the blood rises after a meal and
+          falls between meals.
+        </p>
+        <p>
+          In people without diabetes, the body keeps it within a fairly narrow range. In diabetes, it stays
+          high for longer.
+        </p>
+      </LearnSection>
+
+      <LearnSection id="insulin" step={3} title="Insulin moves it into cells" figure="insulin">
+        <p>
+          Insulin is a hormone made by the pancreas. It works like a key: it binds to cells and lets glucose
+          move out of the blood and into them, where it is used for energy or stored.
         </p>
         <p className="font-medium">Why can glucose stay in the bloodstream?</p>
         <p>
@@ -54,17 +95,15 @@ export default function DiabetesModule() {
         </p>
       </LearnSection>
 
-      <LearnSection title="What is A1c?" figure="red-cells">
+      <LearnSection id="a1c" step={4} title="Some sticks to red blood cells: the A1c test" figure="red-cells" flip>
         <p>
-          <Term k="a1c">A1c</Term> (also called HbA1c, or glycated haemoglobin) is a blood test. It measures how
-          much glucose has become attached to haemoglobin, the protein in red blood cells that carries oxygen.
-          The result is a percentage.
+          While glucose is in the blood, some of it sticks to haemoglobin, the protein in red blood cells that
+          carries oxygen, and stays stuck for the life of the cell. The more glucose there has been in the
+          blood, the more haemoglobin carries it.
         </p>
-        <p className="font-medium">How does it relate to red blood cells?</p>
         <p>
-          While glucose is in the blood, some of it sticks to the haemoglobin inside red blood cells, and stays
-          stuck for the life of the cell. The more glucose there has been in the blood, the more haemoglobin
-          carries it.
+          <Term k="a1c">A1c</Term> (also called HbA1c, or glycated haemoglobin) is the blood test that measures
+          this: the share of haemoglobin with glucose attached, given as a percentage.
         </p>
         <GoDeeper title="Why about three months?">
           <p>
@@ -98,7 +137,7 @@ export default function DiabetesModule() {
       {videoById("a1c") && (
         <section className="flex flex-col gap-3">
           <h2 className="text-lg font-semibold tracking-tight">Watch: a visual recap</h2>
-          <p className="max-w-prose text-sm text-muted-foreground">Everything above, from glucose to the A1C test, in under a minute.</p>
+          <p className="max-w-prose text-sm text-muted-foreground">All four steps, from a meal to the A1C test, in under a minute.</p>
           <div className="max-w-2xl"><VideoCard video={videoById("a1c")!} /></div>
         </section>
       )}
