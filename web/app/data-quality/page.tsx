@@ -152,6 +152,7 @@ export default function DataQualityPage() {
           name="data-pipeline-lineage"
           alt="Data pipeline and lineage: synthetic source records, raw Bronze, clean Silver, the diabetes cohort, the patient-level A1c measure, and Care Gap Explorer."
           caption="The overview. Open any stage below for the detail behind it."
+          className="mx-auto w-full"
         />
         <PipelineLineage stages={STAGES} />
       </Section>

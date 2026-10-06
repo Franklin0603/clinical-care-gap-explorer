@@ -45,7 +45,9 @@ export function AssetFigure({
   if (!asset) return <>{fallback}</>;
   const size = asset.ext === "png" ? pngSize(asset.path) : null;
   return (
-    <figure className={className}>
+    // Never wider than the file itself: a small image scaled past its own
+    // pixels turns soft, so it sits centred at full sharpness instead.
+    <figure className={className} style={size ? { maxWidth: size.width } : undefined}>
       <div className="overflow-hidden rounded-xl border bg-card">
         {/* eslint-disable-next-line @next/next/no-img-element -- static export, no image optimisation */}
         <img
