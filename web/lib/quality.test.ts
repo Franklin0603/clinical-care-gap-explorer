@@ -42,7 +42,7 @@ test("checks: real results, honest statuses, a summary that adds up", () => {
   assert.equal(s.evaluated, s.total - s.notEvaluated);
   assert.equal(new Set(checks.map((c) => c.id)).size, checks.length, "unique ids");
   const byId = Object.fromEntries(checks.map((c) => [c.id, c]));
-  for (const id of ["G1", "G2", "M1", "M2", "M3", "M4", "M6", "M7", "P1", "P2", "C1", "C2", "D1", "D2", "A1"]) {
+  for (const id of ["G1", "G2", "G4", "M1", "M2", "M3", "M4", "M6", "M7", "P1", "C1", "C2", "D1", "D2", "D3", "D5", "R1", "A1"]) {
     assert.equal(byId[id].status, "passed", `${id}: ${byId[id].result}`);
   }
   assert.equal(byId.A2.status, "warning", "13 latest values below 3.0%");
@@ -52,4 +52,10 @@ test("checks: real results, honest statuses, a summary that adds up", () => {
   assert.equal(byId.C3.status, "warning");
   assert.equal(AUDIT.everCoded - AUDIT.deceasedByAsof, gold.cohort);
   assert.equal(AUDIT.rawA1cTotal - gold.a1c_clean_below_3, AUDIT.rawA1cPassingOldFloor, "951 + 7,990 = 8,941");
+});
+
+test("no check tells the injected-defect story", () => {
+  for (const c of qualityChecks(rows, gold, dq)) {
+    assert.ok(!/inject|plant|deliberate|corrupt/i.test(`${c.name} ${c.scope} ${c.result} ${c.why} ${c.evidence ?? ""}`), c.id);
+  }
 });

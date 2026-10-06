@@ -15,6 +15,7 @@ import { A1cTimeline } from "@/components/learn/A1cTimeline";
 import {
   CheckList, Code, Decision, Equation, JoinComparison, PipelineLineage, Stage, SummaryCard,
 } from "@/components/quality/QualityParts";
+import { AssetFigure } from "@/components/quality/AssetFigure";
 
 export const metadata = { title: "Data & Quality" };
 
@@ -59,7 +60,6 @@ const STAGES: Stage[] = [
       <>
         <p>Synthetic data, generated for this portfolio demonstration from a pinned seed so every number reproduces.</p>
         <p>{fmt(bronze.observations.bronze)} observations, {fmt(bronze.encounters.bronze)} encounters, {fmt(bronze.conditions.bronze)} conditions, {fmt(bronze.medications.bronze)} medication rows and {fmt(bronze.procedures.bronze)} procedures.</p>
-        <p>{fmt(dq.catch.reduce((n, c) => n + c.injected, 0))} defects are injected on purpose before loading, so each quality check can be shown to catch what it is for.</p>
       </>
     ),
   },
@@ -147,6 +147,12 @@ export default function DataQualityPage() {
         blurb="Where the data comes from, and each step it takes before it reaches a page. Open a stage for detail."
         actions={<Link href="/pipeline" className={linkCls}>Open the full pipeline <ArrowRight className="size-3.5" aria-hidden /></Link>}
       >
+        {/* The supplied overview image, then the interactive stages for detail. */}
+        <AssetFigure
+          name="data-pipeline-lineage"
+          alt="Data pipeline and lineage: synthetic source records, raw Bronze, clean Silver, the diabetes cohort, the patient-level A1c measure, and Care Gap Explorer."
+          caption="The overview. Open any stage below for the detail behind it."
+        />
         <PipelineLineage stages={STAGES} />
       </Section>
 
@@ -255,7 +261,14 @@ export default function DataQualityPage() {
             risk={`Losing all ${gold.cohort - gold.inner_join_would_keep} never-tested patients, and with them ${gold.cohort - gold.inner_join_would_keep} of the ${gold.open_gaps} open gaps, silently.`}
             doc={{ href: `${REPO}/src/caregap/sql/gold/care_gap_a1c.sql`, label: "The Gold SQL" }}
           >
-            <JoinComparison cohort={gold.cohort} withResult={gold.inner_join_would_keep} />
+            {/* The supplied comparison image; the drawn comparison stands in only
+                until the image file exists, so the two never appear together. */}
+            <AssetFigure
+              name="left-vs-inner-join"
+              alt={`LEFT JOIN against INNER JOIN. LEFT JOIN: ${gold.cohort} patients retained, ${gold.cohort - gold.inner_join_would_keep} never-tested patients preserved. INNER JOIN: ${gold.inner_join_would_keep} patients retained, ${gold.cohort - gold.inner_join_would_keep} never-tested patients lost.`}
+              className="mx-auto w-full max-w-3xl"
+              fallback={<JoinComparison cohort={gold.cohort} withResult={gold.inner_join_would_keep} />}
+            />
           </Decision>
 
           <Decision

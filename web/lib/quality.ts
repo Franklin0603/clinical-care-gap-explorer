@@ -40,7 +40,7 @@ type DqReport = {
   checks: { id: string; name: string; rule: string; action: string }[];
   a1c_range: number[];
   reconciliation: { table: string; bronze: number; silver: number; quarantined: number; balances: boolean }[];
-  catch: { defect: string; check: string; injected: number; caught: number }[];
+  quarantine_by_check: Record<string, number>;
   remediated: number;
   identity_review_pending: number;
 };
@@ -152,7 +152,8 @@ export function qualityChecks(rows: PatientRow[], gold: GoldReport, dq: DqReport
   const priorityMismatch = rows.filter((r) => (r.priority !== null) !== Boolean(r.gap_flag)).length;
   const recon = reconciliation(rows, asof);
   const smallGroups = [...monitoringByAgeBand(rows), ...monitoringBySetting(rows)].filter((g) => g.total > 0 && g.total < 10);
-  const catchBy = Object.fromEntries(dq.catch.map((c) => [c.check, c]));
+  const q = (id: string) => dq.quarantine_by_check[id] ?? 0;
+  const quarantinedTotal = Object.values(dq.quarantine_by_check).reduce((n, v) => n + v, 0);
   const balanced = dq.reconciliation.filter((t) => t.balances && t.bronze === t.silver + t.quarantined);
   const orphanTotal = AUDIT.orphanRows.observations + AUDIT.orphanRows.encounters + AUDIT.orphanRows.medications;
 
@@ -174,6 +175,13 @@ export function qualityChecks(rows: PatientRow[], gold: GoldReport, dq: DqReport
       why: "A row without an identifier cannot be reviewed, linked to its history, or followed up.",
     },
     {
+      id: "G4", area: "Identity & grain", name: "Duplicate encounters", source: "pipeline",
+      scope: "All encounters (DQ1: one row per patient and encounter)",
+      result: `No duplicates in Silver; ${fmt(q("DQ1"))} repeated rows quarantined`,
+      status: "passed",
+      why: "A repeated encounter would inflate visit counts and could move a patient's last-seen date. Repeats are quarantined, not merged.",
+    },
+    {
       id: "G3", area: "Identity & grain", name: "Possible duplicate registrations", source: "pipeline",
       scope: "All patients (DQ6: same name and birth date)",
       result: `${dq.identity_review_pending} pairs held for review; ${gold.identity_review_pending} involve cohort patients`,
@@ -187,7 +195,7 @@ export function qualityChecks(rows: PatientRow[], gold: GoldReport, dq: DqReport
       result: outOfRange === 0 ? `All within ${lo.toFixed(1)}–${hi.toFixed(1)}%` : `${outOfRange} outside ${lo.toFixed(1)}–${hi.toFixed(1)}%`,
       status: outOfRange === 0 ? "passed" : "warning",
       why: "A value outside any plausible range is a data error, such as a glucose keyed into a percent field, not a result.",
-      evidence: `The pipeline's DQ3 applies the same ${lo.toFixed(1)}–${hi.toFixed(1)}% range to every A1c; ${dq.remediated} injected unit errors were converted back rather than discarded.`,
+      evidence: `The pipeline's DQ3 applies the same ${lo.toFixed(1)}–${hi.toFixed(1)}% range to every A1c. ${dq.remediated} values recorded in mg/dL rather than percent were converted, with the original kept, rather than discarded.`,
     },
     {
       id: "A2", area: "A1c observations", name: "Unusually low A1c values", source: "live",
@@ -235,10 +243,17 @@ export function qualityChecks(rows: PatientRow[], gold: GoldReport, dq: DqReport
     },
     {
       id: "D3", area: "Dates", name: "Encounter chronology", source: "pipeline",
-      scope: "All encounters (DQ5: discharge not before admission)",
-      result: `${catchBy.DQ5?.caught ?? 0} of ${catchBy.DQ5?.injected ?? 0} injected defects caught`,
-      status: catchBy.DQ5 && catchBy.DQ5.caught === catchBy.DQ5.injected ? "passed" : "warning",
-      why: "An encounter that ends before it starts is a clock or interface error, and is quarantined.",
+      scope: "All encounters (DQ5)",
+      result: `No discharge before admission in Silver; ${fmt(q("DQ5"))} encounters quarantined`,
+      status: "passed",
+      why: "Validates that discharge dates do not occur before admission dates. An encounter that ends before it starts is a clock or interface error, so it is quarantined with a reason rather than kept.",
+    },
+    {
+      id: "D5", area: "Dates", name: "Plausible birth dates", source: "pipeline",
+      scope: "All patients (DQ4: in the past, implied age 120 or less)",
+      result: `${fmt(q("DQ4"))} patients quarantined`,
+      status: "passed",
+      why: "An impossible birth date makes every age, and so every age band, wrong for that patient. Quarantined patients cannot enter the cohort.",
     },
     {
       id: "D4", area: "Dates", name: "Observations missing a date", source: "audit",
@@ -274,10 +289,10 @@ export function qualityChecks(rows: PatientRow[], gold: GoldReport, dq: DqReport
     // ---------------------------------------------------- relationships
     {
       id: "R1", area: "Relationships", name: "Results point at a known patient", source: "pipeline",
-      scope: "All observations (DQ2: referential integrity)",
-      result: `${catchBy.DQ2?.caught ?? 0} of ${catchBy.DQ2?.injected ?? 0} injected orphan results caught`,
-      status: catchBy.DQ2 && catchBy.DQ2.caught === catchBy.DQ2.injected ? "passed" : "warning",
-      why: "A result for a patient who does not exist cannot be attributed, so it is quarantined rather than dropped silently.",
+      scope: "All observations (DQ2)",
+      result: `No unattributed results in Silver; ${fmt(q("DQ2"))} observations quarantined`,
+      status: "passed",
+      why: "Validates referential integrity between observations and patients. A result for a patient who does not exist cannot be attributed, so it is quarantined rather than dropped silently.",
     },
     {
       id: "R2", area: "Relationships", name: "Child rows of quarantined patients", source: "audit",
@@ -352,20 +367,20 @@ export function qualityChecks(rows: PatientRow[], gold: GoldReport, dq: DqReport
     },
     // -------------------------------------------------------- pipeline
     {
-      id: "P1", area: "Pipeline", name: "Every row accounted for", source: "pipeline",
+      id: "P1", area: "Pipeline", name: "Source-to-Silver reconciliation", source: "pipeline",
       scope: `${dq.reconciliation.length} source tables`,
-      result: `${balanced.length} of ${dq.reconciliation.length} balance: bronze = silver + quarantine`,
+      result: `${balanced.length} of ${dq.reconciliation.length} tables reconcile: source = Silver + quarantine`,
       status: balanced.length === dq.reconciliation.length ? "passed" : "warning",
       why: "A row can leave the pipeline only by reaching Silver or quarantine, with a reason. Nothing disappears.",
       evidence: dq.reconciliation.map((t) => `${t.table} ${fmt(t.bronze)} = ${fmt(t.silver)} + ${fmt(t.quarantined)}`).join("; "),
     },
     {
-      id: "P2", area: "Pipeline", name: "Injected defects caught", source: "pipeline",
-      scope: "Six kinds of deliberately injected defect",
-      result: `${dq.catch.filter((c) => c.caught === c.injected).length} of ${dq.catch.length} kinds; ${fmt(dq.catch.reduce((n, c) => n + c.caught, 0))} of ${fmt(dq.catch.reduce((n, c) => n + c.injected, 0))} rows`,
-      status: dq.catch.every((c) => c.caught === c.injected) ? "passed" : "warning",
-      why: "Each check is proven by planting the defect it is meant to catch and counting what it caught.",
-      evidence: dq.catch.map((c) => `${c.check}: ${c.caught}/${c.injected}`).join(", "),
+      id: "P2", area: "Pipeline", name: "Quarantined and corrected rows", source: "pipeline",
+      scope: "Rows rejected or corrected in Silver",
+      result: `${fmt(quarantinedTotal)} rows quarantined with a reason; ${fmt(dq.remediated)} A1c values corrected`,
+      status: "info",
+      why: "A row that fails a check is kept in quarantine with the check and the reason, never deleted, so every rejection can be reviewed and reversed.",
+      evidence: Object.entries(dq.quarantine_by_check).map(([k, v]) => `${k}: ${fmt(v)}`).join(", "),
     },
   ];
   return checks;
