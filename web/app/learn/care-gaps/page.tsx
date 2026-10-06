@@ -83,6 +83,14 @@ export default function CareGapsModule() {
 
       <A1cTimeline />
 
+      {videoById("care-gap") && (
+        <section className="flex flex-col gap-3">
+          <h2 className="text-lg font-semibold tracking-tight">Watch: the 365-day window in motion</h2>
+          <p className="max-w-prose text-sm text-muted-foreground">A one-minute visual explanation of the definitions above.</p>
+          <div className="max-w-2xl"><VideoCard video={videoById("care-gap")!} /></div>
+        </section>
+      )}
+
       <section className="flex flex-col gap-3">
         <h2 className="text-lg font-semibold tracking-tight">Clinical data, derived status, workflow</h2>
         <p className="max-w-prose text-sm leading-relaxed text-foreground/90">
@@ -101,16 +109,13 @@ export default function CareGapsModule() {
         </ul>
       </LearnSection>
 
-      {videoById("care-gap") && (
-        <section className="grid gap-4 md:grid-cols-[minmax(0,28rem)_minmax(0,1fr)] md:items-start">
-          <VideoCard video={videoById("care-gap")!} />
-          <div className="flex flex-col gap-3">
-            <h2 className="text-lg font-semibold tracking-tight">See it in the application</h2>
-            <AppLink href="/care-gaps" label="Care Gaps" about="Every open gap, with the evidence for each." />
-            <AppLink href="/analytics" label="Analytics" about="How the three statuses split the cohort." />
-          </div>
-        </section>
-      )}
+      <section className="flex flex-col gap-3">
+        <h2 className="text-lg font-semibold tracking-tight">See it in the application</h2>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <AppLink href="/care-gaps" label="Care Gaps" about="Every open gap, with the evidence for each." />
+          <AppLink href="/analytics" label="Analytics" about="How the three statuses split the cohort." />
+        </div>
+      </section>
     </LearnModulePage>
   );
 }

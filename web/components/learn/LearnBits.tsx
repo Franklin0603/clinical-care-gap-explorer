@@ -136,25 +136,43 @@ export function ScreenshotSlot({ label }: { label: string }) {
   );
 }
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 /**
- * A video card. With a real file it plays inline with native controls. Until
- * then the play action is disabled and says the video is coming - no fake
- * URL, no fake duration.
+ * A video card: the player above, title, duration and description below.
+ *
+ * A native HTML5 player, so play, pause, volume, seeking, fullscreen and
+ * keyboard control come from the browser and work everywhere. It never
+ * autoplays, and preload="none" with a poster means nothing is downloaded
+ * until someone presses play - three videos on one page cost three small
+ * images. The frame is 16:9 and the video is letterboxed, never cropped or
+ * stretched. Captions are attached when the video has them.
+ *
+ * Without a file, the card keeps its honest "coming soon" state.
  */
 export function VideoCard({ video, compact = false }: { video: LearnVideo; compact?: boolean }) {
   const ready = Boolean(video.src);
   return (
-    <article className="flex flex-col overflow-hidden rounded-xl border bg-card">
+    <article className="flex w-full flex-col overflow-hidden rounded-xl border bg-card">
       <div className="relative aspect-video w-full bg-muted">
         {ready ? (
-          <video controls preload="none" poster={video.poster ?? undefined} className="size-full" aria-label={video.title}>
-            <source src={video.src!} />
+          <video
+            controls
+            preload="none"
+            playsInline
+            poster={video.poster ? `${BASE}${video.poster}` : undefined}
+            className="size-full bg-black object-contain"
+            aria-label={`Video: ${video.title}`}
+          >
+            <source src={`${BASE}${video.src}`} type="video/mp4" />
+            {video.captions && <track kind="captions" src={`${BASE}${video.captions}`} srcLang="en" label="English" />}
+            Your browser cannot play this video.
           </video>
         ) : (
           <>
             {video.poster ? (
               // eslint-disable-next-line @next/next/no-img-element -- static export
-              <img src={video.poster} alt="" className="size-full object-cover" />
+              <img src={`${BASE}${video.poster}`} alt="" className="size-full object-cover" />
             ) : (
               <div className="flex size-full items-center justify-center" aria-hidden>
                 <MonitorPlay className="size-8 text-primary/40" />
@@ -173,10 +191,11 @@ export function VideoCard({ video, compact = false }: { video: LearnVideo; compa
           <h3 className="text-sm font-semibold">{video.title}</h3>
           <span className="inline-flex shrink-0 items-center gap-1 text-xs text-muted-foreground">
             <Clock className="size-3" aria-hidden />
-            {video.duration ?? "Coming soon"}
+            {video.duration ? <><span className="sr-only">Length </span><span className="num">{video.duration}</span></> : "Coming soon"}
           </span>
         </div>
         <p className="text-xs leading-relaxed text-muted-foreground">{video.description}</p>
+        {ready && video.captions && <p className="mt-auto text-[11px] text-muted-foreground">Captions available in the player.</p>}
         {!ready && (
           <button
             type="button"

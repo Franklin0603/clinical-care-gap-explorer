@@ -2,10 +2,11 @@
  * The Learn area, as data: four modules, three videos and the illustration
  * slots that will hold them.
  *
- * Media is not invented. Every video has no source, no duration and no poster
- * until a real file exists, and the pages show an honest "coming soon" state
- * instead of a fake player. Every illustration slot carries a description of
- * what it will show - written as the brief for the image - and renders that
+ * Media is not invented. A video without a real file has no source, duration
+ * or poster, and its card shows an honest "coming soon" state instead of a
+ * fake player; all three videos now have their files. Every illustration
+ * slot carries a description of what it will show - written as the brief for
+ * the image - and renders that
  * description until a file is supplied. Adding a file is a one-line change
  * here; no page needs to change.
  */
@@ -55,32 +56,45 @@ export type LearnVideo = {
   id: string;
   title: string;
   description: string;
-  /** Set when the file exists. Never a placeholder URL. */
+  /** Path under public/, without the base path. Never a placeholder URL. */
   src: string | null;
-  /** "4:30", once known. */
+  /** Length as shown, read from the file ("0:53"). */
   duration: string | null;
-  /** Thumbnail image, once one exists. */
+  /** Poster image under public/. */
   poster: string | null;
+  /** WebVTT captions under public/, if any. */
+  captions: string | null;
 };
 
+/** The three videos, produced to match the modules. 1920x1080 H.264/AAC,
+ *  with English captions. */
 export const VIDEOS: LearnVideo[] = [
   {
     id: "a1c",
-    title: "Understanding A1c",
-    description: "What the A1c test measures, why it reflects about three months of glucose, and what it cannot tell you.",
-    src: null, duration: null, poster: null,
+    title: "Understanding A1C",
+    description: "See how glucose, insulin, red blood cells, and hemoglobin connect to the A1C blood test.",
+    src: "/videos/understanding-a1c.mp4",
+    duration: "0:53",
+    poster: "/img/video-posters/understanding-a1c.webp",
+    captions: "/videos/understanding-a1c.vtt",
   },
   {
     id: "care-gap",
-    title: "Understanding an A1c Care Gap",
-    description: "How the application decides that a patient is current, overdue or never tested, using a 365-day lookback.",
-    src: null, duration: null, poster: null,
+    title: "Understanding an A1C Care Gap",
+    description: "See how Care Gap Explorer uses a 365-day monitoring window to classify patients as current, overdue, or never tested.",
+    src: "/videos/understanding-a1c-care-gap.mp4",
+    duration: "1:01",
+    poster: "/img/video-posters/understanding-a1c-care-gap.webp",
+    captions: "/videos/understanding-a1c-care-gap.vtt",
   },
   {
     id: "walkthrough",
     title: "Using Care Gap Explorer",
-    description: "A tour from the Home dashboard to a patient's record, a follow-up task, Analytics and Ask AI.",
-    src: null, duration: null, poster: null,
+    description: "Take a guided tour from population monitoring to patient review, workflow tracking, analytics, and Ask AI.",
+    src: "/videos/using-care-gap-explorer.mp4",
+    duration: "1:22",
+    poster: "/img/video-posters/using-care-gap-explorer.webp",
+    captions: "/videos/using-care-gap-explorer.vtt",
   },
 ];
 

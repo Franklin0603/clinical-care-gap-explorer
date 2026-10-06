@@ -53,7 +53,7 @@ export default function LearnPage() {
         })}
       </ul>
 
-      <Section title="Videos" blurb="Three short videos to go with the modules. They are being produced and will appear here.">
+      <Section title="Videos" blurb="Three short videos to go with the modules, each about a minute, with captions.">
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {VIDEOS.map((v) => <li key={v.id} className="flex"><VideoCard video={v} /></li>)}
         </ul>

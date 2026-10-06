@@ -97,8 +97,9 @@ export default function DiabetesModule() {
 
       {videoById("a1c") && (
         <section className="flex flex-col gap-3">
-          <h2 className="text-lg font-semibold tracking-tight">Watch</h2>
-          <div className="max-w-md"><VideoCard video={videoById("a1c")!} /></div>
+          <h2 className="text-lg font-semibold tracking-tight">Watch: a visual recap</h2>
+          <p className="max-w-prose text-sm text-muted-foreground">Everything above, from glucose to the A1C test, in under a minute.</p>
+          <div className="max-w-2xl"><VideoCard video={videoById("a1c")!} /></div>
         </section>
       )}
     </LearnModulePage>

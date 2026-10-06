@@ -47,6 +47,16 @@ const AREAS: { icon: LucideIcon; name: string; href: string; for: string; use: s
 export default function UsingTheAppModule() {
   return (
     <LearnModulePage slug="using-the-app">
+      {videoById("walkthrough") && (
+        <section className="flex flex-col gap-3">
+          <h2 className="text-lg font-semibold tracking-tight">Watch the walkthrough</h2>
+          <p className="max-w-prose text-sm text-muted-foreground">
+            A guided tour of the whole application. Prefer to read? The same route is written out step by step below.
+          </p>
+          <div className="max-w-3xl"><VideoCard video={videoById("walkthrough")!} /></div>
+        </section>
+      )}
+
       <section className="flex flex-col gap-3">
         <h2 className="text-lg font-semibold tracking-tight">The route through the application</h2>
         <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm" aria-label="Order of the walkthrough">
@@ -85,12 +95,6 @@ export default function UsingTheAppModule() {
         ))}
       </ol>
 
-      {videoById("walkthrough") && (
-        <section className="flex flex-col gap-3">
-          <h2 className="text-lg font-semibold tracking-tight">Watch the walkthrough</h2>
-          <div className="max-w-md"><VideoCard video={videoById("walkthrough")!} /></div>
-        </section>
-      )}
     </LearnModulePage>
   );
 }
