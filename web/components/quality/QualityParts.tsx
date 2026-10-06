@@ -191,11 +191,29 @@ export function CheckList({ checks }: { checks: Check[] }) {
 /* ------------------------------------------------------------ decisions */
 
 export function Decision({
-  n, title, decision, why, alternative, risk, children, open = false, doc,
+  n, title, decision, why, alternative, risk, children, open = false, doc, layout = "stacked",
 }: {
   n: number; title: string; decision: string; why: ReactNode; alternative: string; risk: string;
   children?: ReactNode; open?: boolean; doc?: { href: string; label: string };
+  /** "split": the visual on the left, the reasoning on the right, read as one
+   *  case study on wide screens and stacked (visual first) on narrow ones. */
+  layout?: "stacked" | "split";
 }) {
+  const split = layout === "split";
+  const reasoning = (
+    <>
+      <dl className={cn("grid gap-3 text-sm", split ? "gap-4" : "md:grid-cols-3")}>
+        <div className="flex flex-col gap-1"><dt className="text-xs font-medium text-muted-foreground">Why</dt><dd>{why}</dd></div>
+        <div className="flex flex-col gap-1"><dt className="text-xs font-medium text-muted-foreground">Alternative</dt><dd>{alternative}</dd></div>
+        <div className="flex flex-col gap-1"><dt className="text-xs font-medium text-muted-foreground">Risk avoided</dt><dd>{risk}</dd></div>
+      </dl>
+      {doc && (
+        <a href={doc.href} target="_blank" rel="noreferrer" className="inline-flex w-fit items-center gap-1 text-xs font-medium text-primary hover:underline">
+          {doc.label} <ArrowRight className="size-3" aria-hidden />
+        </a>
+      )}
+    </>
+  );
   return (
     <details open={open} className="group rounded-xl border bg-card">
       <summary className="flex cursor-pointer list-none items-start gap-3 rounded-xl p-4 focus-visible:outline-2 focus-visible:outline-ring sm:p-5 [&::-webkit-details-marker]:hidden">
@@ -206,19 +224,17 @@ export function Decision({
         </span>
         <ChevronDown className="mt-1 size-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
       </summary>
-      <div className="flex flex-col gap-4 border-t p-4 sm:p-5">
-        {children}
-        <dl className="grid gap-3 text-sm md:grid-cols-3">
-          <div className="flex flex-col gap-1"><dt className="text-xs font-medium text-muted-foreground">Why</dt><dd>{why}</dd></div>
-          <div className="flex flex-col gap-1"><dt className="text-xs font-medium text-muted-foreground">Alternative</dt><dd>{alternative}</dd></div>
-          <div className="flex flex-col gap-1"><dt className="text-xs font-medium text-muted-foreground">Risk avoided</dt><dd>{risk}</dd></div>
-        </dl>
-        {doc && (
-          <a href={doc.href} target="_blank" rel="noreferrer" className="inline-flex w-fit items-center gap-1 text-xs font-medium text-primary hover:underline">
-            {doc.label} <ArrowRight className="size-3" aria-hidden />
-          </a>
-        )}
-      </div>
+      {split ? (
+        <div className="grid gap-5 border-t p-4 sm:p-5 lg:grid-cols-[minmax(0,11fr)_minmax(0,9fr)] lg:items-center lg:gap-8">
+          <div className="min-w-0">{children}</div>
+          <div className="flex min-w-0 flex-col gap-4">{reasoning}</div>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-4 border-t p-4 sm:p-5">
+          {children}
+          {reasoning}
+        </div>
+      )}
     </details>
   );
 }

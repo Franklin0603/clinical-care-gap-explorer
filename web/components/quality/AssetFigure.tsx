@@ -33,22 +33,30 @@ function pngSize(path: string): { width: number; height: number } | null {
 }
 
 export function AssetFigure({
-  name, alt, caption, fallback = null, className,
+  name, alt, caption, fallback = null, className, frameClassName, captionClassName, fill = false,
 }: {
   name: string;
   alt: string;
   caption?: ReactNode;
   fallback?: ReactNode;
+  /** The <figure>: an outer container, when the image needs one. */
   className?: string;
+  /** The image's own frame: its width, border and radius. */
+  frameClassName?: string;
+  captionClassName?: string;
+  /** Fill the frame's width even past the file's own pixels. Off by default,
+   *  where the image stays at most its natural width so it never softens. */
+  fill?: boolean;
 }) {
   const asset = find(name);
   if (!asset) return <>{fallback}</>;
   const size = asset.ext === "png" ? pngSize(asset.path) : null;
   return (
-    // Never wider than the file itself: a small image scaled past its own
-    // pixels turns soft, so it sits centred at full sharpness instead.
-    <figure className={className} style={size ? { maxWidth: size.width } : undefined}>
-      <div className="overflow-hidden rounded-xl border bg-card">
+    <figure className={className}>
+      <div
+        className={frameClassName ?? "overflow-hidden rounded-xl border bg-card"}
+        style={!fill && size ? { maxWidth: size.width } : undefined}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element -- static export, no image optimisation */}
         <img
           src={`${BASE}/img/${asset.file}`}
@@ -60,7 +68,7 @@ export function AssetFigure({
           className="block h-auto w-full max-w-full"
         />
       </div>
-      {caption && <figcaption className="mt-2 text-xs text-muted-foreground">{caption}</figcaption>}
+      {caption && <figcaption className={captionClassName ?? "mt-2 text-xs text-muted-foreground"}>{caption}</figcaption>}
     </figure>
   );
 }

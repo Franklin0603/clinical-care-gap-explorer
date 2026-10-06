@@ -144,16 +144,24 @@ export default function DataQualityPage() {
       <Section
         id="lineage"
         title="Pipeline and lineage"
-        blurb="Where the data comes from, and each step it takes before it reaches a page. Open a stage for detail."
+        blurb="Where the data comes from, and each step it takes before it reaches a page."
         actions={<Link href="/pipeline" className={linkCls}>Open the full pipeline <ArrowRight className="size-3.5" aria-hidden /></Link>}
       >
-        {/* The supplied overview image, then the interactive stages for detail. */}
+        {/* The overview first, framed as one figure; then the interactive
+            stages, introduced as the detail behind it. */}
         <AssetFigure
           name="data-pipeline-lineage"
           alt="Data pipeline and lineage: synthetic source records, raw Bronze, clean Silver, the diabetes cohort, the patient-level A1c measure, and Care Gap Explorer."
-          caption="The overview. Open any stage below for the detail behind it."
-          className="mx-auto w-full"
+          caption="High-level overview of the data flow."
+          fill
+          className="flex flex-col items-center gap-2.5 rounded-xl border bg-muted/30 px-4 py-4 sm:px-6 sm:py-5"
+          frameClassName="w-full overflow-hidden rounded-lg border bg-card lg:w-[70%]"
+          captionClassName="text-center text-xs text-muted-foreground"
         />
+        <div className="flex flex-col gap-1 pt-2">
+          <h3 className="text-sm font-semibold">Pipeline stages</h3>
+          <p className="text-sm text-muted-foreground">Explore each stage to see its transformations, validation, and outputs.</p>
+        </div>
         <PipelineLineage stages={STAGES} />
       </Section>
 
@@ -255,6 +263,7 @@ export default function DataQualityPage() {
           <Decision
             n={1}
             open
+            layout="split"
             title="Preserve patients with no A1c result"
             decision="Join the cohort to its A1c results with a LEFT JOIN, never an INNER JOIN."
             why={<>Of {gold.cohort} cohort patients, {gold.inner_join_would_keep} have a recorded A1c and {gold.cohort - gold.inner_join_would_keep} have none. Those {gold.cohort - gold.inner_join_would_keep} are the never-tested patients. The missing value is part of the signal.</>}
@@ -267,7 +276,8 @@ export default function DataQualityPage() {
             <AssetFigure
               name="left-vs-inner-join"
               alt={`LEFT JOIN against INNER JOIN. LEFT JOIN: ${gold.cohort} patients retained, ${gold.cohort - gold.inner_join_would_keep} never-tested patients preserved. INNER JOIN: ${gold.inner_join_would_keep} patients retained, ${gold.cohort - gold.inner_join_would_keep} never-tested patients lost.`}
-              className="mx-auto w-full max-w-3xl"
+              fill
+              frameClassName="w-full overflow-hidden rounded-lg border bg-card"
               fallback={<JoinComparison cohort={gold.cohort} withResult={gold.inner_join_would_keep} />}
             />
           </Decision>
