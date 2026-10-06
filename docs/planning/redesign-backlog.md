@@ -182,3 +182,32 @@ module and the Introduction stay as the project story only.
 **Spelling.** The new Learn copy uses British spelling (haemoglobin, anaemia)
 to match the rest of the app; "A1c" follows the app's own casing rather than
 the brief's "A1C". Worth one consistent decision before the landing page.
+
+## From phase 11 (Data & Quality)
+
+**Child rows of quarantined patients stay in Silver.** When DQ4 quarantines a
+patient (impossible birth date), their 2,314 observations, 281 encounters and
+51 medications remain in Silver without a patient row. Nothing reaches the
+cohort, which joins through silver_patients, so no number moves - but the
+pipeline should quarantine children with their patient (or add a check that
+counts them), and bronze = silver + quarantine would then still balance.
+Shown on the page as warning R2.
+
+**Procedures have no referential check.** Shown as "Not evaluated" (R3).
+
+**Some checks are a dated warehouse audit.** The browser cannot open the
+DuckDB warehouse, so cohort-before-death-exclusion (161 / 45), the raw-CSV
+plausibility split (8,941 / 951 / 7,990), duplicate and tied A1c results,
+missing observation dates and the orphan counts are recorded in lib/quality.ts
+(AUDIT, 2026-10-06). Exporting them from the pipeline into dq_report.json
+would make them live like the rest. The Gold assertions V4.1-V4.12 could be
+exported the same way.
+
+**Overview's drift chart counts differently.** Data & Quality computes the
+"if the date moved" sequence with calendar months and whole days (25, 29, 37,
+50, 74, 116). Overview uses 30.44-day months with fractional days, which can
+differ by one patient at a step. Retiring Overview (see phase 6) removes the
+second version.
+
+**The Gold SQL comment calls never-tested patients "highest-risk".** The
+application no longer does; the comment could follow.

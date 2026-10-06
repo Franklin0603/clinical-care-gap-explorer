@@ -4,6 +4,7 @@ import { videoById } from "@/lib/learn";
 import { GapStatusBadge } from "@/components/GapStatusBadge";
 import { Term } from "@/components/Term";
 import { A1cTimeline } from "@/components/learn/A1cTimeline";
+import { DataLayers } from "@/components/DataLayers";
 import { AppLink, GoDeeper, LearnModulePage, LearnSection, VideoCard } from "@/components/learn/LearnBits";
 
 export const metadata = { title: "Understanding A1c Care Gaps" };
@@ -31,24 +32,6 @@ const STATUSES = [
     title: "Never tested",
     def: "No A1c result anywhere in the available data.",
     note: "An open gap. There is no days-overdue figure, because there is no earlier result to be late against.",
-  },
-];
-
-const LAYERS = [
-  {
-    title: "Recorded in the clinical source",
-    tone: "border-status-info/30",
-    items: ["A1c results, with their dates and values", "Encounters and their care settings", "Diagnoses", "Medications and their fill counts", "Procedures performed"],
-  },
-  {
-    title: "Derived by the application",
-    tone: "border-border",
-    items: ["Who is in the diabetes cohort", "Gap status: current, overdue or never tested", "Days overdue and the next due date", "The Care Gaps order (never tested first)"],
-  },
-  {
-    title: "Application workflow (demo)",
-    tone: "border-status-warning/30",
-    items: ["Follow-up tasks, their status and assignee", "Due dates and workflow notes", "Workflow activity", "Ask AI conversations"],
   },
 ];
 
@@ -106,16 +89,7 @@ export default function CareGapsModule() {
           The application keeps three kinds of information apart, and every page labels which one you are looking
           at. A gap status is derived from clinical data; a task is never part of it.
         </p>
-        <ul className="grid gap-3 md:grid-cols-3">
-          {LAYERS.map((l) => (
-            <li key={l.title} className={`flex flex-col gap-2 rounded-xl border-2 bg-card p-4 ${l.tone}`}>
-              <h3 className="text-sm font-semibold">{l.title}</h3>
-              <ul className="flex list-disc flex-col gap-1 pl-4 text-sm text-muted-foreground">
-                {l.items.map((i) => <li key={i}>{i}</li>)}
-              </ul>
-            </li>
-          ))}
-        </ul>
+        <DataLayers />
       </section>
 
       <LearnSection title="What a gap status does not tell you">
