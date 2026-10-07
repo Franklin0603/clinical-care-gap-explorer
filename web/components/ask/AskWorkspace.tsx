@@ -40,15 +40,15 @@ const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const DATA = { rows: patients, asof: gold.asof };
 
 const START = [
-  "Which patients have never had an A1c?",
-  "How many patients currently have an open A1c gap?",
+  "Which patients have never had an A1C?",
+  "How many patients currently have an open A1C gap?",
   "Which age group has the highest gap rate?",
   "Show patients with an open gap who were seen in the last 6 months",
 ];
 const FIRST_RUN = [
-  "Which patients have an open A1c gap?",
+  "Which patients have an open A1C gap?",
   "Which age group has the highest gap rate?",
-  "How has A1c testing changed over time?",
+  "How has A1C testing changed over time?",
 ];
 
 let sqlConn: Promise<Awaited<ReturnType<typeof connect>>> | null = null;
@@ -79,7 +79,7 @@ async function respond(q: string, ctx: Ctx): Promise<{ blocks: AssistantBlock[];
     try {
       res = answer(q, ctx, { ...DATA, history: await loadPatientDetail() });
     } catch {
-      return { blocks: [{ kind: "limitation", text: "We couldn't load the A1c testing history. Try again in a moment." }], ctx };
+      return { blocks: [{ kind: "limitation", text: "We couldn't load the A1C testing history. Try again in a moment." }], ctx };
     }
   }
   if ("needs" in res) return { blocks: [], ctx };
@@ -246,7 +246,7 @@ function Messages({ messages, busy, onAsk, empty }: {
             <p className="text-sm text-muted-foreground">
               {empty === "first"
                 ? "Ask questions about the diabetes cohort using natural language."
-                : "Explore A1c monitoring, care gaps, patients, testing patterns, and the available synthetic clinical data."}
+                : "Explore A1C monitoring, care gaps, patients, testing patterns, and the available synthetic clinical data."}
             </p>
           </div>
           <div className="flex w-full flex-col gap-2">

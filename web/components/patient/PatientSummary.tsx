@@ -56,10 +56,10 @@ export function PatientSummaryTiles({ patient: r, insulin }: { patient: PatientR
       <Tile label="Gap status">
         <GapStatusBadge status={status} />
         <span className="text-xs text-muted-foreground">
-          {status === "current" ? "No current A1c monitoring gap" : "Open A1c monitoring gap"}
+          {status === "current" ? "No current A1C monitoring gap" : "Open A1C monitoring gap"}
         </span>
       </Tile>
-      <Tile label="Latest A1c">
+      <Tile label="Latest A1C">
         {a1c === null ? (
           <span className="text-lg font-semibold"><None /></span>
         ) : (

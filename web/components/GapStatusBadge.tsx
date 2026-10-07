@@ -4,7 +4,7 @@ import type { GapStatus } from "@/lib/cohort";
 import { StatusBadge, StatusTone } from "@/components/shell/StatusBadge";
 
 /**
- * A patient's A1c monitoring state, in words.
+ * A patient's A1C monitoring state, in words.
  *
  * Overdue and never tested share a tone, because both are open gaps, but not a
  * label or an icon: a patient with no result at all is a different

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { gold } from "@/lib/data";
 import "./globals.css";
 
 const SITE = "https://franklin0603.github.io/clinical-care-gap-explorer";
 const DESCRIPTION =
-  "Finds diabetic patients overdue for an A1c test, and shows the data quality work required before that list can be trusted. Synthetic data only.";
+  "Finds diabetic patients overdue for an A1C test, and shows the data quality work required before that list can be trusted. Synthetic data only.";
 
 /**
  * Open Graph matters here because this link gets posted.
@@ -27,18 +28,18 @@ export const metadata: Metadata = {
     type: "website",
     url: SITE,
     siteName: "Care Gap Explorer",
-    title: "Which diabetic patients have not had an A1c in twelve months?",
+    title: "Which diabetic patients have not had an A1C in twelve months?",
     description: DESCRIPTION,
     images: [{
       url: `${SITE}/og.png`,
       width: 1200,
       height: 630,
-      alt: "Clinical Care Gap Explorer — 25 of 116 diabetic patients with an open A1c gap, 21 never tested, 6 of 6 defect types caught.",
+      alt: `Clinical Care Gap Explorer — ${gold.open_gaps} of ${gold.cohort} diabetic patients with an open A1C gap, ${gold.never_tested} never tested. Synthetic data.`,
     }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Which diabetic patients have not had an A1c in twelve months?",
+    title: "Which diabetic patients have not had an A1C in twelve months?",
     description: DESCRIPTION,
     images: [`${SITE}/og.png`],
   },

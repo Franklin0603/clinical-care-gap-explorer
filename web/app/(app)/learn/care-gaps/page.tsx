@@ -7,7 +7,7 @@ import { A1cTimeline } from "@/components/learn/A1cTimeline";
 import { DataLayers } from "@/components/DataLayers";
 import { AppLink, GoDeeper, LearnModulePage, LearnSection, VideoCard } from "@/components/learn/LearnBits";
 
-export const metadata = { title: "Understanding A1c Care Gaps" };
+export const metadata = { title: "Understanding A1C Care Gaps" };
 
 /**
  * The application's monitoring logic in plain words. Every definition here is
@@ -18,19 +18,19 @@ const STATUSES = [
   {
     status: "current" as const,
     title: "Current",
-    def: "An A1c result within the 365 days before the data date.",
+    def: "An A1C result within the 365 days before the data date.",
     note: "No current monitoring gap. The next result is due 365 days after the last one.",
   },
   {
     status: "overdue" as const,
     title: "Overdue",
-    def: "An earlier A1c result, but none in the 365 days before the data date.",
+    def: "An earlier A1C result, but none in the 365 days before the data date.",
     note: "An open gap. Days overdue counts the days past those 365.",
   },
   {
     status: "never" as const,
     title: "Never tested",
-    def: "No A1c result anywhere in the available data.",
+    def: "No A1C result anywhere in the available data.",
     note: "An open gap. There is no days-overdue figure, because there is no earlier result to be late against.",
   },
 ];
@@ -38,12 +38,12 @@ const STATUSES = [
 export default function CareGapsModule() {
   return (
     <LearnModulePage slug="care-gaps">
-      <LearnSection title="What is an A1c monitoring gap?">
+      <LearnSection title="What is an A1C monitoring gap?">
         <p>
           A <Term k="care gap">care gap</Term> is routine care a patient qualifies for but has not received. In
-          this application it is specific: a patient with diabetes who has no A1c result in the 365 days before
+          this application it is specific: a patient with diabetes who has no A1C result in the 365 days before
           the data date, {longDate(gold.asof)}. The rule follows the published <Term k="hedis">HEDIS</Term> idea
-          of at least one A1c a year.
+          of at least one A1C a year.
         </p>
         <p>
           A gap status identifies <strong className="font-medium">missing or outdated monitoring</strong> under
@@ -76,7 +76,7 @@ export default function CareGapsModule() {
         </ul>
         <p className="max-w-prose text-xs text-muted-foreground">
           Overdue and never tested are both open gaps. &ldquo;Never tested&rdquo; means no result in the
-          available data, which may not hold a patient&apos;s complete history. An A1c exactly 365 days old still
+          available data, which may not hold a patient&apos;s complete history. An A1C exactly 365 days old still
           counts as current; at 366 days the patient is overdue.
         </p>
       </section>

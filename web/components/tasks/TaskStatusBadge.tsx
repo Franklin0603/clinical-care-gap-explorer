@@ -8,7 +8,7 @@ import { cn } from "cn";
 /**
  * A task's workflow status, in words with an icon. Deliberately not the
  * clinical palette: the red family stays reserved for the care gap itself,
- * so a task badge can never be mistaken for a patient's A1c status.
+ * so a task badge can never be mistaken for a patient's A1C status.
  *
  *   needs review     neutral        outreach needed  amber
  *   contacted        blue           scheduled        blue

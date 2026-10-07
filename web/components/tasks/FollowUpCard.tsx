@@ -26,7 +26,7 @@ export function FollowUpCard({ patient: r }: { patient: PatientRow }) {
     return (
       <Panel as="h2" title="Follow-up" actions={<WorkflowTag />}>
         <p className="text-sm text-muted-foreground">
-          No follow-up task. Tasks track open A1c gaps, and this patient has none.
+          No follow-up task. Tasks track open A1C gaps, and this patient has none.
         </p>
       </Panel>
     );

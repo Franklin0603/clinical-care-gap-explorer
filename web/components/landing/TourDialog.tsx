@@ -1,11 +1,13 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useRef, useState, useSyncExternalStore, type ReactNode, type RefObject } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, BookOpen, FileText, HeartPulse, LayoutDashboard, Pause, Play, PlayCircle } from "lucide-react";
 
 import { cn } from "cn";
-import { gold } from "@/lib/data";
+// The summary report alone: importing lib/data here would ship every
+// patient row to the landing page for the sake of five numbers.
+import gold from "@/public/data/gold_report.json";
 import { longDate } from "@/lib/dates";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
@@ -327,7 +329,12 @@ function WorkflowSlide({ reduced, playing, pause }: SlideProps) {
 
 /* ------------------------------------------------------------------- dialog */
 
-type TourControl = { openTour: () => void; buttonRef: RefObject<HTMLButtonElement | null> };
+/** Closing the tour or the welcome returns focus to the hero button, found
+ *  by its id, so no ref has to travel through context. */
+const BUTTON_ID = "take-a-tour";
+const heroButton = () => document.getElementById(BUTTON_ID);
+
+type TourControl = { openTour: () => void };
 const TourContext = createContext<TourControl | null>(null);
 
 /**
@@ -342,7 +349,6 @@ const TourContext = createContext<TourControl | null>(null);
 export function TourProvider({ children }: { children: ReactNode }) {
   const [tourOpen, setTourOpen] = useState(false);
   const [welcomeOpen, setWelcomeOpen] = useState(false);
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
   const toTour = useRef(false);
 
   useEffect(() => {
@@ -359,17 +365,17 @@ export function TourProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <TourContext.Provider value={{ openTour, buttonRef }}>
+    <TourContext.Provider value={{ openTour }}>
       {children}
       <Dialog open={tourOpen} onOpenChange={setTourOpen}>
         {/* Mounted only while open, so every opening starts at slide one. */}
-        {tourOpen && <Tour returnFocus={buttonRef} />}
+        {tourOpen && <Tour />}
       </Dialog>
       <Dialog open={welcomeOpen} onOpenChange={setWelcomeOpen}>
         <DialogContent
           aria-modal="true"
           // Into the tour: the tour takes focus. Otherwise: the hero button.
-          finalFocus={() => (toTour.current ? false : buttonRef.current)}
+          finalFocus={() => (toTour.current ? false : heroButton())}
           overlayClassName="bg-black/40 supports-backdrop-filter:backdrop-blur-[2px]"
           className="max-w-[calc(100%-2rem)] gap-0 rounded-2xl border bg-popover p-0 shadow-xl ring-0 sm:max-w-md"
         >
@@ -401,7 +407,7 @@ export function TourButton({ className }: { className?: string }) {
   if (!tour) throw new Error("TourButton must be inside TourProvider");
   return (
     <Button
-      ref={tour.buttonRef}
+      id={BUTTON_ID}
       size="lg"
       variant="outline"
       className={cn("h-11 bg-card px-5 text-base", className)}
@@ -413,7 +419,7 @@ export function TourButton({ className }: { className?: string }) {
   );
 }
 
-function Tour({ returnFocus }: { returnFocus: RefObject<HTMLElement | null> }) {
+function Tour() {
   const reduced = useReducedMotion();
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(!reduced);
@@ -466,7 +472,7 @@ function Tour({ returnFocus }: { returnFocus: RefObject<HTMLElement | null> }) {
   return (
     <DialogContent
       aria-modal="true"
-      finalFocus={returnFocus}
+      finalFocus={heroButton}
       overlayClassName="bg-black/45 supports-backdrop-filter:backdrop-blur-[2px]"
       className="flex max-h-[85vh] w-full max-w-[calc(100%-1.5rem)] flex-col gap-0 overflow-hidden rounded-2xl border bg-popover p-0 shadow-2xl ring-0 sm:max-w-[min(64rem,calc(100%-3rem))]"
       onKeyDown={(e) => {

@@ -22,7 +22,7 @@ export function Logo({ href = "/" }: { href?: string }) {
       <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground">
         <HeartPulse className="size-4" aria-hidden />
       </span>
-      <span className="text-sm font-semibold tracking-tight">Care Gap Explorer</span>
+      <span className="whitespace-nowrap text-sm font-semibold tracking-tight">Care Gap Explorer</span>
     </Link>
   );
 }

@@ -10,7 +10,7 @@ import { GapStatusBadge } from "@/components/GapStatusBadge";
  * uses (gold_report.json: asof, gap_days), with today's real counts beside
  * each status. Nothing here defines the measure; it pictures it.
  *
- * An A1c on or after the window's first day keeps a patient current: exactly
+ * An A1C on or after the window's first day keeps a patient current: exactly
  * 365 days old is still current, 366 is overdue (pipeline decision D6).
  */
 const DAY = 86_400_000;
@@ -25,7 +25,7 @@ const ROWS = [
     n: s.current,
     href: "/patients?status=current",
     marker: 72, // percent along the track
-    text: `An A1c result on or after ${longDate(windowStart)}.`,
+    text: `An A1C result on or after ${longDate(windowStart)}.`,
   },
   {
     status: "overdue" as const,
@@ -39,7 +39,7 @@ const ROWS = [
     n: s.neverTested,
     href: "/care-gaps?status=never",
     marker: null,
-    text: "No A1c result anywhere in the available data.",
+    text: "No A1C result anywhere in the available data.",
   },
 ];
 

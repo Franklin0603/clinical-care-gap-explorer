@@ -16,9 +16,9 @@ import type { PatientRow } from "./data";
 /**
  * The three monitoring states, which are mutually exclusive.
  *
- *   current  an A1c within the last 365 days            (gap_flag false)
- *   overdue  a previous A1c, but not within 365 days     (gap_flag true)
- *   never    no A1c on file at all                       (gap_flag true)
+ *   current  an A1C within the last 365 days            (gap_flag false)
+ *   overdue  a previous A1C, but not within 365 days     (gap_flag true)
+ *   never    no A1C on file at all                       (gap_flag true)
  *
  * "Never tested" is a subset of "open gap", not a separate bucket beside it:
  * all 21 never-tested patients are among the 25 open gaps. A chart that showed
@@ -32,8 +32,8 @@ export function gapStatus(r: PatientRow): GapStatus {
   return r.gap_flag ? "overdue" : "current";
 }
 
-/** The last A1c value, or null when there is none. Never 0: Number(null) is 0,
- *  and a 0% A1c reads as a result when the finding is that there is no result. */
+/** The last A1C value, or null when there is none. Never 0: Number(null) is 0,
+ *  and a 0% A1C reads as a result when the finding is that there is no result. */
 export function lastA1cValue(r: PatientRow): number | null {
   if (r.last_a1c_value === null || r.last_a1c_value === undefined) return null;
   const v = Number(r.last_a1c_value);
@@ -76,7 +76,7 @@ export type CohortSummary = {
   total: number;
   openGaps: number;
   neverTested: number;
-  /** Open gap, with an earlier A1c on file. openGaps = this + neverTested. */
+  /** Open gap, with an earlier A1C on file. openGaps = this + neverTested. */
   gapPreviouslyTested: number;
   current: number;
   /** Current today, but next due within 90 days of the as-of date. */
@@ -268,7 +268,7 @@ export function cohortOptionCounts<K extends keyof PatientFilters>(
  *   mrn          MRN, A to Z (default)
  *   age          oldest first
  *   seen-recent  last seen most recently first
- *   a1c-high     latest A1c, highest first; no result last
+ *   a1c-high     latest A1C, highest first; no result last
  *   status       never tested, then overdue, then current
  *   overdue      days overdue, most first; patients with none last
  */
@@ -278,7 +278,7 @@ export const PATIENT_SORTS: Record<PatientSort, string> = {
   mrn: "MRN",
   age: "Age, oldest first",
   "seen-recent": "Last seen, most recent",
-  "a1c-high": "Latest A1c, highest first",
+  "a1c-high": "Latest A1C, highest first",
   status: "Gap status",
   overdue: "Days overdue, most first",
 };
@@ -403,7 +403,7 @@ export const monitoringBySetting = (rows: PatientRow[]) =>
     .sort((a, b) => b.total - a.total || a.key.localeCompare(b.key));
 
 /** Open gaps whose last encounter falls within `months` calendar months of the
- *  data date: patients who were recently seen, yet have no A1c in a year. */
+ *  data date: patients who were recently seen, yet have no A1C in a year. */
 export function gapsSeenWithin(rows: PatientRow[], asof: string, months: number) {
   const since = monthsBefore(asof, months);
   return rows.filter((r) => r.gap_flag && r.last_encounter_date && String(r.last_encounter_date) >= since).length;
@@ -418,7 +418,7 @@ export function monthsBefore(asof: string, months: number): string {
 }
 
 /**
- * Each patient's latest recorded A1c, counted into equal one-point ranges
+ * Each patient's latest recorded A1C, counted into equal one-point ranges
  * (2.0-2.9%, 3.0-3.9%, ...) from the lowest value to the highest. The ranges
  * are arithmetic, not clinical: nothing here labels a range controlled,
  * uncontrolled or risky. Patients with no result are counted separately and

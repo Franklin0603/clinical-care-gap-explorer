@@ -305,18 +305,18 @@ export default function OverviewView() {
 
       <Section
         title="Data quality"
-        blurb={<>249 rows damaged on purpose, so the <Term k="catch rate">catch rate</Term> is a measurement rather than a claim.</>}
+        blurb="Rows that fail a check are quarantined with a reason, never dropped, and values that can be corrected are."
       >
         <div className="grid gap-4 sm:grid-cols-3">
           <StatCard
-            value={dq.catch_rate_types}
-            label="defect types caught"
-            note="each by the check meant for it"
+            value={String(dq.checks.length)}
+            label="validation checks"
+            note="each with a stated rule and cause"
           />
           <StatCard
-            value={dq.catch_rate_rows}
-            label="injected rows caught"
-            note="scored against the ground-truth log"
+            value={String(dq.remediated)}
+            label="A1C values corrected"
+            note="the original kept beside the fix"
           />
           <StatCard
             value={String(

@@ -82,7 +82,7 @@ def build():
     d.text((x, 92), "CLINICAL CARE GAP EXPLORER", font=font(21), fill=BLUE)
 
     y = 146
-    for line in ["Which diabetic patients", "have not had an A1c", "in twelve months?"]:
+    for line in ["Which diabetic patients", "have not had an A1C", "in twelve months?"]:
         d.text((x, y), line, font=font(50), fill=INK)
         y += 62
 
@@ -94,7 +94,7 @@ def build():
     stats = [
         (f"{gold['open_gaps']} of {gold['cohort']}", "with an open gap", ORANGE),
         (str(gold["never_tested"]), "never tested at all", ORANGE),
-        (dq["catch_rate_types"], "defect types caught", BLUE),
+        (f"{sum(dq['quarantine_by_check'].values()):,}", "rows quarantined, with a reason", BLUE),
     ]
     sx, sy = x, H - 132
     for value, label, colour in stats:

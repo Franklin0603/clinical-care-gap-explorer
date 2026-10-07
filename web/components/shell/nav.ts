@@ -49,7 +49,7 @@ export const NAV_SECTIONS: NavSection[] = [
         icon: CircleAlert,
         // Live from the build's gold report, so it moves with the data.
         count: gold.open_gaps,
-        countLabel: `${gold.open_gaps} patients with an open A1c gap`,
+        countLabel: `${gold.open_gaps} patients with an open A1C gap`,
       },
       { href: "/patients", label: "Patients", icon: Users },
       // No count: there is no task data yet, and a number here would say
@@ -116,7 +116,7 @@ export const NAV_FOOTER: NavItem[] = [
 export const PIPELINE_SECTIONS = [
   { href: "/pipeline#reconciliation", label: "Reconciliation", about: "Bronze equals Silver plus quarantine, for every table, on every run." },
   { href: "/pipeline#validate", label: "The six checks", about: "What each data quality check catches, and the operational cause behind it." },
-  { href: "/pipeline#floor", label: "The A1c floor", about: "Why the plausibility range nearly threw away 951 good results." },
+  { href: "/pipeline#floor", label: "The A1C floor", about: "Why the plausibility range nearly threw away 951 good results." },
   { href: "/pipeline#quarantine", label: "Quarantine", about: "Every row held back from the report, with the reason." },
   { href: "/pipeline#identity", label: "Identity review", about: "Records that look like the same person, waiting for a human decision." },
   { href: "/pipeline#remediation", label: "Remediation", about: "Values corrected rather than rejected, with the original kept." },

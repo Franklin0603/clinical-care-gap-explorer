@@ -22,15 +22,15 @@ const AREAS: { icon: LucideIcon; name: string; href: string; for: string; use: s
   },
   {
     icon: CircleAlert, name: "Care Gaps", href: "/care-gaps",
-    for: "The work queue: every patient with an open A1c gap.",
+    for: "The work queue: every patient with an open A1C gap.",
     use: ["Filter by never tested or overdue, setting, age and insulin", "Work in Care Gaps order, never tested first", "Review any patient's evidence"],
     shot: { src: "/img/learn/app-care-gaps.webp", width: 1600, height: 1099, alt: "Care Gaps: tabs for all, never tested and overdue, filters for setting, age and insulin, and the list of open gaps with a Review button on each row.", caption: "Tabs and filters narrow the 25 open gaps; Review opens a patient's evidence." },
   },
   {
     icon: UserRound, name: "Patient workspace", href: "/patients",
     for: "One patient: why they have their status, and their history.",
-    use: ["Read the care-gap assessment and its evidence", "Inspect every A1c on file, testing per year, medications and procedures", "Open the follow-up task for the gap"],
-    shot: { src: "/img/learn/app-patient.webp", width: 1578, height: 955, alt: "A patient workspace: status, latest A1c, last seen and diabetes therapy, with tabs for Overview, A1c, Medications and Procedures, and the A1c monitoring status.", caption: "One patient's status and the reason for it, with A1c history, medications and procedures a tab away." },
+    use: ["Read the care-gap assessment and its evidence", "Inspect every A1C on file, testing per year, medications and procedures", "Open the follow-up task for the gap"],
+    shot: { src: "/img/learn/app-patient.webp", width: 1578, height: 955, alt: "A patient workspace: status, latest A1C, last seen and diabetes therapy, with tabs for Overview, A1C, Medications and Procedures, and the A1C monitoring status.", caption: "One patient's status and the reason for it, with A1C history, medications and procedures a tab away." },
   },
   {
     icon: ListChecks, name: "Tasks", href: "/tasks",
@@ -40,9 +40,9 @@ const AREAS: { icon: LucideIcon; name: string; href: string; for: string; use: s
   },
   {
     icon: BarChart3, name: "Analytics", href: "/analytics",
-    for: "How A1c monitoring is going across the whole cohort.",
+    for: "How A1C monitoring is going across the whole cohort.",
     use: ["Coverage and the make-up of the gaps", "Gap rates by age band and care setting, with their denominators", "Testing over time and the spread of latest results"],
-    shot: { src: "/img/learn/app-analytics.webp", width: 1573, height: 959, alt: "Analytics: four figures, A1c testing over time as a line chart, and donut charts for monitoring coverage and open gap composition.", caption: "Coverage, the make-up of the gaps, and A1c testing year by year." },
+    shot: { src: "/img/learn/app-analytics.webp", width: 1573, height: 959, alt: "Analytics: four figures, A1C testing over time as a line chart, and donut charts for monitoring coverage and open gap composition.", caption: "Coverage, the make-up of the gaps, and A1C testing year by year." },
   },
   {
     icon: Sparkles, name: "Ask AI", href: "/ask",

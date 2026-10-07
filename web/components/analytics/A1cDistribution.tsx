@@ -8,7 +8,7 @@ import { ChartContainer } from "@/components/ui/chart";
 import { FILL, SrTable, TipBox } from "./chartBits";
 
 /**
- * Each patient's latest recorded A1c in equal one-point ranges, one neutral
+ * Each patient's latest recorded A1C in equal one-point ranges, one neutral
  * colour throughout and no reference line: the ranges are arithmetic, and
  * nothing here says which are good or bad. Patients with no result are not a
  * column - they are counted beside the chart.
@@ -27,7 +27,7 @@ export function A1cDistribution({ bins, withResult }: { bins: A1cBin[]; withResu
               const b = active ? (payload?.[0]?.payload as A1cBin | undefined) : undefined;
               return b ? (
                 <TipBox
-                  title={`Latest A1c ${b.label}`}
+                  title={`Latest A1C ${b.label}`}
                   rows={[
                     { label: "Patients", value: fmt(b.n), strong: true },
                     { label: "Share of patients with a result", value: pctText(b.n, withResult) },
@@ -42,8 +42,8 @@ export function A1cDistribution({ bins, withResult }: { bins: A1cBin[]; withResu
         </BarChart>
       </ChartContainer>
       <SrTable
-        caption="Patients by latest recorded A1c"
-        head={["Latest A1c", "Patients", "Share"]}
+        caption="Patients by latest recorded A1C"
+        head={["Latest A1C", "Patients", "Share"]}
         rows={bins.map((b) => ({ cells: [b.label, fmt(b.n), pctText(b.n, withResult)] }))}
       />
     </>

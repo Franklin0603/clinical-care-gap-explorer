@@ -19,7 +19,7 @@ import {
  * the patient, the status, the one timing fact that matters and Review.
  */
 
-/** Last A1c as value and date, or null - shown as "No result", never a
+/** Last A1C as value and date, or null - shown as "No result", never a
  *  blank or a zero: a missing result is the finding. */
 function lastA1c(r: PatientRow) {
   if (!r.last_a1c_date) return null;
@@ -40,8 +40,8 @@ export function AttentionList({ rows }: { rows: PatientRow[] }) {
           <TableHeader>
             <TableRow>
               <TableHead className="pl-4">Patient</TableHead>
-              <TableHead>A1c status</TableHead>
-              <TableHead>Last A1c</TableHead>
+              <TableHead>A1C status</TableHead>
+              <TableHead>Last A1C</TableHead>
               <TableHead className="text-right">Days overdue</TableHead>
               <TableHead className="hidden lg:table-cell">Last seen</TableHead>
               <TableHead className="pr-4 text-right">
@@ -112,8 +112,8 @@ export function AttentionList({ rows }: { rows: PatientRow[] }) {
                   {late !== null
                     ? <><span className="num font-medium text-foreground">{fmt(late)}</span> days overdue</>
                     : a1c
-                      ? <>Last A1c {a1c.date}</>
-                      : <>No A1c result on file</>}
+                      ? <>Last A1C {a1c.date}</>
+                      : <>No A1C result on file</>}
                 </p>
                 {review(r)}
               </div>

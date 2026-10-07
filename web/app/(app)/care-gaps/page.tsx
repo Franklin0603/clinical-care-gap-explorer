@@ -16,8 +16,8 @@ export default function CareGapsPage() {
       title="Care Gaps"
       description={
         n === 0
-          ? "No patient currently has an A1c monitoring gap."
-          : `${n} ${n === 1 ? "patient currently has" : "patients currently have"} an A1c monitoring gap.`
+          ? "No patient currently has an A1C monitoring gap."
+          : `${n} ${n === 1 ? "patient currently has" : "patients currently have"} an A1C monitoring gap.`
       }
       width="wide"
     >

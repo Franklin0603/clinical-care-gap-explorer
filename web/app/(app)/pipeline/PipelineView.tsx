@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import {
-  CheckCircle2, Database, FlaskConical, ShieldAlert, Users, Wrench, Target,
+  CheckCircle2, Database, ShieldAlert, Users, Wrench, Target,
   ChevronRight,
 } from "lucide-react";
 
@@ -28,12 +28,12 @@ const STAGES = [
   { id: "ingest", icon: Database, name: "Ingest", sub: "Raw CSVs into Bronze",
     detail: "Every column loaded as text. Nothing cast, deduped or filtered — the only additions are a load timestamp and the source filename.",
     stat: `${fmt(layerTotals.bronze)} rows` },
-  { id: "corrupt", icon: FlaskConical, name: "Inject defects", sub: "249 rows damaged on purpose",
-    detail: "Six realistic failure modes, each one logged. Without that log a catch rate is a claim rather than a measurement.",
-    stat: "249 rows" },
   { id: "validate", icon: ShieldAlert, name: "Validate", sub: "Six checks into Silver",
-    detail: "Surviving rows are typed; rejected rows land in quarantine with a reason. Never dropped.",
+    detail: "Rows that pass are typed; invalid rows land in quarantine with a reason. Never dropped.",
     stat: `${fmt(layerTotals.silver)} rows` },
+  { id: "correct", icon: Wrench, name: "Correct", sub: "Fix what can be fixed",
+    detail: "An A1C keyed in the wrong unit is converted rather than rejected, and the original value is kept beside the corrected one.",
+    stat: `${fmt(dq.remediated)} values` },
   { id: "gold", icon: Target, name: "Gold", sub: "One row per diabetic patient",
     detail: "Sourced from Silver only. If Gold ever read Bronze, the whole validation layer would be decorative.",
     stat: `${gold.cohort} patients` },
@@ -53,7 +53,7 @@ export default function PipelineView() {
       actions={
         <Badge variant="outline" className="gap-1.5">
           <CheckCircle2 className="size-3.5 text-primary" />
-          {dq.catch_rate_types} caught
+          {fmt(Object.values(dq.quarantine_by_check as Record<string, number>).reduce((a, b) => a + b, 0))} rows quarantined
         </Badge>
       }
     >
@@ -143,9 +143,8 @@ export default function PipelineView() {
                   </TableCell>
                   <TableCell className="max-w-[16rem] text-muted-foreground">{c.rule}</TableCell>
                   <TableCell className="max-w-[16rem] text-muted-foreground">{c.cause}</TableCell>
-                  {/* Coloured against c.injected without showing it: a check that
-                      left something behind should look wrong here, and the count it
-                      was scored against belongs in the defect-injection section. */}
+                  {/* Coloured against the pipeline's expected count: a check that
+                      left rows behind should look wrong here. */}
                   <TableCell className="num text-right font-semibold">
                     <span
                       className={c.caught === c.injected ? "text-primary" : "text-destructive"}
@@ -248,8 +247,8 @@ export default function PipelineView() {
       >
         <Figure
           src="04_a1c_floor.png"
-          alt="A histogram of clean A1c values, with 951 of 8,941 results falling below a proposed floor of 3.0 percent."
-          caption="The specification proposed rejecting any A1c below 3.0%. Run against the clean data first, that floor would have quarantined 951 of 8,941 real results, an 11% false-positive rate on a check meant to catch 20 injected errors. The floor shipped at 2.0% because the data was checked before the rule was written, not after."
+          alt="A histogram of clean A1C values, with 951 of 8,941 results falling below a proposed floor of 3.0 percent."
+          caption="The specification proposed rejecting any A1C below 3.0%. Run against the clean data first, that floor would have quarantined 951 of 8,941 real results, an 11% false-positive rate on a check meant to catch the 20 values keyed in the wrong unit. The floor shipped at 2.0% because the data was checked before the rule was written, not after."
           source="notebooks/01_profile.ipynb"
         />
       </Section>
@@ -257,7 +256,7 @@ export default function PipelineView() {
       <Section
         id="remediation"
         title="One correction, in full"
-        blurb={<>Not every bad value is thrown away. An <Term k="a1c">A1c</Term> is a percentage, so 250 is impossible — but blood glucose in mg/dL lands there routinely, which makes this a unit error rather than nonsense.</>}
+        blurb={<>Not every bad value is thrown away. An <Term k="a1c">A1C</Term> is a percentage, so 250 is impossible — but blood glucose in mg/dL lands there routinely, which makes this a unit error rather than nonsense.</>}
       >
         <Tabs defaultValue="example">
           <TabsList>
@@ -290,9 +289,9 @@ export default function PipelineView() {
                   <div className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-muted-foreground">
                     <Wrench className="size-3" /> Rule applied
                   </div>
-                  <code className="font-mono text-xs">A1c = (value + 46.7) / 28.7</code>
+                  <code className="font-mono text-xs">A1C = (value + 46.7) / 28.7</code>
                   <p className="text-xs text-muted-foreground">
-                    The ADA mapping between A1c and estimated average glucose. The
+                    The ADA mapping between A1C and estimated average glucose. The
                     original is kept, so a reviewer who disagrees excludes every
                     corrected row with one filter.
                   </p>

@@ -23,7 +23,7 @@ export default function LearnPage() {
   return (
     <Page
       title="Learn"
-      description="Understand diabetes, A1c monitoring, and how to use Care Gap Explorer."
+      description="Understand diabetes, A1C monitoring, and how to use Care Gap Explorer."
     >
       <ul className="grid gap-4 md:grid-cols-2">
         {LEARN_MODULES.map((m, i) => {

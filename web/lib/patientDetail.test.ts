@@ -32,7 +32,7 @@ test("insulin documentation never claims more than the data", () => {
   assert.equal(insulinDoc(true, null), "active");
 });
 
-test("the A1c summary is the series' own last and second-last points", () => {
+test("the A1C summary is the series' own last and second-last points", () => {
   for (const r of rows) {
     const a1c = detail[r.patient_id].a1c;
     const s = a1cSummary(a1c);

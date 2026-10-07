@@ -14,7 +14,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ChartCard, DataTip } from "./ChartCard";
 
 /**
- * The page's primary chart: recorded A1c testing per calendar year across the
+ * The page's primary chart: recorded A1C testing per calendar year across the
  * cohort, from the same per-patient history the patient workspace uses
  * (patient_detail.json, fetched once per session).
  *
@@ -32,7 +32,7 @@ import { ChartCard, DataTip } from "./ChartCard";
 
 type Measure = "tests" | "patients";
 const MEASURES: Record<Measure, { short: string; long: string }> = {
-  tests: { short: "Results", long: "A1c results recorded" },
+  tests: { short: "Results", long: "A1C results recorded" },
   patients: { short: "Patients", long: "Patients with ≥1 result" },
 };
 
@@ -80,7 +80,7 @@ export function TestingOverTime({ className }: { className?: string }) {
   );
 
   const card = (body: ReactNode, extra: Partial<Parameters<typeof ChartCard>[0]> = {}) => (
-    <ChartCard icon={Activity} title="A1c testing over time" action={toggle} className={className} {...extra}>
+    <ChartCard icon={Activity} title="A1C testing over time" action={toggle} className={className} {...extra}>
       {body}
     </ChartCard>
   );
@@ -91,7 +91,7 @@ export function TestingOverTime({ className }: { className?: string }) {
         <CircleAlert className="size-6 text-status-danger" aria-hidden />
         <div className="flex flex-col gap-1">
           <p className="text-base font-semibold">Testing history unavailable</p>
-          <p className="text-sm text-muted-foreground">We couldn&apos;t load the A1c testing history.</p>
+          <p className="text-sm text-muted-foreground">We couldn&apos;t load the A1C testing history.</p>
         </div>
         <Button variant="outline" size="sm" onClick={retry}>Try again</Button>
       </div>,
@@ -206,7 +206,7 @@ export function TestingOverTime({ className }: { className?: string }) {
         </summary>
         <div className="mt-3 overflow-x-auto">
           <table className="w-full text-sm">
-            <caption className="sr-only">A1c results recorded and patients tested, by calendar year</caption>
+            <caption className="sr-only">A1C results recorded and patients tested, by calendar year</caption>
             <thead>
               <tr className="border-b text-left text-xs text-muted-foreground">
                 <th scope="col" className="py-2 pr-4 font-medium">Year</th>
@@ -231,7 +231,7 @@ export function TestingOverTime({ className }: { className?: string }) {
     </>,
     {
       metric: measure === "tests"
-        ? <>{fmt(total)} <span className="text-sm font-normal text-muted-foreground">A1c results recorded</span></>
+        ? <>{fmt(total)} <span className="text-sm font-normal text-muted-foreground">A1C results recorded</span></>
         : <>{fmt(peak?.patients ?? 0)} <span className="text-sm font-normal text-muted-foreground">patients tested in {peak?.year ?? "—"}</span></>,
       insight: peak && (measure === "tests"
         ? `Most in a full year: ${fmt(peak.tests)} in ${peak.year}.`

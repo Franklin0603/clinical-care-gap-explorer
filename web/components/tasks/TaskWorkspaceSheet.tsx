@@ -90,7 +90,7 @@ function TaskWorkspace({ patient: r, task }: { patient: PatientRow; task: Task }
         <Info className="mt-0.5 size-3.5 shrink-0" aria-hidden />
         Task status, assignment, due dates, notes and activity are demo workflow data, saved in this
         browser only. They are not from the clinical source, nothing is sent to a patient, and they never
-        change the care-gap status - only a qualifying A1c result does.
+        change the care-gap status - only a qualifying A1C result does.
       </p>
     </div>
   );
@@ -128,9 +128,9 @@ function FollowUp({ id, task, gapOpen }: { id: string; task: Task; gapOpen: bool
         <p className="rounded-md bg-muted/60 p-3 text-xs leading-relaxed text-muted-foreground">
           <span className="font-medium text-foreground">The care gap is still open.</span>{" "}
           {task.status === "completed"
-            ? "Completed means the follow-up work was completed, not that the A1c monitoring gap closed."
-            : "Closing the task ends the follow-up work; it does not close the A1c monitoring gap."}{" "}
-          Only a qualifying A1c result in the source data closes the gap.
+            ? "Completed means the follow-up work was completed, not that the A1C monitoring gap closed."
+            : "Closing the task ends the follow-up work; it does not close the A1C monitoring gap."}{" "}
+          Only a qualifying A1C result in the source data closes the gap.
         </p>
       )}
 

@@ -39,7 +39,7 @@ export function PatientWorkspaceSheet({
         {patient && (
           <div className="flex flex-col gap-4 p-4 pr-12 sm:p-6 sm:pr-14">
             <SheetDescription className="sr-only">
-              Patient workspace: A1c status, the evidence for it, and the patient&apos;s history.
+              Patient workspace: A1C status, the evidence for it, and the patient&apos;s history.
             </SheetDescription>
             <PatientWorkspace
               patient={patient}

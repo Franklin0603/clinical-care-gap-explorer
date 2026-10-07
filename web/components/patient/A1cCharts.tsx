@@ -14,14 +14,14 @@ import {
 } from "@/components/ui/chart";
 
 /**
- * The three A1c charts from the original patient drawer, moved here intact so
- * the workspace's A1c tab reuses them rather than redrawing them. Each fix
+ * The three A1C charts from the original patient drawer, moved here intact so
+ * the workspace's A1C tab reuses them rather than redrawing them. Each fix
  * recorded in the comments below was earned once and is kept.
  */
 
 const chartConfig = {
-  v: { label: "A1c %", color: "var(--chart-1)" },
-  tests: { label: "A1c tests", color: "var(--chart-1)" },
+  v: { label: "A1C %", color: "var(--chart-1)" },
+  tests: { label: "A1C tests", color: "var(--chart-1)" },
   fills: { label: "Insulin fills", color: "var(--chart-2)" },
 } satisfies ChartConfig;
 
@@ -111,7 +111,7 @@ function DistributionChart({ data, mark }: { data: Box[]; mark: number | null })
 
 /* ------------------------------------------------------------------ series */
 
-/** Every A1c on file, with the 7% reference line and the insulin marker. */
+/** Every A1C on file, with the 7% reference line and the insulin marker. */
 export function A1cSeriesChart({ series, insStart }: { series: A1cPoint[]; insStart: string | null }) {
   return (
     <ChartContainer config={chartConfig} className="h-[230px] w-full">
@@ -212,14 +212,14 @@ export function TestsPerYearChart({
   );
 }
 
-/** Latest A1c by age band across the cohort, with this patient marked. */
+/** Latest A1C by age band across the cohort, with this patient marked. */
 export function CohortComparisonChart({ cohort, mine }: { cohort: PatientRow[]; mine: number | null }) {
-  /** Cohort A1c spread by age band, so one patient has something to sit against. */
+  /** Cohort A1C spread by age band, so one patient has something to sit against. */
   const bandBoxes = useMemo(() => {
     const g = new Map<string, number[]>();
     for (const r of cohort) {
       // Number(null) is 0, and 0 is finite - so a Number.isFinite guard alone
-      // let all 21 never-tested patients into the distribution as a 0% A1c,
+      // let all 21 never-tested patients into the distribution as a 0% A1C,
       // which is biologically impossible and pulled every box downwards. The
       // bands read 116 patients instead of the 95 who have a result.
       if (r.last_a1c_value === null || r.last_a1c_value === undefined) continue;

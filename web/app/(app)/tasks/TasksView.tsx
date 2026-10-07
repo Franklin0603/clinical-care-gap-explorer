@@ -27,8 +27,8 @@ import {
 } from "@/components/ui/table";
 
 /**
- * The follow-up queue: one task per open A1c gap, and what is being done
- * about it. Clinical columns (gap status, last A1c, last seen) come from the
+ * The follow-up queue: one task per open A1C gap, and what is being done
+ * about it. Clinical columns (gap status, last A1C, last seen) come from the
  * report row through the shared cells; workflow columns (task status,
  * assignee, due, last action) come from the task store. The two never mix:
  * nothing here writes to a patient row.
@@ -194,7 +194,7 @@ export function TasksView({ initialOpen = null }: { initialOpen?: string | null 
                   <TableHead className="pl-4">Patient</TableHead>
                   <TableHead>Gap status</TableHead>
                   <TableHead>Task status</TableHead>
-                  <TableHead className="hidden xl:table-cell">Last A1c</TableHead>
+                  <TableHead className="hidden xl:table-cell">Last A1C</TableHead>
                   <TableHead className="hidden lg:table-cell">Last seen</TableHead>
                   <TableHead>Assigned to</TableHead>
                   <TableHead>Due</TableHead>
@@ -283,7 +283,7 @@ function Filter({ label, value, labels, onChange }: {
 
 const Muted = ({ children }: { children: ReactNode }) => <span className="text-muted-foreground">{children}</span>;
 
-/** Latest A1c with its date; "No result" for the never tested, no date made up. */
+/** Latest A1C with its date; "No result" for the never tested, no date made up. */
 function LastA1c({ r }: { r: PatientRow }) {
   return (
     <div className="flex flex-col">
@@ -321,7 +321,7 @@ function Disclosure() {
     <div className="flex flex-wrap items-center justify-between gap-3 border-t pt-4 text-xs text-muted-foreground">
       <p className="flex items-start gap-2">
         <Info className="mt-0.5 size-3.5 shrink-0" aria-hidden />
-        Tasks are demo workflow data, saved in this browser only. One task starts for each open A1c gap;
+        Tasks are demo workflow data, saved in this browser only. One task starts for each open A1C gap;
         activity appears only when you change something. Nothing here comes from the clinical source or
         changes a patient&apos;s gap status.
       </p>

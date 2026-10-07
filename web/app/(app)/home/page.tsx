@@ -51,12 +51,12 @@ export default function HomePage() {
           hrefLabel="View patients"
         />
         <MetricCard
-          label="Open A1c gaps"
+          label="Open A1C gaps"
           value={s.openGaps.toLocaleString("en-US")}
           status={{ tone: s.openGaps ? "danger" : "success", label: s.openGaps ? "Needs attention" : "None open" }}
           context={`${pctText(s.openGaps, s.total)} of the cohort`}
-          caption="No A1c in the last 12 months"
-          hint="Patients with no A1c result in the twelve months before the data date. Includes those who have never been tested."
+          caption="No A1C in the last 12 months"
+          hint="Patients with no A1C result in the twelve months before the data date. Includes those who have never been tested."
           href="/care-gaps"
           hrefLabel="View care gaps"
         />
@@ -64,8 +64,8 @@ export default function HomePage() {
           label="Never tested"
           value={s.neverTested.toLocaleString("en-US")}
           context={`${s.neverTested} of ${s.openGaps} open gaps`}
-          caption="No A1c result on record at all"
-          hint="Open gaps with no A1c in the record at any time. Part of the open-gap count, not in addition to it."
+          caption="No A1C result on record at all"
+          hint="Open gaps with no A1C in the record at any time. Part of the open-gap count, not in addition to it."
           href={s.neverTested ? "/care-gaps?status=never" : undefined}
           hrefLabel={`Review ${s.neverTested} ${s.neverTested === 1 ? "patient" : "patients"}`}
         />
@@ -74,8 +74,8 @@ export default function HomePage() {
           value={s.current.toLocaleString("en-US")}
           status={{ tone: "success", label: "Up to date" }}
           context={`${s.dueWithin90} due again within 90 days`}
-          caption="A1c within the last 12 months"
-          hint="Patients whose most recent A1c is within twelve months of the data date. Due within 90 days counts those whose next test falls due in the next three months."
+          caption="A1C within the last 12 months"
+          hint="Patients whose most recent A1C is within twelve months of the data date. Due within 90 days counts those whose next test falls due in the next three months."
         />
       </section>
 
@@ -98,7 +98,7 @@ export default function HomePage() {
 
       <Section
         title="Population monitoring"
-        blurb="How A1c monitoring stands across the whole cohort."
+        blurb="How A1C monitoring stands across the whole cohort."
         actions={
           <Link href="/analytics" className={linkClass}>
             View analytics

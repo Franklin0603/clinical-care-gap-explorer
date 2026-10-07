@@ -10,7 +10,7 @@ const T = (n: number) => `2026-10-05T0${n}:00:00.000Z`;
 
 function seed() {
   let s = EMPTY_CHATS;
-  s = createConversation(s, "a", T(1), "Open A1c gaps");
+  s = createConversation(s, "a", T(1), "Open A1C gaps");
   s = createConversation(s, "b", T(2), "Never-tested patients");
   s = createConversation(s, "c", T(3), "Gap rate by age band");
   s = createGroup(s, "g1", "Care Gap Analysis", T(4));
@@ -58,7 +58,7 @@ test("search covers titles and message text", () => {
   let s = seed();
   s = appendMessages(s, "a", [
     { id: "1", role: "user", text: "How many were seen in the last 6 months?", at: T(5) },
-    { id: "2", role: "assistant", blocks: [{ kind: "metric", value: "24", label: "patients with an open A1c gap" }], at: T(5) },
+    { id: "2", role: "assistant", blocks: [{ kind: "metric", value: "24", label: "patients with an open A1C gap" }], at: T(5) },
   ], {}, T(5));
   assert.deepEqual(sections(s, "never").recent.map((c) => c.id), ["b"]);
   assert.deepEqual(sections(s, "6 months").recent.map((c) => c.id), ["a"]);

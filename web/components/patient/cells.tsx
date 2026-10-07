@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 
 /**
  * How a patient's fields read in any list - Care Gaps, Patients, the
- * workspace. One implementation each, so a patient cannot show one A1c on one
+ * workspace. One implementation each, so a patient cannot show one A1C on one
  * page and another elsewhere, or "No result" here and a blank there.
  */
 
@@ -61,7 +61,7 @@ export function PatientCell({ r, onOpen }: { r: PatientRow; onOpen?: (el: HTMLEl
   );
 }
 
-/** The latest A1c value, or "No result". Never 0, never blank. */
+/** The latest A1C value, or "No result". Never 0, never blank. */
 export function LatestA1c({ r }: { r: PatientRow }) {
   const v = lastA1cValue(r);
   return v === null ? muted("No result") : <span className="num">{v.toFixed(1)}%</span>;
@@ -69,7 +69,7 @@ export function LatestA1c({ r }: { r: PatientRow }) {
 
 /** The last test date, with days overdue beneath when the measure defines it. */
 export function LastTest({ r }: { r: PatientRow }) {
-  if (!r.last_a1c_date) return muted("—", "No A1c result on file");
+  if (!r.last_a1c_date) return muted("—", "No A1C result on file");
   const late = daysOverdue(r);
   return (
     <div className="flex flex-col">
@@ -93,6 +93,6 @@ export function LastSeen({ r }: { r: PatientRow }) {
 export function TimingLine({ r }: { r: PatientRow }) {
   const late = daysOverdue(r);
   if (late !== null) return <><span className="num font-medium text-foreground">{fmt(late)}</span> days overdue</>;
-  if (r.last_a1c_date) return <>Last A1c {longDate(String(r.last_a1c_date))}</>;
-  return <>No A1c result on file</>;
+  if (r.last_a1c_date) return <>Last A1C {longDate(String(r.last_a1c_date))}</>;
+  return <>No A1C result on file</>;
 }

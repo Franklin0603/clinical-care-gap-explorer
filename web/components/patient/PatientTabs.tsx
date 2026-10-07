@@ -62,7 +62,7 @@ export function OverviewTab({
             { label: "Last seen", value: day(r.last_encounter_date) ?? <None>Not recorded</None> },
             { label: "Care setting of last encounter", value: settingLabel(r.unit) },
             {
-              label: "A1c tests in the last 2 years",
+              label: "A1C tests in the last 2 years",
               value: <span className="num">{fmt(Number(r.a1c_count_2y ?? 0))}</span>,
             },
             {
@@ -76,10 +76,10 @@ export function OverviewTab({
 
       <div className="grid gap-4 md:grid-cols-3">
         <Preview
-          title="A1c history"
+          title="A1C history"
           loading={!detail}
-          line={s ? `${fmt(s.count)} ${s.count === 1 ? "result" : "results"}, ${s.firstYear}–${s.lastYear}` : "No A1c results available"}
-          action="View A1c history"
+          line={s ? `${fmt(s.count)} ${s.count === 1 ? "result" : "results"}, ${s.firstYear}–${s.lastYear}` : "No A1C results available"}
+          action="View A1C history"
           onClick={() => go("a1c")}
         />
         <Preview
@@ -124,7 +124,7 @@ function Preview({ title, line, action, onClick, loading }: {
   );
 }
 
-/* --------------------------------------------------------------------- A1c */
+/* --------------------------------------------------------------------- A1C */
 
 export function A1cTab({
   patient: r, detail, cohort,
@@ -142,14 +142,14 @@ export function A1cTab({
 
   return (
     <div className="flex flex-col gap-4">
-      <Panel as="h2" title="A1c history">
+      <Panel as="h2" title="A1C history">
         {s ? (
           <Facts
             className="lg:grid-cols-4"
             items={[
-              { label: "Latest A1c", value: <><span className="num font-medium">{s.latest.v.toFixed(1)}%</span> <span className="text-xs text-muted-foreground">{day(s.latest.d)}</span></> },
+              { label: "Latest A1C", value: <><span className="num font-medium">{s.latest.v.toFixed(1)}%</span> <span className="text-xs text-muted-foreground">{day(s.latest.d)}</span></> },
               {
-                label: "Previous A1c",
+                label: "Previous A1C",
                 value: s.previous
                   ? <><span className="num">{s.previous.v.toFixed(1)}%</span> <span className="text-xs text-muted-foreground">{day(s.previous.d)}</span></>
                   : <None>None on file</None>,
@@ -159,8 +159,8 @@ export function A1cTab({
             ]}
           />
         ) : (
-          <NoData title="No A1c results available">
-            No qualifying A1c result was found for this patient in the available data,
+          <NoData title="No A1C results available">
+            No qualifying A1C result was found for this patient in the available data,
             which is why the care-gap report lists them.
           </NoData>
         )}
@@ -169,11 +169,11 @@ export function A1cTab({
       {s && (
         <>
           <Panel
-            title="Every A1c on file"
+            title="Every A1C on file"
             description={
               <>
                 {fmt(s.count)} {s.count === 1 ? "result" : "results"} from {s.firstYear} to {s.lastYear}. The dashed
-                line at 7% is shown as a common reference point; individual <Term k="a1c">A1c</Term> goals
+                line at 7% is shown as a common reference point; individual <Term k="a1c">A1C</Term> goals
                 may differ. The shaded band is above it.
                 {insStart && " The marker is when an insulin prescription first appears in the medication data."}
               </>
@@ -201,10 +201,10 @@ export function A1cTab({
         title="Against the rest of the cohort"
         description={
           <>
-            Latest A1c by age band, one box per band, with the patient count in brackets. Whiskers
+            Latest A1C by age band, one box per band, with the patient count in brackets. Whiskers
             are the true minimum and maximum, not a 1.5 IQR fence, because some bands hold only a
             handful of patients.
-            {mine === null && " This patient has no A1c result, so there is nothing to mark on it."}
+            {mine === null && " This patient has no A1C result, so there is nothing to mark on it."}
           </>
         }
       >

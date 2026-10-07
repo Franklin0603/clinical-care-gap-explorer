@@ -68,7 +68,7 @@ export function AppHeader() {
       <Separator orientation="vertical" className="data-vertical:h-5 data-vertical:self-center" />
 
       <Breadcrumb className="min-w-0 flex-1">
-        <BreadcrumbList className="flex-nowrap">
+        <BreadcrumbList className="min-w-0 flex-nowrap overflow-hidden">
           {crumbs.length === 0 ? (
             <BreadcrumbItem>
               <BreadcrumbPage>Care Gap Explorer</BreadcrumbPage>
@@ -76,10 +76,12 @@ export function AppHeader() {
           ) : (
             crumbs.map((c, i) => {
               const last = i === crumbs.length - 1;
-              const hide = c.hideOnMobile ? "hidden sm:inline-flex" : "";
+              // The section name only where there is room for it beside the
+              // page name; below that, the page name alone.
+              const hide = c.hideOnMobile ? "hidden lg:inline-flex" : "";
               return (
                 <Fragment key={`${c.label}-${i}`}>
-                  <BreadcrumbItem className={hide}>
+                  <BreadcrumbItem className={`${hide} ${last ? "min-w-0" : "shrink-0 whitespace-nowrap"}`}>
                     {last ? (
                       <BreadcrumbPage className="truncate">{c.label}</BreadcrumbPage>
                     ) : c.href ? (
@@ -97,7 +99,7 @@ export function AppHeader() {
       </Breadcrumb>
 
       <div className="flex shrink-0 items-center gap-3">
-        <span className="num hidden text-xs text-muted-foreground md:inline">
+        <span className="num hidden whitespace-nowrap text-xs text-muted-foreground lg:inline">
           Data through {longDate(gold.asof)}
         </span>
         <SyntheticDataBadge />

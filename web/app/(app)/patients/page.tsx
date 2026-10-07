@@ -6,7 +6,7 @@ import { PatientDirectoryFromUrl, PatientDirectoryStatic } from "./PatientDirect
 
 export const metadata = {
   title: "Patients",
-  description: "Every patient in the diabetic cohort, searchable by MRN, with each patient's A1c status and history a click away.",
+  description: "Every patient in the diabetic cohort, searchable by MRN, with each patient's A1C status and history a click away.",
 };
 
 export default function PatientsPage() {
@@ -14,7 +14,7 @@ export default function PatientsPage() {
   return (
     <Page
       title="Patients"
-      description="Search the diabetes cohort and review each patient's A1c monitoring status and available clinical history."
+      description="Search the diabetes cohort and review each patient's A1C monitoring status and available clinical history."
       actions={
         <span className="num text-sm text-muted-foreground">
           {fmt(n)} {n === 1 ? "patient" : "patients"} in the cohort

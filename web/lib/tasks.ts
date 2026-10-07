@@ -7,7 +7,7 @@
  * clinical row on purpose: no function in this file reads or writes gap_flag,
  * last_a1c_* or days_overdue, and a task's status never changes a patient's
  * gap status. Completing a task does not make an overdue patient current; only
- * a qualifying A1c result in the source data does, through lib/cohort.ts.
+ * a qualifying A1C result in the source data does, through lib/cohort.ts.
  *
  * Every open gap has a task from the start, in its initial state: Needs
  * review, unassigned, no due date, no activity. That initial task is derived,

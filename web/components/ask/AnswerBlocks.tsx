@@ -72,8 +72,8 @@ function BlockView({ b, onAsk }: { b: AssistantBlock; onAsk: (q: string) => void
       );
     case "years":
       return (
-        <ScrollTable caption="A1c results recorded and patients tested, by year"
-          head={["Year", "A1c results", "Patients tested"]}
+        <ScrollTable caption="A1C results recorded and patients tested, by year"
+          head={["Year", "A1C results", "Patients tested"]}
           numeric={[1, 2]}
           rows={b.rows.map((r) => ({
             key: r.year,
@@ -199,7 +199,7 @@ function PatientCard({ id }: { id: string }) {
     <dl className="grid grid-cols-2 gap-x-6 gap-y-2 rounded-lg border bg-card p-3 text-sm sm:grid-cols-3">
       <Item label="Patient"><span className="font-mono">MRN {shortMrn(r)}</span> · age {String(r.age)}</Item>
       <Item label="Gap status"><GapStatusBadge status={gapStatus(r)} /></Item>
-      <Item label="Latest A1c"><LatestA1c r={r} /></Item>
+      <Item label="Latest A1C"><LatestA1c r={r} /></Item>
       <Item label="Last test"><LastTest r={r} /></Item>
       <Item label="Last seen">{longDate(r.last_encounter_date as string | null) ?? "—"} · {settingLabel(r.unit)}</Item>
       <Item label="Insulin"><InsulinCell r={r} /></Item>

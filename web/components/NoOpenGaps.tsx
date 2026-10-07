@@ -8,9 +8,9 @@ export function NoOpenGaps() {
     <div className="flex flex-col items-center gap-3 rounded-lg border bg-card px-6 py-10 text-center">
       <CircleCheck className="size-6 text-status-success" aria-hidden />
       <div className="flex flex-col gap-1">
-        <p className="text-base font-semibold">No open A1c gaps</p>
+        <p className="text-base font-semibold">No open A1C gaps</p>
         <p className="max-w-md text-sm text-muted-foreground">
-          Every patient in the cohort has an A1c result within the last twelve months.
+          Every patient in the cohort has an A1C result within the last twelve months.
         </p>
       </div>
       <Link

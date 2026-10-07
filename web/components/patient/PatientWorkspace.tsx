@@ -27,8 +27,8 @@ import {
  * session on first use (lib/patientDetail.ts); until it arrives the tab content
  * is skeletons, and if it fails the workspace says so and offers a retry.
  *
- * Tabs unmount when hidden (Base UI's default), so a patient with 275 A1c
- * results only draws that chart when the A1c tab is open.
+ * Tabs unmount when hidden (Base UI's default), so a patient with 275 A1C
+ * results only draws that chart when the A1C tab is open.
  */
 
 type Load = { all: Record<string, PatientDetail> | null; failed: boolean };
@@ -79,11 +79,11 @@ export function PatientWorkspace({
       <Tabs value={tab} onValueChange={(v) => setTab(v as TabKey)} className="gap-4">
         {/* Scrolls sideways rather than wrapping on a phone. */}
         <div className="-mx-1 overflow-x-auto px-1">
-          <TabsList variant="line" aria-label="Patient record sections" className="h-9 w-full justify-start border-b">
-            <TabsTrigger value="overview" className="flex-none px-3">Overview</TabsTrigger>
-            <TabsTrigger value="a1c" className="flex-none px-3">A1c</TabsTrigger>
-            <TabsTrigger value="medications" className="flex-none px-3">Medications</TabsTrigger>
-            <TabsTrigger value="procedures" className="flex-none px-3">Procedures</TabsTrigger>
+          <TabsList variant="line" aria-label="Patient record sections" className="h-9 w-max min-w-full justify-start border-b">
+            <TabsTrigger value="overview" className="flex-none px-2 sm:px-3">Overview</TabsTrigger>
+            <TabsTrigger value="a1c" className="flex-none px-2 sm:px-3">A1C</TabsTrigger>
+            <TabsTrigger value="medications" className="flex-none px-2 sm:px-3">Medications</TabsTrigger>
+            <TabsTrigger value="procedures" className="flex-none px-2 sm:px-3">Procedures</TabsTrigger>
           </TabsList>
         </div>
 

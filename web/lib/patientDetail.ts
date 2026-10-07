@@ -1,4 +1,4 @@
-// The per-patient record behind a table row: A1c series, medications, procedures.
+// The per-patient record behind a table row: A1C series, medications, procedures.
 //
 // Fetched at runtime rather than imported. The other payloads on this site are
 // static imports, which is right for a few hundred rows that every page needs,
@@ -55,7 +55,7 @@ export function loadPatientDetail(): Promise<Record<string, PatientDetail>> {
  *  point and nothing here colours a patient by it. */
 export const A1C_TARGET = 7;
 
-/** A1c tests per calendar year, which is where a lapse in testing shows up. */
+/** A1C tests per calendar year, which is where a lapse in testing shows up. */
 export function testsPerYear(a1c: A1cPoint[]) {
   const byYear = new Map<string, number>();
   for (const p of a1c) {
@@ -89,7 +89,7 @@ export function insulinPerYear(meds: MedRow[]) {
     .map(([year, fills]) => ({ year, fills }));
 }
 
-/** The date insulin first appears, for a marker on the A1c series. */
+/** The date insulin first appears, for a marker on the A1C series. */
 export function insulinStart(meds: MedRow[]): string | null {
   const dates = meds.filter((m) => m.insulin && m.started).map((m) => m.started!);
   return dates.length ? dates.sort()[0] : null;
@@ -176,7 +176,7 @@ export const INSULIN_DOC_TEXT: Record<InsulinDoc, { short: string; long: string 
   },
 };
 
-/** The patient's own A1c history in a few numbers. */
+/** The patient's own A1C history in a few numbers. */
 export function a1cSummary(a1c: A1cPoint[]) {
   if (a1c.length === 0) return null;
   const latest = a1c[a1c.length - 1];
@@ -193,14 +193,14 @@ export function a1cSummary(a1c: A1cPoint[]) {
 
 export type YearRow = {
   year: string;
-  /** A1c results recorded in the year. */
+  /** A1C results recorded in the year. */
   tests: number;
   /** Distinct patients with at least one recorded result in the year. */
   patients: number;
 };
 
 /**
- * A1c results and patients tested per calendar year, across every patient's
+ * A1C results and patients tested per calendar year, across every patient's
  * record, with the empty years drawn rather than skipped - the same rule as a
  * patient's own tests-per-year chart. Also returns the first and last result
  * dates, because the end years are only partly covered and must be labelled.

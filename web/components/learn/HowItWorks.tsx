@@ -23,20 +23,20 @@ type Step = { name: string; does: string; where: { href: string; label: string }
 const STEPS: Step[] = [
   {
     name: "Identify an open monitoring gap",
-    does: "Start from the patients with no A1c result in the 365 days before the data date.",
+    does: "Start from the patients with no A1C result in the 365 days before the data date.",
     where: { href: "/care-gaps", label: "Care Gaps" },
     kinds: ["derived"],
     detail: "Home shows the first five; Care Gaps lists every open gap, never tested first.",
   },
   {
     name: "Review the supporting evidence",
-    does: "Check why the patient has the status: the latest A1c, its date, days overdue, last encounter and care setting.",
+    does: "Check why the patient has the status: the latest A1C, its date, days overdue, last encounter and care setting.",
     where: { href: "/care-gaps", label: "Review on Care Gaps" },
     kinds: ["source", "derived"],
   },
   {
     name: "Inspect the patient's history",
-    does: "Open the patient workspace for every A1c on file, testing per year, medications and procedures.",
+    does: "Open the patient workspace for every A1C on file, testing per year, medications and procedures.",
     where: { href: "/patients", label: "Patients" },
     kinds: ["source"],
     detail: "There is no orders table, so the history shows tests that happened, never tests that were requested.",
@@ -50,7 +50,7 @@ const STEPS: Step[] = [
   },
   {
     name: "Monitor completion",
-    does: "Follow open tasks to completion, and watch for the qualifying A1c result that actually closes the gap.",
+    does: "Follow open tasks to completion, and watch for the qualifying A1C result that actually closes the gap.",
     where: { href: "/tasks", label: "Tasks" },
     kinds: ["workflow", "derived"],
     detail: "Completing a task never closes the gap. Only a new qualifying result in the source data does.",

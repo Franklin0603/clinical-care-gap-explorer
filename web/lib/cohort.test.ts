@@ -258,7 +258,7 @@ test("recently seen open gaps are a subset of open gaps", () => {
 
 import { latestA1cDistribution } from "./cohort.ts";
 
-test("the A1c distribution places every recorded result once and no missing one", () => {
+test("the A1C distribution places every recorded result once and no missing one", () => {
   const d = latestA1cDistribution(rows);
   assert.equal(d.bins.reduce((n, b) => n + b.n, 0), d.withResult);
   assert.equal(d.withResult + d.without, gold.cohort);

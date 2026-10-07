@@ -9,7 +9,7 @@ export default function TasksPage() {
   return (
     <Page
       title="Tasks"
-      description="Track follow-up work for patients with A1c monitoring gaps."
+      description="Track follow-up work for patients with A1C monitoring gaps."
       width="wide"
     >
       {/* ?open= is read on the client; the prerendered page is the queue. */}

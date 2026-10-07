@@ -19,14 +19,14 @@ import { TestingOverTime } from "@/components/analytics/TestingOverTime";
 export const metadata = { title: "Analytics" };
 
 /**
- * How A1c monitoring is performing across the cohort: coverage, what the gaps
+ * How A1C monitoring is performing across the cohort: coverage, what the gaps
  * are made of, where they sit, and what the testing history shows.
  *
  * Every figure is a lib/cohort.ts derivation over the same rows Home, Care
  * Gaps and Patients read, and the tests hold them to the pipeline's own gold
  * report - so this page cannot disagree with the others. It reports the data;
  * it does not grade it. No targets, no benchmarks, no control rates, and no
- * use of the 7% reference line: this is about whether A1c is being monitored,
+ * use of the 7% reference line: this is about whether A1C is being monitored,
  * not about what the results say. Every sentence of interpretation is
  * computed; none says why a pattern exists.
  *
@@ -58,14 +58,14 @@ export default function AnalyticsPage() {
   return (
     <Page
       title="Analytics"
-      description="Understand A1c monitoring across the diabetes population."
+      description="Understand A1C monitoring across the diabetes population."
       width="wide"
     >
       <div className="flex flex-col gap-4">
         <ul aria-label="Summary" className="grid grid-cols-2 gap-3 xl:grid-cols-4">
           <Kpi label="Total cohort" value={fmt(s.total)} context="patients" />
           <Kpi label="Current" value={fmt(s.current)} context={`${pctText(s.current, s.total)} of cohort`} tone="success" />
-          <Kpi label="Open A1c gaps" value={fmt(s.openGaps)} context={`${pctText(s.openGaps, s.total)} of cohort`} tone="danger" />
+          <Kpi label="Open A1C gaps" value={fmt(s.openGaps)} context={`${pctText(s.openGaps, s.total)} of cohort`} tone="danger" />
           <Kpi label="Never tested among gaps" value={fmt(s.neverTested)} context={`${pctText(s.neverTested, s.openGaps)} of gaps`} />
         </ul>
 
@@ -79,7 +79,7 @@ export default function AnalyticsPage() {
               title="Monitoring coverage"
               action={<Link href="/care-gaps" className={headerLink}>Care gaps <ArrowRight className="size-3" aria-hidden /></Link>}
               metric={<>{pctText(s.current, s.total)} <span className="text-sm font-normal text-muted-foreground">current</span></>}
-              insight={`${fmt(s.openGaps)} of ${fmt(s.total)} patients have no A1c result in the 365 days before the data date.`}
+              insight={`${fmt(s.openGaps)} of ${fmt(s.total)} patients have no A1C result in the 365 days before the data date.`}
             >
               <Donut
                 total={s.total}
@@ -87,9 +87,9 @@ export default function AnalyticsPage() {
                 center={pctText(s.current, s.total)}
                 centerLabel="Current"
                 parts={[
-                  { key: "current", label: "Current", about: "A1c result within 365 days", n: s.current,
+                  { key: "current", label: "Current", about: "A1C result within 365 days", n: s.current,
                     fill: FILL.current, href: "/patients?status=current" },
-                  { key: "gap", label: "Open gap", about: "No A1c result within 365 days", n: s.openGaps,
+                  { key: "gap", label: "Open gap", about: "No A1C result within 365 days", n: s.openGaps,
                     fill: FILL.gap, href: "/care-gaps" },
                 ]}
               />
@@ -99,7 +99,7 @@ export default function AnalyticsPage() {
               icon={Layers}
               title="Open gap composition"
               metric={<>{pctText(s.neverTested, s.openGaps)} <span className="text-sm font-normal text-muted-foreground">never tested</span></>}
-              insight={`${fmt(s.neverTested)} of ${fmt(s.openGaps)} open gaps have no A1c result in the available data.`}
+              insight={`${fmt(s.neverTested)} of ${fmt(s.openGaps)} open gaps have no A1C result in the available data.`}
               note={
                 <>
                   {fmt(recentlySeen)} of {fmt(s.openGaps)} had an encounter in the last six months.
@@ -114,7 +114,7 @@ export default function AnalyticsPage() {
                 center={fmt(s.openGaps)}
                 centerLabel="Open gaps"
                 parts={[
-                  { key: "never", label: "Never tested", about: "No A1c result found in the available data", n: s.neverTested,
+                  { key: "never", label: "Never tested", about: "No A1C result found in the available data", n: s.neverTested,
                     fill: FILL.gap, href: "/care-gaps?status=never" },
                   { key: "overdue", label: "Overdue", about: "An earlier result, more than 365 days old", n: s.gapPreviouslyTested,
                     fill: FILL.gap, opacity: 0.5, href: "/care-gaps?status=overdue" },
@@ -164,13 +164,13 @@ export default function AnalyticsPage() {
 
         <ChartCard
           icon={BarChart3}
-          title="Latest A1c result distribution"
-          metric={<>{fmt(dist.withResult)} <span className="text-sm font-normal text-muted-foreground">patients with a recorded A1c</span></>}
-          insight={`No A1c result available: ${fmt(dist.without)} patients, not shown in the chart.`}
+          title="Latest A1C result distribution"
+          metric={<>{fmt(dist.withResult)} <span className="text-sm font-normal text-muted-foreground">patients with a recorded A1C</span></>}
+          insight={`No A1C result available: ${fmt(dist.without)} patients, not shown in the chart.`}
           note={
             <>
               Each patient&apos;s most recent result, whenever it was taken, including results more than
-              a year old. Equal one-point ranges, not clinical categories; individual A1c goals differ.
+              a year old. Equal one-point ranges, not clinical categories; individual A1C goals differ.
               Values below 3% come from the synthetic records and are shown as recorded.
             </>
           }

@@ -26,7 +26,7 @@ export type CheckSource = "live" | "pipeline" | "audit";
 
 export type Check = {
   id: string;
-  area: "Identity & grain" | "A1c observations" | "Dates" | "Cohort" | "Relationships" | "Measure" | "Pipeline";
+  area: "Identity & grain" | "A1C observations" | "Dates" | "Cohort" | "Relationships" | "Measure" | "Pipeline";
   name: string;
   scope: string;
   source: CheckSource;
@@ -65,6 +65,8 @@ export const AUDIT = {
   date: "2026-10-06",
   everCoded: 161,
   deceasedByAsof: 45,
+  /** Open gaps among all 161 coded patients, the dead included. */
+  everCodedGaps: 69,
   rawA1cTotal: 8941,
   rawA1cPassingOldFloor: 7990,
   silverA1cAfterAsof: 0,
@@ -188,39 +190,39 @@ export function qualityChecks(rows: PatientRow[], gold: GoldReport, dq: DqReport
       status: "info",
       why: "Two records for one person would double-count them. They are flagged for a human decision, never merged automatically.",
     },
-    // ------------------------------------------------------------- A1c
+    // ------------------------------------------------------------- A1C
     {
-      id: "A1", area: "A1c observations", name: "Plausible A1c values", source: "live",
-      scope: `Latest A1c of ${fmt(values.length)} tested patients`,
+      id: "A1", area: "A1C observations", name: "Plausible A1C values", source: "live",
+      scope: `Latest A1C of ${fmt(values.length)} tested patients`,
       result: outOfRange === 0 ? `All within ${lo.toFixed(1)}–${hi.toFixed(1)}%` : `${outOfRange} outside ${lo.toFixed(1)}–${hi.toFixed(1)}%`,
       status: outOfRange === 0 ? "passed" : "warning",
       why: "A value outside any plausible range is a data error, such as a glucose keyed into a percent field, not a result.",
-      evidence: `The pipeline's DQ3 applies the same ${lo.toFixed(1)}–${hi.toFixed(1)}% range to every A1c. ${dq.remediated} values recorded in mg/dL rather than percent were converted, with the original kept, rather than discarded.`,
+      evidence: `The pipeline's DQ3 applies the same ${lo.toFixed(1)}–${hi.toFixed(1)}% range to every A1C. ${dq.remediated} values recorded in mg/dL rather than percent were converted, with the original kept, rather than discarded.`,
     },
     {
-      id: "A2", area: "A1c observations", name: "Unusually low A1c values", source: "live",
-      scope: `Latest A1c of ${fmt(values.length)} tested patients`,
+      id: "A2", area: "A1C observations", name: "Unusually low A1C values", source: "live",
+      scope: `Latest A1C of ${fmt(values.length)} tested patients`,
       result: `${below3} below 3.0%`,
       status: below3 > 0 ? "warning" : "passed",
       why: "Values this low are rare in real care. They come from the synthetic generator and are kept as recorded; they pass the plausibility range but are worth knowing about.",
     },
     {
-      id: "A3", area: "A1c observations", name: "Every result has a value", source: "live",
-      scope: `${fmt(tested.length)} patients with a latest A1c`,
+      id: "A3", area: "A1C observations", name: "Every result has a value", source: "live",
+      scope: `${fmt(tested.length)} patients with a latest A1C`,
       result: missingValue === 0 ? "No dated result is missing its value" : `${missingValue} dated results without a value`,
       status: missingValue === 0 ? "passed" : "warning",
       why: "Gold only counts numeric results, so a date without a value would mean the selection let through something it should not.",
     },
     {
-      id: "A4", area: "A1c observations", name: "Duplicate A1c observations", source: "audit",
-      scope: "All A1c results in Silver",
+      id: "A4", area: "A1C observations", name: "Duplicate A1C observations", source: "audit",
+      scope: "All A1C results in Silver",
       result: `${AUDIT.silverDuplicateA1c} duplicates (same patient, time and value)`,
       status: AUDIT.silverDuplicateA1c === 0 ? "passed" : "warning",
       why: "Duplicates would inflate testing counts per year, though not a patient's status.",
     },
     {
-      id: "A5", area: "A1c observations", name: "Latest result is unambiguous", source: "audit",
-      scope: "All A1c results in Silver",
+      id: "A5", area: "A1C observations", name: "Latest result is unambiguous", source: "audit",
+      scope: "All A1C results in Silver",
       result: `${AUDIT.silverLatestA1cTies} patients with two results at the same latest timestamp`,
       status: AUDIT.silverLatestA1cTies === 0 ? "passed" : "warning",
       why: "Gold picks the latest result with row_number() ordered by time. A tie would make the chosen value arbitrary.",
@@ -228,11 +230,11 @@ export function qualityChecks(rows: PatientRow[], gold: GoldReport, dq: DqReport
     // ----------------------------------------------------------- dates
     {
       id: "D1", area: "Dates", name: "No results after the data date", source: "live",
-      scope: "Latest A1c dates",
+      scope: "Latest A1C dates",
       result: resultsAfter === 0 ? `None after ${asof}` : `${resultsAfter} after ${asof}`,
       status: resultsAfter === 0 ? "passed" : "warning",
       why: "A result from after the data date would make a patient current on information that did not yet exist.",
-      evidence: `The audit also found ${AUDIT.silverA1cAfterAsof} A1c results after the data date anywhere in Silver.`,
+      evidence: `The audit also found ${AUDIT.silverA1cAfterAsof} A1C results after the data date anywhere in Silver.`,
     },
     {
       id: "D2", area: "Dates", name: "No encounters after the data date", source: "live",
@@ -325,8 +327,8 @@ export function qualityChecks(rows: PatientRow[], gold: GoldReport, dq: DqReport
       why: "The two kinds of gap must partition the gaps, or a patient is counted twice or not at all.",
     },
     {
-      id: "M3", area: "Measure", name: "Patients without an A1c are kept", source: "live",
-      scope: "Cohort vs patients with any A1c result",
+      id: "M3", area: "Measure", name: "Patients without an A1C are kept", source: "live",
+      scope: "Cohort vs patients with any A1C result",
       result: `${never.length} kept with no result (${gold.cohort} in the cohort, ${gold.inner_join_would_keep} with a result)`,
       status: never.length === gold.cohort - gold.inner_join_would_keep && never.every((r) => r.gap_flag) ? "passed" : "warning",
       why: "These patients are the never-tested gaps. A join that required a result would drop all of them without an error.",
@@ -377,7 +379,7 @@ export function qualityChecks(rows: PatientRow[], gold: GoldReport, dq: DqReport
     {
       id: "P2", area: "Pipeline", name: "Quarantined and corrected rows", source: "pipeline",
       scope: "Rows rejected or corrected in Silver",
-      result: `${fmt(quarantinedTotal)} rows quarantined with a reason; ${fmt(dq.remediated)} A1c values corrected`,
+      result: `${fmt(quarantinedTotal)} rows quarantined with a reason; ${fmt(dq.remediated)} A1C values corrected`,
       status: "info",
       why: "A row that fails a check is kept in quarantine with the check and the reason, never deleted, so every rejection can be reviewed and reversed.",
       evidence: Object.entries(dq.quarantine_by_check).map(([k, v]) => `${k}: ${fmt(v)}`).join(", "),

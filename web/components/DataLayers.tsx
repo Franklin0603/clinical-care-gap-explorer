@@ -12,14 +12,14 @@ export const LAYERS = [
     title: "Clinical source data",
     tone: "border-status-info/30",
     note: "From the synthetic healthcare source, through the pipeline.",
-    items: ["Patient demographics", "Encounters and their care settings", "Diagnoses", "A1c observations, with dates and values", "Medications and their fill counts", "Procedures performed"],
+    items: ["Patient demographics", "Encounters and their care settings", "Diagnoses", "A1C observations, with dates and values", "Medications and their fill counts", "Procedures performed"],
   },
   {
     key: "derived",
     title: "Derived application data",
     tone: "border-border",
     note: "Calculated by Care Gap Explorer from the source.",
-    items: ["Diabetes cohort membership", "Latest A1c and its date", "Monitoring status: current, overdue, never tested", "Open-gap indicator, days overdue, next due date", "Population metrics"],
+    items: ["Diabetes cohort membership", "Latest A1C and its date", "Monitoring status: current, overdue, never tested", "Open-gap indicator, days overdue, next due date", "Population metrics"],
   },
   {
     key: "workflow",

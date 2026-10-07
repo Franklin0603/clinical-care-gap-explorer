@@ -87,7 +87,7 @@ const FEATURES: Feature[] = [
     points: [`${gold.cohort} = ${current} + ${gold.open_gaps}, and ${gold.open_gaps} = ${gold.never_tested} + ${overdue}, checked on every build`, "Every data-quality check, with its result"],
     href: "/data-quality", cta: "Open Data & Quality",
     img: "/img/learn/app-data-quality.webp", w: 1600, h: 1216,
-    alt: "Data & Quality: the reconciliation of 116 = 91 + 25 and 25 = 21 + 4, and the A1C monitoring measure.",
+    alt: `Data & Quality: the reconciliation of ${gold.cohort} = ${current} + ${gold.open_gaps} and ${gold.open_gaps} = ${gold.never_tested} + ${overdue}, and the A1C monitoring measure.`,
   },
 ];
 
@@ -137,9 +137,9 @@ function Landing() {
       <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur supports-backdrop-filter:bg-background/70">
         <Container className="flex h-14 items-center gap-4">
           <Logo />
-          <nav aria-label="Page sections" className="ml-4 hidden items-center gap-1 md:flex">
+          <nav aria-label="Page sections" className="ml-4 hidden items-center gap-1 lg:flex">
             {NAV.map((n) => (
-              <a key={n.href} href={n.href} className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring">
+              <a key={n.href} href={n.href} className="whitespace-nowrap rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring">
                 {n.label}
               </a>
             ))}

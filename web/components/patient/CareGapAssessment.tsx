@@ -8,9 +8,9 @@ import { StatusBadge } from "@/components/shell/StatusBadge";
 import { Facts, None, Panel } from "./parts";
 
 /**
- * Why this patient has the A1c status they have, from the measure's own fields.
+ * Why this patient has the A1C status they have, from the measure's own fields.
  *
- * The measure (pipeline decision D6): an open gap is no A1c result in the 365
+ * The measure (pipeline decision D6): an open gap is no A1C result in the 365
  * days before the data date, and no result at all is a gap. Every figure here
  * is a column Gold computed - days overdue and the next due date included - so
  * nothing is recalculated in the browser and nothing is shown that the
@@ -35,17 +35,17 @@ export function CareGapAssessment({ patient: r, title }: { patient: PatientRow; 
     return (
       <Panel
         as="h2"
-        title={title ?? "A1c care-gap assessment"}
+        title={title ?? "A1C care-gap assessment"}
         actions={<StatusBadge tone="danger" label="Needs attention" />}
       >
-        <Verdict status={status} summary="Open A1c monitoring gap">
-          No qualifying A1c result was found for this patient in the available data.
-          Under the measure, a patient with no A1c result on file has an open gap.
+        <Verdict status={status} summary="Open A1C monitoring gap">
+          No qualifying A1C result was found for this patient in the available data.
+          Under the measure, a patient with no A1C result on file has an open gap.
         </Verdict>
         <Facts
           items={[
-            { label: "Latest A1c", value: <None /> },
-            { label: "Last A1c date", value: <None /> },
+            { label: "Latest A1C", value: <None /> },
+            { label: "Last A1C date", value: <None /> },
             { label: "Last seen", value: seen ?? <None>Not recorded</None> },
             { label: "Care setting", value: setting },
           ]}
@@ -58,16 +58,16 @@ export function CareGapAssessment({ patient: r, title }: { patient: PatientRow; 
     return (
       <Panel
         as="h2"
-        title={title ?? "A1c care-gap assessment"}
+        title={title ?? "A1C care-gap assessment"}
         actions={<StatusBadge tone="danger" label="Needs attention" />}
       >
-        <Verdict status={status} summary="Open A1c monitoring gap">
-          The most recent A1c in the available data is from {lastTest}, more than
+        <Verdict status={status} summary="Open A1C monitoring gap">
+          The most recent A1C in the available data is from {lastTest}, more than
           365 days before the data date ({asof}).
         </Verdict>
         <Facts
           items={[
-            { label: "Latest A1c", value: latest },
+            { label: "Latest A1C", value: latest },
             { label: "Last tested", value: lastTest },
             { label: "Days overdue", value: late === null ? <None>—</None> : <span className="num">{fmt(late)}</span> },
             { label: "Last seen", value: seen ?? <None>Not recorded</None> },
@@ -82,15 +82,15 @@ export function CareGapAssessment({ patient: r, title }: { patient: PatientRow; 
   return (
     <Panel
       as="h2"
-      title={title ?? "A1c monitoring status"}
+      title={title ?? "A1C monitoring status"}
       actions={<StatusBadge tone="success" label="Up to date" />}
     >
-      <Verdict status={status} summary="No current A1c monitoring gap">
-        An A1c result from {lastTest} falls within the 365 days before the data date ({asof}).
+      <Verdict status={status} summary="No current A1C monitoring gap">
+        An A1C result from {lastTest} falls within the 365 days before the data date ({asof}).
       </Verdict>
       <Facts
         items={[
-          { label: "Latest A1c", value: latest },
+          { label: "Latest A1C", value: latest },
           { label: "Tested", value: lastTest },
           // next_due_date is Gold's: the last result plus the measure's 365 days.
           ...(due ? [{ label: "Next due", value: <>{due} <span className="text-xs text-muted-foreground">(365 days after the last result)</span></> }] : []),

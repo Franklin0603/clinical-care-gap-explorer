@@ -6,7 +6,7 @@ import { GoDeeper, LearnModulePage, LearnSection, VideoCard } from "@/components
 
 export const metadata = { title: "Understanding Diabetes" };
 
-/** The four steps from a meal to an A1c result; each is a section below. */
+/** The four steps from a meal to an A1C result; each is a section below. */
 const STEPS = [
   { id: "food", title: "Food becomes glucose" },
   { id: "blood", title: "Glucose travels in the blood" },
@@ -15,9 +15,9 @@ const STEPS = [
 ];
 
 /**
- * Plain-language background on diabetes and A1c, told as one sequence: from a
- * meal to the glucose that an A1c test measures. Educational only: general
- * facts, no advice for any person, and no single A1c goal presented as right
+ * Plain-language background on diabetes and A1C, told as one sequence: from a
+ * meal to the glucose that an A1C test measures. Educational only: general
+ * facts, no advice for any person, and no single A1C goal presented as right
  * for everyone.
  */
 export default function DiabetesModule() {
@@ -43,7 +43,7 @@ export default function DiabetesModule() {
       </LearnSection>
 
       <section aria-labelledby="sequence" className="flex flex-col gap-3 rounded-xl border bg-muted/30 p-4 sm:p-5">
-        <h2 id="sequence" className="text-sm font-semibold">From a meal to an A1c result</h2>
+        <h2 id="sequence" className="text-sm font-semibold">From a meal to an A1C result</h2>
         <ol className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map((s, i) => (
             <li key={s.id} className="flex items-center gap-2">
@@ -61,7 +61,7 @@ export default function DiabetesModule() {
           ))}
         </ol>
         <p className="text-xs leading-relaxed text-muted-foreground">
-          Diabetes changes step 3, so more glucose stays in the blood. An A1c test measures step 4.
+          Diabetes changes step 3, so more glucose stays in the blood. An A1C test measures step 4.
         </p>
       </section>
 
@@ -95,39 +95,39 @@ export default function DiabetesModule() {
         </p>
       </LearnSection>
 
-      <LearnSection id="a1c" step={4} title="Some sticks to red blood cells: the A1c test" figure="red-cells" flip>
+      <LearnSection id="a1c" step={4} title="Some sticks to red blood cells: the A1C test" figure="red-cells" flip>
         <p>
           While glucose is in the blood, some of it sticks to haemoglobin, the protein in red blood cells that
           carries oxygen, and stays stuck for the life of the cell. The more glucose there has been in the
           blood, the more haemoglobin carries it.
         </p>
         <p>
-          <Term k="a1c">A1c</Term> (also called HbA1c, or glycated haemoglobin) is the blood test that measures
+          <Term k="a1c">A1C</Term> (also called HbA1c, or glycated haemoglobin) is the blood test that measures
           this: the share of haemoglobin with glucose attached, given as a percentage.
         </p>
         <GoDeeper title="Why about three months?">
           <p>
-            A red blood cell lives for roughly 120 days. Because the blood holds cells of every age, an A1c
+            A red blood cell lives for roughly 120 days. Because the blood holds cells of every age, an A1C
             reflects average glucose exposure over roughly the past two to three months, weighted towards the
             most recent weeks.
           </p>
         </GoDeeper>
       </LearnSection>
 
-      <LearnSection title="Why is A1c useful over time?">
+      <LearnSection title="Why is A1C useful over time?">
         <p>
           A single blood glucose reading is a snapshot: it changes with the last meal, exercise and time of
-          day. A1c smooths those changes out into one number that describes the past few months, which is why
+          day. A1C smooths those changes out into one number that describes the past few months, which is why
           it is the test used to monitor diabetes over time and the one this application tracks.
         </p>
         <p>
           It also has limits. It does not show daily highs and lows, and some conditions that affect red
           blood cells, such as certain anaemias or haemoglobin variants, can make the result less reliable.
         </p>
-        <GoDeeper title="A1c goals are individual">
+        <GoDeeper title="A1C goals are individual">
           <p>
             A goal around 7% is a common reference for many adults with diabetes, and the patient workspace
-            draws a line there for context. But goals differ from person to person, and A1c is one piece of
+            draws a line there for context. But goals differ from person to person, and A1C is one piece of
             information among many. Diagnosis, goals and treatment are decisions for a clinician who knows the
             patient. Nothing in this application recommends any of them.
           </p>

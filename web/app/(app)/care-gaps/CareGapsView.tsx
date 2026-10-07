@@ -205,14 +205,14 @@ export function CareGapsView({ initialStatus = "all" }: { initialStatus?: GapFil
         </div>
       ) : (
         <>
-          {/* md and up: a table. Last A1c and Insulin give way on a tablet. */}
+          {/* md and up: a table. Last A1C and Insulin give way on a tablet. */}
           <div className="hidden rounded-lg border bg-card md:block">
             <Table>
               <TableHeader>
                 <TableRow>
                   <TableHead className="pl-4">Patient</TableHead>
                   <TableHead>Gap status</TableHead>
-                  <TableHead className="hidden text-right lg:table-cell">Last A1c</TableHead>
+                  <TableHead className="hidden text-right lg:table-cell">Last A1C</TableHead>
                   <TableHead>Last test</TableHead>
                   <TableHead>Last seen</TableHead>
                   <TableHead className="hidden lg:table-cell">Insulin</TableHead>

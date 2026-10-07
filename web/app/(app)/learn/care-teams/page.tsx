@@ -16,7 +16,7 @@ export default function CareTeamsModule() {
       <LearnSection title="A review, start to finish">
         <p>
           Imagine a nurse or care coordinator responsible for the diabetes population at a practice. Their
-          question each week is the same: who has gone too long without an A1c, why, and what is being done
+          question each week is the same: who has gone too long without an A1C, why, and what is being done
           about it. The application is organised around that question, in six steps.
         </p>
         <p>
@@ -34,7 +34,7 @@ export default function CareTeamsModule() {
 
       <LearnSection title="Evidence first, workflow second">
         <p>
-          Every gap rests on clinical source data: an A1c result and its date, or the absence of any result.
+          Every gap rests on clinical source data: an A1C result and its date, or the absence of any result.
           The application derives the gap status from that data the same way on every page. Follow-up work is
           recorded separately, as workflow, and nothing recorded there can change the status. A completed task
           on an overdue patient is still an overdue patient until a new qualifying result arrives.

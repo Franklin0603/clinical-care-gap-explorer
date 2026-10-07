@@ -258,7 +258,7 @@ export function PatientDirectory({ state: s, set }: { state: DirectoryState; set
                 <TableRow>
                   <TableHead className="pl-4">Patient</TableHead>
                   <TableHead>Gap status</TableHead>
-                  <TableHead className="text-right">Latest A1c</TableHead>
+                  <TableHead className="text-right">Latest A1C</TableHead>
                   <TableHead className="hidden lg:table-cell">Last test</TableHead>
                   <TableHead>Last seen</TableHead>
                   <TableHead className="hidden lg:table-cell">Insulin</TableHead>
@@ -291,7 +291,7 @@ export function PatientDirectory({ state: s, set }: { state: DirectoryState; set
                 </div>
                 <div className="flex items-end justify-between gap-3">
                   <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-xs">
-                    <dt className="text-muted-foreground">Latest A1c</dt>
+                    <dt className="text-muted-foreground">Latest A1C</dt>
                     <dd><LatestA1c r={r} /></dd>
                     <dt className="text-muted-foreground">Last seen</dt>
                     <dd className="num">{longDate(r.last_encounter_date as string | null) ?? "—"}</dd>

@@ -41,6 +41,17 @@ test("validation: the headline numbers", () => {
   assert.equal(metric(chat("How many patients are overdue?")[0])!.value, String(gold.open_gaps - gold.never_tested));
 });
 
+test("validation: \"never-tested\" with a hyphen means never tested, not everyone", () => {
+  for (const q of ["Show me never-tested patients.", "List the never-tested patients", "Which patients have never been tested?"]) {
+    const a = chat(q)[0];
+    assert.equal(metric(a)!.value, String(gold.never_tested), q);
+    const list = a.blocks.find((b): b is Extract<Block, { kind: "patients" }> => b.kind === "patients")!;
+    assert.equal(list.ids.length, gold.never_tested, q);
+  }
+  const how = chat("Show me never-tested patients.", "How did you calculate this?")[1];
+  assert.match(text(how), new RegExp(`${gold.never_tested} patients`));
+});
+
 test("validation: age band with the highest gap rate is 45-64, 15 of 51", () => {
   const a = chat("Which age group has the highest observed gap rate?")[0];
   const m = metric(a)!;
@@ -68,7 +79,7 @@ test("never tested: count and list, with the evidence-aware wording", () => {
   const list = a.blocks.find((b) => b.kind === "patients") as { ids: string[] };
   assert.equal(list.ids.length, gold.never_tested);
   for (const id of list.ids) assert.equal(rows.find((r: { patient_id: string }) => r.patient_id === id).last_a1c_date, null);
-  assert.match(text(a), /no A1c result appears in the available data/);
+  assert.match(text(a), /no A1C result appears in the available data/);
   assert.match(text(a), /\/care-gaps\?status=never/);
   assert.equal(a.title, "Never-tested patients");
 });
@@ -80,7 +91,7 @@ test("follow-ups narrow the previous population", () => {
   const seen = band.filter((r: { last_encounter_date: string }) => r.last_encounter_date >= "2026-02-23");
   assert.equal(m.value, String(seen.length));
   assert.match(m.detail!, /Of 51 patients aged 45–64/);
-  assert.match(text(b), /Of the 15 with an open A1c gap/);
+  assert.match(text(b), /Of the 15 with an open A1C gap/);
 
   const [, c, d] = chat("How many patients have an open gap?", "Show them", "Which of them were seen in the last 6 months?");
   assert.equal((c.blocks.find((x) => x.kind === "patients") as { ids: string[] }).ids.length, gold.open_gaps);
@@ -97,7 +108,7 @@ test("SQL and method only on request, and they describe the last answer", () => 
   const [a, b, c] = chat("How many patients have never been tested?", "How did you calculate this?", "Show me the SQL");
   assert.ok(!kinds(a).includes("sql"), "no SQL by default");
   assert.ok(kinds(b).includes("method"));
-  assert.match(text(b), /Never tested: no A1c result anywhere/);
+  assert.match(text(b), /Never tested: no A1C result anywhere/);
   const sql = c.blocks.find((x) => x.kind === "sql") as { sql: string };
   assert.match(sql.sql, /last_a1c_date IS NULL/);
   assert.equal(chat("Show me the SQL")[0].blocks[0].kind, "text", "nothing to show before a question");
@@ -150,7 +161,7 @@ test("wording: whole cohort, percentages, and re-showing a follow-up keeps its d
   assert.ok(!/100\.0%/.test(metric(a)!.detail!));
   assert.equal(metric(chat("What percentage of the cohort is current?")[0])!.label, "of the cohort are current patients");
   const [, , c] = chat("How many patients have an open gap?", "How many of them were seen in the last 6 months?", "Show them");
-  assert.match(metric(c)!.detail!, /Of 25 patients with an open A1c gap/);
+  assert.match(metric(c)!.detail!, /Of 25 patients with an open A1C gap/);
 });
 
 test("phase 8.1: the brief's context chain keeps its reference", () => {
@@ -170,7 +181,7 @@ test("phase 8.1: the brief's context chain keeps its reference", () => {
   // "those" = that seen-recently 45-64 group; now narrowed to open gaps.
   const gapSeen = seen.filter((r: { gap_flag: boolean }) => r.gap_flag);
   assert.equal(metric(c)!.value, String(gapSeen.length));
-  assert.match(metric(c)!.label, /open A1c gap aged 45–64, seen in the last 6 months/);
+  assert.match(metric(c)!.label, /open A1C gap aged 45–64, seen in the last 6 months/);
   assert.match(metric(c)!.detail!, new RegExp(`Of ${seen.length} patients aged 45–64`));
 });
 

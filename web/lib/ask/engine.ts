@@ -109,7 +109,8 @@ const BAND_LABEL = (b: AgeBand) => (b === "76+" ? "76+" : b.replace("-", "–"))
 const has = (q: string, re: RegExp) => re.test(q);
 
 function parseStatus(q: string): StatusFilter | null {
-  if (has(q, /never (been )?(tested|had)|no (recorded )?a1c|without (an |any )?a1c|untested|not been tested|no result/)) return "never";
+  // The hyphenated forms are how people write it ("never-tested patients").
+  if (has(q, /never[- ](been[- ])?(tested|had)|no (recorded )?a1c|without (an |any )?a1c|untested|not been tested|no result/)) return "never";
   if (has(q, /\boverdue\b/) && !has(q, /most overdue|longest overdue/)) return "overdue";
   if (has(q, /\bcurrent\b|up[- ]to[- ]date/)) return "current";
   if (has(q, /open (a1c )?(monitoring )?gaps?|care gaps?|\bwith (a|an open) gap|have (a|an open) gap|\bgaps?\b/)) return "gap";
@@ -153,12 +154,12 @@ function popRows(rows: PatientRow[], p: Pop, asof: string): PatientRow[] {
   return base.filter((r) => r.last_encounter_date && String(r.last_encounter_date) >= since);
 }
 
-/** The population in words: "patients aged 45–64 with an open A1c gap, seen in the last 6 months". */
+/** The population in words: "patients aged 45–64 with an open A1C gap, seen in the last 6 months". */
 export function describePop(p: Pop): string {
   const status: Record<StatusFilter, string> = {
     all: "patients",
     current: "current patients",
-    gap: "patients with an open A1c gap",
+    gap: "patients with an open A1C gap",
     never: "never-tested patients",
     overdue: "overdue patients",
   };
@@ -173,10 +174,10 @@ export function describePop(p: Pop): string {
 
 const STATUS_DEFS: Record<StatusFilter, string | null> = {
   all: null,
-  current: "Current: an A1c result within the 365 days before the data date.",
-  gap: "Open A1c gap: no A1c result in the 365 days before the data date, including patients with no result at all.",
-  never: "Never tested: no A1c result anywhere in the available data. Every never-tested patient has an open gap.",
-  overdue: "Overdue: an earlier A1c result, but none in the 365 days before the data date.",
+  current: "Current: an A1C result within the 365 days before the data date.",
+  gap: "Open A1C gap: no A1C result in the 365 days before the data date, including patients with no result at all.",
+  never: "Never tested: no A1C result anywhere in the available data. Every never-tested patient has an open gap.",
+  overdue: "Overdue: an earlier A1C result, but none in the 365 days before the data date.",
 };
 
 function method(p: Pop, n: number, of: number, ofLabel: string, asof: string, total: number) {
@@ -241,7 +242,7 @@ function popLinks(p: Pop): { href: string; label: string }[] {
 /* ------------------------------------------------------------- answers */
 
 function basis(asof: string) {
-  return `Based on the available A1c results through ${longDate(asof)}.`;
+  return `Based on the available A1C results through ${longDate(asof)}.`;
 }
 
 function populationAnswer(
@@ -274,7 +275,7 @@ function populationAnswer(
     });
   }
   if (pop.status === "never" && n > 0) {
-    blocks.push({ kind: "text", text: "\"Never tested\" means no A1c result appears in the available data, which may not hold a patient's complete history." });
+    blocks.push({ kind: "text", text: "\"Never tested\" means no A1C result appears in the available data, which may not hold a patient's complete history." });
   }
   // Open gaps in the pipeline's worklist order (as Care Gaps), then current
   // patients by MRN (as Patients).
@@ -316,7 +317,7 @@ function groupAnswer(dimension: "age" | "setting", q: string, data: Data): Answe
       kind: "metric",
       value: pctText(pick.gaps, pick.total),
       label: `${label(pick.key)} has the ${lowest ? "lowest" : "highest"} observed gap rate${small.length ? ` among groups with ${SMALL}+ patients` : ""}`,
-      detail: `${pick.gaps} of ${pick.total} patients have an open A1c gap. ${basis(data.asof)}`,
+      detail: `${pick.gaps} of ${pick.total} patients have an open A1C gap. ${basis(data.asof)}`,
     });
   }
   if (small.length) {
@@ -339,7 +340,7 @@ function groupAnswer(dimension: "age" | "setting", q: string, data: Data): Answe
       pop, last: "groups",
       method: [
         { label: "Population", value: `All ${data.rows.length} patients in the diabetes cohort, grouped by ${dimension === "age" ? "age band (18–44, 45–64, 65–75, 76+)" : "care setting of the last encounter"}.` },
-        { label: "Gap rate", value: "Patients with an open A1c gap in the group, divided by all patients in the group." },
+        { label: "Gap rate", value: "Patients with an open A1C gap in the group, divided by all patients in the group." },
         { label: "Ranking", value: `Groups with fewer than ${SMALL} patients are shown but not ranked: one patient moves their rate too far.` },
         { label: "Definition", value: STATUS_DEFS.gap! },
       ],
@@ -364,7 +365,7 @@ function yearsAnswer(data: Data): Result {
       if (!last || p.d > last) last = p.d;
     }
   }
-  if (!first) return { blocks: [{ kind: "text", text: "No A1c results are available." }], ctx: { last: "none" } };
+  if (!first) return { blocks: [{ kind: "text", text: "No A1C results are available." }], ctx: { last: "none" } };
   const rows = [];
   for (let y = Number(first.slice(0, 4)); y <= Number(last.slice(0, 4)); y++) {
     rows.push({ year: String(y), tests: tests.get(String(y)) ?? 0, patients: who.get(String(y))?.size ?? 0 });
@@ -375,7 +376,7 @@ function yearsAnswer(data: Data): Result {
   const total = rows.reduce((n, r) => n + r.tests, 0);
   return {
     blocks: [
-      { kind: "metric", value: total.toLocaleString("en-US"), label: "A1c results recorded", detail: `From ${longDate(first)} to ${longDate(last)}, in the synthetic records.` },
+      { kind: "metric", value: total.toLocaleString("en-US"), label: "A1C results recorded", detail: `From ${longDate(first)} to ${longDate(last)}, in the synthetic records.` },
       { kind: "text", text: `Recorded testing rose from ${full[0]?.tests ?? 0} results in ${full[0]?.year ?? "—"} to a peak of ${peak.tests} in ${peak.year}. ${partial[0]} and ${partial[1]} are partial years: the history starts at the first result on file and stops at the data date, so their lower counts are coverage, not a fall in testing.` },
       { kind: "years", rows, partial },
       { kind: "links", links: [{ href: "/analytics", label: "View Analytics" }] },
@@ -384,11 +385,11 @@ function yearsAnswer(data: Data): Result {
     ctx: {
       last: "years",
       method: [
-        { label: "Population", value: `Every recorded A1c result for the ${data.rows.length} patients in the cohort.` },
+        { label: "Population", value: `Every recorded A1C result for the ${data.rows.length} patients in the cohort.` },
         { label: "Counts", value: "Results recorded per calendar year, and separately the number of distinct patients with at least one result that year." },
         { label: "Partial years", value: `${partial[0]} begins at the first result on file; ${partial[1]} ends at the data date.` },
       ],
-      sql: "-- The per-result A1c history is not in the patients view; it is the\n-- patient_detail export, counted per calendar year:\nSELECT year(observed_at) AS year,\n       count(*) AS a1c_results,\n       count(DISTINCT patient_id) AS patients_tested\nFROM a1c_observations\nGROUP BY 1\nORDER BY 1",
+      sql: "-- The per-result A1C history is not in the patients view; it is the\n-- patient_detail export, counted per calendar year:\nSELECT year(observed_at) AS year,\n       count(*) AS a1c_results,\n       count(DISTINCT patient_id) AS patients_tested\nFROM a1c_observations\nGROUP BY 1\nORDER BY 1",
     },
   };
 }
@@ -406,10 +407,10 @@ function patientAnswer(r: PatientRow, data: Data): Answer {
       {
         kind: "text",
         text: s === "never"
-          ? `No qualifying A1c result was found for MRN ${shortMrn(r)} in the available data, so the patient has an open gap.`
+          ? `No qualifying A1C result was found for MRN ${shortMrn(r)} in the available data, so the patient has an open gap.`
           : s === "overdue"
-            ? `The most recent A1c in the available data is ${v?.toFixed(1)}% on ${longDate(String(r.last_a1c_date))}, ${late?.toLocaleString("en-US")} days past due.`
-            : `The patient is current: an A1c result of ${v?.toFixed(1)}% on ${longDate(String(r.last_a1c_date))}.`,
+            ? `The most recent A1C in the available data is ${v?.toFixed(1)}% on ${longDate(String(r.last_a1c_date))}, ${late?.toLocaleString("en-US")} days past due.`
+            : `The patient is current: an A1C result of ${v?.toFixed(1)}% on ${longDate(String(r.last_a1c_date))}.`,
       },
       { kind: "links", links },
     ],
@@ -429,8 +430,8 @@ function patientAnswer(r: PatientRow, data: Data): Answer {
 const LIMITS: { test: RegExp; text: string; suggest: string[] }[] = [
   {
     test: /\border(ed|s)?\b/,
-    text: "The available source does not contain an orders table, so I cannot determine whether an A1c was ordered but not completed. A patient whose test was ordered and missed looks the same as one who was never sent for it.",
-    suggest: ["Which patients have never had an A1c?", "Which patients are overdue?"],
+    text: "The available source does not contain an orders table, so I cannot determine whether an A1C was ordered but not completed. A patient whose test was ordered and missed looks the same as one who was never sent for it.",
+    suggest: ["Which patients have never had an A1C?", "Which patients are overdue?"],
   },
   {
     test: /\bdose|dosage|how much insulin|units of insulin|how many units\b/,
@@ -439,22 +440,22 @@ const LIMITS: { test: RegExp; text: string; suggest: string[] }[] = [
   },
   {
     test: /\b(should|recommend|advis|treat(ment)?|prescrib|titrat|diagnos|is it safe|ought to)\b/,
-    text: "I can't give clinical advice. I report what the available data shows about A1c monitoring; what to do for a patient is a decision for a clinician with the full record.",
-    suggest: ["Which patients have an open A1c gap?"],
+    text: "I can't give clinical advice. I report what the available data shows about A1C monitoring; what to do for a patient is a decision for a clinician with the full record.",
+    suggest: ["Which patients have an open A1C gap?"],
   },
   {
     test: /\b(risk|urgen(t|cy)|sickest|high[- ]risk|most at risk|severity|priority score)\b/,
     text: "There is no risk or urgency score in this data, and I won't invent one. I can show which patients have never been tested, or who is most overdue.",
-    suggest: ["Which patients are most overdue?", "Which patients have never had an A1c?"],
+    suggest: ["Which patients are most overdue?", "Which patients have never had an A1C?"],
   },
   {
     test: /\b(control(led)?|uncontrolled|at goal|on target|below 7|above 7)\b/,
-    text: "This assistant reports whether A1c is being monitored, not whether results are at goal. Individual A1c goals differ, and the app does not classify patients as controlled or uncontrolled.",
+    text: "This assistant reports whether A1C is being monitored, not whether results are at goal. Individual A1C goals differ, and the app does not classify patients as controlled or uncontrolled.",
     suggest: ["How many patients are current?", "What is the gap rate by age band?"],
   },
   {
     test: /\b(colonoscop|mammogra|cholesterol|lipid|blood pressure|vaccin|immuni[sz]|smoking|bmi|weight|allerg|readmission)\b/,
-    text: "That isn't in the data this assistant reads. It answers questions about the diabetes cohort's A1c monitoring and testing.",
+    text: "That isn't in the data this assistant reads. It answers questions about the diabetes cohort's A1C monitoring and testing.",
     suggest: ["How many patients are in the cohort?"],
   },
   {
@@ -472,8 +473,8 @@ const LIMITS: { test: RegExp; text: string; suggest: string[] }[] = [
 /* ---------------------------------------------------------------- entry */
 
 const SUGGEST_START = [
-  "How many patients currently have an open A1c gap?",
-  "Which patients have never had an A1c?",
+  "How many patients currently have an open A1C gap?",
+  "Which patients have never had an A1C?",
   "Which age group has the highest gap rate?",
   "Show patients with an open gap who were seen in the last 6 months",
 ];
@@ -502,7 +503,7 @@ export function answer(question: string, ctx: Ctx, data: Data): Result {
           kind: "sql",
           sql: ctx.sql,
           note: ctx.sql.includes("a1c_observations")
-            ? "Not executed. The yearly counts come from the per-patient A1c history, which this browser's query engine does not load."
+            ? "Not executed. The yearly counts come from the per-patient A1C history, which this browser's query engine does not load."
             : "Not executed to produce the answer. It expresses the same filters against the patients view of the care-gap report.",
         },
       ],
@@ -537,7 +538,7 @@ export function answer(question: string, ctx: Ctx, data: Data): Result {
   // Testing over time.
   if (has(q, /(testing|tests|a1c results?|a1cs) (changed|over time|per year|by year|trend)|over time|by year|per year|trend/)) {
     const res = yearsAnswer(data);
-    return "needs" in res ? res : { ...res, title: "A1c testing over time" };
+    return "needs" in res ? res : { ...res, title: "A1C testing over time" };
   }
 
   // Group comparisons.
@@ -552,10 +553,10 @@ export function answer(question: string, ctx: Ctx, data: Data): Result {
     const rows = sortPatients(data.rows.filter((r) => daysOverdue(r) !== null), "overdue");
     return {
       blocks: [
-        { kind: "metric", value: String(rows.length), label: "patients have an earlier A1c that is now overdue", detail: `Most overdue first. Patients with no A1c at all have no due date to be late against and are not in this list. ${basis(data.asof)}` },
+        { kind: "metric", value: String(rows.length), label: "patients have an earlier A1C that is now overdue", detail: `Most overdue first. Patients with no A1C at all have no due date to be late against and are not in this list. ${basis(data.asof)}` },
         { kind: "patients", ids: rows.map((r) => String(r.patient_id)) },
         { kind: "links", links: [{ href: "/care-gaps?status=overdue", label: "View all in Care Gaps" }] },
-        { kind: "suggestions", items: ["Which patients have never had an A1c?"] },
+        { kind: "suggestions", items: ["Which patients have never had an A1C?"] },
       ],
       ctx: { pop: { ...ALL_PATIENTS, status: "overdue" }, last: "list", method: method({ ...ALL_PATIENTS, status: "overdue" }, rows.length, data.rows.length, "patients in the cohort", data.asof, data.rows.length), sql: popSql({ ...ALL_PATIENTS, status: "overdue" }, data.asof, "list").replace("ORDER BY priority NULLS LAST, mrn", "ORDER BY days_overdue DESC") },
       title: "Most overdue patients",
@@ -575,7 +576,7 @@ export function answer(question: string, ctx: Ctx, data: Data): Result {
   if (Object.keys(mods).length === 0 && !follow && !mentionsCohort) {
     return {
       blocks: [
-        { kind: "text", text: "I can't answer that from the data I have. I answer questions about the diabetes cohort's A1c monitoring: who has an open gap, who has never been tested, how groups compare, how testing has changed over time, and individual patients by MRN." },
+        { kind: "text", text: "I can't answer that from the data I have. I answer questions about the diabetes cohort's A1C monitoring: who has an open gap, who has never been tested, how groups compare, how testing has changed over time, and individual patients by MRN." },
         { kind: "suggestions", items: SUGGEST_START.slice(0, 3) },
       ],
       ctx: { ...ctx, last: "none" },
@@ -594,7 +595,7 @@ export function answer(question: string, ctx: Ctx, data: Data): Result {
     if (ctx.last === "groups" && narrowed && pop.status === "all") {
       const gaps = popRows(data.rows, { ...pop, status: "gap" }, data.asof).length;
       const allGaps = popRows(data.rows, { ...base, status: "gap" }, data.asof).length;
-      res.blocks.splice(1, 0, { kind: "text", text: `Of the ${allGaps} with an open A1c gap, ${gaps} ${gaps === 1 ? "was" : "were"}.` });
+      res.blocks.splice(1, 0, { kind: "text", text: `Of the ${allGaps} with an open A1C gap, ${gaps} ${gaps === 1 ? "was" : "were"}.` });
     }
     return res;
   }
@@ -611,7 +612,7 @@ function say(text: string, ctx: Ctx): Answer {
 /** A short conversation title from the first question's population. */
 function titleFor(p: Pop, mode: "count" | "list" | "percent"): string {
   const base: Record<StatusFilter, string> = {
-    all: "Cohort size", current: "Current patients", gap: "Open A1c gaps",
+    all: "Cohort size", current: "Current patients", gap: "Open A1C gaps",
     never: "Never-tested patients", overdue: "Overdue patients",
   };
   let t = base[p.status];
