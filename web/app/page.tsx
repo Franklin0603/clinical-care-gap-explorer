@@ -10,6 +10,7 @@ import { LEARN_MODULES, videoById } from "@/lib/learn";
 import { Button } from "@/components/ui/button";
 import { GapStatusBadge } from "@/components/GapStatusBadge";
 import { BASE, Container, Logo, MoreLink, ProductFrame, SectionHeading, SyntheticNote } from "@/components/landing/LandingParts";
+import { TourButton } from "@/components/landing/TourDialog";
 
 export const metadata = {
   title: { absolute: "Care Gap Explorer · Find the patients behind the care gap" },
@@ -162,9 +163,7 @@ export default function LandingPage() {
               <Button size="lg" className="h-11 px-5 text-base" render={<Link href="/home" />}>
                 Explore Care Gap Explorer <ArrowRight data-icon="inline-end" aria-hidden />
               </Button>
-              <Button size="lg" variant="outline" className="h-11 bg-card px-5 text-base" render={<a href="#how-it-works" />}>
-                See how it works
-              </Button>
+              <TourButton />
             </div>
             <p className="mt-6 text-sm text-muted-foreground">
               <span className="num font-medium text-foreground">{gold.cohort}</span> patients ·{" "}
