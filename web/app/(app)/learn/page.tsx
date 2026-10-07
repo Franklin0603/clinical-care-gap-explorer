@@ -61,7 +61,7 @@ export default function LearnPage() {
 
       <Section title="About the project and its data" blurb="Why this application exists, and what the synthetic data behind every page can and cannot tell you.">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <AppLink href="/" label="Introduction" about="What this project is, and how the data gets from source to list." />
+          <AppLink href="/" label="Project overview" about="What Care Gap Explorer is, who it is for, and how it was built." />
           <AppLink href="/data-quality#limitations" label="Data limitations" about="No orders table, fills are not doses, and how role-scoped exports work." />
           <AppLink href="/data-quality" label="Data & Quality" about="How the data is loaded, checked and corrected before it reaches a list." />
         </div>

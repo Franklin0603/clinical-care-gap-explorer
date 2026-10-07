@@ -83,7 +83,6 @@ export const NAV_SECTIONS: NavSection[] = [
         href: "/learn",
         label: "Learn",
         icon: BookOpen,
-        legacy: [{ href: "/", label: "Introduction" }],
       },
     ],
   },
@@ -149,7 +148,7 @@ export function locate(pathname: string): Location {
     ...NAV_FOOTER.map((i) => [undefined, i] as [undefined, NavItem]),
   ];
 
-  // Adopted routes first: "/" is Learn's, and must not fall through to anything.
+  // Adopted routes first, so an older route lands on the item that took it over.
   for (const [section, item] of all) {
     const legacy = item.legacy?.find((l) => within(path, l.href));
     if (legacy) return { section, item, legacy };

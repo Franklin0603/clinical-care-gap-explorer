@@ -2,17 +2,16 @@ import { ReactNode } from "react";
 
 import { AppHeader } from "./AppHeader";
 import { AppSidebar } from "./AppSidebar";
+import { ReviewProvider } from "@/components/review/ReviewDrawer";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 /**
  * Sidebar, global header, and the page.
  *
- * Its own component rather than inline in the root layout because the public
- * landing page will sit outside it. When that is built, the app routes move
- * into an (app) route group whose layout is this, and the landing page does not
- * inherit a sidebar. Doing that move now would have pushed the 404 page out of
- * the shell too, so it waits for the phase that needs it.
+ * The layout of the (app) route group, so the public landing page at / does
+ * not inherit a sidebar. The 404 page renders under the root layout instead,
+ * and wraps itself in this so a mistyped app URL still shows the navigation.
  */
 export function AppShell({ children }: { children: ReactNode }) {
   return (
@@ -26,11 +25,13 @@ export function AppShell({ children }: { children: ReactNode }) {
         Skip to content
       </a>
       <SidebarProvider>
-        <AppSidebar />
-        <SidebarInset id="main-content" tabIndex={-1} className="min-w-0 outline-none">
-          <AppHeader />
-          {children}
-        </SidebarInset>
+        <ReviewProvider>
+          <AppSidebar />
+          <SidebarInset id="main-content" tabIndex={-1} className="min-w-0 outline-none">
+            <AppHeader />
+            {children}
+          </SidebarInset>
+        </ReviewProvider>
       </SidebarProvider>
     </TooltipProvider>
   );

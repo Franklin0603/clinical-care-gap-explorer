@@ -2,15 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HeartPulse, UserRound } from "lucide-react";
+import { HeartPulse, MessageSquareHeart, UserRound } from "lucide-react";
 
 import { cn } from "cn";
 import { NAV_FOOTER, NAV_SECTIONS, NavItem, locate } from "./nav";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { useReview } from "@/components/review/ReviewDrawer";
 import {
   Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent,
   SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuBadge,
-  SidebarMenuButton, SidebarMenuItem, SidebarRail, useSidebar,
+  SidebarMenuButton, SidebarMenuItem, SidebarRail, SidebarSeparator, useSidebar,
 } from "@/components/ui/sidebar";
 
 /**
@@ -21,6 +22,7 @@ import {
 export function AppSidebar() {
   const here = locate(usePathname());
   const { isMobile, setOpenMobile } = useSidebar();
+  const review = useReview();
 
   // The mobile Sheet does not close itself when a link inside it is followed,
   // which leaves the menu covering the page you just asked for.
@@ -91,6 +93,21 @@ export function AppSidebar() {
       </SidebarContent>
 
       <SidebarFooter className="border-t">
+        {/* Not a route: it opens a drawer over the current page, so the
+            visitor reviews what they were just looking at. Only ever opened by
+            choice - nothing in the app prompts for it. */}
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              tooltip="Review this project"
+              onClick={(e) => { const from = e.currentTarget; close(); review.show(from); }}
+            >
+              <MessageSquareHeart aria-hidden />
+              <span>Review this project</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+        <SidebarSeparator className="mx-0" />
         <SidebarMenu>{NAV_FOOTER.map((i) => entry(i, true))}</SidebarMenu>
 
         {/* Not a button: there is no account to open. It says so rather than

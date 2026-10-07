@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { AppShell } from "@/components/shell/AppShell";
 import "./globals.css";
 
 const SITE = "https://franklin0603.github.io/clinical-care-gap-explorer";
@@ -49,10 +48,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        {/* FR7 still holds: the synthetic-data notice is on every route,
-            including 404 and error. It moved from a full-width red band into
-            the global header and the sidebar - see SyntheticDataBadge. */}
-        <AppShell>{children}</AppShell>
+        {/* The shell is not here: the public landing page at / sits outside
+            it, and the application routes get it from app/(app)/layout.tsx.
+            FR7 still holds - the synthetic-data notice is on every route, in
+            the app header and in the landing page's own header. */}
+        {children}
       </body>
     </html>
   );
