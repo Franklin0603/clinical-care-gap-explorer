@@ -170,13 +170,17 @@ export async function sendReview(
   s: ReviewSubmission,
   endpoint: string = REVIEW_ENDPOINT,
   fetchImpl: typeof fetch = fetch,
+  /** A hidden field people never see; a bot that fills it is discarded by
+   *  the form service (Formspree's `_gotcha`). */
+  honeypot = "",
 ): Promise<SendResult> {
   if (!endpoint) return { ok: false, reason: "not-configured" };
   try {
     const res = await fetchImpl(endpoint, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(s),
+      // Accept: JSON, so a form service answers with a status, not a redirect.
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(honeypot ? { ...s, _gotcha: honeypot } : s),
     });
     return res.ok ? { ok: true } : { ok: false, reason: "failed", status: res.status };
   } catch {

@@ -61,6 +61,7 @@ function ReviewDialog({ open, onOpenChange, page, returnFocus }: {
   const [answers, setAnswers] = useState<ReviewAnswers>(EMPTY_ANSWERS);
   const [errors, setErrors] = useState<ReviewErrors>({});
   const [phase, setPhase] = useState<Phase>({ kind: "form" });
+  const [trap, setTrap] = useState("");
   const set = <K extends keyof ReviewAnswers>(k: K, v: ReviewAnswers[K]) => {
     setAnswers((a) => ({ ...a, [k]: v }));
     if (errors[k]) setErrors((e) => ({ ...e, [k]: undefined }));
@@ -89,7 +90,7 @@ function ReviewDialog({ open, onOpenChange, page, returnFocus }: {
     }
     const submission = buildSubmission(answers, page);
     setPhase({ kind: "sending" });
-    setPhase({ kind: "result", result: await sendReview(submission), submission });
+    setPhase({ kind: "result", result: await sendReview(submission, undefined, undefined, trap), submission });
   };
 
   const errorCount = Object.values(errors).filter(Boolean).length;
@@ -115,6 +116,17 @@ function ReviewDialog({ open, onOpenChange, page, returnFocus }: {
             </div>
 
             <form onSubmit={submit} noValidate className="flex min-h-0 flex-1 flex-col">
+              {/* Spam trap: hidden from people and from assistive technology. */}
+              <input
+                type="text"
+                name="_gotcha"
+                value={trap}
+                onChange={(e) => setTrap(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="absolute -left-[9999px] size-px opacity-0"
+              />
               <div className="flex min-h-0 flex-1 flex-col gap-7 overflow-y-auto overscroll-contain px-6 py-5">
                 {errorCount > 0 && (
                   <p role="alert" className="flex gap-2 rounded-lg border border-status-danger/30 bg-status-danger/5 p-3 text-sm text-status-danger">

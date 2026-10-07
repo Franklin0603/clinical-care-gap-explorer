@@ -2,9 +2,18 @@ import type { Metadata } from "next";
 import { gold } from "@/lib/data";
 import "./globals.css";
 
-const SITE = "https://franklin0603.github.io/clinical-care-gap-explorer";
+/**
+ * The site's public origin, for share cards and canonical URLs. Set
+ * NEXT_PUBLIC_SITE_URL for a custom domain; on Vercel the production URL is
+ * known at build time; otherwise the GitHub Pages address.
+ */
+const SITE = (
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
+  "https://franklin0603.github.io/clinical-care-gap-explorer"
+).replace(/\/+$/, "");
 const DESCRIPTION =
-  "Finds diabetic patients overdue for an A1C test, and shows the data quality work required before that list can be trusted. Synthetic data only.";
+  "An explainable healthcare data application for identifying and exploring A1C monitoring gaps in a synthetic diabetes cohort. A portfolio project; not for clinical use.";
 
 /**
  * Open Graph matters here because this link gets posted.
