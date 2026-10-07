@@ -8,6 +8,9 @@
  * not sequential.
  */
 
+import { gold } from "./data";
+import { AUDIT } from "./quality";
+
 export type Entry = {
   term: string;
   short: string;   // what the inline popover shows — one or two sentences
@@ -17,7 +20,7 @@ export type Entry = {
 
 export const GLOSSARY: Record<string, Entry> = {
   a1c: {
-    term: "A1c",
+    term: "A1C",
     tag: "LOINC 4548-4",
     short:
       "A blood test giving average blood sugar over about three months. Under 5.7% is normal, 5.7 to 6.4 prediabetes, 6.5 and above diabetes.",
@@ -27,16 +30,16 @@ export const GLOSSARY: Record<string, Entry> = {
   "care gap": {
     term: "Care gap",
     short:
-      "A patient who qualifies for a routine piece of care and has not received it. Here: a diabetic with no A1c result in twelve months.",
+      "A patient who qualifies for a routine piece of care and has not received it. Here: a diabetic with no A1C result in twelve months.",
     long:
       "The list gets handed to somebody who picks up a phone, which is what makes a wrong list expensive in both directions. A false positive wastes a call, a false negative leaves a patient invisible.",
   },
   cohort: {
     term: "Cohort",
     short:
-      "The set of patients a measure applies to. Here: 116 people carrying any of eight diabetes codes who were alive on the as-of date.",
+      `The set of patients a measure applies to. Here: ${gold.cohort} people carrying any of eight diabetes codes who were alive on the as-of date.`,
     long:
-      "Getting it wrong invalidates everything downstream, which is why it lives in one file with every code written out and every exclusion explained. 161 patients carry a diabetes code; 45 of them died before the as-of date, and a care-gap list is a call list.",
+      `Getting it wrong invalidates everything downstream, which is why it lives in one file with every code written out and every exclusion explained. ${AUDIT.everCoded} patients carry a diabetes code; ${AUDIT.deceasedByAsof} of them died before the as-of date, and a care-gap list is a call list.`,
   },
   snomed: {
     term: "SNOMED CT",
@@ -129,21 +132,14 @@ export const GLOSSARY: Record<string, Entry> = {
     short:
       "The fixed 'today' every age and every twelve-month window is computed against.",
     long:
-      "The simulated data ends on that date. With a wall-clock today, every patient crosses the twelve-month line eventually, so 25 gaps becomes 116 of 116 within a year and the report would describe the calendar rather than the data.",
+      `The simulated data ends on that date. With a wall-clock today, every patient crosses the twelve-month line eventually, so ${gold.open_gaps} gaps becomes ${gold.cohort} of ${gold.cohort} within a year and the report would describe the calendar rather than the data.`,
   },
   denominator: {
     term: "Denominator",
     short:
-      "The patients a rate is measured against. Here it is 116, the cohort alive on the as-of date.",
+      `The patients a rate is measured against. Here it is ${gold.cohort}, the cohort alive on the as-of date.`,
     long:
-      "Quoting a percentage without its denominator hides the definition. 25 of 116 and 69 of 161 are the same data with different exclusion rules.",
-  },
-  "catch rate": {
-    term: "Catch rate",
-    short:
-      "Defects the checks found, divided by defects deliberately injected. 6 of 6 types, 249 of 249 rows.",
-    long:
-      "Without injecting known defects first, 'I found twelve problems' says nothing about whether that was twelve of twelve or twelve of four hundred. The injection log is what turns a claim into a measurement.",
+      `Quoting a percentage without its denominator hides the definition. ${gold.open_gaps} of ${gold.cohort} and ${AUDIT.everCodedGaps} of ${AUDIT.everCoded} are the same data with different exclusion rules.`,
   },
 };
 
@@ -163,6 +159,6 @@ export const GLOSSARY_GROUPS: { title: string; blurb: string; keys: string[] }[]
   {
     title: "How this pipeline is built",
     blurb: "Engineering terms, not clinical ones.",
-    keys: ["bronze", "silver", "gold", "quarantine", "catch rate"],
+    keys: ["bronze", "silver", "gold", "quarantine"],
   },
 ];

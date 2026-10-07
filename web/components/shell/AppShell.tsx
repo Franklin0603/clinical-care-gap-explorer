@@ -1,0 +1,38 @@
+import { ReactNode } from "react";
+
+import { AppHeader } from "./AppHeader";
+import { AppSidebar } from "./AppSidebar";
+import { ReviewProvider } from "@/components/review/ReviewDialog";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { TooltipProvider } from "@/components/ui/tooltip";
+
+/**
+ * Sidebar, global header, and the page.
+ *
+ * The layout of the (app) route group, so the public landing page at / does
+ * not inherit a sidebar. The 404 page renders under the root layout instead,
+ * and wraps itself in this so a mistyped app URL still shows the navigation.
+ */
+export function AppShell({ children }: { children: ReactNode }) {
+  return (
+    <TooltipProvider delay={300}>
+      {/* First thing a keyboard reaches. Without it, every page starts with a
+          dozen navigation links before any content. */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-50 focus:rounded-md focus:bg-background focus:px-3 focus:py-2 focus:text-sm focus:font-medium focus:shadow-md focus:outline-2 focus:outline-ring"
+      >
+        Skip to content
+      </a>
+      <SidebarProvider>
+        <ReviewProvider>
+          <AppSidebar />
+          <SidebarInset id="main-content" tabIndex={-1} className="min-w-0 outline-none">
+            <AppHeader />
+            {children}
+          </SidebarInset>
+        </ReviewProvider>
+      </SidebarProvider>
+    </TooltipProvider>
+  );
+}

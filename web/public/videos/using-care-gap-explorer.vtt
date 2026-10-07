@@ -1,0 +1,58 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.200
+Care Gap Explorer is a portfolio healthcare data application
+
+00:00:04.240 --> 00:00:07.190
+built around a synthetic diabetes cohort.
+
+00:00:07.500 --> 00:00:11.055
+The Home page provides an operational view of the population
+
+00:00:11.095 --> 00:00:14.780
+and highlights patients with open A1C monitoring gaps.
+
+00:00:15.310 --> 00:00:18.530
+Care Gaps turns those results into a work queue.
+
+00:00:19.120 --> 00:00:21.760
+Users can distinguish patients who are overdue
+
+00:00:21.800 --> 00:00:24.670
+from patients with no recorded A1C.
+
+00:00:25.520 --> 00:00:29.320
+Opening a patient provides the evidence behind the status,
+
+00:00:29.360 --> 00:00:34.910
+including A1C history, encounters, medications and procedures.
+
+00:00:35.020 --> 00:00:39.533
+Tasks adds a demonstration workflow layer for tracking review and follow-up
+
+00:00:39.573 --> 00:00:43.180
+without changing the underlying clinical gap status.
+
+00:00:43.680 --> 00:00:46.430
+Analytics moves back to the population level to examine monitoring coverage,
+
+00:00:46.470 --> 00:00:53.690
+gap composition, testing over time, age groups and care settings.
+
+00:00:53.770 --> 00:00:58.650
+Ask AI provides a conversational way to explore the synthetic cohort,
+
+00:00:58.690 --> 00:01:04.040
+including follow-up questions, calculation explanations and SQL when requested.
+
+00:01:04.260 --> 00:01:05.790
+Throughout the application, clinical source data, derived measures
+
+00:01:05.830 --> 00:01:11.640
+and demonstration workflow data are kept separate.
+
+00:01:11.990 --> 00:01:15.914
+The result is an end-to-end example of transforming healthcare data
+
+00:01:15.954 --> 00:01:19.480
+into a measurable and explainable care-gap workflow.

@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.380 --> 00:00:05.610
+A1C is a blood test used to understand glucose levels over time.
+
+00:00:06.230 --> 00:00:11.280
+When we eat carbohydrates, the body breaks them down into glucose.
+
+00:00:11.910 --> 00:00:14.590
+Glucose then travels through the bloodstream.
+
+00:00:14.700 --> 00:00:18.187
+Insulin helps glucose move from the bloodstream into the body's cells,
+
+00:00:18.227 --> 00:00:20.240
+where it can be used for energy.
+
+00:00:20.280 --> 00:00:22.620
+While glucose circulates in the blood,
+
+00:00:22.660 --> 00:00:26.620
+some attaches to hemoglobin inside red blood cells.
+
+00:00:26.780 --> 00:00:31.900
+An A1C test measures the percentage of hemoglobin with glucose attached.
+
+00:00:31.940 --> 00:00:35.590
+Because red blood cells live for about 120 days,
+
+00:00:35.630 --> 00:00:38.801
+A1C provides information about glucose exposure
+
+00:00:38.841 --> 00:00:42.050
+over roughly the past two to three months.
+
+00:00:42.090 --> 00:00:44.867
+Care Gap Explorer uses recorded A1C results
+
+00:00:44.907 --> 00:00:49.550
+to help identify monitoring gaps in a synthetic diabetes cohort.
