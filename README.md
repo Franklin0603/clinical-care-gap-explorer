@@ -3,7 +3,7 @@
 Finds diabetic patients overdue for an A1c test — and shows the data quality work
 required before that list can be trusted.
 
-**Live demo:** https://franklin0603.github.io/clinical-care-gap-explorer/
+**Live demo:** https://clinical-care-gap-explorer.vercel.app/
 **Synthetic data only (Synthea). No PHI.**
 
 ---
