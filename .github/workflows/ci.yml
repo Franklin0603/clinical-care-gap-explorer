@@ -1,21 +1,20 @@
-name: Deploy to GitHub Pages
+name: CI
+
+# The site is hosted on Vercel, which builds and deploys every push to main
+# (root directory: web). This workflow is the test gate: the pipeline tests,
+# the web unit tests, and a production build of the static export.
 
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,7 +25,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -e ".[dev]"
+      # anthropic and python-dotenv are imported by the text-to-SQL agent
+      # module that tests/test_guard.py loads; they are not in pyproject's
+      # dependencies yet, so CI installs them here. No API key is needed:
+      # the tests never call the API.
+      - run: pip install -e ".[dev]" anthropic python-dotenv
       - run: PYTHONPATH=src python -m pytest tests/ -q
 
       - uses: actions/setup-node@v4
@@ -36,28 +39,12 @@ jobs:
           cache-dependency-path: web/package-lock.json
       - run: npm ci
         working-directory: web
-      # The guard and scope tests gate the deploy. Both document real bugs
+      # The guard and scope tests gate the build. Both document real bugs
       # (a WITH...DELETE bypass, and a clinical-advice question that returned
-      # a table), so a regression should stop the site shipping.
+      # a table), so a regression should fail the check.
       - run: node --test lib/*.test.ts lib/ask/*.test.ts
+        working-directory: web
+      - run: npm run lint
         working-directory: web
       - run: npm run build
         working-directory: web
-        env:
-          NEXT_PUBLIC_BASE_PATH: /clinical-care-gap-explorer
-      # Pages runs Jekyll by default, which ignores directories starting with _
-      - run: touch web/out/.nojekyll
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: web/out
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
-    steps:
-      - id: deploy
-        uses: actions/deploy-pages@v4
