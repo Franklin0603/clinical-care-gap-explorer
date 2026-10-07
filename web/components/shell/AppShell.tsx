@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 import { AppHeader } from "./AppHeader";
 import { AppSidebar } from "./AppSidebar";
-import { ReviewProvider } from "@/components/review/ReviewDrawer";
+import { ReviewProvider } from "@/components/review/ReviewDialog";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 

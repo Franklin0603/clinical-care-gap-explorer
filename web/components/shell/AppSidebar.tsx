@@ -7,7 +7,7 @@ import { HeartPulse, MessageSquareHeart, UserRound } from "lucide-react";
 import { cn } from "cn";
 import { NAV_FOOTER, NAV_SECTIONS, NavItem, locate } from "./nav";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { useReview } from "@/components/review/ReviewDrawer";
+import { useReview } from "@/components/review/ReviewDialog";
 import {
   Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent,
   SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuBadge,
@@ -93,7 +93,7 @@ export function AppSidebar() {
       </SidebarContent>
 
       <SidebarFooter className="border-t">
-        {/* Not a route: it opens a drawer over the current page, so the
+        {/* Not a route: it opens a modal over the current page, so the
             visitor reviews what they were just looking at. Only ever opened by
             choice - nothing in the app prompts for it. */}
         <SidebarMenu>

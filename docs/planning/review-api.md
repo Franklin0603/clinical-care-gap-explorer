@@ -1,13 +1,15 @@
 # Project review: submission interface
 
-"Review this project" (the sidebar entry inside Care Gap Explorer) builds a
-review record in the browser. The site is a static export with no server, so
-**nothing is sent until a feedback endpoint is configured**. Until then the
-drawer tells the reviewer their review was not sent and offers to copy it. It
-never reports a send that did not happen.
+"Review this project" (the sidebar entry inside Care Gap Explorer) opens a
+centred modal and builds a review record in the browser. The site is a static
+export with no server, so **nothing is sent until a feedback endpoint is
+configured**. Until then the
+modal thanks the reviewer, says the review was not sent, and offers to copy
+it. "Your feedback has been received" appears only after the endpoint accepts
+the review: the modal never reports a send that did not happen.
 
 Code: `web/lib/review.ts` (record, validation, sending; tested in
-`web/lib/review.test.ts`) and `web/components/review/ReviewDrawer.tsx` (UI).
+`web/lib/review.test.ts`) and `web/components/review/ReviewDialog.tsx` (UI).
 
 ## Turning it on
 
@@ -27,35 +29,31 @@ the endpoint must be safe to call from any browser.
 
 ```json
 {
-  "version": 1,
+  "version": 2,
   "submittedAt": "2026-10-06T21:14:03.512Z",
   "page": "/patients/[patient]",
-  "role": "Data / Analytics",
-  "clarity": 4,
-  "responses": {
-    "mostUseful": "The never-tested list and the evidence panel.",
-    "improve": "Show more history per patient.",
-    "healthcareUse": null
-  },
-  "contact": {
-    "name": null,
-    "organization": null,
-    "email": "reviewer@example.org"
-  }
+  "role": "Recruiter / hiring manager",
+  "clarity": 5,
+  "usefulness": 4,
+  "standout": "Data & Quality",
+  "improve": "A short tour for first-time visitors.",
+  "email": "reviewer@example.org"
 }
 ```
 
 | Field | Type | Rules |
 |---|---|---|
-| `version` | `1` | Record shape version. Accept old versions side by side when it changes. |
+| `version` | `2` | Record shape version. Version 1 (an earlier draft, never sent) had separate free-text answers and name and organization fields. |
 | `submittedAt` | string | ISO 8601, UTC, from the reviewer's clock. Record your own receive time too. |
-| `page` | string | Application page the drawer was opened from. Query string and fragment removed; a patient segment is `[patient]`, any other id-like segment `[id]`. |
-| `role` | string | One of: Physician, Nurse, Healthcare Operations, Health Informatics, Data / Analytics, Engineering, Student / Educator, Other. |
-| `clarity` | integer | 1 (not clear) to 5 (very clear). |
-| `responses.*` | string or null | Free text, at most 2,000 characters each. `null` when left blank. |
-| `contact.*` | string or null | Optional. `null` when left blank. Name and organization at most 200 characters. |
+| `page` | string | Application page the modal was opened from. Query string and fragment removed; a patient segment is `[patient]`, any other id-like segment `[id]`. |
+| `role` | string | One of: Physician / clinician, Nurse / care team, Healthcare leader, Health informatics / data, Data / software engineer, Recruiter / hiring manager, Student / educator, Other. |
+| `clarity` | integer | How clear the purpose was: 1 (not clear) to 5 (very clear). |
+| `usefulness` | integer | How useful or relevant: 1 (not useful) to 5 (very useful). |
+| `standout` | string | One of: Care-gap workflow, Patient workspace, Analytics, Ask AI, Data & Quality, Learn / educational content, Technical case study. |
+| `improve` | string or null | Free text, at most 2,000 characters. `null` when left blank. |
+| `email` | string or null | Optional, for a follow-up conversation. At most 200 characters. |
 
-The client already blocks: a missing role or rating, text over 2,000
+The client already blocks: an unanswered choice or rating, text over 2,000
 characters, a malformed email, and free text containing something shaped like
 a record identifier (an 8-character hex MRN or a UUID).
 
@@ -64,9 +62,10 @@ or anything from the page beyond its sanitised path. No cookies are set.
 
 ## Response
 
-- `2xx` (body ignored): the drawer shows "Thank you. Your review was sent." and
-  clears the draft.
-- Any other status, or a network failure: the drawer says it could not be sent,
+- `2xx` (body ignored): the modal shows "Thank you for reviewing Care Gap
+  Explorer. Your feedback has been received and will help improve the
+  project." with a Done button, and clears the draft.
+- Any other status, or a network failure: the modal says it could not be sent,
   keeps every answer, and offers Try again and Copy review.
 
 ## What the endpoint must do
@@ -80,8 +79,8 @@ or anything from the page beyond its sanitised path. No cookies are set.
 4. **Screen for health information** before storing, as a backstop for the
    in-form warning, and discard rather than store anything that looks like it.
 5. **Store minimally.** Keep the record and a receive timestamp. Do not store
-   IP addresses with the record. Contact details are optional and given for
-   follow-up only; set a retention period and delete on request.
+   IP addresses with the record. The email is optional and given for a
+   follow-up conversation only; set a retention period and delete on request.
 6. **Notify** the project owner however suits (email, Slack, a sheet).
 
 Any small serverless function fits: a Cloudflare Worker, a Vercel or Netlify
