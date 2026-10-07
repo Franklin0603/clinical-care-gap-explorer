@@ -58,10 +58,13 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="border-b px-3 py-3">
+        {/* The brand goes to the public project overview, not the dashboard:
+            "Home" in the navigation is the application's home. */}
         <Link
-          href="/home"
+          href="/"
           onClick={close}
-          className="flex items-center gap-2.5 rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          title="Project overview"
+          className="-m-1 flex items-center gap-2.5 rounded-md p-1 transition-colors hover:bg-sidebar-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
         >
           <div className="flex size-8 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground">
             <HeartPulse className="size-4" aria-hidden />
@@ -70,6 +73,7 @@ export function AppSidebar() {
             <span className="truncate text-sm font-semibold">Care Gap Explorer</span>
             <span className="truncate text-xs text-muted-foreground">Diabetes Care</span>
           </div>
+          <span className="sr-only">, project overview</span>
         </Link>
       </SidebarHeader>
 

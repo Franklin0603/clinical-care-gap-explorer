@@ -10,7 +10,7 @@
 
 import type { LucideIcon } from "lucide-react";
 import {
-  BookOpen, ChartNoAxesCombined, CircleAlert, CircleHelp, Database, House,
+  ArrowLeft, BookOpen, ChartNoAxesCombined, CircleAlert, CircleHelp, Database, House,
   ListChecks, Settings, Sparkles, Users,
 } from "lucide-react";
 
@@ -101,6 +101,9 @@ export const NAV_SECTIONS: NavSection[] = [
 ];
 
 export const NAV_FOOTER: NavItem[] = [
+  // The public landing page, outside the app. Not "Home": that is the
+  // application dashboard, and the two are deliberately different places.
+  { href: "/", label: "Project overview", icon: ArrowLeft },
   { href: "/help", label: "Help", icon: CircleHelp },
   { href: "/settings", label: "Settings", icon: Settings },
 ];

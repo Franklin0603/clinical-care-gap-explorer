@@ -1,23 +1,26 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState, useSyncExternalStore, type ReactNode, type RefObject } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, BookOpen, FileText, LayoutDashboard, Pause, Play, PlayCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, FileText, HeartPulse, LayoutDashboard, Pause, Play, PlayCircle } from "lucide-react";
 
 import { cn } from "cn";
 import { gold } from "@/lib/data";
 import { longDate } from "@/lib/dates";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { hasVisited, markVisited } from "@/lib/visit";
 import { GapStatusBadge } from "@/components/GapStatusBadge";
 import { BASE } from "./LandingParts";
 
 /**
- * "Take a tour": a six-slide orientation in a centred modal, opened only from
- * the landing-page hero. Quick orientation, not a replacement for Learn or the
+ * "Take a tour": a six-slide orientation in a centred modal, opened from the
+ * landing-page hero or from the first-visit welcome. Quick orientation, not a replacement for Learn or the
  * case study: each slide links to where the subject is covered properly.
  *
- * Slides advance every seven seconds. Any manual move (previous, next, a
+ * Each slide stays up for its own time, longer where there is more to read
+ * (seven seconds for the introduction, sixteen for the workflow). Any manual
+ * move (previous, next, a
  * progress marker, a workflow step) pauses that, so the visitor has time to
  * read; Play resumes it. It stops on the last slide rather than looping. With
  * reduced motion requested, the tour opens paused, slides change without
@@ -26,7 +29,6 @@ import { BASE } from "./LandingParts";
  * Every figure comes from the pipeline's gold report.
  */
 
-const INTERVAL = 7000;
 const TICK = 100;
 const CASE_STUDY = `${BASE}/case-study/Care-Gap-Explorer-Case-Study.pdf`;
 
@@ -67,7 +69,7 @@ function CountUp({ value, reduced }: { value: number; reduced: boolean }) {
 /* ------------------------------------------------------------------ slides */
 
 type SlideProps = { reduced: boolean; playing: boolean; pause: () => void };
-type Slide = { id: string; eyebrow: string; title: string; render: (p: SlideProps) => ReactNode };
+type Slide = { id: string; eyebrow: string; title: string; /** ms on screen while playing */ duration: number; render: (p: SlideProps) => ReactNode };
 
 function Shot({ src, alt, className }: { src: string; alt: string; className?: string }) {
   return (
@@ -94,7 +96,7 @@ function TextBlock({ eyebrow, title, children }: { eyebrow: string; title: strin
 
 const SLIDES: Slide[] = [
   {
-    id: "intro", eyebrow: "Care Gap Explorer", title: "Find the patients behind the care gap.",
+    id: "intro", duration: 7000, eyebrow: "Care Gap Explorer", title: "Find the patients behind the care gap.",
     render: ({ reduced }) => (
       <div className="grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)]">
         <TextBlock eyebrow="Care Gap Explorer" title="Find the patients behind the care gap.">
@@ -123,7 +125,7 @@ const SLIDES: Slide[] = [
     ),
   },
   {
-    id: "diabetes", eyebrow: "Diabetes basics", title: "Glucose, insulin and diabetes.",
+    id: "diabetes", duration: 9000, eyebrow: "Diabetes basics", title: "Glucose, insulin and diabetes.",
     render: () => (
       <div className="grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
         <TextBlock eyebrow="Diabetes basics" title="Glucose, insulin and diabetes.">
@@ -148,7 +150,7 @@ const SLIDES: Slide[] = [
     ),
   },
   {
-    id: "a1c", eyebrow: "Understanding A1C", title: "A1C helps show glucose exposure over time.",
+    id: "a1c", duration: 10000, eyebrow: "Understanding A1C", title: "A1C helps show glucose exposure over time.",
     render: () => (
       <div className="grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
         <TextBlock eyebrow="Understanding A1C" title="A1C helps show glucose exposure over time.">
@@ -172,7 +174,7 @@ const SLIDES: Slide[] = [
     ),
   },
   {
-    id: "gap", eyebrow: "A1C monitoring", title: "Who may be missing current monitoring?",
+    id: "gap", duration: 11000, eyebrow: "A1C monitoring", title: "Who may be missing current monitoring?",
     render: ({ reduced }) => (
       <div className="flex flex-col gap-6">
         <TextBlock eyebrow="A1C monitoring" title="Who may be missing current monitoring?">
@@ -209,11 +211,11 @@ const SLIDES: Slide[] = [
     ),
   },
   {
-    id: "workflow", eyebrow: "From population to patient", title: "One measure. Multiple ways to work with it.",
+    id: "workflow", duration: 16000, eyebrow: "From population to patient", title: "One measure. Multiple ways to work with it.",
     render: (p) => <WorkflowSlide {...p} />,
   },
   {
-    id: "explore", eyebrow: "Your turn", title: "Explore Care Gap Explorer.",
+    id: "explore", duration: 9000, eyebrow: "Your turn", title: "Explore Care Gap Explorer.",
     render: () => (
       <div className="flex flex-col gap-6">
         <TextBlock eyebrow="Your turn" title="Explore Care Gap Explorer.">
@@ -266,13 +268,13 @@ const STEPS = [
 ];
 
 /** The workflow as a list of steps beside the matching real screen. While the
- *  tour plays, the screen crossfades through the first steps; choosing a
- *  step shows its screen and pauses the tour. */
+ *  tour plays, the screen crossfades through all five steps over the slide's
+ *  sixteen seconds; choosing a step shows its screen and pauses the tour. */
 function WorkflowSlide({ reduced, playing, pause }: SlideProps) {
   const [active, setActive] = useState(0);
   useEffect(() => {
     if (!playing || reduced) return;
-    const t = setInterval(() => setActive((a) => (a + 1) % 3), 2400);
+    const t = setInterval(() => setActive((a) => Math.min(a + 1, STEPS.length - 1)), 3200);
     return () => clearInterval(t);
   }, [playing, reduced]);
 
@@ -325,20 +327,93 @@ function WorkflowSlide({ reduced, playing, pause }: SlideProps) {
 
 /* ------------------------------------------------------------------- dialog */
 
-export function TourButton({ className }: { className?: string }) {
-  const [open, setOpen] = useState(false);
+type TourControl = { openTour: () => void; buttonRef: RefObject<HTMLButtonElement | null> };
+const TourContext = createContext<TourControl | null>(null);
+
+/**
+ * Owns the tour and the first-visit welcome for the landing page. The hero's
+ * "Take a tour" button and the welcome's "Take the tour" open the same tour,
+ * and closing it always hands focus back to the hero button.
+ *
+ * The welcome appears once per browser, shortly after the first load, and
+ * never starts the tour by itself. Visiting the application also counts as a
+ * visit (see VisitMarker).
+ */
+export function TourProvider({ children }: { children: ReactNode }) {
+  const [tourOpen, setTourOpen] = useState(false);
+  const [welcomeOpen, setWelcomeOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const toTour = useRef(false);
+
+  useEffect(() => {
+    if (hasVisited()) return;
+    const t = setTimeout(() => { markVisited(); setWelcomeOpen(true); }, 600);
+    return () => clearTimeout(t);
+  }, []);
+
+  const openTour = useCallback(() => setTourOpen(true), []);
+  const startFromWelcome = () => {
+    toTour.current = true;
+    setWelcomeOpen(false);
+    setTourOpen(true);
+  };
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger render={<Button size="lg" variant="outline" className={cn("h-11 bg-card px-5 text-base", className)} />}>
-        <PlayCircle data-icon="inline-start" aria-hidden /> Take a tour
-      </DialogTrigger>
-      {/* Mounted only while open, so every opening starts at slide one. */}
-      {open && <Tour />}
-    </Dialog>
+    <TourContext.Provider value={{ openTour, buttonRef }}>
+      {children}
+      <Dialog open={tourOpen} onOpenChange={setTourOpen}>
+        {/* Mounted only while open, so every opening starts at slide one. */}
+        {tourOpen && <Tour returnFocus={buttonRef} />}
+      </Dialog>
+      <Dialog open={welcomeOpen} onOpenChange={setWelcomeOpen}>
+        <DialogContent
+          aria-modal="true"
+          // Into the tour: the tour takes focus. Otherwise: the hero button.
+          finalFocus={() => (toTour.current ? false : buttonRef.current)}
+          overlayClassName="bg-black/40 supports-backdrop-filter:backdrop-blur-[2px]"
+          className="max-w-[calc(100%-2rem)] gap-0 rounded-2xl border bg-popover p-0 shadow-xl ring-0 sm:max-w-md"
+        >
+          <div className="flex flex-col items-center gap-4 px-6 pt-9 pb-6 text-center sm:px-8">
+            <span className="flex size-11 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+              <HeartPulse className="size-5" aria-hidden />
+            </span>
+            <DialogTitle className="text-xl leading-snug font-semibold tracking-tight">Welcome to Care Gap Explorer</DialogTitle>
+            <DialogDescription className="leading-relaxed text-pretty">
+              See how healthcare data moves from an A1C monitoring gap to patient-level evidence, workflow, analytics and explainability.
+            </DialogDescription>
+          </div>
+          <div className="flex flex-col gap-2 border-t bg-muted/40 px-6 py-4 sm:flex-row-reverse sm:justify-center">
+            <Button className="h-10 px-5" onClick={startFromWelcome}>
+              <PlayCircle data-icon="inline-start" aria-hidden /> Take the tour
+            </Button>
+            <DialogClose render={<Button variant="outline" className="h-10 bg-card px-5" />}>Explore on my own</DialogClose>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </TourContext.Provider>
   );
 }
 
-function Tour() {
+/** The landing page's own way in, always there whether or not the welcome
+ *  was dismissed. */
+export function TourButton({ className }: { className?: string }) {
+  const tour = useContext(TourContext);
+  if (!tour) throw new Error("TourButton must be inside TourProvider");
+  return (
+    <Button
+      ref={tour.buttonRef}
+      size="lg"
+      variant="outline"
+      className={cn("h-11 bg-card px-5 text-base", className)}
+      onClick={tour.openTour}
+      aria-haspopup="dialog"
+    >
+      <PlayCircle data-icon="inline-start" aria-hidden /> Take a tour
+    </Button>
+  );
+}
+
+function Tour({ returnFocus }: { returnFocus: RefObject<HTMLElement | null> }) {
   const reduced = useReducedMotion();
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(!reduced);
@@ -359,14 +434,15 @@ function Tour() {
     if (manual) setPlaying(false);
   }, [last]);
 
-  // Advance every INTERVAL while playing; stop on the last slide.
+  // Advance when the current slide's time is up; stop on the last slide.
   useEffect(() => {
     if (!playing) return;
     const t = setInterval(() => {
       elapsedRef.current += TICK;
-      if (elapsedRef.current >= INTERVAL) {
+      const duration = SLIDES[indexRef.current].duration;
+      if (elapsedRef.current >= duration) {
         if (indexRef.current >= last) {
-          elapsedRef.current = INTERVAL;
+          elapsedRef.current = duration;
           setPlaying(false);
         } else {
           indexRef.current += 1;
@@ -381,7 +457,7 @@ function Tour() {
 
   const toggle = () => {
     // Play at the end of the tour starts it again from the beginning.
-    if (!playing && index === last && elapsed >= INTERVAL) { go(0, false); setPlaying(true); return; }
+    if (!playing && index === last && elapsed >= SLIDES[last].duration) { go(0, false); setPlaying(true); return; }
     setPlaying((p) => !p);
   };
 
@@ -390,6 +466,7 @@ function Tour() {
   return (
     <DialogContent
       aria-modal="true"
+      finalFocus={returnFocus}
       overlayClassName="bg-black/45 supports-backdrop-filter:backdrop-blur-[2px]"
       className="flex max-h-[85vh] w-full max-w-[calc(100%-1.5rem)] flex-col gap-0 overflow-hidden rounded-2xl border bg-popover p-0 shadow-2xl ring-0 sm:max-w-[min(64rem,calc(100%-3rem))]"
       onKeyDown={(e) => {
@@ -405,12 +482,12 @@ function Tour() {
           <span className="num text-sm text-muted-foreground" aria-hidden>{index + 1} of {SLIDES.length}</span>
         </div>
         <DialogDescription className="sr-only">
-          A six-slide introduction to Care Gap Explorer. Slides advance every seven seconds; use Pause to stop, and Previous or Next to move.
+          A six-slide introduction to Care Gap Explorer. Slides advance on their own; use Pause to stop, and Previous or Next to move.
         </DialogDescription>
         <nav aria-label="Tour slides">
           <ol className="flex gap-1.5">
             {SLIDES.map((s, i) => {
-              const fill = i < index ? 100 : i > index ? 0 : playing || elapsed > 0 ? (elapsed / INTERVAL) * 100 : 100;
+              const fill = i < index ? 100 : i > index ? 0 : playing || elapsed > 0 ? (elapsed / s.duration) * 100 : 100;
               return (
                 <li key={s.id} className="flex-1">
                   <button
